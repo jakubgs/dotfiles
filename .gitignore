@@ -19,8 +19,8 @@
 !.zshrc
 !.gvimrc
 !.vimrc
-!.vim
-!.vim/bundle
+!.vim/
+!.vim/bundle/
 !.tmux.conf
 !.mplayer/
 !.pentadactylrc
