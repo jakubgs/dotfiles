@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo Scanning $@
+
+find "$@" -type f -iname "*.wmv" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mp4" > /tmp/playlist.m3u
+
+mplayer -nosound -shuffle -fs -playlist /tmp/playlist.m3u
+
+rm /tmp/playlist.m3u

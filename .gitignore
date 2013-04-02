@@ -1,9 +1,11 @@
 # ignote all by default
 /*
+.vim/temp/*
+.vim/undo/*
+.vim/backup/*
 
 # do not ignore these:
 !.gitignore
-!.password-store
 !.Xdefaults
 !.xinitrc
 !.xsession
@@ -14,7 +16,8 @@
 !.zshrc
 !.gvimrc
 !.vimrc
-!.vim
+!.vim/
+!.vim/bundle/*
 !.screenrc
 !.tmux.conf
 !.mplayer/
@@ -28,4 +31,4 @@
 !.awesome
 !.ssh/config
 !.gitconfig
-!bin
+!bin/

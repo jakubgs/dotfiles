@@ -1,0 +1,6 @@
+#!/bin/bash
+
+FONT="xft:inconsolata:size=12:lang=pl:antialias=false:hinting=false"
+#FONT="xft:terminus:size=12:lang=pl:antialias=false:hinting=false"
+
+urxvtc -xrm "urxvt*font: ${FONT}" -xrm "urxvt*boldFont: ${FONT}"

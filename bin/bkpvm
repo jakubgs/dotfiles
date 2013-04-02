@@ -1,0 +1,10 @@
+#!/bin/bash
+
+VM_STAT=$(VBoxManage showvminfo "Windows 7 on SSD" | grep State | cut -d" " -f13)
+
+if [ $VM_STAT == "off" ]; then
+    sudo /usr/sbin/partimage -b -z1 -o -d -f3 -M save -V0 /dev/sda2 /mnt/stuff/backup/win7vm_ssd
+else
+    echo "Virtual Machine cannot be saved because it is not turned off."
+    echo "Turn it off and then proceed."
+fi

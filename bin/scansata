@@ -1,0 +1,14 @@
+#!/bin/bash
+export SCAN_TEMP=$(mktemp -d)
+ls /dev/sd? > ${SCAN_TEMP}/before.txt
+sudo partprobe
+for i in /sys/class/scsi_host/host*/scan
+do
+  echo "- - -" >> sudo tee $i
+done
+ls /dev/sd? > ${SCAN_TEMP}/after.txt
+for i in $(diff ${SCAN_TEMP}/before.txt ${SCAN_TEMP}/after.txt | grep \> | awk -F/ '{print $NF}'); do
+  echo Added /dev/$i:
+  sudo /sbin/sfdisk -uM -l /dev/$i | grep -E "^/dev/$i" | awk '{print "    "$1" "$4" MiB"}'
+done
+rm -rf ${SCAN_TEMP}

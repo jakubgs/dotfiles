@@ -1,0 +1,8 @@
+#!/bin/bash
+
+	if [ "`/usr/bin/amixer -c 0 sget 'Master',0 | grep off`" ]
+	then
+		/usr/bin/amixer -q -c 0 set "Master" unmute
+	else
+		/usr/bin/amixer -q -c 0 set "Master" mute
+	fi

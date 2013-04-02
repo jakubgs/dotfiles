@@ -1,0 +1,34 @@
+" colorscheme
+colorscheme zenburn
+
+" numbers are far, far away from home row
+set hintkeys=asdfghjkl;
+
+" set shell to zsh
+set shell=zsh
+
+" complete from search engines, location bar, local files and bookmarks
+set complete=slfb
+
+" incremental search
+set incfind
+
+" highlight search results
+set hlfind
+
+" jumping 5 times as far down
+map -b j 10j
+" jumping 5 times as far up
+map -b k 10k
+
+" next tab
+map l :tn<CR>
+" previous taib
+map h :tp<CR>
+
+map J :back<CR>
+map K :forward<CR>
+
+" bigger more visible hints
+highlight -a Hint font-size: 130% !important;
+highlight -a Hint text-transform: uppercase;

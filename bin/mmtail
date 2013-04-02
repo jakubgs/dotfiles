@@ -1,0 +1,9 @@
+#!/bin/bash
+
+RVALUE=0
+
+while [ RVALUE ]; do
+	ssh melchior  -t '. /etc/profile; multitail /var/log/hosts/*'
+	RVALUE=$
+	sleep 5
+done

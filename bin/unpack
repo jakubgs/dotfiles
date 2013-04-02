@@ -1,0 +1,49 @@
+#!/bin/sh
+
+untgzf () {
+tar xvzf "$1" -C "$2"
+}
+unzipf () {
+unzip -o "$1" -d "$2"
+}
+unrarf () {
+unrar x -o- -ad "$1"
+}
+un7zf () {
+7z x -o"$2" "$1"
+}
+untbz2f () {
+tar xvjf "$1" -C "$2"
+}
+
+unlha () {
+lha ew="$2" "$1"
+}
+
+for l in "$@";
+	do
+		echo "Trying: $l"
+
+		case $l in
+			*.tar.gz) ext=".tar.gz"; command=untgzf
+			;;
+			*.tgz) ext=".tgz"; command=untgzf
+			;;
+			*.tar.bz2) ext=".tar.bz2"; command=untbz2f
+			;;
+			*.rar) ext=".rar"; command=unrarf
+			;;
+			*.zip) ext=".zip"; command=unzipf
+			;;
+			*.7z) ext=".7z"; command=un7zf
+			;;
+			*.lzh) ext=".lzh"; command=unlha
+			;;
+			*) continue
+		esac
+	
+	A=`basename "$l" "$ext"`
+	echo "Executing: $command $l '$A'"
+	$command "$l" "$A"
+
+done

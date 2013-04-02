@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ $# != 1 ]; then
+  echo "Synopsis: stopsata.sh <drive>"
+  exit 1
+fi
+export DRIVE=$1
+for i in $(mount | grep ${DRIVE} | awk '{print $1}'); do
+  echo Unmounting $i
+  sudo umount $i
+done
+echo Powering down ${DRIVE}
+sudo hdparm -Y /dev/${DRIVE}
+echo 2 >> sudo tee /sys/block/${DRIVE}/device/delete
+echo You may now safely disconnect the drive

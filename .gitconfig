@@ -1,0 +1,28 @@
+[user]
+	email = panswiata@gmail.com
+	name = Jakub Sokołowski
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[alias]
+    hist = log --graph
+    co = checkout
+    br = branch
+    ps = push
+    pl = pull
+    c = commit
+    s = status
+    a = add
+    l = log
+[branch "master"]
+    remote = origin
+    merge = refs/heads/master
+[credential]
+	helper = cache --timeout=1800
+[color]
+	ui = true
+[push]
+  default = current
+[pull]
+  default = current

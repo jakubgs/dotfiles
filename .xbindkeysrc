@@ -1,0 +1,92 @@
+# For the benefit of emacs users: -*- shell-script -*-
+###########################
+# xbindkeys configuration #
+###########################
+#
+#######################################################
+
+# Volume up
+"amixer set "Master" 4+"
+  m:0x0 + c:123
+  XF86AudioRaiseVolume
+
+# Volume down
+"amixer set "Master" 4-"
+  m:0x0 + c:122
+  XF86AudioLowerVolume
+
+# Volume Mute
+"/home/sochan/bin/mute"
+  m:0x0 + c:63
+  XF86AudioMute
+
+# Hibernation
+#"sudo /usr/sbin/s2disk"
+#"sudo /usr/sbin/hibernate-ram"
+#"xlock"
+#  m:0x0 + c:150
+#  XF86Sleep
+
+#"sudo grub2-reboot 0 && sudo /usr/sbin/hibernate -r1"
+#  m:0x50 + c:133
+#  Mod2+Mod4 + Super_L
+
+#"sudo /usr/sbin/hibernate -r0"
+#  m:0x4 + c:150
+#  Control + XF86Sleep
+
+#"xlock"
+#  m:0x18 + c:64
+#  Alt+Mod2 + Alt_L
+
+"mpc volume -5"
+  m:0x10 + c:79"
+
+"mpc stop && mpc play"
+  m:0x10 + c:80
+
+"mpc volume +5"
+  m:0x10 + c:81
+
+"mpc prev"
+  m:0x10 + c:83
+
+"mpc toggle"
+  m:0x10 + c:84
+
+"mpc next"
+  m:0x10 + c:85
+
+"mpc seek -5"
+  m:0x10 + c:87
+
+"mpc stop"
+  m:0x10 + c:88
+
+"mpc seek +5"
+  m:0x10 + c:89
+
+"mpc random on && mpc next && mpc random off"
+  m:0x0 + c:86
+
+"mpc random"
+  m:0x0 + c:82
+
+#######################################################
+
+"mpc next"
+    m:0x0 + c:171
+    XF86AudioNext
+"mpc prev"
+    m:0x0 + c:173
+    XF86AudioPrev
+"mpc toggle"
+    m:0x0 + c:172
+    XF86AudioPlay
+"mpc stop"
+    m:0x0 + c:174
+    XF86AudioStop
+"mpc random on && mpc next && mpc random off"
+    m:0x0 + c:179
+    XF86Tools
+#######################################################

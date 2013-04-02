@@ -1,0 +1,4 @@
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft*antialias:  True
+Xft*dpi:        96

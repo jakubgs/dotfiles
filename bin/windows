@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo Windows Boot at:
+date
+
+sudo grub2-set-default 1
+sudo grub2-reboot 0
+sync
+
+sudo hibernate -r1

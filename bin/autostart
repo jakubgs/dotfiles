@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# daemonize command and ingore all output
+function run {
+	command=$1
+	shift
+	# get the arguments
+	args=$@
+	
+	echo -ne "Checking: $command \t"
+	if ! pgrep -d ", " $command; then
+		echo "STARTING"
+		nohup $command $args &
+		#>/dev/null &
+	fi
+}
+
+export OOO_FORCE_DESKTOP="xfce4"
+export DE="xfce"
+export BROWSER=thunar
+
+####### programs to run ########
+
+echo "### Autostarting programs:"
+
+nitrogen --restore
+
+run urxvtd -q -f -o
+
+run gvim
+
+# start the usual terminal windows
+if ! pgrep mhtop &>/dev/null; then
+	urxvtc -name mmtail -e ~/bin/mmtail &
+	sleep 0.3
+	# Start mpd client and system monitors
+	urxvtc -name mhtop	 -e ~/bin/mhtop &
+	urxvtc -name htop	 -e htop  &
+	urxvtc -name ncmpcpp -e ncmpcpp &
+	# change focus
+	echo "awful.tag.viewonly(tags[4][3])" | awesome-client
+fi
+
+run thunar --daemon > /var/log/thunar.log 2>&1
+
+run xbindkeys
+
+run firefox
+
+run thunderbird
+
+run pidgin
+
+run remmina > /dev/null 2>&1
+
+run luakit http://melchior/rutorrent

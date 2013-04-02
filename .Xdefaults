@@ -1,0 +1,87 @@
+Xft.dpi: 96
+
+Xcursor.theme: Vanilla-DMZ
+
+!.imLocale:             pl_PL.ISO-8859-2
+!*imLocale:             en_GB.UTF-8
+!*geometry:             120x35
+
+*font:         xft:Terminus:pixelsize=10:lang=pl:antialias=true:hinting=true,\
+					xft:Kochi Gothic:antialias=false,\
+					xft:Baekmuk Gulim
+*boldFont:     -*-terminus-bold-r-*-*-11-140-*-*-*-*-iso10646-1
+
+! Disable printing
+*print-pipe:           "cat > /dev/null"
+
+*scrollBar:            false
+*internalBorder:       false
+*externalBorder:       false
+*thickness:            0
+*borderWidth:          1
+
+urxvt.termName:        rxvt-256color
+*termName:             screen-256color
+
+! Real Transparency
+!urxvt*depth:          32
+!urxvt*background:     rgba:02f0/04f0/04f0/6666
+!urxvt*foreground:     #ffffff
+urxvt*foreground:      #e6e6e6
+
+! Clickable links
+urxvt*perl-ext-common: default,matcher
+urxvt*url-launcher:    /usr/bin/firefox
+urxvt*matcher.button:  2
+urxvt*colorUL:         #a6c9f8
+
+*background:           #191919
+*foreground:           #e6e6e6
+*cursorColor:          #ffffff
+*cursorColor2:         #000000
+*cursorBlink:          false
+*saveLines:            8000
+*scrollTtyOutput:      true
+*scrollTtyKeypress:    true
+*mouseWheelScrollPage: false
+*cutchars:             "`'\",;@&*=|?()<>[]{}"
+
+!! Colors !!
+! Black
+*color0:  #2E3436
+*color8:  #555753
+! Red
+*color1:  #CC0000
+*color9:  #EF2929
+! Green (White)
+*color2:  #EBEBEB
+*color10: #FFFFFF
+! Yellow
+*color3:  #C4A000
+*color11: #FCE94F
+! Blue
+*color4:  #3465A4
+*color12: #729FCF
+! Purple
+*color5:  #75507B
+*color13: #AD7FA8
+! Cyan (Blue)
+*color6:  #7e9fd5
+*color14: #34E2E2
+! White
+*color7:  #D3D7CF
+*color15: #EEEEEC
+
+
+! Xterm
+xterm*font:             -*-terminus-medium-r-*-*-11-140-*-*-*-*-iso10646-1
+xterm*boldFont:         -*-terminus-bold-r-*-*-11-140-*-*-*-*-iso10646-1
+xterm*toolBar:          false
+xterm*background:       #191919
+xterm*foreground:       white
+xterm*cursorColor:      LightBlue
+xterm*pointerShape:     arrow
+xterm*pointerColor:     blue
+xterm*scrollTtyOutput:  false
+xterm*scrollKey:        true
+xterm*geometry:         80x25
