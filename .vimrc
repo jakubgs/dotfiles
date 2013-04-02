@@ -47,6 +47,12 @@ if has("gui_running")
     endif
 endif
 
+" File-type highlighting
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
+
 " encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -193,12 +199,6 @@ set hidden
 
 " Show matching brackets
 set sm
-
-" File-type highlighting
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
 
 " Faster standard output
 set ttyfast
