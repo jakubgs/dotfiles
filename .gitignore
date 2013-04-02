@@ -5,6 +5,7 @@
 .vim/backup/*
 
 # do not ignore these:
+!README.md
 !.gitignore
 !.Xdefaults
 !.xinitrc
@@ -22,7 +23,7 @@
 !.tmux.conf
 !.mplayer/
 !.pentadactylrc
-!.pentadactyl/
+!.pentadactyl/colors
 !.fonts.conf
 !.fonts/
 !.gtkrc-2.0
