@@ -1,9 +1,9 @@
 These are my dotfiles.
 
-To deploy run:
+To deploy in current directory run:
 
 ```
-$ git clone https://github.com/PonderingGrower/dotfiles.git
+$ git clone https://github.com/PonderingGrower/dotfiles.git ./
 ```
 
 then updated vim plugins:
