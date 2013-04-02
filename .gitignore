@@ -1,5 +1,5 @@
 # ignote all by default
-/*
+*
 .vim/temp/*
 .vim/undo/*
 .vim/backup/*
@@ -19,8 +19,8 @@
 !.zshrc
 !.gvimrc
 !.vimrc
-!.vim/
-!.vim/bundle/
+!.vim/*
+!.vim/bundle/*
 !.tmux.conf
 !.mplayer/
 !.pentadactylrc
