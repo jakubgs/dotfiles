@@ -8,6 +8,7 @@
 !README.md
 !.gitignore
 !.gitconfig
+!.gitmodules
 !.Xdefaults
 !.xinitrc
 !.xsession
