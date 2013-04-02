@@ -7,6 +7,7 @@
 # do not ignore these:
 !README.md
 !.gitignore
+!.gitconfig
 !.Xdefaults
 !.xinitrc
 !.xsession
@@ -17,8 +18,8 @@
 !.zshrc
 !.gvimrc
 !.vimrc
-!.vim/
-!.vim/bundle/*
+!.vim
+!.vim/bundle
 !.tmux.conf
 !.mplayer/
 !.pentadactylrc
@@ -30,5 +31,4 @@
 !.config/awesome/rc.lua
 !.awesome
 !.ssh/config
-!.gitconfig
 !bin/
