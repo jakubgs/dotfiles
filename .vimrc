@@ -318,9 +318,9 @@ nnoremap gm :Gmove<CR>
 nnoremap gr :Gread<CR>
 nnoremap gw :Gwrite<CR><CR>
 nnoremap gl :Glog<CR>
-nnoremap gs :Git push<CR>
-nnoremap gp :Git pull<CR>
-nnoremap go :Git checkout
+nnoremap gps :Git push<CR>
+nnoremap gpl :Git pull<CR>
+nnoremap gco :Git checkout
 nnoremap gb :Git branch
 
 " strip all trailing whitespaces in current file
