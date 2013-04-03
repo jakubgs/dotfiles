@@ -1,8 +1,5 @@
 # ignote all by default
-*
-.vim/temp/*
-.vim/undo/*
-.vim/backup/*
+/*
 
 # do not ignore these:
 !README.md
@@ -19,8 +16,14 @@
 !.zshrc
 !.gvimrc
 !.vimrc
-!.vim/*
-!.vim/bundle/*
+!.vim/
+!.vim/bundle
+!.vim/backup
+.vim/backup/*
+!.vim/undo
+.vim/undo/*
+!.vim/temp
+.vim/temp/*
 !.tmux.conf
 !.mplayer/
 !.pentadactylrc
