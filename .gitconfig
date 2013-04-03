@@ -13,8 +13,9 @@
     pl = pull
     c = commit
     s = status
-    a = add
-    l = log
+    a = add 
+    l  = log --decorate
+    sl = log --graph --pretty=format:'%h : %s'
 [branch "master"]
     remote = origin
     merge = refs/heads/master
