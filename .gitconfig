@@ -24,6 +24,6 @@
 [color]
 	ui = true
 [push]
-  default = current
+    default = current
 [pull]
-  default = current
+    default = current
