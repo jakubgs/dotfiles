@@ -41,7 +41,7 @@ endif
 " graphical font
 if has("gui_running")
     if has("gui_gtk2")
-        set guifont=Inconsolata\ 11
+        set guifont=terminus\ 10
     elseif has("gui_win32")
         set guifont=Dina:h10:cANSI
     endif
