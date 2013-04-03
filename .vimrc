@@ -6,13 +6,13 @@ filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " powerline statusline
-"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
 
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 " original repos on github
-"Bundle 'Lokaltog/powerline'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/powerline'
+"Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'ervandew/supertab'
@@ -26,6 +26,7 @@ Bundle 'vim-scripts/closetag.vim'
 Bundle 'Valloric/MatchTagAlways'
 " Colorschemes
 Bundle 'nanotech/jellybeans.vim'
+
 
 " }}}
 
@@ -41,7 +42,7 @@ endif
 " graphical font
 if has("gui_running")
     if has("gui_gtk2")
-        set guifont=Inconsolata\ 12
+        set guifont=Inconsolata\ for\ powerline\ 12
     elseif has("gui_win32")
         set guifont=Dina:h10:cANSI
     endif
