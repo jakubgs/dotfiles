@@ -1,5 +1,5 @@
 ""Bundle 'Lokaltog/powerline'
- VIM instad of VI
+" VIM instad of VI
 set nocompatible
 
 " {{{ Vundle plugin management
@@ -41,7 +41,7 @@ endif
 " graphical font
 if has("gui_running")
     if has("gui_gtk2")
-        set guifont=Inconsolata\ 11
+        set guifont=Inconsolata\ 12
     elseif has("gui_win32")
         set guifont=Dina:h10:cANSI
     endif

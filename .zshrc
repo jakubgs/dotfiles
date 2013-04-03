@@ -237,8 +237,8 @@ alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
 alias qemerge='sudo emerge --quiet-build y --quiet-fail y'
+alias WAT="echo lol"
 alias httpat='python2 -m SimpleHTTPServer'
-alias ydl='youtube-dl -to'
 # clipboard in command line
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
