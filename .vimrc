@@ -1,5 +1,5 @@
 ""Bundle 'Lokaltog/powerline'
- VIM instad of VI
+" VIM instad of VI
 set nocompatible
 
 " {{{ Vundle plugin management
@@ -292,7 +292,7 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 
 " paste from clipboard in insert mode
-inoremap <c-v> <c-r>+i
+inoremap <c-v> <c-r>+
 
 " remove annoying comman-line window
 nnoremap q: :q
