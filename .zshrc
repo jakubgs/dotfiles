@@ -27,8 +27,8 @@ esac
         
 export PS1="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
 export PROMPT=${PS1}
-#export PROMPT="%(?..%{$fg[red]%}↪ %?%{$reset_color%} )${PROMPT_TRUE}"
 # This is for a red return value of the last failed command
+#export PROMPT="%(?..%{$fg[red]%}↪ %?%{$reset_color%} )${PROMPT_TRUE}"
 
 # Default editor
 export EDITOR="vim"
@@ -39,15 +39,10 @@ export PAGER="less"
 export MPD_HOST="127.0.0.1"
 export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
-#export LANG="en_US.UTF8"
-#export LC_ALL="en_US.UTF8"
-#export WINEPREFIX="~/win32 sh winetricks ie6"
 #export XDG_CONFIG_HOME="$HOME/config"
 
 export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin:/opt/java/bin/:~/bin:.
 
-# Export for java swing
-#export AWT_TOOLKIT=MToolkit 
 # Export for java classpath
 export CLASSPATH=./:/opt/java/lib:/opt/java:/opt/java/jre/lib:/usr/share/java/hibernate/hibernate3.jar:/usr/share/java/postgresql-jdbc/postgresql-jdbc4.jar
 
@@ -211,7 +206,7 @@ bindkey "^H"	backward-kill-word	# ctrl + backspace
 bindkey "^[[3^" kill-word			# ctrl + delete
 bindkey "^[Oc"	forward-word		# ctrl + right arrow
 bindkey "^[Od"	backward-word		# ctrl + left arrow
-bindkey '^R'	history-incremental-pattern-search-backward # ctrl + r
+bindkey "^R"	history-incremental-pattern-search-backward # ctrl + r
 bindkey "^[[A"	history-beginning-search-backward # Up Arrow
 bindkey "^[[B"	history-beginning-search-forward  # Down Arrow
 bindkey "\e[2~" quoted-insert
