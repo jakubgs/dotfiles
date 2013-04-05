@@ -84,7 +84,7 @@ set relativenumber
 
 " number of lines you want to see in front of and after the cursor
 " in this case we want it in the middle, hence the arbitrary high number
-set scrolloff=10
+set scrolloff=1000
 
 " Show (partial) command in status line.
 "set showcmd
