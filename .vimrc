@@ -254,7 +254,7 @@ let g:ctrlp_regexp = 1
 let g:EasyMotion_leader_key = '<Space>'
 
 " Changing leader to space
-let mapleader = ' '
+let mapleader = "\<Space>"
 " don't let space do anything else
 nnoremap <SPACE> <Nop>
 
