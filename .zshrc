@@ -224,7 +224,6 @@ alias gvim="gvim --servername GVIM --remote-silent"
 alias wq='du -sh'
 alias kt='du -h --max-depth=1'
 alias dy='df --sync -hTt ext4'
-alias srv'sudo rc-service'
 alias restart='sudo rc-config restart '
 alias pjwstk='sudo sshfs s5134@sftp.pjwstk.edu.pl: /mnt/pjwstk -o uid=500,allow_other'
 alias sshm='ssh melchior'
@@ -232,7 +231,6 @@ alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
 alias qemerge='sudo emerge --quiet-build y --quiet-fail y'
-alias WAT="echo lol"
 alias httpat='python2 -m SimpleHTTPServer'
 # clipboard in command line
 alias pbcopy='xclip -selection clipboard'

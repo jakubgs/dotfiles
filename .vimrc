@@ -340,7 +340,7 @@ nnoremap <leader>V :vsp ~/.vimrc<CR>
 nnoremap <leader>v :source ~/.vimrc<CR>
 
 " CtrlP mappings
-nnoremap <Tab>     :CtrlPMixed<CR>
+nnoremap <Tab>      :CtrlPMixed<CR>
 nnoremap <leader>pt :CtrlPBufTagAll<CR>
 nnoremap <leader>pb :CtrlPBuffer<CR>
 nnoremap <leader>pl :CtrlPLine<CR>
