@@ -84,7 +84,7 @@ set relativenumber
 
 " number of lines you want to see in front of and after the cursor
 " in this case we want it in the middle, hence the arbitrary high number
-set scrolloff=1000
+set scrolloff=5
 
 " Show (partial) command in status line.
 "set showcmd
@@ -228,7 +228,7 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplModSelTarget = 1
 " so only one is open when using ctrlp
-let g:miniBufExplorerMoreThanOne = 3
+let g:miniBufExplorerMoreThanOne = 4
 
 " SuperTab
 let g:SuperTabDefaultCompletionType = "context"
@@ -249,6 +249,11 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'raw'
 let g:ctrlp_root_markers = ['.root', 'Makefile', '.git' ]
 let g:ctrlp_regexp = 1
+let g:ctrlp_custom_ignore = {
+	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+	\ 'file': '\v\.(exe|so|dll)$',
+	\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+	\ }
 
 " EasyMotion leader
 let g:EasyMotion_leader_key = '<Space>'
@@ -263,7 +268,7 @@ set pastetoggle=<F8>
 
 " }}}
 
-" save the file as root
+" save the file as root (tee must be addedd as NOPASSWD to sudoers)
 "map :suw :w !sudo tee % > /dev/null
 command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent edit!
 
@@ -342,9 +347,10 @@ nnoremap <leader>v :source ~/.vimrc<CR>
 " CtrlP mappings
 nnoremap <Tab>      :CtrlPMixed<CR>
 nnoremap <leader>pt :CtrlPBufTagAll<CR>
-nnoremap <leader>pb :CtrlPBuffer<CR>
 nnoremap <leader>pl :CtrlPLine<CR>
 nnoremap <leader>pq :CtrlPQuickfix<CR>
+nnoremap <leader>pb :CtrlPBuffer<CR>
+nnoremap <leader><leader> :CtrlP 
 
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ 11<CR>
