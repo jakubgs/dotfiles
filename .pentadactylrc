@@ -10,6 +10,9 @@ set shell=zsh
 " complete from search engines, location bar, local files and bookmarks
 set complete=slfb
 
+" changed keyword for google to g
+set defsearch=g
+
 " incremental search
 set incfind
 

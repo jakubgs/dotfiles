@@ -39,7 +39,7 @@ export PAGER="less"
 export MPD_HOST="127.0.0.1"
 export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
-#export XDG_CONFIG_HOME="$HOME/config"
+export USE_PYTHON="2.7"
 
 export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin:/opt/java/bin/:~/bin:.
 

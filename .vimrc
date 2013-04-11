@@ -346,11 +346,13 @@ nnoremap <leader>v :source ~/.vimrc<CR>
 
 " CtrlP mappings
 nnoremap <Tab>      :CtrlPMixed<CR>
+nnoremap <leader>pp :CtrlP 
 nnoremap <leader>pt :CtrlPBufTagAll<CR>
 nnoremap <leader>pl :CtrlPLine<CR>
 nnoremap <leader>pq :CtrlPQuickfix<CR>
 nnoremap <leader>pb :CtrlPBuffer<CR>
-nnoremap <leader><leader> :CtrlP 
+nnoremap <leader>pm :CtrlPMRUFiles<CR>
+nnoremap <leader><leader> :CtrlPLastMode --dir<CR>
 
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ 11<CR>
