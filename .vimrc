@@ -15,6 +15,7 @@ Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-dispatch'
 Bundle 'ervandew/supertab'
 Bundle 'majutsushi/tagbar'
 Bundle 'fholgado/minibufexpl.vim'
@@ -56,6 +57,10 @@ filetype indent on
 " encoding
 set encoding=utf-8
 set fileencoding=utf-8
+
+" minimum window size
+set winwidth=75
+set winheight=20
 
 " set title when run in terminal
 set title
@@ -331,13 +336,12 @@ nnoremap gb :Git branch
 " strip all trailing whitespaces in current file
 nnoremap <leader>r :%s/\s\+$//<cr>:let @/=''<CR>
 
-" split and switch to new pane
-" vertical
+" Window management
+" split vertical and switch
 nnoremap <leader>s <C-w>v<C-w>l
-" horizontal
+" split horizontal and switch
 nnoremap <leader>d <C-w>s<C-w>l
-
-" Close buffer but leave active pane open
+" close buffer but leave active pane open
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Edit .vimrc and erfresh configuration
@@ -353,7 +357,7 @@ nnoremap <leader>pb :CtrlPBuffer<CR>
 nnoremap <leader><leader> :CtrlP 
 
 " change font
-nnoremap <F12> :set guifont=Inconsolata\ 11<CR>
+nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F5> :make<CR><CR>
 nnoremap <F2> :TMiniBufExplorer<CR>
