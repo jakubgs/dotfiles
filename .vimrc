@@ -363,4 +363,4 @@ nnoremap <F5> :make<CR><CR>
 nnoremap <F2> :TMiniBufExplorer<CR>
 nnoremap <F1> :TagbarToggle<CR>
 
-" }}}
+c }}}
