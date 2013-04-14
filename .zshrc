@@ -13,6 +13,9 @@ autoload -U promptinit
 compinit  # longest wait
 promptinit
 
+# load powerline
+source ~/.powerline/powerline/bindings/zsh/powerline.zsh
+
 # change prompt depending on host
 case $HOST in
     melchior)
@@ -25,8 +28,8 @@ case $HOST in
         COLOR="green" ;;
 esac
         
-export PS1="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
-export PROMPT=${PS1}
+#export PS1="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
+#export PROMPT=${PS1}
 # This is for a red return value of the last failed command
 #export PROMPT="%(?..%{$fg[red]%}↪ %?%{$reset_color%} )${PROMPT_TRUE}"
 
@@ -41,7 +44,7 @@ export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="2.7"
 
-export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin:/opt/java/bin/:~/bin:.
+export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin:/opt/java/bin/:~/bin:~/.powerline/scripts/:.
 
 # Export for java classpath
 export CLASSPATH=./:/opt/java/lib:/opt/java:/opt/java/jre/lib:/usr/share/java/hibernate/hibernate3.jar:/usr/share/java/postgresql-jdbc/postgresql-jdbc4.jar
@@ -230,7 +233,7 @@ alias sshm='ssh melchior'
 alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
-alias qemerge='sudo emerge --quiet-build y --quiet-fail y'
+alias qemerge='sudo emerge --quiet-build y --quiet-fail y -v'
 alias httpat='python2 -m SimpleHTTPServer'
 # clipboard in command line
 alias pbcopy='xclip -selection clipboard'

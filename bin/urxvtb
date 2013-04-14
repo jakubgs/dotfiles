@@ -1,7 +1,9 @@
 #!/bin/bash
 
-FONT="xft:inconsolata for powerline:size=12:lang=pl:antialias=false:hinting=false"
-#FONT="xft:inconsolata:size=12:lang=pl:antialias=false:hinting=false"
+FONT="xft:Inconsolata for Powerline:size=12:lang=pl:antialias=true:hinting=true"
+#FONT="xft:inconsolata:size=14:lang=pl:antialias=false:hinting=false"
+#FONT="xft:Terminus for Powerline:size=12:lang=pl:antialias=false:hinting=false"
+#FONT="xft:Terminus:size=12:lang=pl:antialias=false:hinting=false"
 #FONT="xft:terminus:size=12:lang=pl:antialias=false:hinting=false"
 
-urxvtc -xrm "urxvt*font: ${FONT}" -xrm "urxvt*boldFont: ${FONT}"
+urxvtc -xrm "urxvt*font: ${FONT}" -xrm "urxvt*boldFont: ${FONT}" -xrm "URxvt*imFont: ${FONT}" -xrm "URxvt*italicFont: ${FONT}"

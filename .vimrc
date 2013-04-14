@@ -7,12 +7,11 @@ filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " powerline statusline
-"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
+set rtp+=~/.powerline/powerline/bindings/vim/
 
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 " original repos on github
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
@@ -42,7 +41,7 @@ endif
 " graphical font
 if has("gui_running")
     if has("gui_gtk2")
-        set guifont=terminus\ 10
+        set guifont=Inconsolata\ for\ Powerline\ 12
     elseif has("gui_win32")
         set guifont=Dina:h10:cANSI
     endif
@@ -278,15 +277,12 @@ set pastetoggle=<F8>
 command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent edit!
 
 " compile
-map mm :echohl WildMenu<cr>:echon "Compiling file..."<cr>:silent! make<cr>:bot copen 6<cr><C-w><Up>:echohl None<cr>:echo ""<cr><c-l>
+map mm :echohl WildMenu<cr>:echon "Compiling file..."<cr>:silent! Make<cr>:bot copen 6<cr><C-w><Up>:echohl None<cr>:echo ""<cr><c-l>
 
 " {{{ Key Mappings
 
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O><Backspace>
-
-" because fuck shift, that's why
-nnoremap ; :
 
 " vertical help
 cnoremap help rightb vert help
@@ -350,17 +346,19 @@ nnoremap <leader>v :source ~/.vimrc<CR>
 
 " CtrlP mappings
 nnoremap <Tab>      :CtrlPMixed<CR>
+nnoremap <leader>pp :CtrlP 
 nnoremap <leader>pt :CtrlPBufTagAll<CR>
 nnoremap <leader>pl :CtrlPLine<CR>
 nnoremap <leader>pq :CtrlPQuickfix<CR>
 nnoremap <leader>pb :CtrlPBuffer<CR>
-nnoremap <leader><leader> :CtrlP 
+nnoremap <leader>pm :CtrlPMRUFiles<CR>
+nnoremap <leader><leader> :CtrlPLastMode --dir<CR>
 
 " change font
-nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
+nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F5> :make<CR><CR>
 nnoremap <F2> :TMiniBufExplorer<CR>
 nnoremap <F1> :TagbarToggle<CR>
 
-c }}}
+" }}}
