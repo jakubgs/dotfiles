@@ -32,6 +32,9 @@ map h :tp<CR>
 map J :back<CR>
 map K :forward<CR>
 
+" faster expose
+map e <c-s-e>
+
 " bigger more visible hints
 highlight -a Hint font-size: 130% !important;
 highlight -a Hint text-transform: uppercase;
