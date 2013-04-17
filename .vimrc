@@ -188,7 +188,7 @@ set linebreak
 
 " Case insensitive search
 set is
-set ic
+"set ic
 " highlighting search results
 set hlsearch
 " start searching as you type
