@@ -27,6 +27,7 @@ map -b k 10k
 
 " use ctrl-v as intended
 map -m i,c,t <C-v> <Pass>
+map -m n,v,i,c,t <C-c> <Pass>
 
 " next tab
 map l :tn<CR>
