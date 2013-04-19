@@ -299,6 +299,7 @@ inoremap <right> <nop>
 
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
+nnoremap <c-v> "+p
 " paste to clipboard with ctrl+c in visual mode
 vnoremap <c-c> "+y
 
