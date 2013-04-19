@@ -41,7 +41,7 @@ endif
 " graphical font
 if has("gui_running")
     if has("gui_gtk2")
-        set guifont=Terminus\ 10,Terminus\ (TTF)\ for\ Powerline\ Medium\ 10
+        set guifont=Terminus\ 12,Terminus\ (TTF)\ for\ Powerline\ Medium\ 12
     elseif has("gui_win32")
         set guifont=Dina:h10:cANSI
     endif
@@ -297,8 +297,10 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-" paste from clipboard in insert mode
+" paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
+" paste to clipboard with ctrl+c in visual mode
+vnoremap <c-c> "+y
 
 " remove annoying comman-line window
 nnoremap q: :q

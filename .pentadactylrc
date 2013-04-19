@@ -24,6 +24,10 @@ map -b j 10j
 " jumping 5 times as far up
 map -b k 10k
 
+
+" use ctrl-v as intended
+map -m i,c,t <C-v> <Pass>
+
 " next tab
 map l :tn<CR>
 " previous taib
