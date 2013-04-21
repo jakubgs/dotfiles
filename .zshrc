@@ -222,8 +222,8 @@ alias v='vim'
 alias G='grep -i'
 alias ll='ls -lh --color'
 alias tt="tree -CdL 2"
-alias vim="vim --servername VIM --remote-silent"
-alias gvim="gvim --servername GVIM --remote-silent"
+alias vv="vim --servername VIM --remote-silent"
+alias gv="gvim --servername GVIM --remote-silent"
 alias wq='du -sh'
 alias kt='du -h --max-depth=1'
 alias dy='df --sync -hTt ext4'
@@ -241,6 +241,7 @@ alias pbpaste='xclip -selection clipboard -o'
 # easier usage of etckeeper
 alias etccommit='sudo etckeeper commit "Quick commit."'
 alias sgit='sudo git'
+alias gitc='git commit -a -m '
 
 # {{{ Functions
 
