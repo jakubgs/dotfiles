@@ -120,7 +120,7 @@ set clipboard=unnamed
 set spelllang=pl,en
 
 " Automatically changing working dir
-set autochdir
+"set autochdir
 
 " File menu
 set wildmenu
@@ -327,10 +327,10 @@ nnoremap gm :Gmove<CR>
 nnoremap gr :Gread<CR>
 nnoremap gw :Gwrite<CR><CR>
 nnoremap gl :Glog<CR>
-nnoremap gps :Git push<CR>
-nnoremap gpl :Git pull<CR>
+nnoremap gb :Git branch 
 nnoremap gco :Git checkout
-nnoremap gb :Git branch
+nnoremap gps :Dispatch git push<CR>
+nnoremap gpl :Dispatch git pull<CR>
 
 " strip all trailing whitespaces in current file
 nnoremap <leader>r :%s/\s\+$//<cr>:let @/=''<CR>
@@ -360,7 +360,8 @@ nnoremap <leader><leader> :CtrlPLastMode --dir<CR>
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
-nnoremap <F5> :make<CR><CR>
+nnoremap <F5> :Make<CR><CR>
+nnoremap <F4> :Dispatch 
 nnoremap <F2> :TMiniBufExplorer<CR>
 nnoremap <F1> :TagbarToggle<CR>
 
