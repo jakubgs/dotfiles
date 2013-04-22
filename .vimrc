@@ -320,7 +320,7 @@ nmap N Nzz
 " fugitive git bindings
 nnoremap ga :Git add %<CR><CR>
 nnoremap gs :Gstatus<CR>
-nnoremap gc :Gcommit<CR>
+nnoremap gc :Gcommit<CR>i
 nnoremap gd :Gdiff<CR>
 nnoremap ge :Gedit<CR>
 nnoremap gr :Gread<CR>
