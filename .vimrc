@@ -323,17 +323,17 @@ nnoremap gs :Gstatus<CR>
 nnoremap gc :Gcommit<CR>
 nnoremap gd :Gdiff<CR>
 nnoremap ge :Gedit<CR>
-nnoremap gm :Gmove<CR>
 nnoremap gr :Gread<CR>
 nnoremap gw :Gwrite<CR><CR>
 nnoremap gl :Glog<CR>
+nnoremap gm :Gmove 
 nnoremap gb :Git branch 
 nnoremap gco :Git checkout
 nnoremap gps :Dispatch git push<CR>
 nnoremap gpl :Dispatch git pull<CR>
 
 " strip all trailing whitespaces in current file
-nnoremap <leader>r :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <leader>r :%s/\s\+$//<cr>:let @/=''<CR>;
 
 " Window management
 " split vertical and switch
