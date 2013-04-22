@@ -124,6 +124,8 @@ set spelllang=pl,en
 
 " File menu
 set wildmenu
+" ignore case when opening files
+set wildignorecase
 set wildmode=list:longest,full
 set wildignore=.so,swp,.zip,.mp3,
                 \.bak,.pyc,.o,.ojb,.,a,
