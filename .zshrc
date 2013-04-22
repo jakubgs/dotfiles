@@ -218,10 +218,12 @@ bindkey "^J"    down-line-or-history
 
 # Aliases
 alias x='startx'
-alias v='vim'
+alias v='vim --servername VIM'
+alias S='sudo'
 alias G='grep -i'
 alias ll='ls -lh --color'
 alias tt="tree -CdL 2"
+alias vv="vim --servername VIM --remote-silent"
 alias vv="vim --servername VIM --remote-silent"
 alias gv="gvim --servername GVIM --remote-silent"
 alias wq='du -sh'
