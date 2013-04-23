@@ -41,7 +41,7 @@ endif
 " graphical font
 if has("gui_running")
     if has("gui_gtk2")
-        set guifont=Terminus\ (TTF)\ Medium\ 12
+        set guifont=Terminus\ 10
     elseif has("gui_win32")
         set guifont=Dina:h10:cANSI
     endif
@@ -126,7 +126,7 @@ set spelllang=pl,en
 set wildmenu
 " ignore case when opening files
 set wildignorecase
-set wildmode=list:longest,full
+set wildmode=list:full
 set wildignore=.so,swp,.zip,.mp3,
                 \.bak,.pyc,.o,.ojb,.,a,
                 \ojb.pdf,.jpg,.gif,.png,
@@ -254,10 +254,9 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'raw'
 let g:ctrlp_root_markers = ['.root', 'Makefile', '.git' ]
-let g:ctrlp_regexp = 1
 let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-	\ 'file': '\v\.(exe|so|dll)$',
+	\ 'file': '\v\.(exe|so|dll|tmp|temp|swp|o)$',
 	\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
 	\ }
 
