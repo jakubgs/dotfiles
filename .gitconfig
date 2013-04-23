@@ -11,6 +11,7 @@
     br = branch
     ps = push
     pl = pull
+    sm = submodule
     c = commit
     s = status
     a = add 
