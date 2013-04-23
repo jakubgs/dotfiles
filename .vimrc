@@ -1,9 +1,9 @@
-""Bundle 'Lokaltog/powerline'
+"Bundle 'Lokaltog/powerline'
 " VIM instad of VI
 set nocompatible
 
 " {{{ Vundle plugin management
-filetype off                   " required!
+filetype off " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " powerline statusline
@@ -41,7 +41,7 @@ endif
 " graphical font
 if has("gui_running")
     if has("gui_gtk2")
-        set guifont=Terminus\ 12
+        set guifont=Terminus\ (TTF)\ Medium\ 12
     elseif has("gui_win32")
         set guifont=Dina:h10:cANSI
     endif
