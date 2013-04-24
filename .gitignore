@@ -19,12 +19,9 @@
 !.vimrc
 !.vim/
 !.vim/bundle
-!.vim/backup
-.vim/backup/*
-!.vim/undo
-.vim/undo/*
-!.vim/temp
-.vim/temp/*
+!.vim/backup/.gitignore
+!.vim/undo/.gitignore
+!.vim/temp/.gitignore
 !.tmux.conf
 !.mplayer/
 !.pentadactylrc
