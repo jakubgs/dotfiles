@@ -1,4 +1,3 @@
-"Bundle 'Lokaltog/powerline'
 " VIM instad of VI
 set nocompatible
 
@@ -15,6 +14,7 @@ Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
+Bundle 'tpope/vim-surround'
 Bundle 'ervandew/supertab'
 Bundle 'majutsushi/tagbar'
 Bundle 'fholgado/minibufexpl.vim'
@@ -22,8 +22,8 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'PProvost/vim-ps1'
-Bundle 'vim-scripts/closetag.vim'
 Bundle 'Valloric/MatchTagAlways'
+Bundle 'mhinz/vim-startify'
 " Colorschemes
 Bundle 'nanotech/jellybeans.vim'
 
@@ -115,7 +115,7 @@ set nuw=5
 " Indentation settings, autoindent breaks pasted in text
 set autoindent
 set preserveindent
-set copyindent
+"set copyindent
 
 " paste the clipboard to unnamed register
 set clipboard=unnamed
@@ -195,7 +195,7 @@ set linebreak
 
 " Case insensitive search
 set is
-"set ic
+set ic
 " highlighting search results
 set hlsearch
 " start searching as you type
@@ -233,6 +233,11 @@ let g:jellybeans_overrides = {
 highlight Normal ctermbg=NONE " use terminal background
 highlight nonText ctermbg=NONE " use terminal background
 let g:jellybeans_use_lowcolor_black = 0
+
+" DelimitMate
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
+let delimitMate_smart_quotes = 0
 
 " MiniBufExplorer
 let g:miniBufExplMapCTabSwitchBufs = 1
