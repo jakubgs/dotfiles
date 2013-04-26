@@ -161,8 +161,9 @@ compiler gcc
 " make ~ files in:
 set   backupdir=~/.vim/backup/
 
-" swap dir
-set   directory=~/.vim/temp/
+" disable swap
+set noswapfile
+"set   directory=~/.vim/temp/
 
 " persistend undo history
 if has('persistent_undo')
