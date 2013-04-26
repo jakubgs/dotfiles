@@ -57,6 +57,10 @@ filetype indent on
 set encoding=utf-8
 set fileencoding=utf-8
 
+" fix slight delay after pressing ESC then O
+" " set noesckeys
+set timeout timeoutlen=1000 ttimeoutlen=100
+
 " minimum window size
 set winwidth=75
 set winheight=20
