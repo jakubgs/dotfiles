@@ -16,23 +16,6 @@ promptinit
 # load powerline
 source ~/.powerline/powerline/bindings/zsh/powerline.zsh
 
-# change prompt depending on host
-case $HOST in
-    melchior)
-        COLOR="cyan" ;;
-    caspair)
-        COLOR="blue" ;;
-    arael)
-        COLOR="red" ;;
-    *)
-        COLOR="green" ;;
-esac
-        
-#export PS1="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
-#export PROMPT=${PS1}
-# This is for a red return value of the last failed command
-#export PROMPT="%(?..%{$fg[red]%}↪ %?%{$reset_color%} )${PROMPT_TRUE}"
-
 # Default editor
 export EDITOR="vim"
 export VISION="vim"
@@ -202,9 +185,9 @@ bindkey "${key[Delete]}"  delete-char
 bindkey "${key[Home]}"    beginning-of-line
 bindkey "${key[End]}"     end-of-line
 bindkey "^A"    beginning-of-line   # ctrl + a
-bindkey "^S"    end-of-line         # ctrl + s
+bindkey "^E"    end-of-line         # ctrl + s
 bindkey "^W"	backward-kill-word  # ctrl + w
-bindkey "^E"	kill-word           # ctrl + e
+bindkey "^S"	kill-word           # ctrl + e
 bindkey "^H"	backward-kill-word	# ctrl + backspace
 bindkey "^[[3^" kill-word			# ctrl + delete
 bindkey "^[Oc"	forward-word		# ctrl + right arrow
@@ -220,11 +203,10 @@ bindkey "^J"    down-line-or-history
 alias x='startx'
 alias v='vim --servername VIM'
 alias S='sudo'
-alias fuck='sudo !!'
+alias fuck='echo !$'
 alias G='grep -i'
 alias ll='ls -lh --color'
 alias tt="tree -CdL 2"
-alias vv="vim --servername VIM --remote-silent"
 alias vv="vim --servername VIM --remote-silent"
 alias gv="gvim --servername GVIM --remote-silent"
 alias wq='du -sh'

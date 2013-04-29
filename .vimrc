@@ -23,7 +23,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'PProvost/vim-ps1'
 Bundle 'Valloric/MatchTagAlways'
-Bundle 'mhinz/vim-startify'
+Bundle 'szw/vim-tags'
 " Colorschemes
 Bundle 'nanotech/jellybeans.vim'
 
@@ -234,6 +234,9 @@ highlight Normal ctermbg=NONE " use terminal background
 highlight nonText ctermbg=NONE " use terminal background
 let g:jellybeans_use_lowcolor_black = 0
 
+" Startify
+let g:startify_unlisted_buffer = 0
+
 " DelimitMate
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
@@ -253,7 +256,7 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:Powerline_symbols = 'compatible'
 
 " TagBar
-set tags=tags;/
+set tags=./tags;/
 let g:tagbar_left = 1
 let g:tagbar_width = 30
 let g:tagbar_ctags_bin="/usr/bin/ctags"
@@ -343,6 +346,10 @@ nnoremap gco :Git checkout
 nnoremap gps :Dispatch git push<CR>
 nnoremap gpl :Dispatch git pull<CR>
 
+" paste and sellect
+nnoremap <leader>p p`[v`]
+nnoremap <leader>P P`[v`]
+
 " strip all trailing whitespaces in current file
 nnoremap <leader>r :%s/\s\+$//<cr>:let @/=''<CR>;
 
@@ -360,13 +367,14 @@ nnoremap <leader>v :source ~/.vimrc<CR>
 
 " CtrlP mappings
 nnoremap <Tab>      :CtrlPMixed<CR>
-nnoremap <leader>pp :CtrlP 
-nnoremap <leader>pt :CtrlPBufTagAll<CR>
-nnoremap <leader>pl :CtrlPLine<CR>
-nnoremap <leader>pq :CtrlPQuickfix<CR>
-nnoremap <leader>pb :CtrlPBuffer<CR>
-nnoremap <leader>pm :CtrlPMRUFiles<CR>
+nnoremap <leader>cp :CtrlP 
+nnoremap <leader>ct :CtrlPBufTagAll<CR>
+nnoremap <leader>cl :CtrlPLine<CR>
+nnoremap <leader>cq :CtrlPQuickfix<CR>
+nnoremap <leader>cb :CtrlPBuffer<CR>
+nnoremap <leader>cm :CtrlPMRUFiles<CR>
 nnoremap <leader><leader> :CtrlPLastMode --dir<CR>
+
 
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>

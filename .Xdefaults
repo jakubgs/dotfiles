@@ -6,10 +6,10 @@ Xcursor.theme: Vanilla-DMZ
 !*imLocale:             en_GB.UTF-8
 !*geometry:             120x35
 
-*font:              xft:Terminus:size=10:lang=pl:antialias=true:hinting=true,\
+*font:              xft:Terminus:size=8:lang=pl:antialias=true:hinting=true,\
 					xft:Kochi Gothic:antialias=false,\
 					xft:Baekmuk Gulim
-*boldFont:          xft:Terminus:size=10:Bold:lang=pl:antialias=true:hinting=true
+*boldFont:          xft:Terminus:size=8:Bold:lang=pl:antialias=true:hinting=true
 
 ! Disable printing
 *print-pipe:           "cat > /dev/null"
