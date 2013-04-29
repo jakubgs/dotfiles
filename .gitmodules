@@ -17,38 +17,35 @@
 [submodule ".vim/bundle/supertab"]
 	path = .vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule ".vim/bundle/MatchTagAlways"]
-    path = .vim/bundle/MatchTagAlways
-    url = https://github.com/Valloric/MatchTagAlways.git
-    ignore = dirty
-[submodule ".vim/bundle/closetag.vim"]
-	path = .vim/bundle/closetag.vim
-	url = https://github.com/vim-scripts/closetag.vim.git
-[submodule ".vim/bundle/vim-ps1"]
-	path = .vim/bundle/vim-ps1
-	url = https://github.com/PProvost/vim-ps1.git
-[submodule ".vim/bundle/ctrlp.vim"]
-	path = .vim/bundle/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim.git
-[submodule ".vim/bundle/delimitMate"]
-	path = .vim/bundle/delimitMate
-	url = https://github.com/Raimondi/delimitMate.git
+[submodule ".vim/bundle/tagbar"]
+	path = .vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git
 [submodule ".vim/bundle/minibufexpl.vim"]
 	path = .vim/bundle/minibufexpl.vim
 	url = https://github.com/fholgado/minibufexpl.vim.git
     ignore = dirty
+[submodule ".vim/bundle/delimitMate"]
+	path = .vim/bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
+[submodule ".vim/bundle/ctrlp.vim"]
+	path = .vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule ".vim/bundle/tagbar"]
-	path = .vim/bundle/tagbar
-	url = https://github.com/majutsushi/tagbar.git
-[submodule ".vim/bundle/jellybeans.vim"]
-	path = .vim/bundle/jellybeans.vim
-	url = https://github.com/nanotech/jellybeans.vim.git
+[submodule ".vim/bundle/vim-ps1"]
+	path = .vim/bundle/vim-ps1
+	url = https://github.com/PProvost/vim-ps1.git
+[submodule ".vim/bundle/MatchTagAlways"]
+    path = .vim/bundle/MatchTagAlways
+    url = https://github.com/Valloric/MatchTagAlways.git
+    ignore = dirty
 [submodule ".vim/bundle/vim-tags"]
 	path = .vim/bundle/vim-tags
 	url = https://github.com/szw/vim-tags.git
+[submodule ".vim/bundle/jellybeans.vim"]
+	path = .vim/bundle/jellybeans.vim
+	url = https://github.com/nanotech/jellybeans.vim.git
 [submodule ".powerline"]
 	path = .powerline
 	url = https://github.com/Lokaltog/powerline.git
