@@ -135,9 +135,9 @@ set wildmenu
 set wildignorecase
 set wildmode=list:full
 set wildignore=.so,swp,.zip,.mp3,
-                \.bak,.pyc,.o,.ojb,.,a,
-                \ojb.pdf,.jpg,.gif,.png,
-                \.avi,.mkv,.so,.out
+            \.bak,.pyc,.o,.ojb,.,a,
+            \ojb.pdf,.jpg,.gif,.png,
+            \.avi,.mkv,.so,.out
 
 " Shell
 set shell=zsh
@@ -170,10 +170,10 @@ set noswapfile
 
 " persistend undo history
 if has('persistent_undo')
-  set undofile                " Save undo's after file closes
-  set undodir=~/.vim/undo " where to save undo histories
-  set undolevels=100         " How many undos
-  set undoreload=1000        " number of lines to save for undo
+    set undofile                " Save undo's after file closes
+    set undodir=~/.vim/undo " where to save undo histories
+    set undolevels=100         " How many undos
+    set undoreload=1000        " number of lines to save for undo
 endif
 
 " Tab width
@@ -230,9 +230,9 @@ set cursorline
 "
 " Don't make comments italic
 let g:jellybeans_overrides = {
-\   'Comment': { 'cterm': 'italic' },
-\   'Todo':     { 'guibg': 'ff0000', 'cterm': '224' },
-\}
+            \   'Comment': { 'cterm': 'italic' },
+            \   'Todo':     { 'guibg': 'ff0000', 'cterm': '224' },
+            \}
 
 highlight Normal ctermbg=NONE " use terminal background
 highlight nonText ctermbg=NONE " use terminal background
@@ -272,10 +272,10 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'raw'
 let g:ctrlp_root_markers = ['.root', 'Makefile', '.git' ]
 let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-	\ 'file': '\v\.(exe|so|dll|tmp|temp|swp|o)$',
-	\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-	\ }
+	        \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+	        \ 'file': '\v\.(exe|so|dll|tmp|temp|swp|o)$',
+	        \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+	        \ }
 
 " EasyMotion leader
 let g:EasyMotion_leader_key = '<Space>'
@@ -396,6 +396,6 @@ nnoremap <F1> :TagbarToggle<CR>
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
