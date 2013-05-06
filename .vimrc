@@ -112,6 +112,9 @@ set foldnestmax=2
 " Number line width
 set nuw=5
 
+" automatically update file changes done by other programs
+set autoread
+
 " Indentation settings, autoindent breaks pasted in text
 set autoindent
 set preserveindent
@@ -179,7 +182,7 @@ set shiftwidth=4
 set tabstop=4
 set cinoptions=>4
 
-" Compatible tabs
+" use spaces instead of tabs
 set expandtab
 set smarttab
 
@@ -200,6 +203,7 @@ set ic
 set hlsearch
 " start searching as you type
 set incsearch
+set ignorecase
 set smartcase
 
 " not word dividers
@@ -209,7 +213,7 @@ set iskeyword+=_,$,@,%,#
 set hidden
 
 " Show matching brackets
-set sm
+set showmatch
 
 " Faster standard output
 set ttyfast
@@ -301,9 +305,12 @@ iabbrev </ </<C-X><C-O><Backspace>
 " vertical help
 cnoremap help rightb vert help
 
+" Fast saving
+nmap <c-s> :w!<cr>
+
 "" Learn to use hjkl
-nnoremap <up> <nop>
-nnoremap <down> <nop>
+nnoremap <up> ddkP
+nnoremap <down> ddp
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 inoremap <up> <nop>
@@ -319,9 +326,6 @@ vnoremap <c-c> "+y
 
 " remove annoying comman-line window
 nnoremap q: :q
-
-" append a semicolon
-nnoremap <leader>; A;<Esc>
 
 " for moving in wrapped lines
 nnoremap j gj
@@ -349,6 +353,9 @@ nnoremap gpl :Dispatch git pull<CR>
 " paste and sellect
 nnoremap <leader>p p`[v`]
 nnoremap <leader>P P`[v`]
+
+" append a semicolon
+nnoremap <leader>; A;<Esc>
 
 " strip all trailing whitespaces in current file
 nnoremap <leader>r :%s/\s\+$//<cr>:let @/=''<CR>;
@@ -385,3 +392,10 @@ nnoremap <F2> :TMiniBufExplorer<CR>
 nnoremap <F1> :TagbarToggle<CR>
 
 " }}}
+
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif

@@ -14,7 +14,6 @@ tar zcvf ${TEMP} \
 --exclude="temp/*" \
 --exclude="undo/*" \
 --exclude=".git" \
-.password-store \
 .zshrc \
 .Xdefaults \
 .xsession \
@@ -26,7 +25,6 @@ tar zcvf ${TEMP} \
 .gvimrc \
 .vimrc \
 .vim \
-.screenrc \
 .tmux.conf \
 .mplayer/ \
 .pentadactylrc \
@@ -42,8 +40,10 @@ tar zcvf ${TEMP} \
 .config/ranger/ \
 .config/awesome/ \
 .awesome \
+.powerline \
 .ssh/config \
 .gitconfig \
+.gitignore \
 bin \
 > /dev/null
 

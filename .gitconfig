@@ -3,6 +3,8 @@
 	name = Jakub Sokołowski
 [core]
 	editor = vim
+[diff]
+    tool = vimdiff
 [merge]
 	tool = vimdiff
 [alias]
@@ -17,6 +19,8 @@
     a = add 
     l  = log --decorate
     sl = log --graph --pretty=format:'%h : %s'
+	df = diff
+	dt = difftool
 [branch "master"]
     remote = origin
     merge = refs/heads/master
@@ -28,3 +32,5 @@
     default = current
 [pull]
     default = current
+[difftool]
+	prompt = false
