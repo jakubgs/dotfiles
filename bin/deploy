@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LINKS=(".zshrc" ".vim" ".vimrc" ".tmux.conf" ".powerline" ".")
+LINKS=(".zshrc" ".vim" ".vimrc" ".tmux.conf" ".powerline" ".config/powerline")
 
 cd ~/dotfiles
 
