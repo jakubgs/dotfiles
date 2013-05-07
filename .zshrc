@@ -240,3 +240,11 @@ function src() {
     [[ -f ~/.zcompdump.zwc.old ]] && rm -f ~/.zcompdump.zwc.old
     source ~/.zshrc
 }
+
+function g {
+   if [[ $# > 0 ]]; then
+     git $@
+   else
+     git status
+   fi
+}
