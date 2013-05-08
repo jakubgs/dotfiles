@@ -20,6 +20,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'PProvost/vim-ps1'
 Bundle 'Valloric/MatchTagAlways'
@@ -228,6 +229,11 @@ set cursorline
 "
 " {{{ Plugin configuration
 "
+"
+
+" NERDTree
+let NERDTreeWinPos = "right"
+
 " Don't make comments italic
 let g:jellybeans_overrides = {
             \   'Comment': { 'cterm': 'italic' },
@@ -382,10 +388,13 @@ nnoremap <leader>cb :CtrlPBuffer<CR>
 nnoremap <leader>cm :CtrlPMRUFiles<CR>
 nnoremap <leader><leader> :CtrlPLastMode --dir<CR>
 
+" set current dir to that of current file
+nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
+nnoremap <F6> :NERDTreeToggle<CR>
 nnoremap <F5> :Make<CR><CR>
 nnoremap <F4> :Dispatch 
 nnoremap <F2> :TMiniBufExplorer<CR>

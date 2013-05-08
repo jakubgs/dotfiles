@@ -20,7 +20,7 @@ Xcursor.theme: Vanilla-DMZ
 *thickness:            0
 *borderWidth:          1
 
-urxvt.termName:        rxvt-256color
+urxvt*termName:        rxvt-256color
 *termName:             screen-256color
 
 ! Real Transparency
@@ -36,7 +36,7 @@ urxvt*matcher.button:  2
 urxvt*colorUL:         #a6c9f8
 
 *background:           #191919
-*foreground:           #e6e6e6
+*foreground:           #e9e9e9
 *cursorColor:          #ffffff
 *cursorColor2:         #000000
 *cursorBlink:          false
