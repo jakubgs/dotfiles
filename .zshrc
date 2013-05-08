@@ -14,7 +14,24 @@ compinit  # longest wait
 promptinit
 
 # load powerline
-source ~/.powerline/powerline/bindings/zsh/powerline.zsh
+#source ~/.powerline/powerline/bindings/zsh/powerline.zsh
+
+# change prompt depending on host
+case $HOST in
+    melchior)
+        COLOR="cyan" ;;
+    caspair)
+        COLOR="blue" ;;
+    arael)
+        COLOR="red" ;;
+    zeruel)
+        COLOR="red" ;;
+    *)
+        COLOR="green" ;;
+esac
+        
+export PS1="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
+export PROMPT=${PS1}
 
 # Default editor
 export EDITOR="vim"

@@ -317,8 +317,8 @@ nmap <c-s> :w!<cr>
 "" Learn to use hjkl
 nnoremap <up> ddkP
 nnoremap <down> ddp
-nnoremap <left> <nop>
-nnoremap <right> <nop>
+nnoremap <left> gv<
+nnoremap <right> gv>
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
