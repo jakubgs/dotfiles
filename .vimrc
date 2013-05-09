@@ -17,7 +17,6 @@ Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
 Bundle 'ervandew/supertab'
 Bundle 'majutsushi/tagbar'
-Bundle 'fholgado/minibufexpl.vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
@@ -237,7 +236,7 @@ let NERDTreeWinPos = "right"
 " Don't make comments italic
 let g:jellybeans_overrides = {
             \   'Comment': { 'cterm': 'italic' },
-            \   'Todo':     { 'guibg': 'ff0000', 'cterm': '224' },
+            \   'Todo':     { 'gui' : 'bold', 'guibg': 'ff0000', 'cterm': '224'},
             \}
 
 highlight Normal ctermbg=NONE " use terminal background
@@ -251,13 +250,6 @@ let g:startify_unlisted_buffer = 0
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 let delimitMate_smart_quotes = 0
-
-" MiniBufExplorer
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplModSelTarget = 1
-" so only one is open when using ctrlp
-let g:miniBufExplorerMoreThanOne = 4
 
 " SuperTab
 let g:SuperTabDefaultCompletionType = "context"
@@ -276,6 +268,7 @@ let g:ctrlp_cache_dir = $HOME.'/.vim/temp/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'raw'
+let g:ctrlp_regexp = 0
 let g:ctrlp_root_markers = ['.root', 'Makefile', '.git' ]
 let g:ctrlp_custom_ignore = {
 	        \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -323,6 +316,16 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+
+" easier navigation between splits
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+
+" switch between buffers
+nnoremap <c-Tab>    :bprevious<CR>
+nnoremap <c-s-Tab>  :bnext<CR>
 
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
@@ -381,12 +384,14 @@ nnoremap <leader>v :source ~/.vimrc<CR>
 " CtrlP mappings
 nnoremap <Tab>      :CtrlPMixed<CR>
 nnoremap <leader>cp :CtrlP 
+nnoremap <leader>cr :CtrlPRoot<CR>
 nnoremap <leader>ct :CtrlPBufTagAll<CR>
 nnoremap <leader>cl :CtrlPLine<CR>
 nnoremap <leader>cq :CtrlPQuickfix<CR>
 nnoremap <leader>cb :CtrlPBuffer<CR>
 nnoremap <leader>cm :CtrlPMRUFiles<CR>
-nnoremap <leader><leader> :CtrlPLastMode --dir<CR>
+" re-run last CtrlP command
+nnoremap <leader><leader> :CtrlP<Up><CR>
 
 " set current dir to that of current file
 nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
@@ -397,7 +402,6 @@ nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F6> :NERDTreeToggle<CR>
 nnoremap <F5> :Make<CR><CR>
 nnoremap <F4> :Dispatch 
-nnoremap <F2> :TMiniBufExplorer<CR>
 nnoremap <F1> :TagbarToggle<CR>
 
 " }}}
