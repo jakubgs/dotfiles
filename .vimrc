@@ -329,7 +329,7 @@ nnoremap <c-s-Tab>  :bnext<CR>
 
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
-nnoremap <c-v> "+p
+"nnoremap <c-v> "+p
 " paste to clipboard with ctrl+c in visual mode
 vnoremap <c-c> "+y
 
@@ -399,9 +399,12 @@ nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
-nnoremap <F6> :NERDTreeToggle<CR>
+nnoremap <F8> :nohl<CR>
+nnoremap <F6> :Dispatch 
 nnoremap <F5> :Make<CR><CR>
-nnoremap <F4> :Dispatch 
+nnoremap <F4> :source ~/.vim/session/default<cr>
+nnoremap <F3> :mksession! ~/.vim/session/default<cr>
+nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F1> :TagbarToggle<CR>
 
 " }}}
