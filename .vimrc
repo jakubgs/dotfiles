@@ -302,7 +302,7 @@ map mm :echohl WildMenu<cr>:echon "Compiling file..."<cr>:silent! Make<cr>:bot c
 iabbrev </ </<C-X><C-O><Backspace>
 
 " vertical help
-cnoremap help rightb vert help
+cnoremap hlp rightb vert help
 
 " Fast saving
 nmap <c-s> :w!<cr>
