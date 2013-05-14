@@ -150,7 +150,7 @@ set cmdheight=1
 
 " Different compiler depending on type of file
 set makeprg=make
-au FileType c set makeprg=make
+au FileType c set makeprg=make\ --silent
 au FileType c set cindent
 au FileType cpp set makeprg=/usr/bin/g++\ \-g\ \-Wall\ \-pedantic\ \"%\"\ -o\ \"%<.out\"
 " Format for error QuickList
@@ -305,8 +305,8 @@ cnoremap hlp rightb vert help
 " Fast saving
 nmap <c-s> :w!<cr>
 
-" compile
-map mm :Make<CR>
+" save and compile
+map mm :w<CR>:Make<CR>
 
 "" Learn to use hjkl
 nnoremap <up> ddkP
