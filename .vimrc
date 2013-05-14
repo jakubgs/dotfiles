@@ -149,10 +149,9 @@ set shortmess=atI
 set cmdheight=1
 
 " Different compiler depending on type of file
-set makeprg=make
+set makeprg=make\ -j6\ --silent
 au FileType c set makeprg=make\ --silent
 au FileType c set cindent
-au FileType cpp set makeprg=/usr/bin/g++\ \-g\ \-Wall\ \-pedantic\ \"%\"\ -o\ \"%<.out\"
 " Format for error QuickList
 au FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 au FileType cpp set errorformat=%f:%l:%c:\ %m
@@ -308,6 +307,17 @@ nmap <c-s> :w!<cr>
 " save and compile
 map mm :w<CR>:Make<CR>
 
+" remove annoying comman-line window
+nnoremap q: :q
+
+" for moving in wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" search results in the centre of the screen
+nmap n nzz
+nmap N Nzz
+
 "" Learn to use hjkl
 nnoremap <up> ddkP
 nnoremap <down> ddp
@@ -333,17 +343,6 @@ inoremap <c-v> <c-r>+
 "nnoremap <c-v> "+p
 " paste to clipboard with ctrl+c in visual mode
 vnoremap <c-c> "+y
-
-" remove annoying comman-line window
-nnoremap q: :q
-
-" for moving in wrapped lines
-nnoremap j gj
-nnoremap k gk
-
-" search results in the centre of the screen
-nmap n nzz
-nmap N Nzz
 
 " fugitive git bindings
 nnoremap ga :Git add %<CR><CR>
@@ -401,7 +400,7 @@ nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F9> :nohl<CR>
-nnoremap <F8> :Make<CR>
+nnoremap <F8> :Make!<CR>
 nnoremap <F7> :Copen<CR>
 nnoremap <F6> :tabnext<CR>
 nnoremap <F5> :tabprevious<CR>
