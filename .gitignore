@@ -28,7 +28,6 @@
 !.pentadactylrc
 !.pentadactyl/colors
 !.fonts.conf
-!.fonts/
 !.gtkrc-2.0
 .config/*
 !.config/gtk-3.0/settings.ini
