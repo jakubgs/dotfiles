@@ -399,9 +399,11 @@ nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
-nnoremap <F8> :nohl<CR>
-nnoremap <F6> :Dispatch 
-nnoremap <F5> :Make<CR><CR>
+nnoremap <F9> :nohl<CR>
+nnoremap <F8> :Make<CR><CR>
+nnoremap <F7> :Dispatch 
+nnoremap <F6> :tabnext<CR>
+nnoremap <F5> :tabprevious<CR>
 nnoremap <F4> :source ~/.vim/session/default<cr>
 nnoremap <F3> :mksession! ~/.vim/session/default<cr>
 nnoremap <F2> :NERDTreeToggle<CR>
