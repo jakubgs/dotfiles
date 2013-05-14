@@ -149,9 +149,10 @@ set shortmess=atI
 set cmdheight=1
 
 " Different compiler depending on type of file
-set makeprg=make\ clean\ &&\ make\ -j4\ --silent
-au FileType cpp set makeprg=/usr/bin/g++\ \-g\ \-Wall\ \-pedantic\ \"%\"\ -o\ \"%<.out\"
+set makeprg=make
+au FileType c set makeprg=make
 au FileType c set cindent
+au FileType cpp set makeprg=/usr/bin/g++\ \-g\ \-Wall\ \-pedantic\ \"%\"\ -o\ \"%<.out\"
 " Format for error QuickList
 au FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 au FileType cpp set errorformat=%f:%l:%c:\ %m
@@ -177,10 +178,10 @@ if has('persistent_undo')
 endif
 
 " Tab width
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
-set cinoptions=>4
+set softtabstop=8
+set shiftwidth=8
+set tabstop=8
+set cinoptions=>8
 
 " use spaces instead of tabs
 set expandtab
@@ -293,9 +294,6 @@ set pastetoggle=<F8>
 "map :suw :w !sudo tee % > /dev/null
 command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent edit!
 
-" compile
-map mm :echohl WildMenu<cr>:echon "Compiling file..."<cr>:silent! Make<cr>:bot copen 6<cr><C-w><Up>:echohl None<cr>:echo ""<cr><c-l>
-
 " {{{ Key Mappings
 
 " For closing tags in HTML
@@ -306,6 +304,9 @@ cnoremap hlp rightb vert help
 
 " Fast saving
 nmap <c-s> :w!<cr>
+
+" compile
+map mm :Make<CR>
 
 "" Learn to use hjkl
 nnoremap <up> ddkP
@@ -400,8 +401,8 @@ nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F9> :nohl<CR>
-nnoremap <F8> :Make<CR><CR>
-nnoremap <F7> :Dispatch 
+nnoremap <F8> :Make<CR>
+nnoremap <F7> :Copen<CR>
 nnoremap <F6> :tabnext<CR>
 nnoremap <F5> :tabprevious<CR>
 nnoremap <F4> :source ~/.vim/session/default<cr>
