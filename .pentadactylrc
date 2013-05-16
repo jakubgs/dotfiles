@@ -34,8 +34,13 @@ map l :tn<CR>
 " previous taib
 map h :tp<CR>
 
+" move in history
 map J :back<CR>
 map K :forward<CR>
+
+" move tab left and right
+map H :tabmove -1<CR>
+map L :tabmove +1<CR>
 
 " faster expose
 map e <c-s-e>
