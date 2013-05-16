@@ -1,0 +1,11 @@
+#!/bin/bash
+
+FILE=`realpath $@`
+HOST=`hostname`
+CMD="ssh ${SSH_CONNECTION%% *} export DISPLAY=\":0.0\"; gvim --servername GVIM --remote-send \":e scp://${HOST}/${FILE}<CR><CR>\""
+
+if [[ -z ${SSH_CONNECTION%% *} ]]; then
+        echo "Not in an SSH connection."
+else
+        $CMD
+fi

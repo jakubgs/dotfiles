@@ -88,13 +88,13 @@ myofficemenu = {
 }
 
 mystoolsmenu = {
-	{ "edit config","gvim " .. awful.util.getdir("config") .. "/rc.lua" },
-	{ "edit xorg.conf","gksudo gvim " .. "/etc/X11/xorg.conf" },
-    { "edit wallpaper",		"nitrogen /mnt/melchior/data/Wallpapers/" },
-	{ "--------------", nil },
-    { "system monitor",	"gnome-system-monitor" },
-	{ "palimpsest",     "gksudo palimpsest" },
-    { "disk usage",		"baobab" },
+        { "edit rc.lua",        "gvim " .. awful.util.getdir("config") .. "/rc.lua" },
+	{ "edit xorg.conf",     "gksudo gvim " .. "/etc/X11/xorg.conf" },
+        { "edit wallpaper",	"nitrogen /mnt/melchior/data/Wallpapers/" },
+	{ "---------------",     nil },
+        { "system monitor",	"gnome-system-monitor" },
+	{ "palimpsest",         "gksudo palimpsest" },
+        { "disk usage",	        "baobab" },
 }
 
 mygamesmenu = {
@@ -119,7 +119,7 @@ mymelchiormenu = {
 mymainmenu = awful.menu({ items = { 
 	{ "system",		mysystemmenu, beautiful.awesome_icon },
 	{ "systools",	mystoolsmenu, beautiful.awesome_icon },
-    { "melchior",	mymelchiormenu, beautiful.awesome_icon },
+        { "melchior",	mymelchiormenu, beautiful.awesome_icon },
 	{ "office",		myofficemenu, beautiful.awesome_icon },
 	{ "games",		mygamesmenu, beautiful.awesome_icon },
 	{ "vm",			myvmmenu, beautiful.awesome_icon },
@@ -129,12 +129,12 @@ mymainmenu = awful.menu({ items = {
 	{ "thunderbird","thunderbird" },
 	{ "-------------", nil },
 	{ "file manager",	fmanager },
-    { "urxvt",		terminal },
-    { "urxvtb",		homedir .. "bin/urxvtb" },
+        { "urxvt",		terminal },
+        { "urxvtb",		homedir .. "bin/urxvtb" },
 	{ "htop",		terminal .. " -e htop" },
 	{ "ncmpcpp",	terminal .. " -name ncmpcpp -e ncmpcpp" },
-    { "brasero",	"brasero" },
-    { "remmina",	"remmina" },
+        { "brasero",	"brasero" },
+        { "remmina",	"remmina" },
 	{ "pidgin",		"pidgin" },
 	{ "gmplayer",	"gnome-mplayer" },
 }
@@ -343,7 +343,7 @@ globalkeys = awful.util.table.join(
                     function (s)
                             awful.util.spawn(terminal .. " -e killall " .. s)
                     end,
-                    awful.util.getdir("cache") .. "/killall_history")
+                    homedir .. ".awesome/killall_history")
             end)
 )
 

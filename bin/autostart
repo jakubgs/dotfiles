@@ -37,8 +37,6 @@ if ! pgrep mhtop &>/dev/null; then
 	urxvtc -name mhtop	 -e ~/bin/mhtop &
 	urxvtc -name htop	 -e htop  &
 	urxvtc -name ncmpcpp -e ncmpcpp &
-	# change focus
-	echo "awful.tag.viewonly(tags[4][3])" | awesome-client
 fi
 
 run thunar --daemon > /var/log/thunar.log 2>&1
