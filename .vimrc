@@ -109,6 +109,9 @@ set foldlevel=5
 set foldmethod=syntax
 set foldnestmax=2
 
+" highlight this column
+set colorcolumn=80
+
 " Number line width
 set nuw=5
 
