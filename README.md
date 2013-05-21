@@ -16,5 +16,5 @@ git submodule foreach git submodule update
 ```
 Or just use this script:
 ```
-bin/vplugupdate`
-````
+bin/vplugupdate
+```
