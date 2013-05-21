@@ -13,7 +13,7 @@
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-    ignore = dirty
+        ignore = dirty
 [submodule ".vim/bundle/supertab"]
 	path = .vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
@@ -32,20 +32,17 @@
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-    ignore = dirty
+        ignore = dirty
 [submodule ".vim/bundle/vim-ps1"]
 	path = .vim/bundle/vim-ps1
 	url = https://github.com/PProvost/vim-ps1.git
 [submodule ".vim/bundle/MatchTagAlways"]
-    path = .vim/bundle/MatchTagAlways
-    url = https://github.com/Valloric/MatchTagAlways.git
-    ignore = dirty
+        path = .vim/bundle/MatchTagAlways
+        url = https://github.com/Valloric/MatchTagAlways.git
+        ignore = dirty
 [submodule ".vim/bundle/vim-tags"]
 	path = .vim/bundle/vim-tags
 	url = https://github.com/szw/vim-tags.git
 [submodule ".vim/bundle/jellybeans.vim"]
 	path = .vim/bundle/jellybeans.vim
 	url = https://github.com/nanotech/jellybeans.vim.git
-[submodule ".powerline"]
-	path = .powerline
-	url = https://github.com/Lokaltog/powerline.git
