@@ -5,8 +5,8 @@ set nocompatible
 filetype off " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-" powerline statusline
-set rtp+=~/.powerline/powerline/bindings/vim/
+" custom statusline
+source ~/.vim/statusline.vim
 
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
@@ -339,6 +339,10 @@ inoremap <c-v> <c-r>+
 "nnoremap <c-v> "+p
 " paste to clipboard with ctrl+c in visual mode
 vnoremap <c-c> "+y
+
+" easier navigation through tabs
+nnoremap <c-Tab>   :tabnext<CR>
+nnoremap <c-s-Tab> :tabprevious<CR>
 
 " paste and sellect
 nnoremap <leader>p p`[v`]
