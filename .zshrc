@@ -220,7 +220,6 @@ bindkey "^J"    down-line-or-history
 alias x='startx'
 alias v='vim --servername VIM'
 alias S='sudo'
-alias fuck='echo !$'
 alias -g G='| grep -i'
 alias ll='ls -lh --color'
 alias tt="tree -CdL 2"
