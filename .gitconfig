@@ -1,12 +1,12 @@
 [user]
-	email = panswiata@gmail.com
-	name = Jakub Sokołowski
+    email = panswiata@gmail.com
+    name = Jakub Sokołowski
 [core]
-	editor = vim
+    editor = vim
 [diff]
     tool = vimdiff
 [merge]
-	tool = vimdiff
+    tool = vimdiff
 [alias]
     hist = log --graph
     co = checkout
@@ -19,18 +19,18 @@
     a = add 
     l  = log --decorate
     sl = log --graph --pretty=format:'%h : %s'
-	df = diff
-	dt = difftool
+    df = diff
+    dt = difftool
 [branch "master"]
     remote = origin
     merge = refs/heads/master
 [credential]
-	helper = cache --timeout=1800
+    helper = cache --timeout=1800
 [color]
-	ui = true
+    ui = true
 [push]
     default = current
 [pull]
     default = current
 [difftool]
-	prompt = false
+    prompt = false
