@@ -31,7 +31,6 @@ tar zcvf ${TEMP} \
 .pentadactyl/ \
 .xinitrc \
 .fonts.conf \
-.fonts/ \
 .gtkrc-2.0 \
 .gtkrc-1.2-gnome2 \
 .gtkrc.mine \
@@ -40,7 +39,6 @@ tar zcvf ${TEMP} \
 .config/ranger/ \
 .config/awesome/ \
 .awesome \
-.powerline \
 .ssh/config \
 .gitconfig \
 .gitignore \
