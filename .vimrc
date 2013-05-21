@@ -158,8 +158,6 @@ au FileType c set cindent
 " Format for error QuickList
 au FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 au FileType cpp set errorformat=%f:%l:%c:\ %m
-" HTML
-au FileType html,xml,xsl source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
 
 " Real men use gcc
 compiler gcc
@@ -299,7 +297,7 @@ command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent ed
 " {{{ Key Mappings
 
 " For closing tags in HTML
-iabbrev </ </<C-X><C-O><Backspace>
+iabbrev </ </<C-X><C-O>
 
 " help in new vertical split
 cnoremap hlp rightb vert help
