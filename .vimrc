@@ -298,7 +298,7 @@ command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent ed
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O><Backspace>
 
-" vertical help
+" help in new vertical split
 cnoremap hlp rightb vert help
 
 " Fast saving
@@ -334,30 +334,11 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
-" switch between buffers
-nnoremap <c-Tab>    :bprevious<CR>
-nnoremap <c-s-Tab>  :bnext<CR>
-
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
 "nnoremap <c-v> "+p
 " paste to clipboard with ctrl+c in visual mode
 vnoremap <c-c> "+y
-
-" fugitive git bindings
-nnoremap ga :Git add %<CR><CR>
-nnoremap gs :Gstatus<CR>
-nnoremap gc :Gcommit<CR>i
-nnoremap gd :Gdiff<CR>
-nnoremap ge :Gedit<CR>
-nnoremap gr :Gread<CR>
-nnoremap gw :Gwrite<CR><CR>
-nnoremap gl :Glog<CR>
-nnoremap gm :Gmove 
-nnoremap gb :Git branch 
-nnoremap gco :Git checkout
-nnoremap gps :Dispatch git push<CR>
-nnoremap gpl :Dispatch git pull<CR>
 
 " paste and sellect
 nnoremap <leader>p p`[v`]
@@ -381,9 +362,15 @@ nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <leader>V :vsp ~/.vimrc<CR>
 nnoremap <leader>v :source ~/.vimrc<CR>
 
+" switch between buffers
+nnoremap <leader>h :bprevious<CR>
+nnoremap <leader>l :bnext<CR>
+" toggle last two buffers
+nnoremap <leader>a <c-^>
+
 " CtrlP mappings
 nnoremap <Tab>      :CtrlPMixed<CR>
-nnoremap <leader>cp :CtrlP 
+nnoremap <leader>cp :CtrlP<Space>
 nnoremap <leader>cr :CtrlPRoot<CR>
 nnoremap <leader>ct :CtrlPBufTagAll<CR>
 nnoremap <leader>cl :CtrlPLine<CR>
@@ -395,6 +382,21 @@ nnoremap <leader><leader> :CtrlP<Up><CR>
 
 " set current dir to that of current file
 nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
+
+" fugitive git bindings
+nnoremap ga :Git add %<CR><CR>
+nnoremap gs :Gstatus<CR>
+nnoremap gc :Gcommit<CR>i
+nnoremap gd :Gdiff<CR>
+nnoremap ge :Gedit<CR>
+nnoremap gr :Gread<CR>
+nnoremap gw :Gwrite<CR><CR>
+nnoremap gl :Glog<CR>
+nnoremap gm :Gmove<Space>
+nnoremap gb :Git branch<Space>
+nnoremap gco :Git checkout<Space>
+nnoremap gps :Dispatch git push<CR>
+nnoremap gpl :Dispatch git pull<CR>
 
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>
@@ -410,7 +412,6 @@ nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F1> :TagbarToggle<CR>
 
 " }}}
-
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
