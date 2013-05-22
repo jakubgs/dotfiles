@@ -73,5 +73,5 @@ set statusline+=%4*\ %{strlen(&fileformat)>0?&fileformat.'\ <\ ':''}
 set statusline+=%{strlen(&fileencoding)>0?&fileencoding.'\ <\ ':''}
 set statusline+=%{strlen(&filetype)>0?&filetype.'\ ':''}
 set statusline+=%3*\ %p%%\ |
-set statusline+=%5*\ \ %l:%c\ |
+set statusline+=%5*\ %l:%c\ |
 " }}}2
