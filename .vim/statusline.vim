@@ -9,15 +9,15 @@ function! Mode()
         " mode
         hi User2 guifg=#005f00 guibg=#afd700 gui=BOLD ctermfg=22 ctermbg=190 cterm=BOLD
         " file depth
-        hi User3 guifg=#afd700 guibg=#414243 ctermfg=255 ctermbg=241 cterm=bold
+        hi User3 guifg=#afd700 guibg=#414243 ctermfg=255 ctermbg=238 cterm=bold
         " file info
         hi User4 guifg=#989c88 guibg=#151515 ctermfg=241 ctermbg=234
         " line:row
         hi User5 guifg=#4e4e4e guibg=#FFFFFF gui=bold ctermfg=239 ctermbg=255 cterm=bold
         " git status
-        hi User6 guifg=#a8bcbc guibg=#585858 ctermfg=255 ctermbg=245
+        hi User6 guifg=#a8bcbc guibg=#585858 ctermfg=255 ctermbg=238
         " file name
-        hi User7 guifg=#FFFFFF guibg=#585858 gui=bold ctermfg=255 ctermbg=245 cterm=bold
+        hi User7 guifg=#FFFFFF guibg=#585858 gui=bold ctermfg=255 ctermbg=238 cterm=bold
 
         if l:mode ==# 'n'
             hi User3 guifg=#afd700 ctermfg=190
