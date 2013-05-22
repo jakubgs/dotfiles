@@ -409,8 +409,8 @@ nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F9> :nohl<CR>
 nnoremap <F8> :Make!<CR>
 nnoremap <F7> :Copen<CR>
-nnoremap <F6> :tabnext<CR>
-nnoremap <F5> :tabprevious<CR>
+nnoremap <F6> :tabclose<CR>
+nnoremap <F5> :tabnew<CR>
 nnoremap <F4> :source ~/.vim/session/default<cr>
 nnoremap <F3> :mksession! ~/.vim/session/default<cr>
 nnoremap <F2> :NERDTreeToggle<CR>
