@@ -388,6 +388,10 @@ nnoremap <leader><leader> :CtrlP<Up><CR>
 " set current dir to that of current file
 nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 
+" add new line above and bellow current line
+nnoremap <silent> <leader>[ :<C-U>call <SID>AddLines(1)<CR>
+nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
+
 " fugitive git bindings
 nnoremap ga :Git add %<CR><CR>
 nnoremap gs :Gstatus<CR>
@@ -402,6 +406,7 @@ nnoremap gb :Git branch<Space>
 nnoremap gco :Git checkout<Space>
 nnoremap gps :Dispatch git push<CR>
 nnoremap gpl :Dispatch git pull<CR>
+
 
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>
@@ -423,3 +428,11 @@ autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
             \   exe "normal! g`\"" |
             \ endif
+
+" Add []<space> mappings for adding empty lines {{{1
+fun! s:AddLines(before)
+  let cnt = (v:count>0) ? v:count : 1
+  call append(line('.')-a:before, repeat([''], cnt))
+  silent! call repeat#set((a:before ? '[ ' : '] '), cnt)
+endf
+
