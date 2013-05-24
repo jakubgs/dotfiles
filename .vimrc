@@ -62,7 +62,7 @@ set fileencoding=utf-8
 set timeout timeoutlen=1000 ttimeoutlen=100
 
 " minimum window size
-set winwidth=75
+set winwidth=78
 set winheight=20
 
 " set title when run in terminal
