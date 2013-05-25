@@ -9,13 +9,12 @@
     tool = vimdiff
 [alias]
     hist = log --graph
-    co = checkout
-    br = branch
+    c = checkout
+    b = branch
     ps = push
     pl = pull
     sm = submodule
     c = commit
-    s = status
     a = add 
     l  = log --decorate
     sl = log --graph --pretty=format:'%h : %s'
