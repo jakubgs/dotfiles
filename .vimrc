@@ -24,6 +24,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'PProvost/vim-ps1'
 Bundle 'Valloric/MatchTagAlways'
 Bundle 'szw/vim-tags'
+Bundle 'bling/vim-bufferline'
 " Colorschemes
 Bundle 'nanotech/jellybeans.vim'
 
