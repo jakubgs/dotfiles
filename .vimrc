@@ -234,11 +234,12 @@ set cursorline
 
 " NERDTree
 let NERDTreeWinPos = "right"
+let NERDTreeWinSize = 35
 
 " Don't make comments italic
 let g:jellybeans_overrides = {
             \   'Comment': { 'cterm': 'italic' },
-            \   'Todo':     { 'gui' : 'bold', 'guibg': 'ff0000', 'cterm': '224'},
+            \   'Todo':   { 'gui' : 'bold', 'guibg': 'ff0000', 'cterm': '224'},
             \}
 
 highlight Normal ctermbg=NONE " use terminal background
@@ -410,7 +411,7 @@ nnoremap gpl :Dispatch git pull<CR>
 
 
 " change font
-nnoremap <F12> :set guifont=Inconsolata\ for\ Powerline\ 12<CR>
+nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F9> :nohl<CR>
 nnoremap <F8> :Make!<CR>
@@ -429,6 +430,9 @@ autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
             \   exe "normal! g`\"" |
             \ endif
+
+" Check awesome configuration after every write
+autocmd BufWritePost $HOME/.config/awesome/rc.lua !awesome -k
 
 " Add []<space> mappings for adding empty lines {{{1
 fun! s:AddLines(before)

@@ -1,4 +1,4 @@
-" My own version fo powerline that's not 400 lines long {{{2
+" My own version of powerline that's not 400 lines long {{{2
 let g:last_mode = ''
 function! Mode()
     let l:mode = mode()
@@ -30,8 +30,10 @@ function! Mode()
             hi User7 guibg=#0087af ctermbg=4
         elseif l:mode ==# "R"
             hi User2 guifg=#FFFFFF guibg=#df0000 ctermfg=255 ctermbg=160
-        elseif l:mode ==? "v" || l:mode ==# "" || l:mode ==# ""
+        elseif l:mode ==? "v" || l:mode ==# ""
             hi User2 guifg=#4e4e4e guibg=#ffaf00 ctermfg=239 ctermbg=214
+        elseif l:mode ==# ""
+            hi User2 guibg=#FFFFFF
         endif
     endif
 
@@ -53,12 +55,24 @@ function! Mode()
 endfunction
 
 function! GitStatus()
-        let result = split(system('git status --porcelain '.shellescape(expand('%:t'))." 2>/dev/null|awk '{print $1}'"))
-        if len(result) > 0 | return join(result).' ' | else | return '' | endif
+    let result = split(system('git status --porcelain '.shellescape(expand('%:t'))." 2>/dev/null|awk '{print $1}'"))
+
+    if len(result) > 0
+        return join(result).' '
+    else
+        return ''
+    endif
+endfunction
+
+function! ModeColor()
+    if exists("g:actual_curbuf") && g:actual_curbuf !=# bufnr('%')
+        return "%6*"
+    else
+        return "%2*"
+    endif
 endfunction
 
 set statusline=%2*%{Mode()}
-set statusline+=%#StatusLine#
 set statusline+=%6*%{strlen(fugitive#statusline())>0?'\ ':''}
 set statusline+=%{matchstr(fugitive#statusline(),'(\\zs.*\\ze)')}
 set statusline+=%{strlen(fugitive#statusline())>0?'\ \ >\ ':'\ '}
@@ -68,7 +82,6 @@ set statusline+=%{&mod?'+':''}
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%4*%=
-set statusline+=%#StatusLine#
 set statusline+=%4*\ %{strlen(&fileformat)>0?&fileformat.'\ <\ ':''}
 set statusline+=%{strlen(&fileencoding)>0?&fileencoding.'\ <\ ':''}
 set statusline+=%{strlen(&filetype)>0?&filetype.'\ ':''}
