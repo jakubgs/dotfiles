@@ -14,6 +14,9 @@
 	path = .vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
     ignore = dirty
+[submodule ".vim/bundle/vim-startify"]
+	path = .vim/bundle/vim-startify
+	url = https://github.com/mhinz/vim-startify.git
 [submodule ".vim/bundle/supertab"]
 	path = .vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git

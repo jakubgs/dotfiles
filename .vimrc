@@ -15,6 +15,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
+Bundle 'mhinz/vim-startify'
 Bundle 'ervandew/supertab'
 Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
@@ -304,6 +305,10 @@ iabbrev </ </<C-X><C-O>
 " help in new vertical split
 cnoremap hlp rightb vert help
 
+" reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
 " Fast saving
 nmap <c-s> :w!<cr>
 
@@ -316,6 +321,8 @@ nnoremap q: :q
 " for moving in wrapped lines
 nnoremap j gj
 nnoremap k gk
+nnoremap gj j
+nnoremap gk k
 
 " search results in the centre of the screen
 nmap n nzz
