@@ -28,6 +28,7 @@ map -b k 10k
 " use ctrl-v as intended
 map -m i,c,t <C-v> <Pass>
 map -m n,v,i,c,t <C-c> <Pass>
+map -m n,v,i,c,t <C-a> <Pass>
 
 " next tab
 map l :tn<CR>
@@ -46,7 +47,7 @@ map L :tabmove +1<CR>
 map e <c-s-e>
 
 " fast access to history descending by date
-map x :history -sort -date 
+map x :history! -sort -date 
 
 " bigger more visible hints
 highlight -a Hint font-size: 130% !important;
