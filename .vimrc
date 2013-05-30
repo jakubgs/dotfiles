@@ -66,6 +66,9 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 " minimum window size
 set winwidth=78
 set winheight=20
+" Automatically resize vertical splits.
+au WinEnter * :set winfixheight
+au WinEnter * :wincmd =
 
 " set title when run in terminal
 set title
@@ -87,8 +90,6 @@ set t_vb=
 " Enable the use of the mouse.
 set mouse=a
 
-" Show normal line numbers
-"set number
 " Show how far each line of from the current one
 set relativenumber
 
@@ -138,7 +139,7 @@ set spelllang=pl,en
 set wildmenu
 " ignore case when opening files
 set wildignorecase
-set wildmode=list:full
+set wildmode=list:longest,full
 set wildignore=.so,swp,.zip,.mp3,
             \.bak,.pyc,.o,.ojb,.,a,
             \ojb.pdf,.jpg,.gif,.png,
@@ -235,7 +236,7 @@ set cursorline
 
 " NERDTree
 let NERDTreeWinPos = "right"
-let NERDTreeWinSize = 35
+let NERDTreeWinSize = 30
 
 " Don't make comments italic
 let g:jellybeans_overrides = {
@@ -385,6 +386,7 @@ nnoremap <leader>a <c-^>
 " CtrlP mappings
 nnoremap <Tab>      :CtrlPMixed<CR>
 nnoremap <leader>cp :CtrlP<Space>
+nnoremap <leader>cc :CtrlP %:p:h<CR>
 nnoremap <leader>cr :CtrlPRoot<CR>
 nnoremap <leader>ct :CtrlPBufTagAll<CR>
 nnoremap <leader>cl :CtrlPLine<CR>
