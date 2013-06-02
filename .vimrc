@@ -56,7 +56,8 @@ filetype plugin on
 filetype indent on
 
 " keep the console title unchanged
-let titleold=getcwd()
+set notitle
+"let titleold=getcwd()
 
 " encoding
 set encoding=utf-8
