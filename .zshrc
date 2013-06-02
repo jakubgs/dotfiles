@@ -226,7 +226,7 @@ alias tt="tree -CdL 2"
 alias vv="vim --servername VIM --remote-silent"
 alias gv="gvim --servername GVIM --remote-silent"
 alias wq='du -sh'
-alias kt='du -h --max-depth=1'
+alias kt='du -h --max-depth=1 | sort -h'
 alias dy='df --sync -hTt ext4'
 alias restart='sudo rc-config restart '
 alias pjwstk='sudo sshfs s5134@sftp.pjwstk.edu.pl: /mnt/pjwstk -o uid=500,allow_other'
