@@ -278,11 +278,10 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'raw'
 let g:ctrlp_regexp = 0
-let g:ctrlp_root_markers = ['.root', 'Makefile', '.git' ]
+let g:ctrlp_root_markers = ['.root', '.git', 'COPYING' ]
 let g:ctrlp_custom_ignore = {
 	        \ 'dir':  '\v[\/]\.(git|hg|svn)$',
 	        \ 'file': '\v\.(exe|so|dll|tmp|temp|swp|o)$',
-	        \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
 	        \ }
 
 " EasyMotion leader
@@ -360,8 +359,8 @@ nnoremap <c-Tab>   :tabnext<CR>
 nnoremap <c-s-Tab> :tabprevious<CR>
 
 " paste and sellect
-nnoremap <leader>p p`[v`]
-nnoremap <leader>P P`[v`]
+nnoremap <leader>o p`[v`]
+nnoremap <leader>O P`[v`]
 
 " append a semicolon
 nnoremap <leader>; A;<Esc>
@@ -389,14 +388,14 @@ nnoremap <leader>a <c-^>
 
 " CtrlP mappings
 nnoremap <Tab>      :CtrlPMixed<CR>
-nnoremap <leader>cp :CtrlP<Space>
-nnoremap <leader>cc :CtrlP %:p:h<CR>
-nnoremap <leader>cr :CtrlPRoot<CR>
-nnoremap <leader>ct :CtrlPBufTagAll<CR>
-nnoremap <leader>cl :CtrlPLine<CR>
-nnoremap <leader>cq :CtrlPQuickfix<CR>
-nnoremap <leader>cb :CtrlPBuffer<CR>
-nnoremap <leader>cm :CtrlPMRUFiles<CR>
+nnoremap <leader>pp :CtrlP<Space>
+nnoremap <leader>pc :CtrlP %:p:h<CR>
+nnoremap <leader>pr :CtrlPRoot<CR>
+nnoremap <leader>pt :CtrlPBufTagAll<CR>
+nnoremap <leader>pl :CtrlPLine<CR>
+nnoremap <leader>pq :CtrlPQuickfix<CR>
+nnoremap <leader>pb :CtrlPBuffer<CR>
+nnoremap <leader>pm :CtrlPMRUFiles<CR>
 " re-run last CtrlP command
 nnoremap <leader><leader> :CtrlP<Up><CR>
 
