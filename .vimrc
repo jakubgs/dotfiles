@@ -165,6 +165,8 @@ au FileType c set cindent
 " Format for error QuickList
 au FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 au FileType cpp set errorformat=%f:%l:%c:\ %m
+" per file syntax
+au BufRead,BufNewFile .pentadactylrc set filetype=vim
 
 " Real men use gcc
 compiler gcc
