@@ -1,6 +1,9 @@
 " colorscheme
 colorscheme zenburn
 
+" for special key bindings
+map <Space> <leader>
+
 " numbers are far, far away from home row
 set hintkeys=asdfghjkl;
 
@@ -42,6 +45,20 @@ map K :forward<CR>
 " move tab left and right
 map H :tabmove -1<CR>
 map L :tabmove +1<CR>
+
+" source configuration
+nmap <leader>s :source ~/.pentadactylrc<CR>
+
+" some bookmarks for most opened web pages
+nmap <leader>y :tabopen http://youtube.com/feed/subscriptions<CR>
+nmap <leader>t :tabopen http://www.teamliquid.net<CR>
+nmap <leader>r :tabopen http://reddit.com<CR>
+nmap <leader>c :tabopen https://www.google.com/calendar/render<CR>
+nmap <leader>m :tabopen http://www.mangareader.net<CR>
+nmap <leader>p :tabopen https://tls.passthepopcorn.me/<CR>
+
+" start private browsing
+nmap <leader>i :private winopen<CR>
 
 " faster expose
 map e <c-s-e>
