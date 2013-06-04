@@ -474,9 +474,11 @@ awful.rules.rules = {
                     } },
     { rule = { class = "Gvim" },
       properties = {
-                    floating = false,
                     --size_hints_honor = false,
+                    floating = false,
                     tag = tags[2][1],
+					maximized_horizontal = true,
+					maximized_vertical   = true
                     } },
     { rule = { name = "StarCraft II.exe*" },
       properties = {
