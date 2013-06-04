@@ -47,7 +47,7 @@ map H :tabmove -1<CR>
 map L :tabmove +1<CR>
 
 " source configuration
-nmap <leader>s :source ~/.pentadactylrc<CR>
+nmap <leader>v :source ~/.pentadactylrc<CR>
 
 " some bookmarks for most opened web pages
 nmap <leader>y :tabopen http://youtube.com/feed/subscriptions<CR>
@@ -56,6 +56,11 @@ nmap <leader>r :tabopen http://reddit.com<CR>
 nmap <leader>c :tabopen https://www.google.com/calendar/render<CR>
 nmap <leader>m :tabopen http://www.mangareader.net<CR>
 nmap <leader>p :tabopen https://tls.passthepopcorn.me/<CR>
+nmap <leader>j :tabopen http://warszawa.jakdojade.pl<CR>
+nmap <leader>w :tabopen http://www.meteo.pl/um/php/meteorogram_list.php?ntype=0u&fdate=2013060400&row=406&col=250&lang=pl&cname=Warszawa<CR>
+
+" Session manager
+nmap <leader>s :tabopen about:sessionrestore<CR>
 
 " start private browsing
 nmap <leader>i :private winopen<CR>
