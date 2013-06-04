@@ -49,6 +49,9 @@ if has("gui_running")
     endif
 endif
 
+set modifiable
+set write
+
 " File-type highlighting
 syntax on
 filetype on
@@ -57,7 +60,6 @@ filetype indent on
 
 " keep the console title unchanged
 set notitle
-"let titleold=getcwd()
 
 " encoding
 set encoding=utf-8
@@ -74,14 +76,11 @@ set winheight=20
 au WinEnter * :set winfixheight
 au WinEnter * :wincmd =
 
-" set title when run in terminal
-set title
-
 " always show the statusline
 set laststatus=2
 
-" prevent some security exploits
-set modelines=0
+" useless reading of setting from first lines in file
+set nomodeline
 
 " faster macros processing
 set lazyredraw
@@ -237,8 +236,10 @@ set cursorline
 " }}}
 "
 " {{{ Plugin configuration
-"
-"
+
+" Syntastic
+let g:syntastic_check_on_open = 1
+let g:syntastic_enable_signs  = 1
 
 " NERDTree
 let NERDTreeWinPos = "right"
