@@ -36,6 +36,10 @@ function! Mode()
             hi User2 guibg=#FFFFFF
         endif
     endif
+    
+    if exists("g:actual_curbuf") && g:actual_curbuf !=# bufnr('%')
+      return ""
+    endif
 
     if l:mode ==# "n"
       return "\  NORMAL "
@@ -61,14 +65,6 @@ function! GitStatus()
         return join(result).' '
     else
         return ''
-    endif
-endfunction
-
-function! ModeColor()
-    if exists("g:actual_curbuf") && g:actual_curbuf !=# bufnr('%')
-        return "%6*"
-    else
-        return "%2*"
     endif
 endfunction
 
