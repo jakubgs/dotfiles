@@ -32,7 +32,6 @@
 .config/*
 !.config/gtk-3.0/settings.ini
 !.config/awesome/rc.lua
-!.config/powerline/config.json
 !.awesome/
 !.ssh/config
 !bin/
