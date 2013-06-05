@@ -37,10 +37,6 @@ function! Mode()
         endif
     endif
     
-    if exists("g:actual_curbuf") && g:actual_curbuf !=# bufnr('%')
-      return ""
-    endif
-
     if l:mode ==# "n"
       return "\  NORMAL "
     elseif l:mode ==# "i"
@@ -83,4 +79,12 @@ set statusline+=%{strlen(&fileencoding)>0?&fileencoding.'\ <\ ':''}
 set statusline+=%{strlen(&filetype)>0?&filetype.'\ ':''}
 set statusline+=%3*\ %p%%\ |
 set statusline+=%5*\ %l:%c\ |
+
+" Current Buffer statusline
+let g:CBstatusline=&g:statusline
+" Not Current statusline
+let g:NCstatusline="%6*%f%< %{&ro?'>':''}%4*%=%4*\ %{strlen(&fileformat)>0?&fileformat.'\ <\ ':''}%{strlen(&fileencoding)>0?&fileencoding.'\ <\ ':''}%{strlen(&filetype)>0?&filetype.'\ ':''}%3* %p%% %6* %l:%c "
+
+au WinEnter * let&l:statusline = g:CBstatusline
+au WinLeave * let&l:statusline = g:NCstatusline 
 " }}}2
