@@ -405,6 +405,9 @@ nnoremap <leader><leader> :CtrlP<Up><CR>
 " set current dir to that of current file
 nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 
+" open Errors pane from Syntastic
+nnoremap <leader>x :Errors<CR>
+
 " add new line above and bellow current line
 nnoremap <silent> <leader>[ :<C-U>call <SID>AddLines(1)<CR>
 nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
