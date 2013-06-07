@@ -224,6 +224,7 @@ alias -g G='| grep -i'
 alias ll='ls -lh --color'
 alias tt="tree -CdL 2"
 alias vv="vim --servername VIM --remote-silent"
+alias vim="vim --servername VIM"
 alias gv="gvim --servername GVIM --remote-silent"
 alias wq='du -sh'
 alias kt='du -h --max-depth=1 | sort -h'
@@ -235,6 +236,7 @@ alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
 alias qemerge='sudo emerge --quiet y --quiet-build y --quiet-fail y -v'
+alias psync='ssh melchior "sudo emerge --sync > /tmp/portage_sync.log" && sudo eix-update'
 alias httpat='python2 -m SimpleHTTPServer'
 # clipboard in command line
 alias pbcopy='xclip -selection clipboard'
