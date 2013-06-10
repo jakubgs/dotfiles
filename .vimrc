@@ -101,7 +101,7 @@ set relativenumber
 set scrolloff=5
 
 " Show (partial) command in status line.
-"set showcmd
+set showcmd
 set showmode
 " When a bracket is inserted, briefly jump to the matching one
 set showmatch
