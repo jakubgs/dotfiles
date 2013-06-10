@@ -1,0 +1,15 @@
+#!/bin/bash
+
+URL=$@
+
+youtube-dl -o "/mnt/stuff/downloads/YouTube/%(uploader)s/%(title)s.%(ext)s" "${URL}"
+
+FILENAME=`youtube-dl -s --get-filename -o "/mnt/stuff/downloads/YouTube/%(uploader)s/%(title)s.%(ext)s" "${URL}"`
+
+read -p "Do you wish to watch the downloaded video?" yn
+
+case $yn in
+    [Yy]* ) mplayer "${FILENAME}"; exit;;
+    [Nn]* ) exit;;
+    * ) echo "Please answer yes or no.";;
+esac
