@@ -17,7 +17,7 @@
     c = commit --verbose
     a = add 
     l  = log --decorate
-    sl = log --graph --pretty=format:'%h : %s'
+    sl = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     df = diff
     dt = difftool
 [branch "master"]
