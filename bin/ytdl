@@ -4,6 +4,7 @@ URL=$@
 
 youtube-dl -o "/mnt/stuff/downloads/YouTube/%(uploader)s/%(title)s.%(ext)s" "${URL}"
 
+# get filename for mplayer
 FILENAME=`youtube-dl -s --get-filename -o "/mnt/stuff/downloads/YouTube/%(uploader)s/%(title)s.%(ext)s" "${URL}"`
 
 read -p "Do you wish to watch the downloaded video?" yn
