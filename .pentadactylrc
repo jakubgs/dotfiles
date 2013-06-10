@@ -65,6 +65,9 @@ nmap <leader>s :tabopen about:sessionrestore<CR>
 " start private browsing
 nmap <leader>i :private winopen<CR>
 
+" download youtube video
+nmap <leader>d y:!~/bin/urxvtb -hold -e ~/bin/ytdl "<S-Insert>"<CR><CR>
+
 " faster expose
 map e <c-s-e>
 
