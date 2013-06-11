@@ -322,7 +322,7 @@ globalkeys = awful.util.table.join(
     -- Run or raise
     awful.key({ modkey,           }, "e",       function () run_or_raise("gvim --servername GVIM", { class = "Gvim" }) end),
     awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Firefox" }) end),
-    awful.key({ modkey,           }, "c",       function () run_or_raise(homedir .. "bin/urxvtb", { name = "urxvt" }) end),
+    awful.key({ modkey,           }, "c",       function () run_or_raise(homedir .. "bin/urxvtb", { class = "URxvt" }) end),
     awful.key({ modkey,           }, "m",       function () run_or_raise(terminal .. " --name ncmpcpp -e ncmpcpp", { instance = "ncmpcpp" }) end),
     -- Standard program
     awful.key({ "Control","Shift" }, "BackSpace", function () awful.util.spawn(terminal) end),
