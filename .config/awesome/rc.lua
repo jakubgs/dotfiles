@@ -305,7 +305,13 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "l",       function () awful.client.focus.global_bydirection("right") end),
     awful.key({ modkey,           }, "k",       function () awful.client.focus.global_bydirection("up") end),
     awful.key({ modkey,           }, "j",       function () awful.client.focus.global_bydirection("down") end),
-    awful.key({ modkey,           }, "d",       function () awful.client.focus.history.previous() end),
+    awful.key({ modkey,           }, "d",       -- toggle between last raised windows
+                                                function ()
+                                                    awful.client.focus.history.previous()
+                                                    if client.focus then
+                                                        client.focus:raise()
+                                                    end
+                                                end),
     awful.key({ modkey, "Shift"   }, "k",       function () awful.client.swap.byidx( -1) end),
     awful.key({ modkey, "Shift"   }, "j",       function () awful.client.swap.byidx(  1) end),
     awful.key({ modkey, "Shift"   }, "h",       function () awful.client.movetoscreen(client.focus ,client.focus.screen - 1) end),
@@ -588,8 +594,13 @@ client.connect_signal("manage", function (c, startup)
     end
 end)
 
-client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("focus", function(c)
+    c.border_color = beautiful.border_focus
+end)
+
+client.connect_signal("unfocus", function(c)
+    c.border_color = beautiful.border_normal
+end)
 -- }}}
 
 -- {{{ Custom functions
