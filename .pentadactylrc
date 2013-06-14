@@ -65,6 +65,9 @@ nmap <leader>s :tabopen about:sessionrestore<CR>
 " start private browsing
 nmap <leader>i :private winopen<CR>
 
+" open selected links, replaces spaces between links for propper spearators
+nmap <leader>o :!echo "<S-Insert>" | sed 's/ / | /g' | xclip <CR>:tabopen <S-Insert><CR>
+
 " download youtube video
 nmap <leader>d y:!~/bin/urxvtb -hold -e ~/bin/ytdl "<S-Insert>"<CR><CR>
 
