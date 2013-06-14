@@ -438,7 +438,7 @@ nnoremap <F6> :tabclose<CR>
 nnoremap <F5> :tabnew<CR>
 nnoremap <F4> :source ~/.vim/session/default<cr>
 nnoremap <F3> :mksession! ~/.vim/session/default<cr>
-nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F2> :NERDTreeToggle %:p:h<CR>
 nnoremap <F1> :TagbarToggle<CR>
 
 " }}}
