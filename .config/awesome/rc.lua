@@ -488,7 +488,7 @@ awful.rules.rules = {
 					maximized_horizontal = true,
 					maximized_vertical   = true
                     } },
-    { rule = { name = "StarCraft II.exe*" },
+    { rule = { name = "StarCraft II*" },
       properties = {
 					tag = tags[2][4],
 					floating = true,
