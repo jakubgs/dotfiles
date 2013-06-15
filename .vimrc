@@ -72,20 +72,17 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 " minimum window size
 set winwidth=78
 set winheight=20
-" Automatically resize vertical splits.
-au WinEnter * :set winfixheight
-au WinEnter * :wincmd =
 
 " always show the statusline
 set laststatus=2
 
-" useless reading of setting from first lines in file
+" uselessm, reading of setting from first lines in file
 set nomodeline
 
 " faster macros processing
 set lazyredraw
 
-" tell vim to shut up set noerrorbells
+" tell vim to shut up
 set noerrorbells
 set visualbell
 set t_vb=
@@ -97,7 +94,6 @@ set mouse=a
 set relativenumber
 
 " number of lines you want to see in front of and after the cursor
-" in this case we want it in the middle, hence the arbitrary high number
 set scrolloff=5
 
 " Show (partial) command in status line.
@@ -109,9 +105,6 @@ set showmatch
 " folding
 "set foldenable
 set foldlevel=5
-"set foldlevelstart=1
-"set foldmethod=indent
-"set foldmethod=marker
 set foldmethod=syntax
 set foldnestmax=2
 
