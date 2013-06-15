@@ -383,6 +383,9 @@ nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <leader>V :vsp ~/.vimrc<CR>
 nnoremap <leader>v :source ~/.vimrc<CR>
 
+" Edit file for 
+nnoremap <leader>c :vsp ~/.vim/notes.txt<CR>
+
 " switch between buffers
 nnoremap <leader>h :bprevious<CR>
 nnoremap <leader>l :bnext<CR>
@@ -431,6 +434,7 @@ nnoremap gpl :Dispatch git pull<CR>
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
+nnoremap <F10> :set guifont=*<CR>
 nnoremap <F9> :nohl<CR>
 nnoremap <F8> :Make!<CR>
 nnoremap <F7> :Copen<CR>
@@ -458,4 +462,3 @@ fun! s:AddLines(before)
   call append(line('.')-a:before, repeat([''], cnt))
   silent! call repeat#set((a:before ? '[ ' : '] '), cnt)
 endf
-
