@@ -427,7 +427,7 @@ nnoremap gpl :Dispatch git pull<CR>
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
-nnoremap <F10> :set guifont=*<CR>
+nnoremap <F10> :SyntasticToggleMode<CR>
 nnoremap <F9> :nohl<CR>
 nnoremap <F8> :Make!<CR>
 nnoremap <F7> :Copen<CR>
