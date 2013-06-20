@@ -94,6 +94,9 @@ set mouse=a
 " Show how far each line of from the current one
 set relativenumber
 
+" Number line width
+set nuw=4
+
 " number of lines you want to see in front of and after the cursor
 set scrolloff=5
 
@@ -112,8 +115,8 @@ set foldnestmax=2
 " highlight this column
 set colorcolumn=80
 
-" Number line width
-set nuw=5
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
 
 " automatically update file changes done by other programs
 set autoread
@@ -377,7 +380,7 @@ nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <leader>V :vsp ~/.vimrc<CR>
 nnoremap <leader>v :source ~/.vimrc<CR>
 
-" Edit file for 
+" Edit file for
 nnoremap <leader>c :vsp ~/.vim/notes.txt<CR>
 
 " switch between buffers
@@ -385,6 +388,9 @@ nnoremap <leader>h :bprevious<CR>
 nnoremap <leader>l :bnext<CR>
 " toggle last two buffers
 nnoremap <leader>a <c-^>
+
+" roggle showing of newline and tab characters
+nnoremap <leader>i :set list!<CR>
 
 " CtrlP mappings
 nnoremap <Tab>      :CtrlPMixed<CR>
