@@ -2,7 +2,7 @@
 TEMP=/tmp/config.tgz
 BACKUPS="/mnt/melchior/http/public/ \
         /mnt/melchior/data/Dropbox/Public/ \
-        /mnt/melchior/backup/caspair_config/ \
+        /mnt/melchior/backup/configs/ \
         /mnt/stuff/Important/"
 
 cd ~/
