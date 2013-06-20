@@ -4,7 +4,7 @@ SERVICES=("php-fpm" "nginx" "rtorrentd" "dropbox" "mpd" "samba" "vboxwebsrv" "nf
 
 /usr/bin/truecrypt  --keyfiles= --protect-hidden=no --filesystem=ext4 \
                     --fs-options=defaults,noatime,nodiratime,data=writeback,errors=remount-ro,rw,noauto \
-                    /dev/md0 /mnt/raid
+                    /dev/md0 /mnt/raid5
 
 for name in ${SERVICES[@]} ; do
     sudo "/etc/init.d/${name}" restart
