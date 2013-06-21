@@ -244,8 +244,8 @@ let NERDTreeWinSize = 30
 
 " Don't make comments italic
 let g:jellybeans_overrides = {
-            \   'Comment': { 'cterm': 'italic' },
-            \   'Todo':   { 'gui' : 'bold', 'guibg': 'ff0000', 'cterm': '224'},
+            \ 'Comment':{ 'cterm': 'italic' },
+            \ 'Todo':   { 'gui' : 'bold', 'guibg': 'ff0000', 'cterm': '224'},
             \}
 
 highlight Normal ctermbg=NONE " use terminal background
