@@ -18,12 +18,10 @@ Bundle 'tpope/vim-surround'
 Bundle 'mhinz/vim-startify'
 Bundle 'ervandew/supertab'
 Bundle 'majutsushi/tagbar'
-Bundle 'Raimondi/delimitMate'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'PProvost/vim-ps1'
-Bundle 'Valloric/MatchTagAlways'
 Bundle 'szw/vim-tags'
 Bundle 'bling/vim-bufferline'
 Bundle 'vim-scripts/Align'
@@ -138,12 +136,14 @@ set spelllang=pl,en
 " File menu
 set wildmenu
 " ignore case when opening files
-set wildignorecase
 set wildmode=list:longest,full
-set wildignore=.so,swp,.zip,.mp3,
-            \.bak,.pyc,.o,.ojb,.,a,
-            \ojb.pdf,.jpg,.gif,.png,
-            \.avi,.mkv,.so,.out
+if has('wildignore')
+    set wildignorecase
+    set wildignore=.so,swp,.zip,.mp3,
+                \.bak,.pyc,.o,.ojb,.,a,
+                \ojb.pdf,.jpg,.gif,.png,
+                \.avi,.mkv,.so,.out
+endif
 
 " Shell
 set shell=zsh
