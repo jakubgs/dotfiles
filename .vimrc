@@ -141,7 +141,7 @@ set wildignore=.so,swp,.zip,.mp3,
             \.bak,.pyc,.o,.ojb,.,a,
             \ojb.pdf,.jpg,.gif,.png,
             \.avi,.mkv,.so,.out
-if has('wildignorecase')
+if has('patch072')
     set wildignorecase
 endif
 
