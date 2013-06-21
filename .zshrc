@@ -224,7 +224,6 @@ alias -g G='| grep -i'
 alias ll='ls -lh --color'
 alias tt="tree -CdL 2"
 alias vv="vim --servername VIM --remote-silent"
-alias vim="vim --servername VIM"
 alias gv="gvim --servername GVIM --remote-silent"
 alias wq='du -sh'
 alias kt='du -h --max-depth=1 | sort -h'
