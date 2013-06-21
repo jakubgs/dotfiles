@@ -137,12 +137,12 @@ set spelllang=pl,en
 set wildmenu
 " ignore case when opening files
 set wildmode=list:longest,full
-if has('wildignore')
+set wildignore=.so,swp,.zip,.mp3,
+            \.bak,.pyc,.o,.ojb,.,a,
+            \ojb.pdf,.jpg,.gif,.png,
+            \.avi,.mkv,.so,.out
+if has('wildignorecase')
     set wildignorecase
-    set wildignore=.so,swp,.zip,.mp3,
-                \.bak,.pyc,.o,.ojb,.,a,
-                \ojb.pdf,.jpg,.gif,.png,
-                \.avi,.mkv,.so,.out
 endif
 
 " Shell
