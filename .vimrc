@@ -71,7 +71,7 @@ set fileencoding=utf-8
 set timeout timeoutlen=1000 ttimeoutlen=100
 
 " minimum window size
-set winwidth=78
+set winwidth=79
 set winheight=20
 
 " always show the statusline
