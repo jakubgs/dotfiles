@@ -29,7 +29,7 @@ case $HOST in
     *)
         COLOR="green" ;;
 esac
-        
+
 export PS1="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
 export PROMPT=${PS1}
 
