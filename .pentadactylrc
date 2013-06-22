@@ -10,6 +10,9 @@ set hintkeys=asdfghjkl;
 " set shell to zsh
 set shell=zsh
 
+" usen editor from shell
+set editor='urxvtc -e vim -f +<line> +"sil! call cursor(0, <column>)" <file>'
+
 " complete from search engines, location bar, local files and bookmarks
 set complete=slfb
 
