@@ -474,13 +474,7 @@ awful.rules.rules = {
       properties = { tag = tags[1][1] } },
     { rule = { name = "ytdl" },
       properties = { tag = tags[3][1] } },
-    { rule = { name = "ffvim" },
-      properties = {
-                    floating = true,
-					ontop = true,
-                    --tag = tags[1][2],
-                    } },
-    { rule = { class = "Gvim" },
+    { rule = { name = "Vim" },
       properties = {
                     --size_hints_honor = false,
                     floating = false,
