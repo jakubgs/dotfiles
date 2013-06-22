@@ -1,0 +1,9 @@
+#!/bin/bash
+
+LINES=$1
+COLUMN=$2
+shift 2
+
+echo "awful.tag.viewonly(tags[2][1])" | awesome-client
+gvim -f +$LINES +"sil! call cursor(0, $COLUMN)" $@
+echo "awful.tag.viewonly(tags[1][2])" | awesome-client
