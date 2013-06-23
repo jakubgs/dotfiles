@@ -11,6 +11,7 @@ local beautiful = require("beautiful")
 local vicious = require("vicious")
 vicious.widgets.mpd = require("vicious.widgets.mpd")
 vicious.widgets.volume = require("vicious.widgets.volume")
+local naughty = require('naughty')
 -- Run the autostart script
 awful.util.spawn_with_shell("~/bin/autostart")
 
