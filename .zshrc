@@ -266,3 +266,18 @@ function g {
      git status
    fi
 }
+
+function alert {
+    RVAL=$?
+    zmodload zsh/parameter
+    LAST=$history[$HISTCMD]
+    DATE=`date`
+
+    if [[ $RVAL == 0 ]]; then
+        RVAL="Success"
+    else
+        RVAL="Failure"
+    fi
+
+    notify-send -u critical "Command completed!" "$DATE\n$ $LAST\n$RVAL"
+}
