@@ -279,7 +279,7 @@ function fuck {
 function alert {
     RVAL=$?
     zmodload zsh/parameter
-    LAST=$history[$HISTCMD]
+    LAST=${history[$HISTCMD]%[;&|]*}
     DATE=`date`
 
     # set window title so we can get back to it
