@@ -57,7 +57,7 @@ export SAVEHIST=4000
 export HISTFILE="$HOME/.zhistory"
 # append command to history file once executed
 setopt inc_append_history
-# for sharing history between zsh processes
+# for sharing history between zsh proce'ses
 setopt SHARE_HISTORY
 # Ignore duplicates in history
 setopt HIST_IGNORE_ALL_DUPS
@@ -275,13 +275,28 @@ function alert {
     LAST=$history[$HISTCMD]
     DATE=`date`
 
+    # set window title so we can get back to it
+    echo -ne "\e]2;$LAST\a"
+
     if [[ $RVAL == 0 ]]; then
-        RVAL="Success"
+        RVAL="SUCCESS"
+        BG_COLOR="#535d9a"
     else
-        RVAL="Failure"
+        RVAL="FAILURE"
+        BG_COLOR="#ff2000"
     fi
 
-    notify-send -u critical "Command completed!" "$DATE\n$ $LAST\n$RVAL"
+    MESSAGE="naughty.notify({ \
+            title = \"Command completed on: \t$DATE\", \
+            text = \"$ $LAST\" .. newline .. \"$RVAL\", \
+            timeout = 0, \
+            screen = 2, \
+            bg = \"$BG_COLOR\", \
+            fg = \"#ffffff\", \
+            margin = 8, \
+            run = function () run_or_raise(nill, { name = \"$LAST\" }) end
+            })"
+    echo $MESSAGE | awesome-client -
 }
 
 # print date when executing command
