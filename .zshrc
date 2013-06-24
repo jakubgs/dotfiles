@@ -220,6 +220,7 @@ bindkey "^J"    down-line-or-history
 alias x='startx'
 alias v='vim --servername VIM'
 alias S='sudo'
+alias -g A='; alert'
 alias -g G='| grep -i'
 alias ll='ls -lh --color'
 alias tt="tree -CdL 2"
@@ -259,6 +260,7 @@ function src() {
     source ~/.zshrc
 }
 
+# g as simple shortcut for git status or just git if any other arguments are given
 function g {
    if [[ $# > 0 ]]; then
      git $@
@@ -267,6 +269,7 @@ function g {
    fi
 }
 
+# send a notification when command completes
 function alert {
     RVAL=$?
     zmodload zsh/parameter
@@ -280,4 +283,11 @@ function alert {
     fi
 
     notify-send -u critical "Command completed!" "$DATE\n$ $LAST\n$RVAL"
+}
+
+# print date when executing command
+preexec () {
+    DATE=`date +"%H:%M:%S on %Y-%m-%d"`
+    C=$(($COLUMNS-24))
+    echo -e "\033[1A\033[${C}C ${DATE} "
 }
