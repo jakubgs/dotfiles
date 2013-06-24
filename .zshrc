@@ -294,13 +294,14 @@ function alert {
     fi
 
     MESSAGE="naughty.notify({ \
-            title = \"Command completed on: \t$DATE\", \
+            title = \"Command completed on: \t\t$DATE\", \
             text = \"$ $LAST\" .. newline .. \"$RVAL\", \
             timeout = 0, \
             screen = 2, \
             bg = \"$BG_COLOR\", \
             fg = \"#ffffff\", \
             margin = 8, \
+            width = 382, \
             run = function () run_or_raise(nill, { name = \"$LAST\" }) end
             })"
     echo $MESSAGE | awesome-client -
