@@ -1,17 +1,17 @@
 -- Standard awesome library
-local gears = require("gears")
-local awful = require("awful")
+gears = require("gears")
+awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
 wibox = require("wibox")
 -- Theme handling library
-local beautiful = require("beautiful")
+beautiful = require("beautiful")
 -- Notification library
-local vicious = require("vicious")
+vicious = require("vicious")
 vicious.widgets.mpd = require("vicious.widgets.mpd")
 vicious.widgets.volume = require("vicious.widgets.volume")
-local naughty = require('naughty')
+naughty = require('naughty')
 -- Run the autostart script
 awful.util.spawn_with_shell("~/bin/autostart")
 
