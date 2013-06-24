@@ -268,6 +268,13 @@ function g {
    fi
 }
 
+# repeat last command with sudo
+function fuck {
+    LAST_CMD=`fc -nl -1`
+    echo sudo $LAST_CMD
+    sudo zsh -c $LAST_CMD
+}
+
 # send a notification when command completes
 function alert {
     RVAL=$?
