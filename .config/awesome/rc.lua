@@ -35,6 +35,9 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod1"
 
+-- for usage with awesome-client
+newline = '\n'
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
