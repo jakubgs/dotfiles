@@ -8,4 +8,4 @@ xmodmap .speedswapper
 wmname LG3D
 
 # Start awesome
-exec ck-launch-session dbus-launch --sh-syntax --exit-with-session awesome
+exec ck-launch-session dbus-launch --sh-syntax --exit-with-session awesome --no-argb
