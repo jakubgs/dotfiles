@@ -279,10 +279,11 @@ function alert {
     DATE=`date`             # get time of completion
     LAST=$history[$HISTCMD] # get current command
     LAST=${LAST%[;&|]*}     # remove "; alert" from it
-    LAST=${LAST//\"/'\"'}   # replace " for \" to not break lua format
 
     # set window title so we can get back to it
     echo -ne "\e]2;$LAST\a"
+
+    LAST=${LAST//\"/'\"'}   # replace " for \" to not break lua format
 
     # check if the command was successful
     if [[ $RVAL == 0 ]]; then
