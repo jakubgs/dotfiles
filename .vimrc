@@ -402,6 +402,8 @@ nnoremap <leader>pl :CtrlPLine<CR>
 nnoremap <leader>pq :CtrlPQuickfix<CR>
 nnoremap <leader>pb :CtrlPBuffer<CR>
 nnoremap <leader>pm :CtrlPMRUFiles<CR>
+nnoremap <leader>po :CtrlPLastMode --dir<CR>
+
 " re-run last CtrlP command
 nnoremap <leader><leader> :CtrlP<Up><CR>
 
@@ -429,7 +431,6 @@ nnoremap gb :Git branch<Space>
 nnoremap gco :Git checkout<Space>
 nnoremap gps :Dispatch git push<CR>
 nnoremap gpl :Dispatch git pull<CR>
-
 
 " change font
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
