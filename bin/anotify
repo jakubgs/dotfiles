@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DATE=`date` # get time of notification
+MESSAGE=$@  # get all arguments as the message for this notifiaction
+BG_COLOR="#2f8a2c"
+
+# compose the notification
+COMMAND="naughty.notify({ \
+        title = \"Reminder \t\t\t$DATE\", \
+        text = \"Message: $MESSAGE\", \
+        timeout = 0, \
+        screen = 2, \
+        bg = \"$BG_COLOR\", \
+        fg = \"#ffffff\", \
+        margin = 8, \
+        width = 382, \
+        })"
+# send it to awesome
+echo $COMMAND | awesome-client -
