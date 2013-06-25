@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATE=`date` # get time of notification
+DATE=`date +"%a %b %d/%m/%Y, %H:%M:%S"` # get time of completion
 MESSAGE=$@  # get all arguments as the message for this notifiaction
 BG_COLOR="#2f8a2c"
 
@@ -13,7 +13,7 @@ COMMAND="naughty.notify({ \
         bg = \"$BG_COLOR\", \
         fg = \"#ffffff\", \
         margin = 8, \
-        width = 382, \
+        width = 380, \
         })"
 # send it to awesome
 echo $COMMAND | awesome-client -

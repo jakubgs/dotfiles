@@ -276,7 +276,7 @@ function fuck {
 # send a notification when command completes
 function alert {
     RVAL=$?                 # get return value of the last command
-    DATE=`date`             # get time of completion
+    DATE=`date +"%a %b %d/%m/%Y, %H:%M:%S"` # get time of completion
     LAST=$history[$HISTCMD] # get current command
     LAST=${LAST%[;&|]*}     # remove "; alert" from it
     echo -ne "\e]2;$LAST\a" # set window title so we can get back to it
@@ -294,13 +294,13 @@ function alert {
     # compose the notification
     MESSAGE="naughty.notify({ \
             title = \"Command completed on: \t\t$DATE\", \
-            text = \"$ $LAST\" .. newline .. \"$RVAL\", \
+            text = \"$ $LAST\" .. newline .. \"-> $RVAL\", \
             timeout = 0, \
             screen = 2, \
             bg = \"$BG_COLOR\", \
             fg = \"#ffffff\", \
             margin = 8, \
-            width = 382, \
+            width = 380, \
             run = function () run_or_raise(nill, { name = \"$LAST\" }) end
             })"
     # send it to awesome

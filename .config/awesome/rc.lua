@@ -151,7 +151,7 @@ mylauncher = awful.widget.launcher({ image = awesome.load_image(beautiful.awesom
 -- {{{ Wibox
 
 -- Create a textclock widget
-mytextclock = awful.widget.textclock("| %a %b %d, %H:%M:%S |", 1 )
+mytextclock = awful.widget.textclock("| %a %b %d/%m/%Y, %H:%M:%S |", 1 )
 
 -- MPD status
 -- Initialize widget
