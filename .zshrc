@@ -13,8 +13,8 @@ autoload -U promptinit
 compinit  # longest wait
 promptinit
 
-# load powerline
-#source ~/.powerline/powerline/bindings/zsh/powerline.zsh
+# load to use $history[$HISTCMD] variable
+zmodload zsh/parameter
 
 # change prompt depending on host
 case $HOST in
@@ -104,7 +104,7 @@ zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
 # set format for warnings
 zstyle ':completion:*:warnings' format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d'
- 
+
 # Describe options in full
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
@@ -188,8 +188,6 @@ zstyle ':mime:.jpg:' handler feh -x %s
 
 # Key Bindings
 typeset -A key
-# Emacs mode
-#bindkey -e
 # Vim mode
 bindkey -v
 
@@ -277,14 +275,16 @@ function fuck {
 
 # send a notification when command completes
 function alert {
-    RVAL=$?
-    zmodload zsh/parameter
-    LAST=${history[$HISTCMD]%[;&|]*}
-    DATE=`date`
+    RVAL=$?                 # get return value of the last command
+    DATE=`date`             # get time of completion
+    LAST=$history[$HISTCMD] # get current command
+    LAST=${LAST%[;&|]*}     # remove "; alert" from it
+    LAST=${LAST//\"/'\"'}   # replace " for \" to not break lua format
 
     # set window title so we can get back to it
     echo -ne "\e]2;$LAST\a"
 
+    # check if the command was successful
     if [[ $RVAL == 0 ]]; then
         RVAL="SUCCESS"
         BG_COLOR="#535d9a"
@@ -293,6 +293,7 @@ function alert {
         BG_COLOR="#ff2000"
     fi
 
+    # compose the notification
     MESSAGE="naughty.notify({ \
             title = \"Command completed on: \t\t$DATE\", \
             text = \"$ $LAST\" .. newline .. \"$RVAL\", \
@@ -304,6 +305,7 @@ function alert {
             width = 382, \
             run = function () run_or_raise(nill, { name = \"$LAST\" }) end
             })"
+    # send it to awesome
     echo $MESSAGE | awesome-client -
 }
 
