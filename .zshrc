@@ -309,7 +309,7 @@ function alert {
 
 # print date when executing command
 preexec () {
-    DATE=`date +"%H:%M:%S on %Y-%m-%d"`
+    DATE=`date +"%H:%M:%S on %d-%m-%Y"`
     C=$(($COLUMNS-24))
     echo -e "\033[1A\033[${C}C ${DATE} "
 }
