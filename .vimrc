@@ -208,7 +208,7 @@ let g:ctrlp_custom_ignore = {
 let g:EasyMotion_leader_key = '<Space>'
 
 " }}}
-" General Key Mappings {{{
+" General key mappings {{{
 
 " Toggle pastemode, doesn't indent
 set pastetoggle=<F8>
@@ -274,7 +274,7 @@ nnoremap <c-s-Tab> :tabprevious<CR>
 nnoremap zz za
 
 " }}}
-" <Leader> bindings {{{
+" <Leader> mappings {{{
 
 " paste and sellect
 nnoremap <leader>o p`[v`]
@@ -343,7 +343,7 @@ nnoremap <silent> <leader>[ :<C-U>call <SID>AddLines(1)<CR>
 nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
 
 " }}}
-" Git bindings {{{
+" Git mappings {{{
 
 " fugitive git bindings
 nnoremap ga :Git add %<CR><CR>
@@ -361,7 +361,7 @@ nnoremap gps :Dispatch git push<CR>
 nnoremap gpl :Dispatch git pull<CR>
 
 " }}}
-" Fxx bindings {{{
+" Fxx mappings {{{
 
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
