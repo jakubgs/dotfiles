@@ -89,6 +89,11 @@ set listchars=tab:▸\ ,eol:¬
 " Show how far each line of from the current one
 set relativenumber
 
+" Text wrappingi
+set wrap
+" don't break in middle of words
+set linebreak
+
 " }}}
 " Formatting settings {{{
 " Tab width
@@ -197,11 +202,6 @@ if has('persistent_undo')
     set undoreload=1000        " number of lines to save for undo
 endif
 
-" Text wrappingi
-set wrap
-" don't break in middle of words
-set linebreak
-
 " Case insensitive search
 set is
 set ic
@@ -232,7 +232,7 @@ command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent ed
 " Folding settings {{{
 
 set foldenable
-set foldlevel=5
+set foldlevel=0
 set foldmethod=syntax
 set foldnestmax=2
 
@@ -483,7 +483,7 @@ autocmd BufWritePost $HOME/.config/awesome/rc.lua !awesome -k
 
 augroup DisableMappings
     " remove mapping made by align plugin
-    autocmd! VimEnter * :nnoremap <space>swp <nop>
+    autocmd! VimEnter * :unmap <space>swp
 augroup END
 " }}}
 " Functions {{{
