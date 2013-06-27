@@ -270,6 +270,9 @@ vnoremap <c-c> "+y
 nnoremap <c-Tab>   :tabnext<CR>
 nnoremap <c-s-Tab> :tabprevious<CR>
 
+" easier toggling of folds
+nnoremap zz za
+
 " }}}
 " <Leader> bindings {{{
 
