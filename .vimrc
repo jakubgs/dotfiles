@@ -173,6 +173,9 @@ endif
 " Shell
 set shell=zsh
 
+" search selected text in firefox default search with K
+set keywordprg=firefox\ -search
+
 " remove message at vim start
 set shortmess=atI
 
@@ -384,8 +387,6 @@ nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>;
 nnoremap <leader>S :%s//<left>
 
 " Window management
-" remove mapping made by align plugin
-unmap <leader>swp
 " split vertical and switch
 nnoremap <leader>s <C-w>v<C-w>l
 " split horizontal and switch
@@ -479,6 +480,11 @@ autocmd BufReadPost *
 
 " Check awesome configuration after every write
 autocmd BufWritePost $HOME/.config/awesome/rc.lua !awesome -k
+
+augroup DisableMappings
+    " remove mapping made by align plugin
+    autocmd! VimEnter * :nnoremap <space>swp <nop>
+augroup END
 " }}}
 " Functions {{{
 
