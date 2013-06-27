@@ -384,6 +384,8 @@ nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>;
 nnoremap <leader>S :%s//<left>
 
 " Window management
+" remove mapping made by align plugin
+unmap <leader>swp
 " split vertical and switch
 nnoremap <leader>s <C-w>v<C-w>l
 " split horizontal and switch
