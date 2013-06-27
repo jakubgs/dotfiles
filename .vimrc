@@ -1,13 +1,18 @@
-" VIM instad of VI
-set nocompatible
+" vim:fdm=marker
+" Author: Jakub Sokołowski <panswiata@gmail.com>
+" Source: https://github.com/PonderingGrower/dotfiles
 
-" {{{ Vundle plugin management
+" Preamble {{{
 filetype off " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+" VIM instad of VI
+set nocompatible
 " custom statusline
 source ~/.vim/statusline.vim
 
+" }}}
+" Vundle plugin management {{{
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 " original repos on github
@@ -29,8 +34,7 @@ Bundle 'vim-scripts/Align'
 Bundle 'nanotech/jellybeans.vim'
 
 " }}}
-
-" {{{ General configuration
+" Display configuration {{{
 set background=dark
 
 if &t_Co == 256 || has('gui_running')
@@ -48,14 +52,60 @@ if has("gui_running")
     endif
 endif
 
-set modifiable
-set write
+" Get rid of useless GUI elements
+set guioptions=
 
 " File-type highlighting
 syntax on
+"enable file type detection
 filetype on
+" loading of plugin files for specific file types
 filetype plugin on
+" loading of indent files for specific file types
 filetype indent on
+
+" minimum window size
+set winwidth=79
+set winheight=20
+
+" highlight this column
+set colorcolumn=80
+
+" Number line width
+set nuw=4
+
+" Show columns and rows
+set ruler
+
+" highlight the current line
+set cursorline
+
+" always show the statusline
+set laststatus=2
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+" Show how far each line of from the current one
+set relativenumber
+
+" }}}
+" Formatting settings {{{
+" Tab width
+set softtabstop=4
+set shiftwidth=4
+set tabstop=4
+set cinoptions=>4
+
+" use spaces instead of tabs
+set expandtab
+set smarttab
+
+" }}}
+" General configuration {{{
+
+set modifiable
+set write
 
 " keep the console title unchanged
 set notitle
@@ -68,15 +118,8 @@ set fileencoding=utf-8
 " " set noesckeys
 set timeout timeoutlen=1000 ttimeoutlen=100
 
-" minimum window size
-set winwidth=79
-set winheight=20
-
-" always show the statusline
-set laststatus=2
-
 " uselessm, reading of setting from first lines in file
-set nomodeline
+"set nomodeline
 
 " faster macros processing
 set lazyredraw
@@ -89,12 +132,6 @@ set t_vb=
 " Enable the use of the mouse.
 set mouse=a
 
-" Show how far each line of from the current one
-set relativenumber
-
-" Number line width
-set nuw=4
-
 " number of lines you want to see in front of and after the cursor
 set scrolloff=5
 
@@ -103,18 +140,6 @@ set showcmd
 set showmode
 " When a bracket is inserted, briefly jump to the matching one
 set showmatch
-
-" folding
-"set foldenable
-set foldlevel=5
-set foldmethod=syntax
-set foldnestmax=2
-
-" highlight this column
-set colorcolumn=80
-
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
 
 " automatically update file changes done by other programs
 set autoread
@@ -154,48 +179,20 @@ set shortmess=atI
 " command line length
 set cmdheight=1
 
-" Different compiler depending on type of file
-set makeprg=make\ -j6\ --silent
-au FileType c set makeprg=make\ --silent
-au FileType c set cindent
-" Format for error QuickList
-au FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
-au FileType cpp set errorformat=%f:%l:%c:\ %m
-" per file syntax
-au BufRead,BufNewFile .pentadactylrc set filetype=vim
-
-" Real men use gcc
-compiler gcc
-
 " make ~ files in:
-set   backupdir=~/.vim/backup/
+set backupdir=~/.vim/backup//
 
 " disable swap
 set noswapfile
-"set   directory=~/.vim/temp/
+"set   directory=~/.vim/temp//
 
 " persistend undo history
 if has('persistent_undo')
     set undofile                " Save undo's after file closes
-    set undodir=~/.vim/undo " where to save undo histories
+    set undodir=~/.vim/undo// " where to save undo histories
     set undolevels=100         " How many undos
     set undoreload=1000        " number of lines to save for undo
 endif
-
-" Tab width
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
-set cinoptions=>4
-
-" use spaces instead of tabs
-set expandtab
-set smarttab
-
-" make sure splits are at least 30 characters wide
-
-" Get rid of useless GUI elements
-set guioptions=
 
 " Text wrappingi
 set wrap
@@ -224,15 +221,35 @@ set showmatch
 " Faster standard output
 set ttyfast
 
-" Show columns and rows
-set ruler
-
-" highlight the current line
-set cursorline
+" save the file as root (tee must be addedd as NOPASSWD to sudoers)
+"map :suw :w !sudo tee % > /dev/null
+command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent edit!
 
 " }}}
-"
-" {{{ Plugin configuration
+" Folding settings {{{
+
+set foldenable
+set foldlevel=5
+set foldmethod=syntax
+set foldnestmax=2
+
+" }}}
+" Programming settings {{{
+" Different compiler depending on type of file
+set makeprg=make\ -j6\ --silent
+au FileType c set makeprg=make\ --silent
+au FileType c set cindent
+" Format for error QuickList
+au FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
+au FileType cpp set errorformat=%f:%l:%c:\ %m
+" per file syntax
+au BufRead,BufNewFile .pentadactylrc set filetype=vim
+
+" Real men use gcc
+compiler gcc
+
+" }}}
+" Plugin configuration {{{
 
 " Syntastic
 let g:syntastic_check_on_open = 1
@@ -284,6 +301,9 @@ let g:ctrlp_custom_ignore = {
 " EasyMotion leader
 let g:EasyMotion_leader_key = '<Space>'
 
+" }}}
+" General Key Mappings {{{
+
 " Changing leader to space
 let mapleader = "\<Space>"
 " don't let space do anything else
@@ -291,14 +311,6 @@ nnoremap <SPACE> <Nop>
 
 " Toggle pastemode, doesn't indent
 set pastetoggle=<F8>
-
-" }}}
-
-" save the file as root (tee must be addedd as NOPASSWD to sudoers)
-"map :suw :w !sudo tee % > /dev/null
-command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent edit!
-
-" {{{ Key Mappings
 
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
@@ -329,7 +341,7 @@ nnoremap gk k
 nmap n nzz
 nmap N Nzz
 
-"" Learn to use hjkl
+" Learn to use hjkl
 nnoremap <up> ddkP
 nnoremap <down> ddp
 nnoremap <left> gv<
@@ -355,6 +367,9 @@ vnoremap <c-c> "+y
 nnoremap <c-Tab>   :tabnext<CR>
 nnoremap <c-s-Tab> :tabprevious<CR>
 
+" }}}
+" <Leader> bindings {{{
+
 " paste and sellect
 nnoremap <leader>o p`[v`]
 nnoremap <leader>O P`[v`]
@@ -363,7 +378,10 @@ nnoremap <leader>O P`[v`]
 nnoremap <leader>; A;<Esc>
 
 " strip all trailing whitespaces in current file
-nnoremap <leader>r :%s/\s\+$//<cr>:let @/=''<CR>;
+nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>;
+
+" easier access to substitution
+nnoremap <leader>S :%s//<left>
 
 " Window management
 " split vertical and switch
@@ -374,17 +392,15 @@ nnoremap <leader>d <C-w>s<C-w>l
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Edit .vimrc and erfresh configuration
-nnoremap <leader>V :vsp ~/.vimrc<CR>
 nnoremap <leader>v :source ~/.vimrc<CR>
-
-" Edit file for
-nnoremap <leader>c :vsp ~/.vim/notes.txt<CR>
+nnoremap <leader>V :vsp ~/.vimrc<CR>
+nnoremap <leader>C :vsp ~/.vim/notes.txt<CR>
 
 " switch between buffers
 nnoremap <leader>h :bprevious<CR>
 nnoremap <leader>l :bnext<CR>
 " toggle last two buffers
-nnoremap <leader>a <c-^>
+nnoremap <leader>u <c-^>
 
 " roggle showing of newline and tab characters
 nnoremap <leader>i :set list!<CR>
@@ -410,9 +426,15 @@ nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 " open Errors pane from Syntastic
 nnoremap <leader>x :Errors<CR>
 
+" focus the current fold
+nnoremap <leader>z zMzvzz
+
 " add new line above and bellow current line
 nnoremap <silent> <leader>[ :<C-U>call <SID>AddLines(1)<CR>
 nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
+
+" }}}
+" Git bindings {{{
 
 " fugitive git bindings
 nnoremap ga :Git add %<CR><CR>
@@ -429,7 +451,9 @@ nnoremap gco :Git checkout<Space>
 nnoremap gps :Dispatch git push<CR>
 nnoremap gpl :Dispatch git pull<CR>
 
-" change font
+" }}}
+" Fxx bindings {{{
+
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F10> :SyntasticToggleMode<CR>
@@ -444,7 +468,7 @@ nnoremap <F2> :NERDTreeToggle %:p:h<CR>
 nnoremap <F1> :TagbarToggle<CR>
 
 " }}}
-
+" autocmd settings {{{
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -453,10 +477,14 @@ autocmd BufReadPost *
 
 " Check awesome configuration after every write
 autocmd BufWritePost $HOME/.config/awesome/rc.lua !awesome -k
+" }}}
+" Functions {{{
 
-" Add []<space> mappings for adding empty lines {{{1
+" Add []<space> mappings for adding empty lines
 fun! s:AddLines(before)
   let cnt = (v:count>0) ? v:count : 1
   call append(line('.')-a:before, repeat([''], cnt))
   silent! call repeat#set((a:before ? '[ ' : '] '), cnt)
 endf
+
+" }}}
