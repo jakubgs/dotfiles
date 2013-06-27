@@ -263,9 +263,6 @@ let delimitMate_smart_quotes = 0
 " SuperTab
 let g:SuperTabDefaultCompletionType = "context"
 
-" Powerline
-let g:Powerline_symbols = 'compatible'
-
 " TagBar
 set tags=./tags;/
 let g:tagbar_left = 1
