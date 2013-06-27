@@ -12,9 +12,7 @@ source ~/.vim/statusline.vim
 
 " }}}
 " Vundle plugin management {{{
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-" original repos on github
+Bundle 'gmarik/vundle'            " let Vundle manage Vundle
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
@@ -29,8 +27,7 @@ Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
 Bundle 'bling/vim-bufferline'
 Bundle 'vim-scripts/Align'
-" Colorschemes
-Bundle 'nanotech/jellybeans.vim'
+Bundle 'nanotech/jellybeans.vim'  " colorschemes
 
 " }}}
 " Display configuration {{{
@@ -39,11 +36,10 @@ set background=dark
 if &t_Co == 256 || has('gui_running')
     colors jellybeans
 else
-    colors jellybeans " Or some other 16-color scheme
+    colors jellybeans             " or some other 16-color scheme
 endif
 
-" graphical font
-if has("gui_running")
+if has("gui_running")             " graphical font
     if has("gui_gtk2")
         set guifont=Terminus\ 10
     elseif has("gui_win32")
@@ -53,8 +49,8 @@ endif
 
 syntax on                         " File-type highlighting
 filetype on                       " enable file type detection
-filetype plugin on                " loading of plugin files for specific file types
-filetype indent on                " loading of indent files for specific file types
+filetype plugin on                " loading of plugin files for all formats
+filetype indent on                " loading of indent files for all formats
 
 set guioptions=                   " Get rid of useless GUI elements
 set winwidth=79                   " minimum split width
@@ -76,10 +72,10 @@ set t_vb=                         " don't flash the screen on errors
 
 set expandtab                     " use spaces instead of tabs
 set smarttab                      " ;
-set tabstop=4                     " number of spaces <tab> in the file counts for
-set softtabstop=4                 " number of spaces that a <tab> counts for while editing
-set shiftwidth=4                  " number of spaces to use for each step of (auto)indend
-set cinoptions=>4                 " affects the way cindent reindents lines in a C program
+set tabstop=4                     " spaces in <tab>
+set softtabstop=4                 " spaces in <tab> when editing
+set shiftwidth=4                  " spaces for each step of (auto)indendj
+set cinoptions=>4                 " how cindent indents lines in C programs
 
 " }}}
 " General configuration {{{
@@ -87,26 +83,26 @@ set cinoptions=>4                 " affects the way cindent reindents lines in a
 set notitle                       " keep the console title unchanged
 set encoding=utf-8                " encoding
 set fileencoding=utf-8
-set nomodeline                    " uselessm, reading of setting from first lines in file
+set nomodeline                    " no options from first comment in file
 set lazyredraw                    " faster macros processing
 set visualbell                    " tell vim to shut up
 set mouse=a                       " Enable the use of the mouse.
-set scrolloff=5                   " number of lines you want to see in front of and after the cursor
+set scrolloff=5                   " number of lies vim won't scroll below
 set showcmd                       " Show (partial) command in status line.
 set noshowmode                    " don't show mode in command line
 set showmatch                     " show match when a bracket is inserted
 set autoread                      " automatically update file changes
-set autoindent                    " autoindent breaks pasted in text, use F8
+set autoindent                    " breaks pasted in text, use F8 in insert
 set preserveindent
 set clipboard=unnamed             " paste the clipboard to unnamed register
 set spelllang=pl,en               " spelling check
 "set autochdir                    " Automatically changing working dir
 set shell=zsh                     " Shell
-set keywordprg=firefox\ -search   " K searches text in firefox default search
+set keywordprg=firefox\ -search   " K searches text in firefox def. search
 set shortmess=atI                 " remove message at vim start
 set cmdheight=1                   " command line length
 set backupdir=~/.vim/backup//     " make ~ files in:
-set noswapfile                    " disable swap, set directory=~/.vim/temp//
+set noswapfile                    " set directory=~/.vim/temp//
 set hlsearch                      " highlighting search results
 set incsearch                     " start searching as you type
 set ignorecase                    " ignore case in search patterns
@@ -136,10 +132,10 @@ command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent ed
 " }}}
 " Folding settings {{{
 
-set foldenable
-set foldlevel=0
-set foldmethod=syntax
-set foldnestmax=2
+set foldenable                    " when on all folds are closed
+set foldlevel=1                   " folds with higher level will be closed
+set foldmethod=syntax             " by default fold based on syntax
+set foldnestmax=2                 " nest fold limit for indent/syntax modes
 
 " }}}
 " Programming settings {{{
@@ -210,13 +206,13 @@ let g:EasyMotion_leader_key = '<Space>'
 " }}}
 " General Key Mappings {{{
 
+" Toggle pastemode, doesn't indent
+set pastetoggle=<F8>
+
 " Changing leader to space
 let mapleader = "\<Space>"
 " don't let space do anything else
 nnoremap <SPACE> <Nop>
-
-" Toggle pastemode, doesn't indent
-set pastetoggle=<F8>
 
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
