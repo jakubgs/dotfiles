@@ -135,8 +135,9 @@ command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent ed
 
 set foldenable                    " when on all folds are closed
 set foldlevel=1                   " folds with higher level will be closed
-set foldmethod=syntax             " by default fold based on syntax
-set foldnestmax=2                 " nest fold limit for indent/syntax modes
+set foldmethod=indent             " by default fold based on syntax
+set foldnestmax=1                 " nest fold limit for indent/syntax modes
+set foldtext=NeatFoldText()       " change how folds are desplayed when closed
 
 " }}}
 " Programming settings {{{
@@ -147,6 +148,7 @@ set makeprg=make\ -j6\ --silent   " default compilation command
 " Different compiler depending on type of file
 autocmd FileType c set makeprg=make\ --silent
 autocmd FileType c set cindent
+autocmd FileType c set foldmethod=syntax
 " Format for errors in QuickList
 autocmd FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
@@ -166,6 +168,7 @@ let NERDTreeWinSize = 30
 let g:jellybeans_overrides = {
             \ 'Comment':{ 'cterm': 'italic' },
             \ 'Todo':   { 'gui' : 'bold', 'guibg': 'ff0000', 'cterm': '224'},
+            \ 'Folded': { 'guifg': 'dddddd', 'guibg': '333333'},
             \}
 
 highlight Normal ctermbg=NONE " use terminal background
@@ -396,10 +399,21 @@ augroup END
 " Functions {{{
 
 " Add []<space> mappings for adding empty lines
-fun! s:AddLines(before)
+function! s:AddLines(before)
   let cnt = (v:count>0) ? v:count : 1
   call append(line('.')-a:before, repeat([''], cnt))
   silent! call repeat#set((a:before ? '[ ' : '] '), cnt)
 endf
+
+function! NeatFoldText()
+  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(foldchar, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
 
 " }}}
