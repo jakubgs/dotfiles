@@ -12,7 +12,8 @@ source ~/.vim/statusline.vim
 
 " }}}
 " Vundle plugin management {{{
-Bundle 'gmarik/vundle'            " let Vundle manage Vundle
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
@@ -27,7 +28,8 @@ Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
 Bundle 'bling/vim-bufferline'
 Bundle 'vim-scripts/Align'
-Bundle 'nanotech/jellybeans.vim'  " colorschemes
+" colorschemes
+Bundle 'nanotech/jellybeans.vim'
 
 " }}}
 " Display configuration {{{
