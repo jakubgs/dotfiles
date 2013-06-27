@@ -1,4 +1,3 @@
-" vim:fdm=marker
 " Author: Jakub Sokołowski <panswiata@gmail.com>
 " Source: https://github.com/PonderingGrower/dotfiles
 
@@ -52,66 +51,58 @@ if has("gui_running")
     endif
 endif
 
-set guioptions=             " Get rid of useless GUI elements
+syntax on                         " File-type highlighting
+filetype on                       " enable file type detection
+filetype plugin on                " loading of plugin files for specific file types
+filetype indent on                " loading of indent files for specific file types
 
-syntax on                   " File-type highlighting
-filetype on                 " enable file type detection
-filetype plugin on          " loading of plugin files for specific file types
-filetype indent on          " loading of indent files for specific file types
-
-set winwidth=79             " minimum window size
-set winheight=20
-set colorcolumn=80          " highlight this column
-set nuw=4                   " Number line width
-set ruler                   " Show columns and rows
-set cursorline              " highlight the current line
-set laststatus=2            " always show the statusline
-set listchars=tab:▸\ ,eol:¬ " use less visible characters for tabstops and EOLs
-set relativenumber          " Show how far each line of from the current one
-set wrap                    " Text wrappingi
-set linebreak               " don't break in middle of words
-set showmatch               " Show matching brackets
+set guioptions=                   " Get rid of useless GUI elements
+set winwidth=79                   " minimum split width
+set winheight=20                  " minimum split height
+set colorcolumn=80                " highlight this column
+set nuw=4                         " number line width
+set ruler                         " show columns and rows
+set cursorline                    " highlight the current line
+set laststatus=2                  " always show the statusline
+set listchars=tab:▸\ ,eol:¬       " use less visible characters for tabstops and EOLs
+set relativenumber                " show how far each line of from the current one
+set wrap                          " text wrappingi
+set linebreak                     " don't break in middle of words
+set showmatch                     " show matching brackets
+set t_vb=                         " don't flash the screen on errors
 
 " }}}
 " Formatting settings {{{
 
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
-set cinoptions=>4
-set expandtab               " use spaces instead of tabs
-set smarttab
+set expandtab                     " use spaces instead of tabs
+set smarttab                      " ;
+set tabstop=4                     " number of spaces <tab> in the file counts for
+set softtabstop=4                 " number of spaces that a <tab> counts for while editing
+set shiftwidth=4                  " number of spaces to use for each step of (auto)indend
+set cinoptions=>4                 " affects the way cindent reindents lines in a C program
 
 " }}}
 " General configuration {{{
 
-" fix slight delay after pressing ESC then O
-set timeout timeoutlen=1000 ttimeoutlen=100
-set modifiable
-set write
 set notitle                       " keep the console title unchanged
 set encoding=utf-8                " encoding
 set fileencoding=utf-8
-"set noesckeys
-"set nomodeline                   " uselessm, reading of setting from first lines in file
+set nomodeline                    " uselessm, reading of setting from first lines in file
 set lazyredraw                    " faster macros processing
-set noerrorbells                  " tell vim to shut up
-set visualbell
-set t_vb=
+set visualbell                    " tell vim to shut up
 set mouse=a                       " Enable the use of the mouse.
 set scrolloff=5                   " number of lines you want to see in front of and after the cursor
 set showcmd                       " Show (partial) command in status line.
-set showmode
-set showmatch                     " When a bracket is inserted, briefly jump to the matching one
-set autoread                      " automatically update file changes done by other programs
-set autoindent                    " Indentation settings, autoindent breaks pasted in text
+set noshowmode                    " don't show mode in command line
+set showmatch                     " show match when a bracket is inserted
+set autoread                      " automatically update file changes
+set autoindent                    " autoindent breaks pasted in text, use F8
 set preserveindent
-"set copyindent
 set clipboard=unnamed             " paste the clipboard to unnamed register
 set spelllang=pl,en               " spelling check
 "set autochdir                    " Automatically changing working dir
 set shell=zsh                     " Shell
-set keywordprg=firefox\ -search   " search selected text in firefox default search with K
+set keywordprg=firefox\ -search   " K searches text in firefox default search
 set shortmess=atI                 " remove message at vim start
 set cmdheight=1                   " command line length
 set backupdir=~/.vim/backup//     " make ~ files in:
@@ -129,7 +120,7 @@ set wildignore=.so,swp,.zip,.mp3,
             \ojb.pdf,.jpg,.gif,.png,
             \.avi,.mkv,.so,.out
 
-if has('patch072')                " check if neccessary path exists to avoid errors
+if has('patch072')                " check if patch exists to avoid errors
     set wildignorecase            " ignore case when autocompleting paths
 endif
 if has('persistent_undo')         " persistend undo history
@@ -162,8 +153,6 @@ autocmd FileType c set cindent
 " Format for errors in QuickList
 autocmd FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
-" per file syntax
-autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
 
 " }}}
 " Plugin configuration {{{
@@ -232,9 +221,6 @@ set pastetoggle=<F8>
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
 
-" help in new vertical split
-cnoremap hlp rightb vert help
-
 " reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
@@ -290,6 +276,9 @@ nnoremap <c-s-Tab> :tabprevious<CR>
 " paste and sellect
 nnoremap <leader>o p`[v`]
 nnoremap <leader>O P`[v`]
+
+" help in new vertical split
+nnoremap <leader>H :rightb vert help<space>
 
 " append a semicolon
 nnoremap <leader>; A;<Esc>
@@ -394,6 +383,10 @@ autocmd BufReadPost *
 
 " Check awesome configuration after every write
 autocmd BufWritePost $HOME/.config/awesome/rc.lua !awesome -k
+
+" per file syntax
+autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
+autocmd BufRead,BufNewFile .vimrc set foldmethod=marker
 
 augroup DisableMappings
     " remove mapping made by align plugin
