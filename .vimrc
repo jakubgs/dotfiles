@@ -390,6 +390,7 @@ autocmd BufWritePost $HOME/.config/awesome/rc.lua !awesome -k
 " per file syntax
 autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
 autocmd BufRead,BufNewFile .vimrc set foldmethod=marker
+autocmd BufRead,BufNewFile .zshrc set foldmethod=marker
 
 augroup DisableMappings
     " remove mapping made by align plugin
