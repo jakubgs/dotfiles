@@ -1,23 +1,20 @@
-#
-# .zshrc is sourced in interactive shells.
-# It should contain commands to set up aliases,
-# functions, options, key bindings, etc.
-#
+# Author: Jakub Sokołowski <panswiata@gmail.com>
+# Source: https://github.com/PonderingGrower/dotfiles
 
-# Colors
-autoload colors; colors
-# Portage completions and Gentoo prompt
-autoload -U compinit
-autoload -U promptinit
+# Preamble {{{
+autoload colors         # enable colors
+autoload -U compinit    # enable auto completion
+autoload -U promptinit  # advanced prompts support
 
-compinit  # longest wait
+colors                  # initialize
+compinit                # longest wait
 promptinit
 
-# load to use $history[$HISTCMD] variable
-zmodload zsh/parameter
+zmodload zsh/parameter  # load to use $history[$HISTCMD] variable
 
-# change prompt depending on host
-case $HOST in
+# }}}
+# Display settings {{{
+case $HOST in           # change prompt depending on host
     melchior)
         COLOR="cyan" ;;
     caspair)
@@ -33,7 +30,24 @@ esac
 export PS1="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
 export PROMPT=${PS1}
 
-# Default editor
+# define colors for less to get colored manpages
+# or wget nion.modprobe.de/mostlike.txt && mkdir ~/.terminfo && cp mostlike.txt ~/.terminfo && tic ~/.terminfo/mostlike.txt
+export LESS_TERMCAP_mb=$'\E[0;34m'	# begin blinking
+export LESS_TERMCAP_md=$'\E[0;34m'	# begin bold
+export LESS_TERMCAP_us=$'\E[01;34m'	# begin underline
+export LESS_TERMCAP_me=$'\E[0m'		# end mode
+export LESS_TERMCAP_se=$'\E[0m'		# end standout-mode
+export LESS_TERMCAP_so=$'\E[01;47;34m' # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'		# end underline
+export GROFF_NO_SGR=1
+
+# color stderr red
+#exec 2>>(while read line; do
+#  print '\e[91m'${(q)line}'\e[0m' > /dev/tty; print -n $'\0'; done &)
+
+# }}}
+# Exports {{{
+
 export EDITOR="vim"
 export VISION="vim"
 export BROWSER="thunar"
@@ -49,44 +63,28 @@ export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/ga
 # Export for java classpath
 export CLASSPATH=./:/opt/java/lib:/opt/java:/opt/java/jre/lib:/usr/share/java/hibernate/hibernate3.jar:/usr/share/java/postgresql-jdbc/postgresql-jdbc4.jar
 
-# number of lines kept in history
-export HISTSIZE=4000
-# number of lines saved in the history after logout
-export SAVEHIST=4000
-# location of history
-export HISTFILE="$HOME/.zhistory"
-# append command to history file once executed
-setopt inc_append_history
-# for sharing history between zsh proce'ses
-setopt SHARE_HISTORY
-# Ignore duplicates in history
-setopt HIST_IGNORE_ALL_DUPS
-# Prevent record in history entry if preceding them with at least one space
-setopt hist_ignore_space
-setopt no_case_glob
+# }}}
+# General settings {{{
 
-# Nobody needs flow control anymore. Troublesome feature.
-setopt noflowcontrol
+export HISTSIZE=4000              # number of lines kept in history
+export SAVEHIST=4000              # number of lines saved in the history after logout
+export HISTFILE="$HOME/.zhistory" # location of history
+setopt INC_APPEND_HISTORY         # append command to history file once executed
+setopt APPEND_HISTORY             # Don't overwrite, append!
+setopt SHARE_HISTORY              # for sharing history between zsh proce'ses
+setopt HIST_IGNORE_ALL_DUPS       # Ignore duplicates in history
+setopt HIST_IGNORE_SPACE          # don't record entry if a space is preceeding it
+setopt NO_CASE_GLOB               # case insensitive globbing
+setopt NOFLOWCONTROL              # Nobody needs flow control anymore. Troublesome feature.
+setopt AUTO_PUSHD                 # auto directory pushd that you can get dirs list by cd -[tab]
+setopt AUTOCD                     # change directory without using cd command
+setopt EXTENDEDGLOB               # Regular expressions in files
+setopt COMPLETE_IN_WORD           # allow tab completion in the middle of a word
+setopt AUTO_RESUME                # Resume jobs after typing it's name
+setopt CHECK_JOBS                 # Dont quit console if processes are running
 
-# auto directory pushd that you can get dirs list by cd -[tab]
-setopt auto_pushd
-
-# Work without cd
-setopt AUTOCD
-
-# Regular expressions in files
-setopt EXTENDEDGLOB
-
-#allow tab completion in the middle of a word
-setopt COMPLETE_IN_WORD
-
-# Resume jobs after typing it's name
-setopt AUTO_RESUME
-
-# Dont quit console if processes are running
-setopt CHECK_JOBS
-
-# {{{ Completion
+# }}}
+# Completion {{{
 # :completion:<func>:<completer>:<command>:<argument>:<tag>
 # Expansion options
 zstyle ':completion:*' completer _complete _prefix _expand _approximate
@@ -163,30 +161,15 @@ zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 # arrow driven menu
 zstyle ':completion:*' menu select
 
+# How to handle different filetypes
+zstyle ':mime:.jpg:' handler feh -x %s
+
 #
 # # cd not select parent dir
 # zstyle ':completion:*:cd:*' ignore-parents parent pwd
 #
-
-# color stderr red
-#exec 2>>(while read line; do
-#  print '\e[91m'${(q)line}'\e[0m' > /dev/tty; print -n $'\0'; done &)
-
-# define colors for less to get colored manpages
-# or wget nion.modprobe.de/mostlike.txt && mkdir ~/.terminfo && cp mostlike.txt ~/.terminfo && tic ~/.terminfo/mostlike.txt
-export LESS_TERMCAP_mb=$'\E[0;34m'	# begin blinking
-export LESS_TERMCAP_md=$'\E[0;34m'	# begin bold
-export LESS_TERMCAP_us=$'\E[01;34m'	# begin underline
-export LESS_TERMCAP_me=$'\E[0m'		# end mode
-export LESS_TERMCAP_se=$'\E[0m'		# end standout-mode
-export LESS_TERMCAP_so=$'\E[01;47;34m' # begin standout-mode - info box
-export LESS_TERMCAP_ue=$'\E[0m'		# end underline
-export GROFF_NO_SGR=1
-
-# How to handle different filetypes
-zstyle ':mime:.jpg:' handler feh -x %s
-
-# Key Bindings
+# }}}
+# Key Bindings {{{
 typeset -A key
 # Vim mode
 bindkey -v
@@ -213,12 +196,17 @@ bindkey "\e[2~" quoted-insert
 bindkey "^K"    up-line-or-history
 bindkey "^J"    down-line-or-history
 
-# Aliases
+# }}}
+# Aliases {{{
+
+# Global
+alias -g A='; alert'
+alias -g G='| grep -i'
+alias -g V='| vim -'
+
 alias x='startx'
 alias v='vim --servername VIM'
 alias S='sudo'
-alias -g A='; alert'
-alias -g G='| grep -i'
 alias ll='ls -lh --color'
 alias tt="tree -CdL 2"
 alias vv="vim --servername VIM --remote-silent"
@@ -244,7 +232,8 @@ alias etccommit='sudo etckeeper commit "Quick commit."'
 alias sgit='sudo git'
 alias gitc='git commit -a -m '
 
-# {{{ Functions
+# }}}
+# Functions {{{
 
 # reload zshrc
 function src() {
@@ -313,3 +302,5 @@ function preexec () {
     C=$(($COLUMNS-24))
     echo -e "\033[1A\033[${C}C ${DATE} "
 }
+
+# }}}
