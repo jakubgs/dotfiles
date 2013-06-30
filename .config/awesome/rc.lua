@@ -1,4 +1,7 @@
--- Standard awesome library
+-- Author: Jakub Sokołowski <panswiata@gmail.com>
+-- Source: https://github.com/PonderingGrower/dotfiles
+
+-- {{{ Standard awesome libraries
 gears = require("gears")
 awful = require("awful")
 awful.rules = require("awful.rules")
@@ -15,7 +18,7 @@ naughty = require('naughty')
 -- Run the autostart script
 awful.util.spawn_with_shell("~/bin/autostart")
 
-
+-- }}}
 -- {{{ Variable definitions
 homedir = "/home/sochan/"
 -- Themes define colours, icons, and wallpapers
@@ -54,7 +57,6 @@ layouts =
     --awful.layout.suit.spiral.dwindle,
 }
 -- }}}
-
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
@@ -68,7 +70,6 @@ tags[3] = awful.tag({ ":admin:", ":web:", ":music:", ":files:", ":misc:", ":work
 					{ layouts[3], layouts[8], layouts[4], layouts[2], layouts[3], layouts[8] })
 --end
 -- }}}
-
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 mysystemmenu = {
@@ -141,13 +142,12 @@ mymainmenu = awful.menu({ items = {
     { "remmina",	"remmina" },
 	{ "pidgin",		"pidgin" },
 	{ "gmplayer",	"gnome-mplayer" },
-}
-                        })
+    }
+})
 
 mylauncher = awful.widget.launcher({ image = awesome.load_image(beautiful.awesome_icon),
                                      menu = mymainmenu })
 -- }}}
-
 -- {{{ Wibox
 
 -- Create a textclock widget
@@ -233,7 +233,7 @@ mytasklist.buttons = awful.util.table.join(
                                               awful.client.focus.byidx(1)
                                               if client.focus then client.focus:raise() end
                                           end))
--- }}
+
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
@@ -277,7 +277,6 @@ for s = 1, screen.count() do
     mywibox[s]:set_widget(layout)
 end
 -- }}}
-
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 2, function () awful.util.spawn(fmanager) end),
@@ -286,14 +285,6 @@ root.buttons(awful.util.table.join(
     awful.button({ }, 5, awful.tag.viewnext)
 ))
 -- }}}
-
--- Function for focusing
-local function focusby(count)
-  awful.client.focus.byidx( count)
-  if client.focus then client.focus:raise() end
-end
-
--- {{{ Key bindings
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     awful.key({ "Mod4",			  }, "l",       function () awful.util.spawn("slock") end),
@@ -429,7 +420,6 @@ clientbuttons = awful.util.table.join(
 -- Set keys
 root.keys(globalkeys)
 -- }}}
-
 -- {{{ Rules
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -527,7 +517,6 @@ awful.rules.rules = {
       properties = { tag = tags[2][3] } },
 }
 -- }}}
-
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
@@ -600,7 +589,6 @@ client.connect_signal("unfocus", function(c)
     c.border_color = beautiful.border_normal
 end)
 -- }}}
-
 -- {{{ Custom functions
 --- Spawns cmd if no client can be found matching properties
 -- If such a client can be found, pop to first tag where it is visible, and give it focus
@@ -655,4 +643,9 @@ function match (table1, table2)
    return true
 end
 
+-- Function for focusing
+local function focusby(count)
+  awful.client.focus.byidx( count)
+  if client.focus then client.focus:raise() end
+end
 -- }}}
