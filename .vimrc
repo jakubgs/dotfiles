@@ -135,7 +135,7 @@ command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent ed
 
 set foldenable                    " when on all folds are closed
 set foldlevel=1                   " folds with higher level will be closed
-set foldmethod=indent             " by default fold based on syntax
+set foldmethod=marker             " by default fold based on markers( {{{,}}} )
 set foldnestmax=1                 " nest fold limit for indent/syntax modes
 set foldtext=NeatFoldText()       " change how folds are desplayed when closed
 
@@ -389,8 +389,6 @@ autocmd BufWritePost $HOME/.config/awesome/rc.lua !awesome -k
 
 " per file syntax
 autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
-autocmd BufRead,BufNewFile .vimrc set foldmethod=marker
-autocmd BufRead,BufNewFile .zshrc set foldmethod=marker
 
 augroup DisableMappings
     " remove mapping made by align plugin
