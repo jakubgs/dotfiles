@@ -1,0 +1,4 @@
+#!/bin/bash
+# based on http://christianiversen.dk/2013/07/flash-is-terrible-how-to-fix-fullscreen-flash/
+
+sudo sed -i -re s/_NET_ACTIVE_WINDOW/XNET_ACTIVE_WINDOW/ /opt/Adobe/flash-player/flash-plugin/libflashplayer.so
