@@ -215,7 +215,16 @@ let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 4
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-" <TAB>: completion.
+
+" For snippet_complete marker.
+if has('conceal')
+   set conceallevel=2 concealcursor=i
+endif
+
+" }}}
+" Key mappings - Plugins {{{
+
+" <TAB>: completion for neocomplete
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
