@@ -46,3 +46,12 @@
 	path = .vim/bundle/Align
 	url = https://github.com/vim-scripts/Align.git
     ignore = dirty
+[submodule ".vim/bundle/neocomplete/"]
+	path = .vim/bundle/neocomplete/
+	url = https://github.com/Shougo/neocomplete.vim.git
+[submodule ".vim/bundle/neosnippet"]
+	path = .vim/bundle/neosnippet
+	url = https://github.com/Shougo/neosnippet.vim.git
+[submodule ".vim/bundle/neocomplete"]
+	path = .vim/bundle/neocomplete
+	url = https://github.com/Shougo/neocomplete.vim.git
