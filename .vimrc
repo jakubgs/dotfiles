@@ -2,12 +2,12 @@
 " Source: https://github.com/PonderingGrower/dotfiles
 
 " Preamble {{{
-filetype off " required!
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
 " VIM instad of VI
 set nocompatible
 " custom statusline
+filetype off " required!
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 source ~/.vim/statusline.vim
 
 " }}}
@@ -27,6 +27,8 @@ Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
 Bundle 'bling/vim-bufferline'
 Bundle 'vim-scripts/Align'
+Bundle 'Shougo/neocomplete'
+Bundle 'Shougo/neosnippet'
 " colorschemes
 Bundle 'nanotech/jellybeans.vim'
 
