@@ -371,7 +371,7 @@ nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 nnoremap <leader>x :Errors<CR>
 
 " focus the current fold
-nnoremap <leader>z zMzvzz
+nnoremap <leader>z zMzv
 
 " add new line above and bellow current line
 nnoremap <silent> <leader>[ :<C-U>call <SID>AddLines(1)<CR>
