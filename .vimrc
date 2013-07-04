@@ -389,6 +389,7 @@ nnoremap ge :Gedit<CR>
 nnoremap gr :Gread<CR>
 nnoremap gw :Gwrite<CR><CR>
 nnoremap gl :Glog<CR>
+nnoremap gg :Ggrep<Space>
 nnoremap gm :Gmove<Space>
 nnoremap gb :Git branch<Space>
 nnoremap gco :Git checkout<Space>
