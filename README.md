@@ -1,4 +1,4 @@
-These are my dotfiles.
+# These are my dotfiles.
 
 To deploy in current directory run:
 
