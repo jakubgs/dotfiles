@@ -189,12 +189,16 @@ bindkey "^L"	kill-word           # ctrl + l
 bindkey "^[[3^" kill-word			# ctrl + delete
 bindkey "^[Oc"	forward-word		# ctrl + right arrow
 bindkey "^[Od"	backward-word		# ctrl + left arrow
+bindkey "^K"    history-beginning-search-backward
+bindkey "^J"    history-beginning-search-forward
 bindkey "^R"	history-incremental-pattern-search-backward # ctrl + r
-bindkey "^[[A"	history-beginning-search-backward # Up Arrow
-bindkey "^[[B"	history-beginning-search-forward  # Down Arrow
 bindkey "\e[2~" quoted-insert
-bindkey "^K"    up-line-or-history
-bindkey "^J"    down-line-or-history
+
+# stop using arrow keys
+bindkey "^[[A" beep
+bindkey "^[[B" beep
+bindkey "^[[C" beep
+bindkey "^[[D" beep
 
 # }}}
 # Aliases {{{
@@ -253,6 +257,9 @@ function g {
    else
      git status
    fi
+}
+function gps {
+    git commit . -m"$@" && git push
 }
 
 # repeat last command with sudo
