@@ -182,23 +182,20 @@ bindkey "${key[Insert]}"  overwrite-mode
 bindkey "${key[Delete]}"  delete-char
 bindkey "${key[Home]}"    beginning-of-line
 bindkey "${key[End]}"     end-of-line
-bindkey "^A"    beginning-of-line   # ctrl + a
-bindkey "^S"    end-of-line         # ctrl + s
-bindkey "^H"	backward-kill-word	# ctrl + h
-bindkey "^L"	kill-word           # ctrl + l
-bindkey "^[[3^" kill-word			# ctrl + delete
-bindkey "^[Oc"	forward-word		# ctrl + right arrow
-bindkey "^[Od"	backward-word		# ctrl + left arrow
-bindkey "^K"    history-beginning-search-backward
-bindkey "^J"    history-beginning-search-forward
-bindkey "^R"	history-incremental-pattern-search-backward # ctrl + r
+bindkey "^A"    beginning-of-line                           # ctrl + a
+bindkey "^S"    end-of-line                                 # ctrl + s
+bindkey "^L"    forward-word                                # ctrl + l
+bindkey "^H"    backward-word                               # ctrl + h
+bindkey "^E"    kill-word                                   # ctrl + e
+bindkey "^W"    backward-kill-word                          # ctrl + w
+bindkey "^K"    history-beginning-search-backward           # ctrl + k
+bindkey "^J"    history-beginning-search-forward            # ctrl + j
+bindkey "^R"    history-incremental-pattern-search-backward # ctrl + r
 bindkey "\e[2~" quoted-insert
 
 # stop using arrow keys
 bindkey "^[[A" beep
 bindkey "^[[B" beep
-bindkey "^[[C" beep
-bindkey "^[[D" beep
 
 # }}}
 # Aliases {{{
