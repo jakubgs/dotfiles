@@ -50,3 +50,6 @@
 	path = .vim/bundle/neocomplete
 	url = https://github.com/Shougo/neocomplete.vim.git
     ignore = dirty
+[submodule ".vim/bundle/vim-markdown"]
+	path = .vim/bundle/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown.git

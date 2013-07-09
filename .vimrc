@@ -28,6 +28,7 @@ Bundle 'bling/vim-bufferline'
 Bundle 'vim-scripts/Align'
 Bundle 'Shougo/neocomplete'
 Bundle 'Shougo/neosnippet'
+Bundle 'plasticboy/vim-markdown'
 " colorschemes
 Bundle 'nanotech/jellybeans.vim'
 
