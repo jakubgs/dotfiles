@@ -256,7 +256,9 @@ function g {
    fi
 }
 function gps {
-    git commit . -m"$@" && git push
+    git commit . -m "$@"
+    git push
+    git status
 }
 
 # repeat last command with sudo
