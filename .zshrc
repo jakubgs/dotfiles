@@ -183,7 +183,7 @@ bindkey "${key[Delete]}"  delete-char
 bindkey "${key[Home]}"    beginning-of-line
 bindkey "${key[End]}"     end-of-line
 bindkey "^A"    beginning-of-line   # ctrl + a
-bindkey "^E"    end-of-line         # ctrl + s
+bindkey "^S"    end-of-line         # ctrl + s
 bindkey "^H"	backward-kill-word	# ctrl + h
 bindkey "^L"	kill-word           # ctrl + l
 bindkey "^[[3^" kill-word			# ctrl + delete
