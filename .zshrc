@@ -194,8 +194,8 @@ bindkey "^R"    history-incremental-pattern-search-backward # ctrl + r
 bindkey "\e[2~" quoted-insert
 
 # stop using arrow keys
-bindkey "^[[A" beep
-bindkey "^[[B" beep
+bindkey "^[[A" beep # up arrow key
+bindkey "^[[B" beep # down arrow key
 
 # }}}
 # Aliases {{{
