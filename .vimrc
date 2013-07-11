@@ -151,6 +151,7 @@ set makeprg=make\ -j6\ --silent   " default compilation command
 autocmd FileType c set makeprg=make\ --silent
 autocmd FileType c set cindent
 autocmd FileType c set foldmethod=syntax
+autocmd FileType cpp set foldmethod=syntax
 " Format for errors in QuickList
 autocmd FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
