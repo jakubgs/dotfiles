@@ -290,6 +290,7 @@ globalkeys = awful.util.table.join(
     awful.key({ "Mod4",			  }, "l",       function () awful.util.spawn("slock") end),
     awful.key({ "Mod4",			  }, "h",       function () awful.util.spawn("sudo hibernate") end),
     awful.key({ "Mod4",			  }, "w",       function () awful.util.spawn(homedir .. "bin/windows") end),
+    awful.key({ "Control",		  }, "Escape",  function () awful.util.spawn("xmodmap ~/.speedswapper") end),
     awful.key({ modkey,           }, "`",	    awful.tag.history.restore),
     awful.key({ modkey, "Shift"   }, "Tab",     function () focusby(-1)  end),
     awful.key({ modkey,			  }, "Tab",     function () focusby( 1)  end),
