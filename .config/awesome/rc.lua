@@ -278,12 +278,19 @@ for s = 1, screen.count() do
 end
 -- }}}
 -- {{{ Mouse bindings
+
 root.buttons(awful.util.table.join(
     awful.button({ }, 2, function () awful.util.spawn(fmanager) end),
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewprev),
     awful.button({ }, 5, awful.tag.viewnext)
 ))
+
+clientbuttons = awful.util.table.join(
+    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+    awful.button({ modkey }, 1, awful.mouse.client.move),
+    awful.button({ modkey }, 3, awful.mouse.client.resize))
+
 -- }}}
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
@@ -294,33 +301,15 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "`",	    awful.tag.history.restore),
     awful.key({ modkey, "Shift"   }, "Tab",     function () focusby(-1)  end),
     awful.key({ modkey,			  }, "Tab",     function () focusby( 1)  end),
-
     -- Layout manipulation
-    -- VIM movement
     awful.key({ modkey,           }, "h",       function () awful.client.focus.global_bydirection("left") end),
     awful.key({ modkey,           }, "l",       function () awful.client.focus.global_bydirection("right") end),
     awful.key({ modkey,           }, "k",       function () awful.client.focus.global_bydirection("up") end),
     awful.key({ modkey,           }, "j",       function () awful.client.focus.global_bydirection("down") end),
-    awful.key({ modkey,           }, "d",       -- toggle between last raised windows
-                                                function ()
-                                                    awful.client.focus.history.previous()
-                                                    if client.focus then
-                                                        client.focus:raise()
-                                                    end
-                                                end),
     awful.key({ modkey, "Shift"   }, "k",       function () awful.client.swap.byidx( -1) end),
     awful.key({ modkey, "Shift"   }, "j",       function () awful.client.swap.byidx(  1) end),
     awful.key({ modkey, "Shift"   }, "h",       function () awful.client.movetoscreen(client.focus ,client.focus.screen - 1) end),
     awful.key({ modkey, "Shift"   }, "l",       function () awful.client.movetoscreen(client.focus ,client.focus.screen + 1) end),
-    --awful.key({ modkey,		    }, "h",       function () awful.screen.focus_relative(-1)	end),
-    --awful.key({ modkey,	        }, "l",       function () awful.screen.focus_relative(1)	end),
-    --awful.key({ modkey,           }, "k",       function () focusby(-1)  end),
-	--awful.key({ modkey,           }, "j",       function () focusby( 1)  end),
-    --awful.key({ modkey, "Shift"   }, "h",       function () awful.client.swap.global_bydirection("left") end),
-    --awful.key({ modkey, "Shift"   }, "l",       function () awful.client.swap.global_bydirection("right") end),
-    --awful.key({ modkey, "Shift"   }, "k",       function () awful.client.swap.global_bydirection("up") end),
-    --awful.key({ modkey, "Shift"   }, "j",       function () awful.client.swap.global_bydirection("down") end),
-
     -- Run or raise
     awful.key({ modkey,           }, "e",       function () run_or_raise("gvim --servername GVIM", { class = "Gvim" }) end),
     awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Firefox" }) end),
@@ -335,11 +324,16 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "l",		function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space",	function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space",	function () awful.layout.inc(layouts, -1) end),
-
     -- Prompt
-    --awful.key({ modkey },            "r",		obvious.popup_run_prompt.run_prompt)
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ modkey },            "t",
+    awful.key({ modkey,           }, "d",       -- toggle between last raised windows
+            function ()
+                awful.client.focus.history.previous()
+                if client.focus then
+                    client.focus:raise()
+                end
+            end),
+    awful.key({ modkey            },  "t",
             function ()
                     awful.prompt.run({ prompt = "killall: " },
                     mypromptbox[mouse.screen].widget,
@@ -412,11 +406,6 @@ for i = 1, keynumber do
                       end
                   end))
 end
-
-clientbuttons = awful.util.table.join(
-    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-    awful.button({ modkey }, 1, awful.mouse.client.move),
-    awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 -- Set keys
 root.keys(globalkeys)
