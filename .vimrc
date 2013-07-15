@@ -277,9 +277,12 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
+" easier toggling of folds
+nnoremap zz za
+
 " search results in the centre of the screen
-nmap n nzz
-nmap N Nzz
+"nmap n nzz
+"nmap N Nzz
 
 " Learn to use hjkl
 nnoremap <up> ddkP
@@ -306,9 +309,6 @@ vnoremap <c-c> "+y
 " easier navigation through tabs
 nnoremap <c-Tab>   :tabnext<CR>
 nnoremap <c-s-Tab> :tabprevious<CR>
-
-" easier toggling of folds
-nnoremap zz za
 
 " }}}
 " Key mappings - <Leader> {{{
@@ -416,6 +416,7 @@ nnoremap <F1> :TagbarToggle<CR>
 
 " }}}
 " autocmd settings {{{
+
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -427,11 +428,14 @@ autocmd BufWritePost $HOME/.config/awesome/rc.lua !awesome -k
 
 " per file syntax
 autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
+" per file foldmethod
+autocmd BufRead,BufNewFile rc.lua set foldmethod=marker
 
 augroup DisableMappings
     " remove mapping made by align plugin
     autocmd! VimEnter * :unmap <space>swp
 augroup END
+
 " }}}
 " Functions {{{
 
