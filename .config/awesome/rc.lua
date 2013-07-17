@@ -104,6 +104,7 @@ mystoolsmenu = {
 
 mygamesmenu = {
 	{ "Starcraft II", "wine \"/mnt/stuff/Games/StarCraft II/StarCraft II.exe\"" },
+	{ "FTL", "wine \"/mnt/stuff/Games/Faster Than Light/FTLGame.exe\"" },
 }
 
 myvmmenu = {
