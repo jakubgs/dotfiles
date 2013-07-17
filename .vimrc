@@ -148,7 +148,7 @@ compiler gcc                      " real men use gcc
 set makeprg=make\ -j6\ --silent   " default compilation command
 
 " Different compiler depending on type of file
-autocmd FileType c set makeprg=make\ --silent
+autocmd FileType c set makeprg=make\ -j6\ --silent
 autocmd FileType c set cindent
 autocmd FileType c set foldmethod=syntax
 autocmd FileType cpp set foldmethod=syntax
