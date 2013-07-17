@@ -3,8 +3,8 @@
 echo Windows Boot at:
 date
 
-sudo grub2-set-default 1
-sudo grub2-reboot 0
+sudo grub2-set-default 0
+sudo grub2-reboot 4
 sync
 
 sudo hibernate -r1
