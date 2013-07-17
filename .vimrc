@@ -99,7 +99,7 @@ set autoindent                    " breaks pasted in text, use F8 in insert
 set preserveindent
 set clipboard=unnamed             " paste the clipboard to unnamed register
 set spelllang=pl,en               " spelling check
-"set autochdir                    " Automatically changing working dir
+set autochdir                     " Automatically changing working dir
 set shell=zsh                     " Shell
 set keywordprg=firefox\ -search   " K searches text in firefox def. search
 set shortmess=atI                 " remove message at vim start
