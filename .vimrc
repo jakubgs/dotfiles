@@ -8,7 +8,6 @@ set nocompatible
 filetype off " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-source ~/.vim/statusline.vim
 
 " }}}
 " Vundle plugin management {{{
@@ -29,6 +28,7 @@ Bundle 'vim-scripts/Align'
 Bundle 'Shougo/neocomplete'
 Bundle 'Shougo/neosnippet'
 Bundle 'plasticboy/vim-markdown'
+Bundle 'bling/vim-airline'
 " colorschemes
 Bundle 'nanotech/jellybeans.vim'
 
@@ -158,6 +158,11 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 
 " }}}
 " Plugin configuration {{{
+
+" Airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='powerlineish'
 
 " Syntastic
 let g:syntastic_check_on_open = 1
