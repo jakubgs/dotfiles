@@ -56,3 +56,6 @@
 [submodule ".vim/bundle/vim-airline"]
 	path = .vim/bundle/vim-airline
 	url = https://github.com/plasticboy/vim-markdown.git://github.com/bling/vim-airline.git
+[submodule ".vim/bundle/vim-hardtime"]
+	path = .vim/bundle/vim-hardtime
+	url = https://github.com/takac/vim-hardtime.git

@@ -29,6 +29,8 @@ Bundle 'Shougo/neocomplete'
 Bundle 'Shougo/neosnippet'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'bling/vim-airline'
+" temporary
+Bundle 'takac/vim-hardtime'
 " colorschemes
 Bundle 'nanotech/jellybeans.vim'
 
@@ -56,7 +58,7 @@ filetype plugin on                " loading of plugin files for all formats
 filetype indent on                " loading of indent files for all formats
 
 set guioptions=                   " Get rid of useless GUI elements
-set winwidth=79                   " minimum split width
+set winwidth=78                   " minimum split width
 set winheight=20                  " minimum split height
 set colorcolumn=80                " highlight this column
 set nuw=4                         " number line width
@@ -163,10 +165,15 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme='powerlineish'
+"let g:airline_section_c = '%f'
+
+" Harttime
+let g:hardtime_default_on = 1
 
 " Syntastic
 let g:syntastic_check_on_open = 1
 let g:syntastic_enable_signs  = 1
+let g:syntastic_c_remove_include_errors = 1
 
 " NERDTree
 let NERDTreeWinPos = "right"
@@ -341,6 +348,7 @@ nnoremap <leader>s <C-w>v<C-w>l
 nnoremap <leader>d <C-w>s<C-w>l
 " close buffer but leave active pane open
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <leader>Q :q!<CR>
 
 " Edit .vimrc and erfresh configuration
 nnoremap <leader>v :source ~/.vimrc<CR>
@@ -435,6 +443,7 @@ autocmd BufWritePost $HOME/.config/awesome/rc.lua !awesome -k
 autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
 " per file foldmethod
 autocmd BufRead,BufNewFile rc.lua set foldmethod=marker
+autocmd BufRead,BufNewFile .vimrc set foldmethod=marker
 
 augroup DisableMappings
     " remove mapping made by align plugin
