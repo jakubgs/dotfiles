@@ -25,10 +25,12 @@ Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
 Bundle 'bling/vim-bufferline'
 Bundle 'vim-scripts/Align'
-Bundle 'Shougo/neocomplete'
-Bundle 'Shougo/neosnippet'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'bling/vim-airline'
+Bundle 'Shougo/neosnippet'
+if ( has("lua") )
+    Bundle 'Shougo/neocomplete'
+endif
 " temporary
 Bundle 'takac/vim-hardtime'
 " colorschemes
