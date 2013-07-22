@@ -165,7 +165,7 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme='powerlineish'
-"let g:airline_section_c = '%f'
+let g:airline_section_c = '%F %m'
 
 " Harttime
 let g:hardtime_default_on = 1
