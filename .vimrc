@@ -67,8 +67,8 @@ set nuw=4                         " number line width
 set ruler                         " show columns and rows
 set cursorline                    " highlight the current line
 set laststatus=2                  " always show the statusline
-set listchars=tab:▸\ ,eol:¬       " use less visible characters for tabstops and EOLs
-set relativenumber                " show how far each line of from the current one
+set listchars=tab:▸\ ,eol:¬       " less visible characters for tabs and EOLs
+set relativenumber                " how far each line is of from the current one
 set wrap                          " text wrappingi
 set linebreak                     " don't break in middle of words
 set showmatch                     " show matching brackets
@@ -339,6 +339,9 @@ nnoremap <leader>; A;<Esc>
 
 " strip all trailing whitespaces in current file
 nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>;
+
+" insert spaces between brackets
+nnoremap <leader>y mp%a<space><esc>%%i<space><esc>`p
 
 " easier access to substitution
 nnoremap <leader>S :%s//<left>
