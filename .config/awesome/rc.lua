@@ -93,18 +93,18 @@ myofficemenu = {
 }
 
 mystoolsmenu = {
-        { "edit rc.lua",        "gvim " .. awful.util.getdir("config") .. "/rc.lua" },
+    { "edit rc.lua",        "gvim " .. awful.util.getdir("config") .. "/rc.lua" },
 	{ "edit xorg.conf",     "gksudo gvim " .. "/etc/X11/xorg.conf" },
-        { "edit wallpaper",	"nitrogen /mnt/melchior/data/Wallpapers/" },
+    { "edit wallpaper",	"nitrogen /mnt/melchior/data/Wallpapers/" },
 	{ "---------------",     nil },
-        { "system monitor",	"gnome-system-monitor" },
+    { "system monitor",	"gnome-system-monitor" },
 	{ "palimpsest",         "gksudo palimpsest" },
-        { "disk usage",	        "baobab" },
+    { "disk usage",	        "baobab" },
 }
 
 mygamesmenu = {
 	{ "Starcraft II", "wine \"/mnt/stuff/Games/StarCraft II/StarCraft II.exe\"" },
-	{ "FTL", "wine \"/mnt/stuff/Games/Faster Than Light/FTLGame.exe\"" },
+	{ "FTL",          terminal .. " -e cd /mnt/melchior/data/Games/Faster\ Than\ Light && wine FTLGame.exe" },
 }
 
 myvmmenu = {
@@ -625,7 +625,7 @@ function run_or_raise(cmd, properties)
 end
 
 -- Returns true if all pairs in table1 are present in table2
-function match (table1, table2)
+function match(table1, table2)
    for k, v in pairs(table1) do
       if table2[k] ~= v and not table2[k]:find(v) then
          return false
@@ -635,7 +635,7 @@ function match (table1, table2)
 end
 
 -- Function for focusing
-local function focusby(count)
+function focusby(count)
   awful.client.focus.byidx( count)
   if client.focus then client.focus:raise() end
 end
