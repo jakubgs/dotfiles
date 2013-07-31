@@ -69,7 +69,7 @@ nmap <leader>s :tabopen about:sessionrestore<CR>
 nmap <leader>i :private winopen<CR>
 
 " open selected links, replaces spaces between links for propper spearators
-nmap <leader>o :!echo "<S-Insert>" | sed 's/ / | /g' | xclip <CR>:tabopen <S-Insert><CR>h
+nmap <leader>o :!echo "<S-Insert>" | sed 's/ / | /g' | xclip <CR>:tabopen <S-Insert><CR>
 
 " pop out youtube video
 nmap <leader>f y:!echo "<S-Insert>" | sed 's/youtu.be\//www.youtube.com\/tv?vq=high#\/watch?v=/g' | xclip <CR>:tabopen <S-Insert><CR>
