@@ -73,6 +73,7 @@ set wrap                          " text wrappingi
 set linebreak                     " don't break in middle of words
 set showmatch                     " show matching brackets
 set t_vb=                         " don't flash the screen on errors
+set previewheight=25              " height of preview windows for fugitive, etc
 
 " }}}
 " Formatting settings {{{
@@ -153,6 +154,7 @@ set makeprg=make\ -j6\ --silent   " default compilation command
 
 " Different compiler depending on type of file
 autocmd FileType c set makeprg=make\ -j6\ --silent
+autocmd FileType lua set makeprg=awesome\ -k
 autocmd FileType c set cindent
 autocmd FileType c set foldmethod=syntax
 autocmd FileType cpp set foldmethod=syntax
@@ -204,7 +206,7 @@ let delimitMate_smart_quotes = 0
 let g:SuperTabDefaultCompletionType = "context"
 
 " TagBar
-set tags=./tags;/
+set tags=./tags;../tags;/
 let g:tagbar_left = 1
 let g:tagbar_width = 30
 let g:tagbar_ctags_bin="/usr/bin/ctags"
@@ -338,7 +340,7 @@ nnoremap <leader>H :rightb vert help<space>
 nnoremap <leader>; A;<Esc>
 
 " strip all trailing whitespaces in current file
-nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>;
+nnoremap <leader>c :%s/\s\+$//<cr>:let @/=''<CR>;
 
 " insert spaces between brackets
 nnoremap <leader>y mp%a<space><esc>%%i<space><esc>`p
@@ -403,7 +405,7 @@ nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
 " fugitive git bindings
 nnoremap ga :Git add %<CR><CR>
 nnoremap gs :Gstatus<CR>
-nnoremap gc :Gcommit<CR>i
+nnoremap gc :Gcommit -v<CR><c-w>H
 nnoremap gd :Gdiff<CR>
 nnoremap ge :Gedit<CR>
 nnoremap gr :Gread<CR>
