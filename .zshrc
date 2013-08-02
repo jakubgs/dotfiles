@@ -209,6 +209,7 @@ alias x='startx'
 alias v='vim --servername VIM'
 alias S='sudo'
 alias ll='ls -lh --color'
+alias mm="make -j6"
 alias tt="tree -CdL 2"
 alias vv="vim --servername VIM --remote-silent"
 alias gv="gvim --servername GVIM --remote-silent"
