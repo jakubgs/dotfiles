@@ -33,10 +33,6 @@
 [submodule ".vim/bundle/vim-tags"]
 	path = .vim/bundle/vim-tags
 	url = https://github.com/szw/vim-tags.git
-[submodule ".vim/bundle/vim-bufferline"]
-	path = .vim/bundle/vim-bufferline
-	url = https://github.com/bling/vim-bufferline.git
-    ignore = dirty
 [submodule ".vim/bundle/jellybeans.vim"]
 	path = .vim/bundle/jellybeans.vim
 	url = https://github.com/nanotech/jellybeans.vim.git
@@ -57,6 +53,3 @@
 [submodule ".vim/bundle/vim-airline"]
 	path = .vim/bundle/vim-airline
 	url = https://github.com/bling/vim-airline.git
-[submodule ".vim/bundle/vim-hardtime"]
-	path = .vim/bundle/vim-hardtime
-	url = https://github.com/takac/vim-hardtime.git
