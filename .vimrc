@@ -23,7 +23,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
-Bundle 'bling/vim-bufferline'
 Bundle 'vim-scripts/Align'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'bling/vim-airline'
@@ -31,8 +30,6 @@ Bundle 'Shougo/neosnippet'
 if ( has("lua") )
     Bundle 'Shougo/neocomplete'
 endif
-" temporary
-Bundle 'takac/vim-hardtime'
 " colorschemes
 Bundle 'nanotech/jellybeans.vim'
 
@@ -114,7 +111,7 @@ set noswapfile                    " set directory=~/.vim/temp//
 set hlsearch                      " highlighting search results
 set incsearch                     " start searching as you type
 set ignorecase                    " ignore case in search patterns
-set iskeyword+=_,$,@,%,#          " not word dividers
+set iskeyword+=$,@,%,#          " not word dividers
 set hidden                        " buffer change, more undo
 set ttyfast                       " Faster standard output
 set wildmenu                      " File menu
@@ -280,6 +277,7 @@ vnoremap > >gv
 
 " Fast saving
 nmap <c-s> :w!<cr>
+imap <c-s> <esc>:w!<cr>i
 
 " save and compile
 map mm :w<CR>:Make<CR>
