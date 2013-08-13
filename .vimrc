@@ -17,9 +17,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
-Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
@@ -167,6 +165,7 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme='powerlineish'
 let g:airline_section_c = '%F %m'
+let g:airline_section_x = ''
 
 " Harttime
 let g:hardtime_default_on = 1
@@ -280,7 +279,7 @@ nmap <c-s> :w!<cr>
 imap <c-s> <esc>:w!<cr>i
 
 " save and compile
-map mm :w<CR>:Make<CR>
+map mm :Make<CR>
 
 " remove annoying comman-line window
 nnoremap q: :q

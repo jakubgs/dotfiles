@@ -14,19 +14,12 @@
 	path = .vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
     ignore = dirty
-[submodule ".vim/bundle/tagbar"]
-	path = .vim/bundle/tagbar
-	url = https://github.com/majutsushi/tagbar.git
 [submodule ".vim/bundle/ctrlp.vim"]
 	path = .vim/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-    ignore = dirty
 [submodule ".vim/bundle/vim-ps1"]
 	path = .vim/bundle/vim-ps1
 	url = https://github.com/PProvost/vim-ps1.git
