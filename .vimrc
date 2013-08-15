@@ -68,7 +68,8 @@ set wrap                          " text wrappingi
 set linebreak                     " don't break in middle of words
 set showmatch                     " show matching brackets
 set t_vb=                         " don't flash the screen on errors
-set previewheight=25              " height of preview windows for fugitive, etc
+set previewheight=25              " height of windows for fugitive, etc
+set fillchars=vert:│              " smooth windows splits
 
 " }}}
 " Formatting settings {{{
@@ -86,6 +87,7 @@ set cinoptions=>4                 " how cindent indents lines in C programs
 set notitle                       " keep the console title unchanged
 set encoding=utf-8                " encoding
 set fileencoding=utf-8
+set history=1000                  " history of vim commands
 set nomodeline                    " no options from first comment in file
 set lazyredraw                    " faster macros processing
 set visualbell                    " tell vim to shut up
@@ -282,7 +284,7 @@ imap <c-s> <esc>:w!<cr>i
 map mm :Make<CR>
 
 " remove annoying comman-line window
-nnoremap q: :q
+"nnoremap q: :q
 
 " for moving in wrapped lines
 nnoremap j gj
