@@ -308,6 +308,7 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+inoremap <backspace> <nop>
 
 " easier navigation between splits
 nnoremap <c-h> <c-w>h
