@@ -406,7 +406,7 @@ nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
 nnoremap ga :Git add %<CR><CR>
 nnoremap gs :Gstatus<CR>
 nnoremap gc :Gcommit -v<CR><c-w>H
-nnoremap gg :Gcommit -v %<CR><c-w>H
+nnoremap gt :Gcommit -v %<CR><c-w>H
 nnoremap gd :Gdiff<CR>
 nnoremap ge :Gedit<CR>
 nnoremap gr :Gread<CR>
