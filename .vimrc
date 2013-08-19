@@ -217,9 +217,9 @@ let g:ctrlp_working_path_mode = 'raw'
 let g:ctrlp_regexp = 0
 let g:ctrlp_root_markers = ['.root', '.git', 'COPYING' ]
 let g:ctrlp_custom_ignore = {
-	        \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-	        \ 'file': '\v\.(exe|so|dll|tmp|temp|swp|o)$',
-	        \ }
+    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    \ 'file': '\v\.(exe|so|dll|tmp|temp|swp|o)$',
+    \ }
 
 " EasyMotion leader
 let g:EasyMotion_leader_key = '<Space>'
