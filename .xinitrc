@@ -1,7 +1,6 @@
 # Keyboard layout
 setxkbmap -layout pl
 
-export TERMINAL="~/bin/urxvtb"
 # Caps Lock <-> Esc
 #xmodmap .speedswapper
 #setxkbmap -option caps:escape
