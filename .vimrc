@@ -403,10 +403,10 @@ nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
 " Key mappings - Git {{{
 
 " fugitive git bindings
-nnoremap ga :Git add %<CR><CR>
+nnoremap ga :Git add %:p<CR><CR>
 nnoremap gs :Gstatus<CR>
 nnoremap gc :Gcommit -v<CR><c-w>H
-nnoremap gt :Gcommit -v %<CR><c-w>H
+nnoremap gt :Gcommit -v %:p<CR><c-w>H
 nnoremap gd :Gdiff<CR>
 nnoremap ge :Gedit<CR>
 nnoremap gr :Gread<CR>
