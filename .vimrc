@@ -416,8 +416,8 @@ nnoremap gp :Ggrep<Space>
 nnoremap gm :Gmove<Space>
 nnoremap gb :Git branch<Space>
 nnoremap go :Git checkout<Space>
-nnoremap gps :Dispatch git push<CR>
-nnoremap gpl :Dispatch git pull<CR>
+nnoremap gps :Dispatch! git push<CR>
+nnoremap gpl :Dispatch! git pull<CR>
 
 " }}}
 " Key mappings - Fxx {{{
