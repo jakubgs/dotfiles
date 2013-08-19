@@ -110,7 +110,7 @@ mygamesmenu = {
 myvmmenu = {
 	{ "virtualbox", "VirtualBox" },
 	{ "-------------", nil },
-	{ "* Windows 7",    "VirtualBox --startvm \"Windows 7 on SSD\"" },
+	{ "* Windows 7",    "VirtualBox --startvm \"Windows 7\"" },
 	{ "* Windows XP",   "VirtualBox --startvm \"Windows XP Pro\"" },
 	{ "* Gentoo Test",  "VirtualBox --startvm \"Gentoo Testing System\"" }
 }
@@ -474,7 +474,7 @@ awful.rules.rules = {
 					fullscreen = true,
 					--ontop = true
 					} },
-    { rule = { name = "Windows 7 *" },
+    { rule = { name = "Windows 7" },
       properties = {
 					tag = tags[2][6],
 					floating = false,
