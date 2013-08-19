@@ -339,9 +339,6 @@ nnoremap <leader>H :rightb vert help<space>
 " append a semicolon
 nnoremap <leader>; A;<Esc>
 
-" strip all trailing whitespaces in current file
-nnoremap <leader>c :%s/\s\+$//<cr>:let @/=''<CR>;
-
 " insert spaces between brackets
 nnoremap <leader>y mp%a<space><esc>%%i<space><esc>`p
 
@@ -370,6 +367,12 @@ nnoremap <leader>u <c-^>
 
 " roggle showing of newline and tab characters
 nnoremap <leader>i :set list!<CR>
+
+" strip all trailing whitespaces in current file
+nnoremap <leader>o :%s/\s\+$//<cr>:let @/=''<CR>;
+
+" open console in current directory
+nnoremap <leader>c :Start<CR>
 
 " CtrlP mappings
 nnoremap <Tab>      :CtrlPMixed<CR>
