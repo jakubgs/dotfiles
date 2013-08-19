@@ -51,6 +51,7 @@ export GROFF_NO_SGR=1
 export EDITOR="vim"
 export VISION="vim"
 export BROWSER="thunar"
+export TERMINAL="~/urxvtb"
 export DEITY="fsm"
 export PAGER="less"
 export MPD_HOST="127.0.0.1"

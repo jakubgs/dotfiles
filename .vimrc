@@ -445,7 +445,7 @@ autocmd BufReadPost *
             \ endif
 
 " Check awesome configuration after every write
-autocmd BufWritePost $HOME/.config/awesome/rc.lua !awesome -k
+autocmd BufWritePost $HOME/.config/awesome/rc.lua Dispatch! awesome -k
 
 " per file syntax
 autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim

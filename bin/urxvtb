@@ -1,5 +1,0 @@
-#!/bin/bash
-
-FONT="xft:Terminus:size=10:lang=pl"
-
-urxvtc -xrm "urxvt*font: ${FONT}" -xrm "urxvt*boldFont: ${FONT}:style=bold" -xrm "urxvt*imFont: ${FONT}" -xrm "urxvt*italicFont: ${FONT}:style:italic" $@

@@ -17,7 +17,9 @@ function run {
 
 export OOO_FORCE_DESKTOP="xfce4"
 export DE="xfce"
-export BROWSER=thunar
+export BROWSER="thunar"
+export TERMINAL="urxvtc"
+TERMINAL_S="~/urxvtb"
 
 ####### programs to run ########
 
@@ -31,12 +33,12 @@ run gvim
 
 # start the usual terminal windows
 if ! pgrep mhtop &>/dev/null; then
-	urxvtc -name mmtail -e ~/bin/mmtail &
+	$TERMINAL_S -name mmtail -e ~/bin/mmtail &
 	sleep 0.3
 	# Start mpd client and system monitors
-	urxvtc -name mhtop	 -e ~/bin/mhtop &
-	urxvtc -name htop	 -e htop  &
-	urxvtc -name ncmpcpp -e ncmpcpp &
+	$TERMINAL_S -name mhtop	 -e ~/bin/mhtop &
+	$TERMINAL_S -name htop	 -e htop  &
+	$TERMINAL_S -name ncmpcpp -e ncmpcpp &
 fi
 
 run thunar --daemon > /var/log/thunar.log 2>&1

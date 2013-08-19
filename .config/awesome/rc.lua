@@ -28,6 +28,7 @@ beautiful.init(homedir .. ".awesome/themes/default/theme.lua")
 browser = "firefox"
 fmanager = "thunar /mnt/melchior/torrent"
 terminal = "urxvtc"
+terminal_s = homedir .. "bin/urxvts"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -117,8 +118,8 @@ myvmmenu = {
 
 mymelchiormenu = {
 	{ "ssh", terminal .. " -e ssh melchior" },
-	{ "htop", terminal .. " -e " .. homedir .. "bin/mhtop" },
-	{ "mmtail", terminal .. " -e " .. homedir .. "bin/mmtail" },
+	{ "htop", terminal_s .. " -e " .. homedir .. "bin/mhtop" },
+	{ "mmtail", terminal_s .. " -e " .. homedir .. "bin/mmtail" },
 	{ "mpd", "gmpc" }
 }
 
@@ -136,9 +137,8 @@ mymainmenu = awful.menu({ items = {
 	{ "-------------", nil },
 	{ "file manager",	fmanager },
     { "urxvt",		terminal },
-    { "urxvtb",		homedir .. "bin/urxvtb" },
-	{ "htop",		terminal .. " -e htop" },
-	{ "ncmpcpp",	terminal .. " -name ncmpcpp -e ncmpcpp" },
+	{ "htop",		terminal_s .. " -e htop" },
+	{ "ncmpcpp",	terminal_s .. " -name ncmpcpp -e ncmpcpp" },
     { "brasero",	"brasero" },
     { "remmina",	"remmina" },
 	{ "pidgin",		"pidgin" },
@@ -314,11 +314,11 @@ globalkeys = awful.util.table.join(
     -- Run or raise
     awful.key({ modkey,           }, "e",       function () run_or_raise("gvim --servername GVIM", { class = "Gvim" }) end),
     awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Firefox" }) end),
-    awful.key({ modkey,           }, "c",       function () run_or_raise(homedir .. "bin/urxvtb", { class = "URxvt" }) end),
-    awful.key({ modkey,           }, "m",       function () run_or_raise(terminal .. " --name ncmpcpp -e ncmpcpp", { instance = "ncmpcpp" }) end),
+    awful.key({ modkey,           }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
+    awful.key({ modkey,           }, "m",       function () run_or_raise(terminal_s .. " --name ncmpcpp -e ncmpcpp", { instance = "ncmpcpp" }) end),
     -- Standard program
-    awful.key({ "Control","Shift" }, "BackSpace", function () awful.util.spawn(terminal) end),
-    awful.key({ "Control",        }, "BackSpace", function () awful.util.spawn(homedir .. "bin/urxvtb") end),
+    awful.key({ "Control",        }, "BackSpace", function () awful.util.spawn(terminal) end),
+    awful.key({ "Control", "Shift"}, "BackSpace", function () awful.util.spawn(terminal_s) end),
     awful.key({ modkey, "Control" }, "r",       awesome.restart),
     awful.key({ modkey, "Control" }, "q",       awesome.quit),
     awful.key({ modkey, "Control" }, "h",		function () awful.tag.incncol( 1)         end),
