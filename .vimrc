@@ -396,7 +396,7 @@ nnoremap <leader><leader> :CtrlP<Up><CR>
 " set current dir to that of current file
 nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 
-" calculate current line
+" calculate current line with precision of 2
 nnoremap <leader>x yy:.!echo "scale=2; <c-r>"<c-h>"\|bc<CR>
 
 " focus the current fold
