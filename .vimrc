@@ -21,6 +21,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
+Bundle 'rking/ag.vim'
 Bundle 'vim-scripts/Align'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'bling/vim-airline'
@@ -328,6 +329,9 @@ nnoremap <c-s-Tab> :tabprevious<CR>
 
 " }}}
 " Key mappings - <Leader> {{{
+
+" paste and sellect
+nnoremap <leader>/ :Ag<Space>
 
 " paste and sellect
 nnoremap <leader>o p`[v`]
