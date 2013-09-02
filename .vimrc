@@ -396,8 +396,8 @@ nnoremap <leader><leader> :CtrlP<Up><CR>
 " set current dir to that of current file
 nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
 
-" open Errors pane from Syntastic
-nnoremap <leader>x :Errors<CR>
+" calculate current line
+nnoremap <leader>x yy:.!echo "scale=2; <c-r>"<c-h>"\|bc<CR>
 
 " focus the current fold
 nnoremap <leader>z zMzv
