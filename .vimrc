@@ -408,8 +408,8 @@ nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
 " fugitive git bindings
 nnoremap ga :Git add %:p<CR><CR>
 nnoremap gs :Gstatus<CR>
-nnoremap gc :Gcommit -v<CR><c-w>H
-nnoremap gt :Gcommit -v %:p<CR><c-w>H
+nnoremap gc :Gcommit -v -q<CR><c-w>H
+nnoremap gt :Gcommit -v -q %:p<CR><c-w>H
 nnoremap gd :Gdiff<CR>
 nnoremap ge :Gedit<CR>
 nnoremap gr :Gread<CR>
