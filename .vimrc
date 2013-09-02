@@ -344,7 +344,7 @@ nnoremap <leader>H :rightb vert help<space>
 nnoremap <leader>; A;<Esc>
 
 " insert spaces between brackets
-nnoremap <leader>y mp%a<space><esc>%%i<space><esc>`p
+nnoremap <leader>y :CopyMatches *<CR>
 
 " easier access to substitution
 nnoremap <leader>S :%s//<left>
