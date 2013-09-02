@@ -1,12 +1,14 @@
 # These are my dotfiles.
 
-To deploy in current directory run:
+To deploy in directory `dotfiles` run:
 
 ```
-git clone https://github.com/PonderingGrower/dotfiles.git ./
+git clone https://github.com/PonderingGrower/dotfiles.git ./dotfiles
 ```
 
-then update vim plugins:
+Then you can link folders and files you want to use.
+
+It's necessary to update vim plugins with:
 
 ```
 git submodule init
