@@ -18,7 +18,6 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/syntastic'
 Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
 Bundle 'rking/ag.vim'
@@ -172,11 +171,6 @@ let g:airline_section_x = ''
 
 " Harttime
 let g:hardtime_default_on = 1
-
-" Syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_enable_signs  = 1
-let g:syntastic_c_remove_include_errors = 1
 
 " NERDTree
 let NERDTreeWinPos = "right"
@@ -431,7 +425,7 @@ nnoremap gpl :Dispatch! git pull<CR>
 
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
-nnoremap <F10> :SyntasticToggleMode<CR>
+nnoremap <F10> <nop>
 nnoremap <F9> :nohl<CR>
 nnoremap <F8> :Make!<CR>
 nnoremap <F7> :Copen<CR>
