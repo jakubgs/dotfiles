@@ -162,7 +162,6 @@ mympdwidget = wibox.widget.textbox()
 vicious.register(mympdwidget, vicious.widgets.mpd,
     function (widget, args)
         if args["{state}"] == "Stop" then
-    awful.key({ "Control",		  }, "Escape",  function () awful.util.spawn("xmodmap ~/.speedswapper") end),
             return "| - Stopped - "
         else
             return '| ' .. args["{state}"] .. ': ' .. args["{Artist}"]..' - '.. args["{Title}"] .. ' '
