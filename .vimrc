@@ -175,7 +175,7 @@ let g:airline_section_x = ''
 let g:hardtime_default_on = 1
 
 " LaTeX Suite
-g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_DefaultTargetFormat = 'pdf'
 
 " NERDTree
 let NERDTreeWinPos = "right"
