@@ -17,6 +17,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
+Bundle 'jcf/vim-latex'
 Bundle 'kien/ctrlp.vim'
 Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
@@ -171,6 +173,9 @@ let g:airline_section_x = ''
 
 " Harttime
 let g:hardtime_default_on = 1
+
+" LaTeX Suite
+g:Tex_DefaultTargetFormat = 'pdf'
 
 " NERDTree
 let NERDTreeWinPos = "right"
@@ -425,7 +430,7 @@ nnoremap gpl :Dispatch! git pull<CR>
 
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
-nnoremap <F10> <nop>
+nnoremap <F10> :SyntasticToggleMode<CR>
 nnoremap <F9> :nohl<CR>
 nnoremap <F8> :Make!<CR>
 nnoremap <F7> :Copen<CR>
