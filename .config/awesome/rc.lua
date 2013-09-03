@@ -63,11 +63,11 @@ layouts =
 tags = {}
 
 -- Each screen has its own tag table.
-tags[1] = awful.tag({ ":admin:", ":web:", ":im:", ":files:", ":misc:", ":work:" }, 1, 
+tags[1] = awful.tag({ ":admin:", ":web:", ":im:", ":files:", ":misc:", ":work:" }, 1,
 					{ layouts[2], layouts[8], layouts[2], layouts[3], layouts[2], layouts[8] })
-tags[2] = awful.tag({ ":editor:", ":web:", ":mail:", ":images:", ":movies:", ":work:" }, 2, 
+tags[2] = awful.tag({ ":editor:", ":web:", ":mail:", ":images:", ":movies:", ":work:" }, 2,
 					{ layouts[2], layouts[8], layouts[5], layouts[8], layouts[1], layouts[8] })
-tags[3] = awful.tag({ ":admin:", ":web:", ":music:", ":files:", ":misc:", ":work:" }, 3, 
+tags[3] = awful.tag({ ":admin:", ":web:", ":music:", ":files:", ":misc:", ":work:" }, 3,
 					{ layouts[3], layouts[8], layouts[4], layouts[2], layouts[3], layouts[8] })
 --end
 -- }}}
@@ -123,7 +123,7 @@ mymelchiormenu = {
 	{ "mpd", "gmpc" }
 }
 
-mymainmenu = awful.menu({ items = { 
+mymainmenu = awful.menu({ items = {
 	{ "system",		mysystemmenu, beautiful.awesome_icon },
 	{ "systools",	mystoolsmenu, beautiful.awesome_icon },
     { "melchior",	mymelchiormenu, beautiful.awesome_icon },
@@ -142,7 +142,7 @@ mymainmenu = awful.menu({ items = {
     { "brasero",	"brasero" },
     { "remmina",	"remmina" },
 	{ "pidgin",		"pidgin" },
-	{ "gmplayer",	"gnome-mplayer" },
+    { "gmplayer",	"gnome-mplayer" },
     }
 })
 
@@ -161,9 +161,10 @@ mympdwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(mympdwidget, vicious.widgets.mpd,
     function (widget, args)
-        if args["{state}"] == "Stop" then 
+        if args["{state}"] == "Stop" then
+    awful.key({ "Control",		  }, "Escape",  function () awful.util.spawn("xmodmap ~/.speedswapper") end),
             return "| - Stopped - "
-        else 
+        else
             return '| ' .. args["{state}"] .. ': ' .. args["{Artist}"]..' - '.. args["{Title}"] .. ' '
         end
     end, 1) -- refresh every 2 seconds
@@ -295,10 +296,9 @@ clientbuttons = awful.util.table.join(
 -- }}}
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ "Mod4",			  }, "l",       function () awful.util.spawn("slock") end),
-    awful.key({ "Mod4",			  }, "h",       function () awful.util.spawn("sudo hibernate") end),
-    awful.key({ "Mod4",			  }, "w",       function () awful.util.spawn(homedir .. "bin/windows") end),
-    awful.key({ "Control",		  }, "Escape",  function () awful.util.spawn("xmodmap ~/.speedswapper") end),
+    awful.key({ modkey, "Control" }, "l",       function () awful.util.spawn("slock") end),
+    awful.key({ modkey, "Control" }, "h",       function () awful.util.spawn("sudo hibernate") end),
+    awful.key({ modkey, "Control" }, "w",       function () awful.util.spawn(homedir .. "bin/windows") end),
     awful.key({ modkey,           }, "`",	    awful.tag.history.restore),
     awful.key({ modkey, "Shift"   }, "Tab",     function () focusby(-1)  end),
     awful.key({ modkey,			  }, "Tab",     function () focusby( 1)  end),
@@ -474,7 +474,7 @@ awful.rules.rules = {
 					fullscreen = true,
 					--ontop = true
 					} },
-    { rule = { name = "Windows 7" },
+    { rule = { name = "Windows 7*" },
       properties = {
 					tag = tags[2][6],
 					floating = false,
@@ -490,14 +490,14 @@ awful.rules.rules = {
 					maximized_vertical   = true
 					} },
     { rule = { class = "Remmina" },
-      properties = { 
+      properties = {
 					tag = tags[1][6],
 					floating = false,
 					maximized_horizontal = true,
 					maximized_vertical   = true
 					} },
     { rule = { class = "Evince" },
-      properties = { 
+      properties = {
 					floating = false
 					} },
 	{ rule = { instance = "plugin-container" },
