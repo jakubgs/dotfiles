@@ -19,7 +19,7 @@ export OOO_FORCE_DESKTOP="xfce4"
 export DE="xfce"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
-TERMINAL_S="~/bin/urxvtb"
+TERMINAL_S="~/bin/urxvts"
 
 ####### programs to run ########
 
