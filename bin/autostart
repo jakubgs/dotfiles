@@ -19,7 +19,7 @@ export OOO_FORCE_DESKTOP="xfce4"
 export DE="xfce"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
-TERMINAL_S="~/urxvtb"
+TERMINAL_S="~/bin/urxvtb"
 
 ####### programs to run ########
 
@@ -32,12 +32,10 @@ run urxvtd -q -f -o
 run gvim
 
 # start the usual terminal windows
-if ! pgrep mhtop &>/dev/null; then
+if ! pgrep ncmpcpp &>/dev/null; then
 	$TERMINAL_S -name mmtail -e ~/bin/mmtail &
 	sleep 0.3
-	# Start mpd client and system monitors
-	$TERMINAL_S -name mhtop	 -e ~/bin/mhtop &
-	$TERMINAL_S -name htop	 -e htop  &
+	# Start mpd client
 	$TERMINAL_S -name ncmpcpp -e ncmpcpp &
 fi
 
