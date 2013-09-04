@@ -167,9 +167,11 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 " Airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline_left_alt_sep = '|'
+let g:airline_right_alt_sep = '|'
 let g:airline_theme='powerlineish'
-let g:airline_section_c = '%F %m'
-let g:airline_section_x = ''
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Harttime
 let g:hardtime_default_on = 1
