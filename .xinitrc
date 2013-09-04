@@ -1,3 +1,5 @@
+export TERMINAL="urxvtc"
+
 # Keyboard layout
 setxkbmap -layout pl
 
