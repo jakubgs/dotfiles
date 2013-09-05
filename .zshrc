@@ -285,7 +285,7 @@ function alert {
         BG_COLOR="#535d9a"
     else
         RVAL="FAILURE"
-        BG_COLOR="#ff2000"
+        BG_COLOR="#ba3624"
     fi
 
     # compose the notification
