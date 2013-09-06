@@ -318,6 +318,9 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+" counterpart to <c-h> in insert mode
+inoremap <c-l> <Del>
+
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
 "nnoremap <c-v> "+p
