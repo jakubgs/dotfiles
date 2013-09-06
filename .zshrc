@@ -185,8 +185,8 @@ bindkey "${key[Home]}"    beginning-of-line
 bindkey "${key[End]}"     end-of-line
 bindkey "^A"    beginning-of-line                           # ctrl + a
 bindkey "^S"    end-of-line                                 # ctrl + s
-bindkey "^L"    forward-word                                # ctrl + l
-bindkey "^H"    backward-word                               # ctrl + h
+bindkey "^L"    delete-char                                 # ctrl + l
+bindkey "^H"    backward-delete-char                        # ctrl + h
 bindkey "^E"    kill-word                                   # ctrl + e
 bindkey "^W"    backward-kill-word                          # ctrl + w
 bindkey "^K"    history-beginning-search-backward           # ctrl + k
