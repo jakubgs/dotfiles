@@ -297,6 +297,9 @@ nnoremap gk k
 " easier toggling of folds
 nnoremap zz za
 
+" to match the behaviour of D
+nnoremap Y y$
+
 " search results in the centre of the screen
 "nmap n nzz
 "nmap N Nzz
@@ -317,6 +320,9 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
+
+" alternative to escape
+inoremap <c-k> <Esc>
 
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
