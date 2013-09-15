@@ -61,6 +61,8 @@ nmap <leader>m :tabopen http://www.mangareader.net<CR>
 nmap <leader>p :tabopen https://tls.passthepopcorn.me/<CR>
 nmap <leader>j :tabopen http://warszawa.jakdojade.pl<CR>
 nmap <leader>w :tabopen http://www.meteo.pl/um/php/meteorogram_list.php?ntype=0u&fdate=2013060400&row=406&col=250&lang=pl&cname=Warszawa<CR>
+nmap <leader>a :tabopen http://adam/<CR>
+nmap <leader>v :tabopen http://melchior/vm<CR>
 
 " Session manager
 nmap <leader>s :tabopen about:sessionrestore<CR>
