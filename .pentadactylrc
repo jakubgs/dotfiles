@@ -26,9 +26,9 @@ set incfind
 set hlfind
 
 " jumping 5 times as far down
-map -b j 10j
+map -b j 15j
 " jumping 5 times as far up
-map -b k 10k
+map -b k 15k
 
 " use ctrl-v as intended
 map -m i,c,t <C-v> <Pass>
@@ -36,9 +36,9 @@ map -m n,v,i,c,t <C-c> <Pass>
 map -m n,v,i,c,t <C-a> <Pass>
 
 " next tab
-map l <c-n>
+map -b l <c-n>
 " previous taib
-map h <c-p>
+map -b h <c-p>
 
 " move in history
 map J :back<CR>
@@ -56,7 +56,7 @@ nmap <leader>y :tabopen http://youtube.com/feed/subscriptions<CR>
 nmap <leader>t :tabopen http://www.teamliquid.net<CR>
 nmap <leader>r :tabopen http://reddit.com<CR>
 nmap <leader>c :tabopen https://www.google.com/calendar/render<CR>
-nmap <leader>w :tabopen http://www.mangareader.net<CR>
+nmap <leader>n :tabopen http://www.mangareader.net<CR>
 nmap <leader>p :tabopen https://tls.passthepopcorn.me/<CR>
 nmap <leader>j :tabopen http://warszawa.jakdojade.pl<CR>
 nmap <leader>w :tabopen http://www.meteo.pl/<CR>
