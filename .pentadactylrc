@@ -30,16 +30,15 @@ map -b j 10j
 " jumping 5 times as far up
 map -b k 10k
 
-
 " use ctrl-v as intended
 map -m i,c,t <C-v> <Pass>
 map -m n,v,i,c,t <C-c> <Pass>
 map -m n,v,i,c,t <C-a> <Pass>
 
 " next tab
-map l :tn<CR>
+map l <c-n>
 " previous taib
-map h :tp<CR>
+map h <c-p>
 
 " move in history
 map J :back<CR>
@@ -57,12 +56,12 @@ nmap <leader>y :tabopen http://youtube.com/feed/subscriptions<CR>
 nmap <leader>t :tabopen http://www.teamliquid.net<CR>
 nmap <leader>r :tabopen http://reddit.com<CR>
 nmap <leader>c :tabopen https://www.google.com/calendar/render<CR>
-nmap <leader>m :tabopen http://www.mangareader.net<CR>
+nmap <leader>w :tabopen http://www.mangareader.net<CR>
 nmap <leader>p :tabopen https://tls.passthepopcorn.me/<CR>
 nmap <leader>j :tabopen http://warszawa.jakdojade.pl<CR>
-nmap <leader>w :tabopen http://www.meteo.pl/um/php/meteorogram_list.php?ntype=0u&fdate=2013060400&row=406&col=250&lang=pl&cname=Warszawa<CR>
+nmap <leader>w :tabopen http://www.meteo.pl/<CR>
 nmap <leader>a :tabopen http://adam/<CR>
-nmap <leader>v :tabopen http://melchior/vm<CR>
+nmap <leader>m :tabopen http://melchior/<CR>
 
 " Session manager
 nmap <leader>s :tabopen about:sessionrestore<CR>
