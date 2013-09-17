@@ -285,9 +285,6 @@ imap <c-s> <esc>:up!<cr>i
 " save and compile
 map mm :Make<CR>
 
-" remove annoying comman-line window
-"nnoremap q: :q
-
 " for moving in wrapped lines
 nnoremap j gj
 nnoremap k gk
