@@ -121,7 +121,7 @@ set wildmode=list:longest,full    " ignore case when opening files
 set wildignore=.so,swp,.zip,.mp3,
             \.bak,.pyc,.o,.ojb,.,a,
             \ojb.pdf,.jpg,.gif,.png,
-            \.avi,.mkv,.so,.out
+            \.avi,.mkv,.so,.out,.fls,.pdf
 
 if has('patch072')                " check if patch exists to avoid errors
     set wildignorecase            " ignore case when autocompleting paths
@@ -279,8 +279,8 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Fast saving
-nmap <c-s> :w!<cr>
-imap <c-s> <esc>:w!<cr>i
+nmap <c-s> :up!<cr>
+imap <c-s> <esc>:up!<cr>i
 
 " save and compile
 map mm :Make<CR>
@@ -322,7 +322,7 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
 " alternative to escape
-inoremap <c-k> <Esc>
+inoremap <c-k> <c-w>
 
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
@@ -415,6 +415,10 @@ nnoremap <leader>z zMzv
 " add new line above and bellow current line
 nnoremap <silent> <leader>[ :<C-U>call <SID>AddLines(1)<CR>
 nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
+
+" performance debugging
+nnoremap <silent> <leader>DD :exe ":profile start /tmp/profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
+nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
 
 " }}}
 " Key mappings - Git {{{
