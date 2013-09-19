@@ -415,7 +415,7 @@ nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
 
 " performance debugging
 nnoremap <silent> <leader>DD :exe ":profile start /tmp/profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
-nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
+nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>"
 
 " }}}
 " Key mappings - Git {{{
