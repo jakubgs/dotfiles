@@ -443,7 +443,7 @@ awful.rules.rules = {
     { rule = { class = "Firefox" },
       properties = { tag = tags[1][2], floating = false } },
     { rule = { class = "Firefox", instance = "Zapisz*" },
-	  callback = function(c) awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c) end},
+        callback = function(c) awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c) end},
     { rule = { name = "Session Manager*" },
       properties = { floating = true } },
     { rule = { class = "luakit" },
@@ -463,17 +463,17 @@ awful.rules.rules = {
                     --size_hints_honor = false,
                     floating = false,
                     tag = tags[2][1],
-					maximized_horizontal = true,
-					maximized_vertical   = true
+                    maximized_horizontal = true,
+                    maximized_vertical   = true
                     } },
     { rule = { name = "StarCraft II*" },
       properties = {
-					tag = tags[2][4],
-					floating = true,
-					fullscreen = true,
-					--ontop = true
-					} },
-    { rule = { name = "Windows 7*" },
+                    tag = tags[2][4],
+                    floating = true,
+                    fullscreen = true,
+                    --ontop = true
+                    } },
+    { rule = { name = "Windows 7 *" },
       properties = {
 					tag = tags[2][6],
 					floating = false,
