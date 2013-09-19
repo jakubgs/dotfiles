@@ -34,7 +34,6 @@ run gvim
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
 	$TERMINAL_S -name mmtail -e ~/bin/mmtail &
-	sleep 0.3
 	# Start mpd client
 	$TERMINAL_S -name ncmpcpp -e ncmpcpp &
 fi
