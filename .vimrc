@@ -71,7 +71,7 @@ set linebreak                     " don't break in middle of words
 set showmatch                     " show matching brackets
 set t_vb=                         " don't flash the screen on errors
 set previewheight=25              " height of windows for fugitive, etc
-set fillchars=vert:│              " smooth windows splits
+set fillchars=vert:│,fold:-       " smooth windows splits
 
 " }}}
 " Formatting settings {{{
