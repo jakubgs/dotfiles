@@ -314,8 +314,9 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
-" alternative to escape
-inoremap <c-k> <c-w>
+" easier newline
+inoremap <c-j> <cr>
+inoremap <c-k> <c-o>O
 
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
