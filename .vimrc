@@ -297,10 +297,6 @@ nnoremap zz za
 " to match the behaviour of D
 nnoremap Y y$
 
-" search results in the centre of the screen
-"nmap n nzz
-"nmap N Nzz
-
 " Learn to use hjkl
 nnoremap <up> ddkP
 nnoremap <down> ddp
@@ -386,7 +382,7 @@ nnoremap <leader>o :%s/\s\+$//<cr>:let @/=''<CR>;
 nnoremap <leader>c :Start<CR>
 
 " CtrlP mappings
-nnoremap <Tab>      :CtrlPMixed<CR>
+nnoremap <c-p>      :CtrlPMixed<CR>
 nnoremap <leader>pp :CtrlP<Space>
 nnoremap <leader>pc :CtrlP %:p:h<CR>
 nnoremap <leader>pr :CtrlPRoot<CR>
