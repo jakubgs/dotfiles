@@ -214,6 +214,7 @@ let g:tagbar_ctags_bin="/usr/bin/ctags"
 " Stop CtrlP from recalculating on files on start
 let g:ctrlp_cache_dir = $HOME.'/.vim/temp/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_match_window = 'min:5,max:20'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'raw'
 let g:ctrlp_regexp = 0
