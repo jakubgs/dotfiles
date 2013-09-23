@@ -104,8 +104,9 @@ mystoolsmenu = {
 }
 
 mygamesmenu = {
-	{ "Starcraft II", "wine \"/mnt/stuff/Games/StarCraft II/StarCraft II.exe\"" },
-	{ "FTL",          terminal .. " -e cd /mnt/melchior/data/Games/Faster\ Than\ Light && wine FTLGame.exe" },
+	{ "SC2",        "wine \"/mnt/stuff/Games/StarCraft II/StarCraft II.exe\"" },
+	{ "EU4",        "wine \"/mnt/melchior/data/Games/Europa\ Universalis\ IV/eu4.exe\"" },
+	{ "FTL",        terminal .. " -e cd /mnt/melchior/data/Games/Faster\ Than\ Light && wine FTLGame.exe" },
 }
 
 myvmmenu = {
