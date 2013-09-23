@@ -318,6 +318,9 @@ nnoremap <c-l> <c-w>l
 inoremap <c-j> <cr>
 inoremap <c-k> <c-o>O
 
+" for jumping forward
+nnoremap <c-p> <c-i>
+
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
 
@@ -383,7 +386,7 @@ nnoremap <leader>o :%s/\s\+$//<cr>:let @/=''<CR>;
 nnoremap <leader>c :Start<CR>
 
 " CtrlP mappings
-nnoremap <c-p>      :CtrlPMixed<CR>
+nnoremap <c-i>      :CtrlPMixed<CR>
 nnoremap <leader>pp :CtrlP<Space>
 nnoremap <leader>pc :CtrlP %:p:h<CR>
 nnoremap <leader>pr :CtrlPRoot<CR>
