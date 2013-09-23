@@ -298,6 +298,19 @@ nnoremap zz za
 " to match the behaviour of D
 nnoremap Y y$
 
+" for jumping forward
+nnoremap <c-p> <c-i>
+
+" easier navigation between splits
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+
+" easier navigation through tabs
+nnoremap <c-Tab>   :tabnext<CR>
+nnoremap <c-s-Tab> :tabprevious<CR>
+
 " Learn to use hjkl
 nnoremap <up> ddkP
 nnoremap <down> ddp
@@ -309,31 +322,17 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 inoremap <backspace> <nop>
 
-" easier navigation between splits
-nnoremap <c-h> <c-w>h
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
-
 " easier newline
 inoremap <c-j> <cr>
 inoremap <c-k> <c-o>O
-
-" for jumping forward
-nnoremap <c-p> <c-i>
 
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
 
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
-"nnoremap <c-v> "+p
 " paste to clipboard with ctrl+c in visual mode
 vnoremap <c-c> "+y
-
-" easier navigation through tabs
-nnoremap <c-Tab>   :tabnext<CR>
-nnoremap <c-s-Tab> :tabprevious<CR>
 
 " }}}
 " Key mappings - <Leader> {{{
@@ -422,7 +421,7 @@ nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>"
 " }}}
 " Key mappings - Git {{{
 
-" fugitive git bindings
+" f ugitive git bindings
 nnoremap ga :Git add %:p<CR><CR>
 nnoremap gs :Gstatus<CR>
 nnoremap gc :Gcommit -v -q<CR><c-w>H
