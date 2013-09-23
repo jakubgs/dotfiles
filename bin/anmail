@@ -16,6 +16,7 @@ COMMAND="naughty.notify({ \
         fg = \"#ffffff\", \
         margin = 8, \
         width = 380, \
+        run = function () run_or_raise(nill, { class = \"Thunderbird\" }) end
         })"
 # send it to awesome
 echo $COMMAND | awesome-client -
