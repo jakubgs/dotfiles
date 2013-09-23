@@ -398,7 +398,7 @@ nnoremap <leader>pm :CtrlPMRUFiles<CR>
 nnoremap <leader>po :CtrlPLastMode --dir<CR>
 
 " re-run last CtrlP command
-nnoremap <leader><leader> :CtrlP<Up><CR>
+nnoremap <leader><leader> :CtrlPBuffer<CR>
 
 " set current dir to that of current file
 nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
