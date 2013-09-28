@@ -18,7 +18,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
-Bundle 'jcf/vim-latex'
+Bundle 'LaTeX-Box-Team/LaTeX-Box'
 Bundle 'kien/ctrlp.vim'
 Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
@@ -65,6 +65,7 @@ set ruler                         " show columns and rows
 set cursorline                    " highlight the current line
 set laststatus=2                  " always show the statusline
 set listchars=tab:▸\ ,eol:¬       " less visible characters for tabs and EOLs
+set number                        " shot current line number
 set relativenumber                " how far each line is of from the current one
 set wrap                          " text wrappingi
 set linebreak                     " don't break in middle of words
@@ -175,9 +176,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Harttime
 let g:hardtime_default_on = 1
-
-" LaTeX Suite
-let g:Tex_DefaultTargetFormat = 'pdf'
 
 " NERDTree
 let NERDTreeWinPos = "right"
