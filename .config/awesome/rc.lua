@@ -474,7 +474,7 @@ awful.rules.rules = {
                     fullscreen = true,
                     --ontop = true
                     } },
-    { rule = { name = "Windows 7 *" },
+    { rule = { name = "Windows 7*" },
       properties = {
 					tag = tags[2][6],
 					floating = false,
