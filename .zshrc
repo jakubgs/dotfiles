@@ -278,6 +278,10 @@ function alert {
     echo -ne "\e]2;$LAST\a" # set window title so we can get back to it
     LAST=${LAST//\"/'\"'}   # replace " for \" to not break lua format
 
+    if (( $+commands[awesome-client] )); then
+        return
+    fi
+
     # check if the command was successful
     if [[ $RVAL == 0 ]]; then
         RVAL="SUCCESS"
