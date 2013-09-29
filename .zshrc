@@ -279,9 +279,7 @@ function alert {
     LAST=${LAST//\"/'\"'}   # replace " for \" to not break lua format
 
     # check if awesome is present
-    if (( $+commands[awesome-client] )); then
-        return
-    fi
+    (( $+commands[awesome-client] )) || return
 
     # check if the command was successful
     if [[ $RVAL == 0 ]]; then
