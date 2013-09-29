@@ -278,6 +278,7 @@ function alert {
     echo -ne "\e]2;$LAST\a" # set window title so we can get back to it
     LAST=${LAST//\"/'\"'}   # replace " for \" to not break lua format
 
+    # check if awesome is present
     if (( $+commands[awesome-client] )); then
         return
     fi
