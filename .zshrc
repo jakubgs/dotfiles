@@ -304,7 +304,7 @@ function alert {
 }
 
 function qemerge () {
-    sudo emerge --quiet y --quiet-build y --quiet-fail y -v $@ ; alert
+    sudo emerge --quiet y --quiet-build y --quiet-fail y -v $* ; alert
 }
 
 # print date when executing command
