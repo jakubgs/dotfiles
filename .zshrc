@@ -223,6 +223,7 @@ alias sshm='ssh melchior'
 alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
+alias qemerge='sudo emerge --quiet y --quiet-build y --quiet-fail y -v'
 alias qupdate='sudo emerge --quiet y --quiet-build y --quiet-fail y -avuD --with-bdeps=y --keep-going @world'
 alias psync='ssh melchior "sudo emerge --sync > /tmp/portage_sync.log" && sudo eix-update'
 alias httpat='python2 -m SimpleHTTPServer'
@@ -304,10 +305,6 @@ function alert {
             })"
     # send it to awesome
     echo $MESSAGE | awesome-client -
-}
-
-function qemerge () {
-    sudo emerge --quiet y --quiet-build y --quiet-fail y -v $* ; alert
 }
 
 # print date when executing command
