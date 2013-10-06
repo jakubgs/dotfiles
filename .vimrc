@@ -73,6 +73,7 @@ set showmatch                     " show matching brackets
 set t_vb=                         " don't flash the screen on errors
 set previewheight=25              " height of windows for fugitive, etc
 set fillchars=vert:│,fold:-       " smooth windows splits
+set splitright                    " new windows right to the current
 
 " }}}
 " Formatting settings {{{
@@ -290,8 +291,19 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
+" change centering of the screen
+nnoremap zZ zz
+
 " easier toggling of folds
 nnoremap zz za
+
+" center the screen
+nmap n nzZ
+nmap N NzZ
+nmap * *zZ
+nmap # #zZ
+nmap g* g*zZ
+nmap g# g#zZ
 
 " to match the behaviour of D
 nnoremap Y y$
@@ -442,7 +454,7 @@ nnoremap gpl :Dispatch! git pull<CR>
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F10> :SyntasticToggleMode<CR>
-nnoremap <F9> :nohl<CR>
+nnoremap <F9> :vsplit \| enew \| r !ls -l<CR><CR><c-w>L
 nnoremap <F8> :Make!<CR>
 nnoremap <F7> :Copen<CR>
 nnoremap <F6> :tabclose<CR>
