@@ -291,19 +291,16 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
-" change centering of the screen
-nnoremap zZ zz
-
 " easier toggling of folds
 nnoremap zz za
 
 " center the screen
-nmap n nzZ
-nmap N NzZ
-nmap * *zZ
-nmap # #zZ
-nmap g* g*zZ
-nmap g# g#zZ
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
 
 " to match the behaviour of D
 nnoremap Y y$
