@@ -115,12 +115,12 @@ autocenter_mode = "yes"
 #repeat_one_mode = "no"
 #
 #default_place_to_search_in = "database" (database/playlist)
-default_place_to_search_in = "playlist"
+default_place_to_search_in = "database"
 #
 #media_library_left_column = "a" (possible values: a,y,g,c,p, legend above)
 #
 #default_find_mode = "wrapped" (wrapped/normal)
-default_find_mode = "normal"
+default_find_mode = "wrapped"
 #
 #default_space_mode = "add" (add/select)
 #
