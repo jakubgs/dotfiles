@@ -37,7 +37,7 @@ map -m n,v,i,c,t <C-a> <Pass>
 
 " next tab
 map -b l <c-n>
-" previous taib
+" previous tab
 map -b h <c-p>
 
 " move in history
@@ -53,8 +53,6 @@ nmap <leader>v :source ~/.pentadactylrc<CR>
 
 " some bookmarks for most opened web pages
 nmap <leader>y :tabopen http://youtube.com/feed/subscriptions<CR>
-nmap <leader>t :tabopen http://www.teamliquid.net<CR>
-nmap <leader>r :tabopen http://reddit.com<CR>
 nmap <leader>c :tabopen https://www.google.com/calendar/render<CR>
 nmap <leader>n :tabopen http://www.mangareader.net<CR>
 nmap <leader>p :tabopen https://tls.passthepopcorn.me/<CR>
@@ -62,6 +60,8 @@ nmap <leader>j :tabopen http://warszawa.jakdojade.pl<CR>
 nmap <leader>w :tabopen http://www.meteo.pl/<CR>
 nmap <leader>a :tabopen http://adam/<CR>
 nmap <leader>m :tabopen http://melchior/<CR>
+nmap <leader>t :tabopen https://matariel:8888/<CR>
+nmap <leader>u :exta http://5digits.org/nightly/pentadactyl-latest.xpi<CR>
 
 " Session manager
 nmap <leader>s :tabopen about:sessionrestore<CR>
