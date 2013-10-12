@@ -84,7 +84,7 @@ nmap <leader>d y:!~/bin/urxvtb -hold -e ~/bin/ytdl "<S-Insert>"<CR><CR>
 map e <c-s-e>
 
 " fast access to history descending by date
-map x :history! -sort -date 
+map x :history -sort -date 
 
 " bigger more visible hints
 highlight -a Hint font-size: 130% !important;
