@@ -257,11 +257,6 @@ function g {
      git status
    fi
 }
-function gps {
-    git commit . -m "$@"
-    git push
-    git status
-}
 
 # repeat last command with sudo
 function fuck {
