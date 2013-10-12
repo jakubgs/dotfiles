@@ -61,6 +61,8 @@ nmap <leader>w :tabopen http://www.meteo.pl/<CR>
 nmap <leader>a :tabopen http://adam/<CR>
 nmap <leader>m :tabopen http://melchior/<CR>
 nmap <leader>t :tabopen https://matariel:8888/<CR>
+
+" update pentadactyl
 nmap <leader>u :exta http://5digits.org/nightly/pentadactyl-latest.xpi<CR>
 
 " Session manager
