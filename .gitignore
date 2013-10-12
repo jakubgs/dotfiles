@@ -12,7 +12,6 @@
 !.Xresources
 !.xbindkeysrc
 !.speedswapper
-.ncmpcpp/*
 !.ncmpcpp/config
 !.ncmpcpp/keys
 !.psqlrc
@@ -31,7 +30,6 @@
 !.pentadactyl/colors
 !.fonts.conf
 !.gtkrc-2.0
-.config/*
 !.config/awesome/rc.lua
 !.config/gtk-3.0/settings.ini
 !.awesome/
