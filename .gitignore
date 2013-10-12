@@ -12,7 +12,9 @@
 !.Xresources
 !.xbindkeysrc
 !.speedswapper
+.ncmpcpp/*
 !.ncmpcpp/config
+!.ncmpcpp/keys
 !.psqlrc
 !.zshrc
 !.gvimrc
