@@ -1,2 +1,4 @@
-key_next = 'l'
-key_prev = 'h'
+key_next = 'H'
+key_prev = 'L'
+key_seek_forward = 'l'
+key_seek_backward = 'h'
