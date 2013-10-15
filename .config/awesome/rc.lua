@@ -424,7 +424,7 @@ awful.rules.rules = {
     --floating = false,
     keys = clientkeys,
     buttons = clientbuttons, } },
-    { rule = { class = "MPlayer" },
+    { rule = { class = "mpv" },
     properties = { floating = true } },
     { rule = { class = "Spacefm" },
     properties = { floating = true, border = 5 } },
