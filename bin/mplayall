@@ -2,8 +2,14 @@
 
 echo Scanning $@
 
-find "$@" -type f -iname "*.wmv" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mp4" > /tmp/playlist.m3u
+find "$@" -type f \
+    -iname "*.wmv" -o \
+    -iname "*.mkv" -o \
+    -iname "*.avi" -o \
+    -iname "*.flv" -o \
+    -iname "*.mp4" \
+    > /tmp/playlist.m3u
 
-mplayer -fs -playlist /tmp/playlist.m3u
+mpv --shuffle --fs --playlist /tmp/playlist.m3u
 
 rm /tmp/playlist.m3u
