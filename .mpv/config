@@ -1,31 +1,12 @@
 [default]
-# Specify default audio driver (see -ao help for a list).
 ao=alsa
-# Specify default audio codec (see -ac help for a list).
-#ac=mad
-vo=xv
-# Screencaps
-vf='screenshot=1'
-quiet=1
-
-nolirc=1
-ass=yes
-fontconfig = "yes"
+#vo=xv
 embeddedfonts= "yes"
-# Write your default config options here!
-subfont-text-scale = 3.5
-# ffactor = 10
-#:vop=expand=0:-90:0:0
 brightness=0
 subcp=cp1250
-#font=/usr/share/mplayer/font/font.desc
-# Use 8MB input cache by default.
 #cache=65536
 cache=32768
-#cache = 8192
-#
 # Prefill 20% of the cache before starting playback.
 cache-min = 8.0
-#
 # Prefill 50% of the cache before restarting playback after the cache emptied.
 cache-seek-min = 4.0
