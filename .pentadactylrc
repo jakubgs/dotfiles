@@ -61,6 +61,7 @@ nmap <leader>w :tabopen http://www.meteo.pl/<CR>
 nmap <leader>a :tabopen http://adam/<CR>
 nmap <leader>m :tabopen http://melchior/<CR>
 nmap <leader>t :tabopen https://matariel:8888/<CR>
+nmap <leader>w :tabopen https://portal.microsoftonline.com<CR>
 
 " update pentadactyl
 nmap <leader>u :exta http://5digits.org/nightly/pentadactyl-latest.xpi<CR>
@@ -78,7 +79,8 @@ nmap <leader>o :!echo "<S-Insert>" | sed 's/ / | /g' | xclip <CR>:tabopen <S-Ins
 nmap <leader>f y:!echo "<S-Insert>" | sed 's/youtu.be\//www.youtube.com\/tv?vq=high#\/watch?v=/g' | xclip <CR>:tabopen <S-Insert><CR>
 
 " download youtube video
-nmap <leader>d y:!~/bin/urxvtb -hold -e ~/bin/ytdl "<S-Insert>"<CR><CR>
+nmap <leader>d y:!mpv "<S-Insert>"<CR><CR>
+nmap <leader>D y:!~/bin/urxvtb -hold -e ~/bin/ytdl "<S-Insert>"<CR><CR>
 
 " faster expose
 map e <c-s-e>
