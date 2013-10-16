@@ -369,17 +369,17 @@ nnoremap <leader>s <C-w>v<C-w>l
 " split horizontal and switch
 nnoremap <leader>d <C-w>s<C-w>l
 " close buffer but leave active pane open
-nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
-nnoremap <leader>Q :q!<CR>
+nnoremap <silent> <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <silent> <leader>Q :q!<CR>
 
 " Edit .vimrc and erfresh configuration
-nnoremap <leader>v :source ~/.vimrc<CR>
-nnoremap <leader>V :vsp ~/.vimrc<CR>
-nnoremap <leader>C :vsp ~/.vim/notes.txt<CR>
+nnoremap <silent> <leader>v :source ~/.vimrc<CR>
+nnoremap <silent> <leader>V :vsp ~/.vimrc<CR>
+nnoremap <silent> <leader>C :vsp ~/.vim/notes.txt<CR>
 
 " switch between buffers
-nnoremap <leader>h :bprevious<CR>
-nnoremap <leader>l :bnext<CR>
+nnoremap <silent> <leader>h :bprevious<CR>
+nnoremap <silent> <leader>l :bnext<CR>
 " toggle last two buffers
 nnoremap <leader>u <c-^>
 
