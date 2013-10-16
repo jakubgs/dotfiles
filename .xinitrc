@@ -4,7 +4,7 @@ export TERMINAL="urxvtc"
 setxkbmap -layout pl
 
 # Caps Lock <-> Esc
-xmodmap .speedswapper
+#xmodmap .speedswapper
 #setxkbmap -option caps:escape
 
 # Small hack for java compatibility
