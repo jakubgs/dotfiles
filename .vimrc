@@ -338,7 +338,7 @@ inoremap <c-k> <c-o>O
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
 
-" leave insert mode
+" leave insert mode with enter
 inoremap <c-m> <Esc>
 
 " paste with ctrl+v from clipboard in insert mode
