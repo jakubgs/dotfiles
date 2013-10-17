@@ -59,7 +59,7 @@ filetype indent on                " loading of indent files for all formats
 
 set guioptions=                   " Get rid of useless GUI elements
 set winwidth=78                   " minimum split width
-set winheight=20                  " minimum split height
+set winheight=15                  " minimum split height
 set colorcolumn=80                " highlight this column
 set nuw=4                         " number line width
 set ruler                         " show columns and rows
@@ -337,9 +337,6 @@ inoremap <c-k> <c-o>O
 
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
-
-" leave insert mode with enter
-inoremap <c-m> <Esc>
 
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
