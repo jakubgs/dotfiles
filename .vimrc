@@ -18,6 +18,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
+Bundle 'krisajenkins/vim-pipe'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 Bundle 'kien/ctrlp.vim'
 Bundle 'PProvost/vim-ps1'
@@ -268,6 +269,7 @@ set pastetoggle=<F8>
 
 " Changing leader to space
 let mapleader = "\<Space>"
+let maplocalleader = "\\"
 " don't let space do anything else
 nnoremap <SPACE> <Nop>
 
@@ -335,6 +337,9 @@ inoremap <c-k> <c-o>O
 
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
+
+" leave insert mode
+inoremap <c-m> <Esc>
 
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
