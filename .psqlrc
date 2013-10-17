@@ -1,3 +1,4 @@
+\set QUIET yes
 \timing
 \pset null ¤
 \pset linestyle unicode
@@ -8,3 +9,4 @@
 \set HISTFILE ~/.psql_history- :HOST - :DBNAME
 \set HISTSIZE 1000
 \set PROMPT1 '%[%033[33;1m%]%x%[%033[0m%]%[%033[1m%]%/%[%033[0m%]%R%# '
+\unset QUIET
