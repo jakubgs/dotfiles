@@ -4,8 +4,8 @@ export TERMINAL="urxvtc"
 setxkbmap -layout pl
 
 # Caps Lock <-> Esc
-#xmodmap .speedswapper
-#setxkbmap -option caps:escape
+xmodmap .speedswapper
+xcape
 
 # Small hack for java compatibility
 wmname LG3D
