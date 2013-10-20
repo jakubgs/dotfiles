@@ -46,7 +46,7 @@ run firefox
 
 run thunderbird
 
-#run remmina > /dev/null 2>&1
+run remmina > /dev/null 2>&1
 
 run luakit http://melchior/rutorrent
 
