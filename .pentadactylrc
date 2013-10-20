@@ -48,6 +48,9 @@ map K :forward<CR>
 map H :tabmove -1<CR>
 map L :tabmove +1<CR>
 
+" confirm choice with only left hand
+cmap <c-d> <Return>
+
 " source configuration
 nmap <leader>v :source ~/.pentadactylrc<CR>
 
