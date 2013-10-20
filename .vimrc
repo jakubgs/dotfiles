@@ -65,9 +65,9 @@ set nuw=4                         " number line width
 set ruler                         " show columns and rows
 set cursorline                    " highlight the current line
 set laststatus=2                  " always show the statusline
-set listchars=tab:▸\ ,eol:¬       " less visible characters for tabs and EOLs
+set listchars=tab:▸\ ,eol:¬       " visible characters for tabs and EOLs
 set number                        " shot current line number
-set relativenumber                " how far each line is of from the current one
+set relativenumber                " distance from the current line
 set wrap                          " text wrappingi
 set linebreak                     " don't break in middle of words
 set showmatch                     " show matching brackets
@@ -144,7 +144,7 @@ command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent ed
 
 set foldenable                    " when on all folds are closed
 set foldlevel=1                   " folds with higher level will be closed
-set foldmethod=marker             " by default fold based on markers( {{{,}}} )
+set foldmethod=marker             " by default fold based on markers
 set foldnestmax=1                 " nest fold limit for indent/syntax modes
 set foldtext=NeatFoldText()       " change how folds are desplayed when closed
 
@@ -431,7 +431,7 @@ nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>"
 " }}}
 " Key mappings - Git {{{
 
-" f ugitive git bindings
+" fugitive git bindings
 nnoremap ga :Git add %:p<CR><CR>
 nnoremap gs :Gstatus<CR>
 nnoremap gc :Gcommit -v -q<CR><c-w>H
