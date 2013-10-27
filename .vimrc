@@ -394,6 +394,10 @@ nnoremap <leader>o :%s/\s\+$//<cr>:let @/=''<CR>;
 " open console in current directory
 nnoremap <leader>c :Start<CR>
 
+" make latex
+nnoremap <leader>m :Dispatch! Latexmk<CR>
+nnoremap <leader>M :LatexView<CR>
+
 " CtrlP mappings
 nnoremap <c-i>      :CtrlPMixed<CR>
 nnoremap <leader>pp :CtrlP<Space>
@@ -485,6 +489,7 @@ autocmd BufRead,BufNewFile .vimrc set foldmethod=marker
 augroup DisableMappings
     " remove mapping made by align plugin
     autocmd! VimEnter * :unmap <space>swp
+    autocmd! VimEnter * :unmap <space>m=
 augroup END
 
 " }}}
