@@ -28,7 +28,6 @@ echo "### Autostarting programs:"
 nitrogen --restore
 
 run urxvtd -q -f -o
-
 run gvim
 
 # start the usual terminal windows
@@ -39,15 +38,10 @@ if ! pgrep ncmpcpp &>/dev/null; then
 fi
 
 run thunar --daemon > /var/log/thunar.log 2>&1
-
 run xbindkeys
-
 run firefox
-
 run thunderbird
-
 run remmina > /dev/null 2>&1
-
 run luakit http://melchior/rutorrent
-
 run pidgin
+run skype
