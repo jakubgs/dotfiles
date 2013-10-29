@@ -57,3 +57,6 @@
 [submodule ".vim/bundle/LaTeX-Box"]
 	path = .vim/bundle/LaTeX-Box
 	url = https://github.com/LaTeX-Box-Team/LaTeX-Box.git
+[submodule ".vim/bundle/vim-pipe"]
+	path = .vim/bundle/vim-pipe
+	url = https://github.com/krisajenkins/vim-pipe.git
