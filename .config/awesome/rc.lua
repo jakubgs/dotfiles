@@ -66,7 +66,7 @@ layouts =
 tags = {}
 
 -- Each screen has its own tag table.
-tags[1] = awful.tag({ ":admin:", ":web:", ":im:", ":files:", ":misc:", ":work:" }, 1,
+tags[1] = awful.tag({ ":admin:", ":web:", ":im:", ":skype:", ":misc:", ":work:" }, 1,
 { layouts[2], layouts[8], layouts[2], layouts[3], layouts[2], layouts[8] })
 tags[2] = awful.tag({ ":editor:", ":web:", ":mail:", ":images:", ":movies:", ":work:" }, 2,
 { layouts[2], layouts[8], layouts[5], layouts[8], layouts[1], layouts[8] })
@@ -457,13 +457,13 @@ awful.rules.rules = {
     properties = { tag = tags[1][1] } },
     { rule = { name = "ytdl" },
     properties = { tag = tags[3][1] } },
-    { rule = { name = "Vim" },
+    { rule = { class = "Gvim" },
     properties = {
         --size_hints_honor = false,
         floating = false,
         tag = tags[2][1],
-        maximized_horizontal = true,
-        maximized_vertical   = true
+        --maximized_horizontal = true,
+        --maximized_vertical   = true
     } },
     { rule = { name = "StarCraft II*" },
     properties = {
@@ -502,6 +502,8 @@ awful.rules.rules = {
     properties = { floating = true, fullscreen = true } },
     { rule = { class = "Pidgin" },
     properties = { floating = false, tag = tags[1][3] } },
+    { rule = { class = "Skype" },
+    properties = { floating = false, tag = tags[1][4] } },
     { rule = { class = "Thunderbird" },
     properties = { tag = tags[2][3] } },
 }
