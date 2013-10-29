@@ -299,10 +299,8 @@ awful.button({ modkey }, 3, awful.mouse.client.resize))
 -- }}}
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-awful.key({ modkey, "Control" }, "l",       function () awful.util.spawn("slock") end),
-awful.key({ modkey, "Control" }, "h",       function () awful.util.spawn("sudo hibernate") end),
-awful.key({ modkey, "Control" }, "w",       function () awful.util.spawn(homedir .. "bin/windows") end),
-awful.key({ modkey,           }, "Escape",  awful.tag.history.restore),
+awful.key({ modkey,           }, "Escape",  function () awful.util.spawn("xmodmap ~/.speedswapper && xcape") end),
+awful.key({ modkey,           }, "`",       awful.tag.history.restore),
 awful.key({ modkey, "Shift"   }, "Tab",     function () focusby(-1)  end),
 awful.key({ modkey,           }, "Tab",     function () focusby( 1)  end),
 -- Layout manipulation
