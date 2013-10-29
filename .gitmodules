@@ -60,3 +60,4 @@
 [submodule ".vim/bundle/vim-pipe"]
 	path = .vim/bundle/vim-pipe
 	url = https://github.com/krisajenkins/vim-pipe.git
+    ignore = dirty
