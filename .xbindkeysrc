@@ -1,3 +1,19 @@
+# Power Management {{{
+# Hibernation
+"slock"
+ m:0x50 + c:46
+ Mod2+Mod4 + l
+
+"~/bin/windows"
+ m:0x50 + c:25
+ Mod2+Mod4 + w
+
+"sudo /usr/sbin/hibernate"
+ m:0x50 + c:43
+ Mod2+Mod4 + h
+
+# }}}
+# Volume {{{
 # Volume up
 "amixer set "Master" 4+"
   m:0x0 + c:123
@@ -13,6 +29,7 @@
   m:0x0 + c:63
   XF86AudioMute
 
+# }}}
 # MPD management {{{
 "mpc volume -5"
   m:0x10 + c:79"
