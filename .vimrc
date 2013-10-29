@@ -235,6 +235,14 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 4
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
+" Latex-Box
+" don't focus quickfix window
+let g:LatexBox_quickfix=2
+" don't show just warnings
+let g:LatexBox_show_warnings=0
+" compile in the background
+let g:LatexBox_latexmk_async=0
+
 " For snippet_complete marker.
 if has('conceal')
    set conceallevel=2 concealcursor=i
@@ -281,8 +289,8 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Fast saving
-nmap <c-s> :up!<cr>
-imap <c-s> <esc>:up!<cr>i
+nmap <c-s> :update<cr>
+imap <c-s> <c-p>:update<cr>
 
 " save and compile
 map mm :Make<CR>
@@ -395,7 +403,7 @@ nnoremap <leader>o :%s/\s\+$//<cr>:let @/=''<CR>;
 nnoremap <leader>c :Start<CR>
 
 " make latex
-nnoremap <leader>m :Dispatch! Latexmk<CR>
+nnoremap <leader>m :Latexmk<CR>
 nnoremap <leader>M :LatexView<CR>
 
 " CtrlP mappings
