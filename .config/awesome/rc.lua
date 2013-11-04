@@ -165,10 +165,17 @@ mympdwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(mympdwidget, vicious.widgets.mpd,
 function (widget, args)
+    mpdorder = "D"
+    if args["{random}"] == "1" then
+        mpdorder = "R"
+    end
     if args["{state}"] == "Stop" then
-        return "| - Stopped - "
+        return '|'.. mpdorder ..'| - Stopped - '
     else
-        return '| ' .. args["{state}"] .. ': ' .. args["{Artist}"]..' - '.. args["{Title}"] .. ' '
+        return '| '..args["{state}"] .. ': ' .. 
+                    args["{Artist}"]..' - '.. 
+                    args["{Title}"] .. ' |'..
+                    mpdorder
     end
 end, 1) -- refresh every 2 seconds
 
