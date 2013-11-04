@@ -1,8 +1,10 @@
 #!/bin/bash
 
-echo Scanning $@
+DIRS=`realpath $@`
 
-find "$@" -type f \
+echo Scanning $DIRS
+
+find "$DIRS" -type f \
     -iname "*.wmv" -o \
     -iname "*.mkv" -o \
     -iname "*.avi" -o \
@@ -10,6 +12,6 @@ find "$@" -type f \
     -iname "*.mp4" \
     > /tmp/playlist.m3u
 
-mpv --shuffle --fs --playlist /tmp/playlist.m3u
+mpv --quiet --msglevel=cache=1 --shuffle --fs --playlist /tmp/playlist.m3u | awk 'BEGIN{FS="/"}/Playing:/{I++; printf(" *%3d - %s\n", I, $NF)}'
 
 rm /tmp/playlist.m3u
