@@ -167,6 +167,12 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 " }}}
 " Plugin configuration {{{
 
+" NetRW
+let g:netrw_liststyle= 3
+let g:netrw_browse_split = 4
+let g:netrw_preview = 1
+let g:netrw_altv = 1
+
 " Airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -178,10 +184,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Harttime
 let g:hardtime_default_on = 1
-
-" NERDTree
-let NERDTreeWinPos = "right"
-let NERDTreeWinSize = 30
 
 " Don't make comments italic
 let g:jellybeans_overrides = {
@@ -382,7 +384,7 @@ nnoremap <leader>d <C-w>s<C-w>l
 nnoremap <silent> <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <silent> <leader>Q :q!<CR>
 
-" Edit .vimrc and erfresh configuration
+" Edit .vimrc and refresh configuration
 nnoremap <silent> <leader>v :source ~/.vimrc<CR>
 nnoremap <silent> <leader>V :vsp ~/.vimrc<CR>
 nnoremap <silent> <leader>C :vsp ~/.vim/notes.txt<CR>
@@ -473,7 +475,6 @@ nnoremap <F6> :tabclose<CR>
 nnoremap <F5> :tabnew<CR>
 nnoremap <F4> :source ~/.vim/session/default<cr>
 nnoremap <F3> :mksession! ~/.vim/session/default<cr>
-nnoremap <F2> :NERDTreeToggle %:p:h<CR>
 nnoremap <F1> :TagbarToggle<CR>
 
 " }}}
@@ -486,7 +487,7 @@ autocmd BufReadPost *
             \ endif
 
 " Check awesome configuration after every write
-autocmd BufWritePost $HOME/.config/awesome/rc.lua Dispatch! awesome -k
+autocmd BufWritePost $HOME/.config/awesome/rc.lua Dispatch awesome -k
 
 " per file syntax
 autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
