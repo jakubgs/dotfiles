@@ -8,10 +8,13 @@ find "$DIRS" -type f \
     -iname "*.wmv" -o \
     -iname "*.mkv" -o \
     -iname "*.avi" -o \
+    -iname "*.mpg" -o \
     -iname "*.flv" -o \
+    -iname "*.divx" -o \
     -iname "*.mp4" \
     > /tmp/playlist.m3u
 
-mpv --quiet --msglevel=cache=1 --shuffle --fs --playlist /tmp/playlist.m3u | awk 'BEGIN{FS="/"}/Playing:/{I++; printf(" *%3d - %s\n", I, $NF)}'
+mpv --quiet --msglevel=cache=1 --shuffle --fs --playlist /tmp/playlist.m3u \
+    | awk 'BEGIN{FS="/"}/Playing:/{I++; printf(" *%3d - %s\n", I, $NF)}'
 
 rm /tmp/playlist.m3u
