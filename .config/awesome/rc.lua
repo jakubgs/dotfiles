@@ -170,7 +170,7 @@ function (widget, args)
         mpdorder = "R"
     end
     if args["{state}"] == "Stop" then
-        return '|'.. mpdorder ..'| - Stopped - '
+        return '| - Stopped - |'.. mpdorder
     else
         return '| '..args["{state}"] .. ': ' .. 
                     args["{Artist}"]..' - '.. 
