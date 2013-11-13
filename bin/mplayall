@@ -6,6 +6,8 @@ echo Scanning $DIRS
 
 find "$DIRS" -type f \
     -iname "*.wmv" -o \
+    -iname "*.mp4" -o \
+    -iname "*.m4v" -o \
     -iname "*.mkv" -o \
     -iname "*.avi" -o \
     -iname "*.mpg" -o \
