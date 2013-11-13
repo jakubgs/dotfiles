@@ -292,7 +292,7 @@ vnoremap > >gv
 
 " Fast saving
 nmap <c-s> :update<cr>
-imap <c-s> <c-p>:update<cr>
+imap <c-s> <c-o>:update<cr>
 
 " save and compile
 map mm :Make<CR>
