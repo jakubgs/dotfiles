@@ -27,9 +27,9 @@
 [submodule ".vim/bundle/jellybeans.vim"]
 	path = .vim/bundle/jellybeans.vim
 	url = https://github.com/nanotech/jellybeans.vim.git
-[submodule ".vim/bundle/Align"]
-	path = .vim/bundle/Align
-	url = https://github.com/vim-scripts/Align.git
+[submodule ".vim/bundle/vim-easy-align"]
+	path = .vim/bundle/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
     ignore = dirty
 [submodule ".vim/bundle/neosnippet"]
 	path = .vim/bundle/neosnippet
