@@ -24,7 +24,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'PProvost/vim-ps1'
 Bundle 'szw/vim-tags'
 Bundle 'rking/ag.vim'
-Bundle 'vim-scripts/Align'
+Bundle 'junegunn/vim-easy-align'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'bling/vim-airline'
 Bundle 'Shougo/neosnippet'
@@ -271,6 +271,10 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: "\<TAB>"
 
+" easy-align
+vnoremap <silent> <cr> :EasyAlign<cr>
+vnoremap <silent> <leader><cr> :LiveEasyAlign<cr>
+
 " }}}
 " Key mappings - General {{{
 
@@ -494,12 +498,6 @@ autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
 " per file foldmethod
 autocmd BufRead,BufNewFile rc.lua set foldmethod=marker
 autocmd BufRead,BufNewFile .vimrc set foldmethod=marker
-
-augroup DisableMappings
-    " remove mapping made by align plugin
-    autocmd! VimEnter * :unmap <space>swp
-    autocmd! VimEnter * :unmap <space>m=
-augroup END
 
 " }}}
 " Functions {{{
