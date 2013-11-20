@@ -5,8 +5,8 @@
  Mod2+Mod4 + l
 
 "~/bin/windows"
- m:0x50 + c:25
- Mod2+Mod4 + w
+ m:0x50 + c:27
+ Mod2+Mod4 + r
 
 "sudo /usr/sbin/hibernate"
  m:0x50 + c:43
