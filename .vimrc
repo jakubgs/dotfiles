@@ -374,24 +374,23 @@ nnoremap <leader>H :rightb vert help<space>
 nnoremap <leader>; A;<Esc>
 
 " insert spaces between brackets
-nnoremap <leader>y :CopyMatches *<CR>
+nnoremap <leader>Y :CopyMatches *<CR>
 
 " easier access to substitution
 nnoremap <leader>S :%s//<left>
 
 " Window management
 " split vertical and switch
-nnoremap <leader>s <C-w>v<C-w>l
+nnoremap <leader>i <C-w>v<C-w>l
 " split horizontal and switch
-nnoremap <leader>d <C-w>s<C-w>l
+nnoremap <leader>o <C-w>s<C-w>l
 " close buffer but leave active pane open
 nnoremap <silent> <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <silent> <leader>Q :q!<CR>
 
 " Edit .vimrc and refresh configuration
-nnoremap <silent> <leader>v :source ~/.vimrc<CR>
-nnoremap <silent> <leader>V :vsp ~/.vimrc<CR>
-nnoremap <silent> <leader>C :vsp ~/.vim/notes.txt<CR>
+nnoremap <silent> <leader>r :source ~/.vimrc<CR>
+nnoremap <silent> <leader>R :vsp ~/.vimrc<CR>
 
 " switch between buffers
 nnoremap <silent> <leader>h :bprevious<CR>
@@ -400,13 +399,13 @@ nnoremap <silent> <leader>l :bnext<CR>
 nnoremap <leader>u <c-^>
 
 " roggle showing of newline and tab characters
-nnoremap <leader>i :set list!<CR>
+nnoremap <leader>I :set list!<CR>
 
 " strip all trailing whitespaces in current file
-nnoremap <leader>o :%s/\s\+$//<cr>:let @/=''<CR>;
+nnoremap <leader>O :%s/\s\+$//<cr>:let @/=''<CR>;
 
 " open console in current directory
-nnoremap <leader>c :Start<CR>
+nnoremap <leader>C :Start<CR>
 
 " make latex
 nnoremap <leader>m :Latexmk<CR>
