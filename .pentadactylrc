@@ -52,7 +52,7 @@ map L :tabmove +1<CR>
 cmap <c-d> <Return>
 
 " source configuration
-nmap <leader>v :source ~/.pentadactylrc<CR>
+nmap <leader>r :source ~/.pentadactylrc<CR>
 
 " some bookmarks for most opened web pages
 nmap <leader>y :tabopen http://youtube.com/feed/subscriptions<CR>
