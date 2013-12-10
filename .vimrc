@@ -13,7 +13,7 @@ call vundle#rc()
 " Vundle plugin management {{{
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
-Bundle 'liujoey/vim-easymotion'
+Bundle 'supasorn/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
