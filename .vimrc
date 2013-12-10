@@ -276,7 +276,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 
 " easy-align
 vnoremap <silent> <cr> :EasyAlign<cr>
-vnoremap <silent> <leader><cr> :LiveEasyAlign<cr>
+vnoremap <silent> <space><cr> :LiveEasyAlign<cr>
 
 " }}}
 " Key mappings - General {{{
@@ -285,7 +285,7 @@ vnoremap <silent> <leader><cr> :LiveEasyAlign<cr>
 set pastetoggle=<F8>
 
 " Changing leader to space
-let mapleader = "\<Space>"
+let mapleader = ","
 let maplocalleader = "\\"
 " don't let space do anything else
 nnoremap <SPACE> <Nop>
@@ -346,7 +346,6 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-inoremap <backspace> <nop>
 
 " easier newline
 inoremap <c-j> <cr>
@@ -364,89 +363,93 @@ vnoremap <c-c> "+y
 " Key mappings - <Leader> {{{
 
 " paste and sellect
-nnoremap <leader>/ :Ag<Space>
+nnoremap <space>/ :Ag<Space>
+
+" grep word under cursor
+nnoremap <silent> <space>* :Ag "\b<C-R><C-W>\b"<CR>
 
 " paste and sellect
-nnoremap <leader>o p`[v`]
-nnoremap <leader>O P`[v`]
+nnoremap <space>o p`[v`]
+nnoremap <space>O P`[v`]
 
 " help in new vertical split
-nnoremap <leader>H :rightb vert help<space>
+nnoremap <space>H :rightb vert help<space>
 
 " append a semicolon
-nnoremap <leader>; A;<Esc>
+nnoremap <space>; A;<Esc>
 
 " insert spaces between brackets
-nnoremap <leader>Y :CopyMatches *<CR>
+nnoremap <space>Y :CopyMatches *<CR>
 
 " easier access to substitution
-nnoremap <leader>S :%s//<left>
+nnoremap <space>S :%s//<left>
 
 " Window management
 " split vertical and switch
-nnoremap <leader>i <C-w>v<C-w>l
+nnoremap <space>i <C-w>v<C-w>l
 " split horizontal and switch
-nnoremap <leader>o <C-w>s<C-w>l
+nnoremap <space>o <C-w>s<C-w>l
 " close buffer but leave active pane open
-nnoremap <silent> <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
-nnoremap <silent> <leader>Q :q!<CR>
+nnoremap <silent> <space>q :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <silent> <space>Q :q!<CR>
 
 " Edit .vimrc and refresh configuration
-nnoremap <silent> <leader>r :source ~/.vimrc<CR>
-nnoremap <silent> <leader>R :vsp ~/.vimrc<CR>
+nnoremap <silent> <space>r :source ~/.vimrc<CR>
+nnoremap <silent> <space>R :vsp ~/.vimrc<CR>
 
 " switch between buffers
-nnoremap <silent> <leader>h :bprevious<CR>
-nnoremap <silent> <leader>l :bnext<CR>
+nnoremap <silent> <space>h :bprevious<CR>
+nnoremap <silent> <space>l :bnext<CR>
 " toggle last two buffers
-nnoremap <leader>u <c-^>
+nnoremap <space>u <c-^>
 
 " roggle showing of newline and tab characters
-nnoremap <leader>I :set list!<CR>
+nnoremap <space>I :set list!<CR>
 
 " strip all trailing whitespaces in current file
-nnoremap <leader>O :%s/\s\+$//<cr>:let @/=''<CR>;
+nnoremap <space>O :%s/\s\+$//<cr>:let @/=''<CR>;
 
 " open console in current directory
-nnoremap <leader>C :Start<CR>
+nnoremap <space>C :Start<CR>
 
 " make latex
-nnoremap <leader>m :Latexmk<CR>
-nnoremap <leader>M :LatexView<CR>
+nnoremap <space>m :Latexmk<CR>
+nnoremap <space>M :LatexView<CR>
 
 " CtrlP mappings
 nnoremap <c-i>      :CtrlPMixed<CR>
-nnoremap <leader>pp :CtrlP<Space>
-nnoremap <leader>pc :CtrlP %:p:h<CR>
-nnoremap <leader>pr :CtrlPRoot<CR>
-nnoremap <leader>pt :CtrlPBufTagAll<CR>
-nnoremap <leader>pl :CtrlPLine<CR>
-nnoremap <leader>pq :CtrlPQuickfix<CR>
-nnoremap <leader>pb :CtrlPBuffer<CR>
-nnoremap <leader>pm :CtrlPMRUFiles<CR>
-nnoremap <leader>po :CtrlPLastMode --dir<CR>
+nnoremap <space>pp :CtrlP<Space>
+nnoremap <space>pc :CtrlP %:p:h<CR>
+nnoremap <space>pr :CtrlPRegister<CR>
+nnoremap <space>p/ :CtrlPRoot<CR>
+nnoremap <space>pt :CtrlPBufTagAll<CR>
+nnoremap <space>pl :CtrlPLine<CR>
+nnoremap <space>pq :CtrlPQuickfix<CR>
+nnoremap <space>pb :CtrlPBuffer<CR>
+nnoremap <space>pm :CtrlPMRUFiles<CR>
+nnoremap <space>po :CtrlPLastMode --dir<CR>
 
 " re-run last CtrlP command
-nnoremap <leader><leader> :CtrlPBuffer<CR>
+nnoremap <space><space> :CtrlPBuffer<CR>
 
 " set current dir to that of current file
-nnoremap <leader>g :cd %:p:h<CR>:pwd<CR>
+nnoremap <space>g :cd %:p:h<CR>:pwd<CR>
 
 " calculate current line with precision of 2
-nnoremap <leader>x yy:.!echo "scale=2; <c-r>"<c-h>"\|bc<CR>
+nnoremap <space>x yy:.!echo "scale=2; <c-r>"<c-h>"\|bc<CR>
 
 " focus the current fold
-nnoremap <leader>z zMzv
+nnoremap <space>z zMzv
 
 " add new line above and bellow current line
-nnoremap <silent> <leader>[ :<C-U>call <SID>AddLines(1)<CR>
-nnoremap <silent> <leader>] :<C-U>call <SID>AddLines(0)<CR>
+nnoremap <silent> <space>[ :<C-U>call <SID>AddLines(1)<CR>
+nnoremap <silent> <space>] :<C-U>call <SID>AddLines(0)<CR>
 
 " performance debugging
-nnoremap <silent> <leader>DD :exe ":profile start /tmp/profile.log"<cr>
+nnoremap <silent> <space>DD :exe ":profile start /tmp/profile.log"<cr>
                                     \ <bar> profile func *"<cr>
                                     \ <bar> profile file *"<cr>
-nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>"
+nnoremap <silent> <space>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>"
 
 " }}}
 " Key mappings - Git {{{
