@@ -216,6 +216,7 @@ let g:tagbar_width = 30
 let g:tagbar_ctags_bin="/usr/bin/ctags"
 
 " Stop CtrlP from recalculating on files on start
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_cache_dir = $HOME.'/.vim/temp/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_match_window = 'min:5,max:20'
