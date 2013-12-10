@@ -1,0 +1,43 @@
+# -- THEME AUTO-WRITTEN DO NOT EDIT
+##include "/usr/share/themes/Murrina-Black/gtk-2.0/gtkrc"
+##include "/usr/share/themes/minimal grey/gtk-2.0/gtkrc"
+
+style "user-font" {
+	font_name = "Droid Sans Arabic 8"
+	#"Helvetica 8"
+	#"Arial 8"
+	#"Terminus 8"
+	#"Sans 8"
+}
+
+style "thunar-icon-view-reduced-style"
+{
+	ThunarIconView::column-spacing = 0
+    ThunarIconView::row-spacing = 0
+}
+
+class "ThunarIconView" style "thunar-icon-view-reduced-style"
+
+widget_class "*" style "user-font"
+
+gtk-toolbar-style=0
+gtk-theme-name="Murrina-Night-Owl-Darkest"
+#"Murrina-Black"
+gtk-icon-theme-name = "ALLWHITE"
+#"Elegant Zenburn"
+#"Arial 8"
+#"Sans 8"
+#"Terminus 8"
+gtk-font-name="Droid Sans Arabic 8"
+#"Helvetica 8"
+
+gtk-xft-antialias = 1 
+gtk-xft-hinting = 1
+gtk-xft-hintstyle = full
+gtk-xft-rgba = rgb #vrgb
+#gtk-xft-dpi =  # 1024 * dots/inch. -1 to use default value.
+
+# For changing shortcuts in thunar
+gtk-can-change-accels=1
+
+#include ".gtkrc-2.0-gnome-color-chooser"

@@ -1,45 +1,19 @@
-# -- THEME AUTO-WRITTEN DO NOT EDIT
+# DO NOT EDIT! This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-style "user-font" {
-	font_name = "Droid Sans Arabic 9"
-	#"Helvetica 8"
-	#"Arial 8"
-	#"Terminus 8"
-	#"Sans 8"
-}
-
-style "thunar-icon-view-reduced-style"
-{
-	ThunarIconView::column-spacing = 0
-    ThunarIconView::row-spacing = 0
-}
-
-style "vimfix" {
-    bg[NORMAL] = "#151515" # this matches my gvim theme 'Normal' bg color.
-}
-
-class "ThunarIconView" style "thunar-icon-view-reduced-style"
-
-widget_class "*" style "user-font"
-
-gtk-toolbar-style=0
 gtk-theme-name="Murrina-Night-Owl-Darkest"
-#"Murrina-Black"
-gtk-icon-theme-name = "Tok-tok"
-#"Elegant Zenburn"
-#"Arial 8"
-#"Sans 8"
-#"Terminus 8"
+gtk-icon-theme-name="ALLWHITE"
 gtk-font-name="Droid Sans Arabic 9"
-#"Helvetica 8"
-
-gtk-xft-antialias = 1 
-gtk-xft-hinting = 1
-gtk-xft-hintstyle = full
-gtk-xft-rgba = rgb #vrgb
-#gtk-xft-dpi =  # 1024 * dots/inch. -1 to use default value.
-
-# For changing shortcuts in thunar
-gtk-can-change-accels=1
-
-#include ".gtkrc-2.0-gnome-color-chooser"
+gtk-cursor-theme-name="SmoothGNOME"
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_ICONS
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="none"
+include "/home/sochan/.gtkrc-2.0.mine"
