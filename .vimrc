@@ -111,6 +111,7 @@ set spelllang=pl,en               " spelling check
 set autochdir                     " Automatically changing working dir
 set shell=zsh                     " Shell
 set keywordprg=firefox\ -search   " K searches text in firefox def. search
+set grepprg=ag\ --nogroup\ --nocolor " use ag over grep
 set shortmess=atI                 " remove message at vim start
 set cmdheight=1                   " command line length
 set backupdir=~/.vim/backup//     " make ~ files in:
