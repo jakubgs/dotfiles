@@ -496,6 +496,7 @@ awful.rules.rules = {
     properties = {
         tag = tags[1][6],
         floating = false,
+        fullscreen= false,
         maximized_horizontal = true,
         maximized_vertical   = true
     } },
