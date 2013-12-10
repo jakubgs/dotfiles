@@ -29,6 +29,7 @@
 !.pentadactylrc
 !.pentadactyl/colors
 !.gtkrc-2.0
+!.gtkrc-3.0
 !.config/awesome/rc.lua
 !.config/fontconfig/fonts.conf
 !.config/gtk-3.0/settings.ini
