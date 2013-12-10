@@ -19,7 +19,7 @@
 !.gvimrc
 !.vimrc
 !.vim/
-!.vim/bundle
+!.vim/bundle/.gititnore
 !.vim/session/.gitignore
 !.vim/backup/.gitignore
 !.vim/undo/.gitignore
