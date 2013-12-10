@@ -65,7 +65,6 @@ set nuw=4                         " number line width
 set ruler                         " show columns and rows
 set cursorline                    " highlight the current line
 set laststatus=2                  " always show the statusline
-set listchars=tab:▸\ ,eol:¬       " visible characters for tabs and EOLs
 set number                        " shot current line number
 set relativenumber                " distance from the current line
 set wrap                          " text wrappingi
@@ -73,8 +72,11 @@ set linebreak                     " don't break in middle of words
 set showmatch                     " show matching brackets
 set t_vb=                         " don't flash the screen on errors
 set previewheight=25              " height of windows for fugitive, etc
-set fillchars=vert:│,fold:-       " smooth windows splits
 set splitright                    " new windows right to the current
+if has("multi_byte")
+    set fillchars=vert:│,fold:-       " smooth windows splits
+    set listchars=tab:▸\ ,eol:¬       " visible chars for tabs and EOLs
+endif
 
 " }}}
 " Formatting settings {{{
