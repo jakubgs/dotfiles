@@ -1,0 +1,23 @@
+#!/bin/bash
+
+FILELIST="/tmp/filelist"
+DIRS=$(realpath $@)
+
+echo "Scanning ${DIRS}"
+
+find "$DIRS" -type f \
+    -iname "*.jpg" -o \
+    -iname "*.jpeg" -o \
+    -iname "*.png" -o \
+    -iname "*.gif" -o \
+    -iname "*.bmp" -o \
+    -iname "*.tif" -o \
+    -iname "*.tiff" \
+    > "$FILELIST"
+
+COUNT=$(wc -l "$FILELIST")
+echo "Found $COUNT image files."
+
+feh --zoom max --magick-timeout 5 -dZxrSfilename --filelist "$FILELIST" 2>/dev/null
+
+rm "$FILELIST"
