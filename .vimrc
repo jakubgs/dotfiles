@@ -287,8 +287,8 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \: "\<TAB>"
 
 " easy-align
-vnoremap <silent> <cr> :EasyAlign<cr>
-vnoremap <silent> <space><cr> :LiveEasyAlign<cr>
+xnoremap <silent> <cr> :EasyAlign<cr>
+xnoremap <silent> <space><cr> :LiveEasyAlign<cr>
 
 " }}}
 " Key mappings - General {{{
@@ -309,8 +309,8 @@ xnoremap / <esc>/\%V
 iabbrev </ </<C-X><C-O>
 
 " reselect visual block after indent/outdent
-vnoremap < <gv
-vnoremap > >gv
+xnoremap < <gv
+xnoremap > >gv
 
 " Fast saving
 nmap <c-s> :update<cr>
@@ -372,7 +372,7 @@ inoremap <c-l> <Del>
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
 " paste to clipboard with ctrl+c in visual mode
-vnoremap <c-c> "+y
+xnoremap <c-c> "+y
 
 " }}}
 " Key mappings - <Leader> {{{
