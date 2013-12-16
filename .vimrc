@@ -302,6 +302,9 @@ let maplocalleader = "\\"
 " don't let space do anything else
 nnoremap <SPACE> <Nop>
 
+" search within visual block
+xnoremap / <esc>/\%V
+
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
 
