@@ -13,11 +13,12 @@ call vundle#rc()
 " Vundle plugin management {{{
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
-Bundle 'supasorn/vim-easymotion'
+Bundle 'liujoey/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
+Bundle 'int3/vim-extradite'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mattn/ctrlp-register'
@@ -182,7 +183,6 @@ let g:netrw_preview = 1
 let g:netrw_altv = 1
 
 " Airline
-let g:airline#extensions#whitespace#enabled = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_left_alt_sep = '|'
@@ -190,6 +190,7 @@ let g:airline_right_alt_sep = '|'
 let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#whitespace#enabled = 0
 
 " Harttime
 let g:hardtime_default_on = 1
@@ -238,6 +239,10 @@ let g:ctrlp_custom_ignore = {
 
 " EasyMotion leader
 let g:EasyMotion_leader_key = '<Space>'
+let g:EasyMotion_keys = 'qwertyuiopasdfghjklzxcvbnm'
+let g:EasyMotion_special_select_line = 1
+let g:EasyMotion_special_select_phrase = 1
+let g:EasyMotion_do_normal_motion = 1
 
 " neocomplete
 let g:neocomplete#enable_at_startup = 1
