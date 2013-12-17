@@ -32,7 +32,6 @@ Bundle 'Shougo/neosnippet'
 if ( has("lua") )
     Bundle 'Shougo/neocomplete'
 endif
-Bundle 'dbext.vim'
 " colorschemes
 Bundle 'nanotech/jellybeans.vim'
 
@@ -171,10 +170,6 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 
 " }}}
 " Plugin configuration {{{
-
-" DBExt
-let dbext_default_PGSQL_bin = '/usr/bin/psql'
-let g:dbext_default_profile_melchior_pagila = 'type=PGSQL:host=melchior:user=sochan:dbname=pagila:cmd_terminator=;'
 
 " NetRW
 let g:netrw_liststyle= 3
@@ -369,6 +364,7 @@ inoremap <c-k> <c-o>O
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
 
+inoremap <c-z> <c-v>
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-r>+
 " paste to clipboard with ctrl+c in visual mode
