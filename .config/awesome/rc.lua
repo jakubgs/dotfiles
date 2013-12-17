@@ -497,8 +497,8 @@ awful.rules.rules = {
         tag = tags[1][6],
         floating = false,
         fullscreen= false,
-        maximized_horizontal = true,
-        maximized_vertical   = true
+        --maximized_horizontal = true,
+        --maximized_vertical   = true
     } },
     { rule = { class = "Evince" },
     properties = {
