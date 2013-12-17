@@ -297,6 +297,12 @@ let maplocalleader = "\\"
 " don't let space do anything else
 nnoremap <SPACE> <Nop>
 
+" easier access to commands
+nnoremap ; :
+nnoremap : ;
+xnoremap ; :
+xnoremap : ;
+
 " search within visual block
 xnoremap / <esc>/\%V
 
