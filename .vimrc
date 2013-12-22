@@ -119,7 +119,8 @@ set noswapfile                    " set directory=~/.vim/temp//
 set hlsearch                      " highlighting search results
 set incsearch                     " start searching as you type
 set ignorecase                    " ignore case in search patterns
-set iskeyword+=$,@,%,#          " not word dividers
+set iskeyword+=$,@,%,#            " not word dividers
+set iskeyword-=_                  " word dividers
 set hidden                        " buffer change, more undo
 set ttyfast                       " Faster standard output
 set wildmenu                      " File menu
@@ -353,14 +354,18 @@ nnoremap <c-Tab>   :tabnext<CR>
 nnoremap <c-s-Tab> :tabprevious<CR>
 
 " Learn to use hjkl
-nnoremap <up> ddkP
-nnoremap <down> ddp
-nnoremap <left> gv<
-nnoremap <right> gv>
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+
+" learn not to use hjkl
+nnoremap j <nop>
+nnoremap k <nop>
 
 " easier newline
 inoremap <c-j> <cr>
