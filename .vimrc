@@ -27,6 +27,7 @@ Bundle 'rking/ag.vim'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'bling/vim-airline'
+Bundle 'takac/vim-hardtime'
 Bundle 'Shougo/neosnippet'
 if ( has("lua") )
     Bundle 'Shougo/neocomplete'
@@ -170,6 +171,9 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 
 " }}}
 " Plugin configuration {{{
+
+" hardtime
+let g:hardtime_timeout = 2
 
 " NetRW
 let g:netrw_liststyle= 3
@@ -362,10 +366,6 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-
-" learn not to use hjkl
-nnoremap j <nop>
-nnoremap k <nop>
 
 " easier newline
 inoremap <c-j> <cr>
