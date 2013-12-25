@@ -10,7 +10,7 @@ unrarf () {
 unrar x -o- -ad "$1"
 }
 un7zf () {
-7z x -o"$2" "$1"
+7z x -y -o"$2" "$1"
 }
 untbz2f () {
 tar xvjf "$1" -C "$2"
@@ -24,7 +24,7 @@ unpack() {
     FILE="$1"
 	echo "Trying: $FILE"
 
-	case $FILE in
+	case "$FILE" in
 		*.tar.gz) ext=".tar.gz"; command=untgzf
 		;;
 		*.tgz) ext=".tgz"; command=untgzf
@@ -39,22 +39,17 @@ unpack() {
 		;;
 		*.lzh) ext=".lzh"; command=unlha
 		;;
-		*) echo "NOT KNOWN"; continue
+		*) echo "Unknown Format!"; continue
 	esac
 	
 	A=`basename "$FILE" "$ext"`
-	echo "Executing: $command $FILE '$A'"
-	$command "$FILE" "$A"
+    CMD="$command \"$FILE\" \"$A\""
+	echo "Executing: $CMD"
+	eval "$CMD"
 }
 
-for ARG in $@; do
-    if [[ -d "$ARG" ]]; then
-        for FILE in $ARG/*; do
-            if [[ ! -d "$FILE" ]]; then
-                unpack "$FILE"
-            fi
-        done
-    else
+for ARG in "$@"; do
+    if [[ ! -d "$ARG" ]]; then
         unpack "$ARG"
     fi
 done
