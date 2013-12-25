@@ -20,30 +20,43 @@ unlha () {
 lha ew="$2" "$1"
 }
 
-for l in "$@";
-	do
-		echo "Trying: $l"
+unpack() {
+    FILE="$1"
+	echo "Trying: $FILE"
 
-		case $l in
-			*.tar.gz) ext=".tar.gz"; command=untgzf
-			;;
-			*.tgz) ext=".tgz"; command=untgzf
-			;;
-			*.tar.bz2) ext=".tar.bz2"; command=untbz2f
-			;;
-			*.rar) ext=".rar"; command=unrarf
-			;;
-			*.zip) ext=".zip"; command=unzipf
-			;;
-			*.7z) ext=".7z"; command=un7zf
-			;;
-			*.lzh) ext=".lzh"; command=unlha
-			;;
-			*) continue
-		esac
+	case $FILE in
+		*.tar.gz) ext=".tar.gz"; command=untgzf
+		;;
+		*.tgz) ext=".tgz"; command=untgzf
+		;;
+		*.tar.bz2) ext=".tar.bz2"; command=untbz2f
+		;;
+		*.rar) ext=".rar"; command=unrarf
+		;;
+		*.zip) ext=".zip"; command=unzipf
+		;;
+		*.7z) ext=".7z"; command=un7zf
+		;;
+		*.lzh) ext=".lzh"; command=unlha
+		;;
+		*) echo "NOT KNOWN"; continue
+	esac
 	
-	A=`basename "$l" "$ext"`
-	echo "Executing: $command $l '$A'"
-	$command "$l" "$A"
+	A=`basename "$FILE" "$ext"`
+	echo "Executing: $command $FILE '$A'"
+	$command "$FILE" "$A"
+}
 
+for ARG in $@; do
+    if [[ -d "$ARG" ]]; then
+        for FILE in $ARG/*; do
+            if [[ ! -d "$FILE" ]]; then
+                unpack "$FILE"
+            fi
+        done
+    else
+        unpack "$ARG"
+    fi
 done
+
+sleep 10
