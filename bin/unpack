@@ -1,23 +1,22 @@
 #!/bin/sh
 
 untgzf () {
-tar xvzf "$1" -C "$2"
+    tar xvzf "$1" -C "$2"
 }
 unzipf () {
-unzip -o "$1" -d "$2"
+    unzip -o "$1" -d "$2"
 }
 unrarf () {
-unrar x -o- -ad "$1"
+    unrar x -o- -ad "$1"
 }
 un7zf () {
-7z x -y -o"$2" "$1"
+    7z x -y -o"$2" "$1"
 }
 untbz2f () {
-tar xvjf "$1" -C "$2"
+    tar xvjf "$1" -C "$2"
 }
-
 unlha () {
-lha ew="$2" "$1"
+    lha ew="$2" "$1"
 }
 
 unpack() {
