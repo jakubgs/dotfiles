@@ -13,7 +13,7 @@ call vundle#rc()
 " Vundle plugin management {{{
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
-Bundle 'liujoey/vim-easymotion'
+Bundle 'haya14busa/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
@@ -218,11 +218,11 @@ let g:ctrlp_custom_ignore = {
     \ }
 
 " EasyMotion leader
-let g:EasyMotion_leader_key = '<Space>'
-let g:EasyMotion_keys = 'qwertyuiopasdfghjklzxcvbnm'
-let g:EasyMotion_special_select_line = 1
-let g:EasyMotion_special_select_phrase = 1
-let g:EasyMotion_do_normal_motion = 1
+let g:EasyMotion_leader_key = '<space>'
+let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_startofline = 1
+let g:EasyMotion_do_special_mapping = 1
 
 " neocomplete
 let g:neocomplete#enable_at_startup = 1
