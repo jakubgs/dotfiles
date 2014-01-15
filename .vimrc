@@ -172,9 +172,6 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 " }}}
 " Plugin configuration {{{
 
-" hardtime
-let g:hardtime_timeout = 2
-
 " NetRW
 let g:netrw_liststyle= 3
 let g:netrw_browse_split = 4
@@ -193,6 +190,7 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " Harttime
 let g:hardtime_default_on = 1
+let g:hardtime_timeout = 2
 
 " Don't make comments italic
 let g:jellybeans_overrides = {
@@ -205,25 +203,8 @@ highlight Normal ctermbg=NONE " use terminal background
 highlight nonText ctermbg=NONE " use terminal background
 let g:jellybeans_use_lowcolor_black = 0
 
-" Startify
-let g:startify_unlisted_buffer = 0
-
-" DelimitMate
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
-let delimitMate_smart_quotes = 0
-
-" SuperTab
-let g:SuperTabDefaultCompletionType = "context"
-
-" TagBar
-set tags=./tags;../tags;/
-let g:tagbar_left = 1
-let g:tagbar_width = 30
-let g:tagbar_ctags_bin="/usr/bin/ctags"
-
 " Stop CtrlP from recalculating on files on start
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_user_command = 'ag %s -l -a --nocolor -g ""'
 let g:ctrlp_cache_dir = $HOME.'/.vim/temp/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_match_window = 'min:5,max:20'
@@ -295,11 +276,9 @@ xnoremap <silent> <space><cr> :LiveEasyAlign<cr>
 " Toggle pastemode, doesn't indent
 set pastetoggle=<F8>
 
-" Changing leader to space
+" Changing leader
 let mapleader = ","
 let maplocalleader = "\\"
-" don't let space do anything else
-nnoremap <SPACE> <Nop>
 
 " easier access to commands
 nnoremap ; :
@@ -318,11 +297,14 @@ xnoremap < <gv
 xnoremap > >gv
 
 " Fast saving
-nmap <c-s> :update<cr>
-imap <c-s> <c-o>:update<cr>
+nnoremap <c-s> :update<cr>
+inoremap <c-s> <c-o>:update<cr>
+
+" make last typed word uppercase
+inoremap <c-u> <esc>viWUEa
 
 " save and compile
-map mm :Make<CR>
+nnoremap mm :Make<CR>
 
 " for moving in wrapped lines
 nnoremap j gj
@@ -505,7 +487,6 @@ nnoremap <F6> :tabclose<CR>
 nnoremap <F5> :tabnew<CR>
 nnoremap <F4> :source ~/.vim/session/default<cr>
 nnoremap <F3> :mksession! ~/.vim/session/default<cr>
-nnoremap <F1> :TagbarToggle<CR>
 
 " }}}
 " autocmd settings {{{
