@@ -1,8 +1,8 @@
 [default]
 ao=alsa
-vo=vdpau
-vc=ffh264vdpau,ffodivxvdpau,ffmpeg12vdpau,
-#vo=xv
+#vo=vdpau
+#vc=ffh264vdpau,ffodivxvdpau,ffmpeg12vdpau,
+vo=xv
 embeddedfonts= "yes"
 brightness=0
 subcp=cp1250
