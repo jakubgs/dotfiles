@@ -1,26 +1,31 @@
 #!/bin/bash
 
 PLAYLIST="/tmp/playlist.m3u"
-DIRS=$(realpath $@)
+
+if [[ -z $1 ]]; then
+    DIRS=$(pwd)
+else
+    DIRS=$(realpath "$@")
+fi
 
 echo "Scanning ${DIRS}"
 
 find "$DIRS" -type f \
-    -iname "*.wmv" -o \
-    -iname "*.mp4" -o \
-    -iname "*.m4v" -o \
-    -iname "*.mkv" -o \
-    -iname "*.avi" -o \
-    -iname "*.mpg" -o \
-    -iname "*.flv" -o \
-    -iname "*.divx" -o \
-    -iname "*.mp4" \
-    > "$PLAYLIST"
+-iname "*.wmv" -o \
+-iname "*.mp4" -o \
+-iname "*.m4v" -o \
+-iname "*.mkv" -o \
+-iname "*.avi" -o \
+-iname "*.mpg" -o \
+-iname "*.flv" -o \
+-iname "*.divx" -o \
+-iname "*.mp4" \
+> "$PLAYLIST"
 
 COUNT=$(wc -l $PLAYLIST)
 echo "Found $COUNT video files."
 
-mpv --quiet --msglevel=cache=1 --shuffle --fs --playlist $PLAYLIST \
+mpv --quiet --shuffle --fs --playlist $PLAYLIST \
     | awk 'BEGIN{FS="/"}/Playing:/{I++; printf(" *%3d - %s\n", I, $NF)}'
 
 rm $PLAYLIST
