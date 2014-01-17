@@ -1,7 +1,17 @@
 #!/bin/bash
 
 FILELIST="/tmp/filelist"
-DIRS=$(realpath $@)
+# action for deleting folder containing current file
+ACTION='
+CMD="rm -r \"$(dirname %F)\"";
+echo "$CMD";
+eval "$CMD";'
+
+if [[ -z $1 ]]; then
+    DIRS=$(pwd)
+else
+    DIRS=$(realpath "$@")
+fi
 
 echo "Scanning ${DIRS}"
 
@@ -18,6 +28,6 @@ find "$DIRS" -type f \
 COUNT=$(wc -l "$FILELIST")
 echo "Found $COUNT image files."
 
-feh --zoom max --magick-timeout 5 -dZxrSfilename --filelist "$FILELIST" 2>/dev/null
+feh -A "$ACTION" --zoom max --magick-timeout 5 -dZxrSfilename --filelist "$FILELIST" 2>/dev/null
 
 rm "$FILELIST"
