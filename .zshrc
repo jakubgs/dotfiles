@@ -27,8 +27,9 @@ case $HOST in           # change prompt depending on host
         COLOR="green" ;;
 esac
 
-export PS1="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
-export PROMPT=${PS1}
+export PROMPT_TMP="%B %n@%m: %1~%#%{$reset_color%}%b "
+export PS1=$PROMPT_TMP
+export PROMPT=$PROMPT_TMP
 
 # define colors for less to get colored manpages
 # or wget nion.modprobe.de/mostlike.txt && mkdir ~/.terminfo && cp mostlike.txt ~/.terminfo && tic ~/.terminfo/mostlike.txt
@@ -174,6 +175,11 @@ zstyle ':mime:.jpg:' handler feh -x %s
 typeset -A key
 # Vim mode
 bindkey -v
+# 10ms for key sequences
+KEYTIMEOUT=1
+
+# fix backspace in append mode
+bindkey "^?" backward-delete-char
 
 key[Home]=${terminfo[khome]}
 key[End]=${terminfo[kend]}
@@ -302,11 +308,34 @@ function alert {
     echo $MESSAGE | awesome-client -
 }
 
-# print date when executing command
-function preexec () {
-    DATE=`date +"%H:%M:%S on %d-%m-%Y"`
-    C=$(($COLUMNS-24))
-    echo -e "\033[1A\033[${C}C ${DATE} "
+# add vi mode indicator in the prompt
+vim_ins_mode="$fg[blue]"
+vim_cmd_mode="$fg[green]"
+vim_mode=$vim_ins_mode
+PROMPT=${vim_mode}${PROMPT_TMP}
+
+function prompt-refresh {
+    PROMPT=${vim_mode}${PROMPT_TMP}
+    zle reset-prompt
+}
+zle -N prompt-refresh
+
+function zle-keymap-select {
+    vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+    zle prompt-refresh
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
+    vim_mode=$vim_ins_mode
+    zle prompt-refresh
+}
+zle -N zle-line-finish
+
+function TRAPINT() {
+    vim_mode=$vim_ins_mode
+    zle prompt-refresh
+    return $(( 128 + $1 ))
 }
 
 # }}}
