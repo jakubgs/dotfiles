@@ -45,3 +45,4 @@ run remmina > /dev/null 2>&1
 run luakit http://melchior/rutorrent
 run pidgin
 run skype
+run keepassx
