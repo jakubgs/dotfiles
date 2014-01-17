@@ -66,7 +66,7 @@ layouts =
 tags = {}
 
 -- Each screen has its own tag table.
-tags[1] = awful.tag({ ":admin:", ":web:", ":im:", ":skype:", ":misc:", ":work:" }, 1,
+tags[1] = awful.tag({ ":admin:", ":web:", ":im:", ":skype:", ":pass:", ":work:" }, 1,
 { layouts[2], layouts[8], layouts[2], layouts[3], layouts[2], layouts[8] })
 tags[2] = awful.tag({ ":editor:", ":web:", ":mail:", ":images:", ":movies:", ":work:" }, 2,
 { layouts[2], layouts[8], layouts[5], layouts[8], layouts[1], layouts[8] })
@@ -108,8 +108,9 @@ mystoolsmenu = {
 
 mygamesmenu = {
     { "SC2",        "wine \"/mnt/stuff/Games/StarCraft II/StarCraft II.exe\"" },
-    { "EU4",        "wine \"/mnt/melchior/data/Games/Europa\ Universalis\ IV/eu4.exe\"" },
-    { "FTL",        terminal .. " -e cd /mnt/melchior/data/Games/Faster\ Than\ Light && wine FTLGame.exe" },
+    { "EU4",        "wine \"/mnt/stuff/Games/Europa\ Universalis\ IV/eu4.exe\"" },
+    { "FTL",        terminal .. " -e cd /mnt/stuff/Games/Faster\ Than\ Light && wine FTLGame.exe" },
+    { "KSP",        "wine \"/mnt/stuff/Games/Kerbal Space Program/KSP.exe\"" },
 }
 
 myvmmenu = {
@@ -301,7 +302,10 @@ awful.button({ }, 5, awful.tag.viewnext)
 clientbuttons = awful.util.table.join(
 awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
 awful.button({ modkey }, 1, awful.mouse.client.move),
-awful.button({ modkey }, 3, awful.mouse.client.resize))
+awful.button({ modkey }, 3, awful.mouse.client.resize),
+awful.button({ modkey }, 4, awful.tag.viewprev),
+awful.button({ modkey }, 5, awful.tag.viewnext)
+)
 
 -- }}}
 -- {{{ Key bindings
@@ -427,7 +431,7 @@ awful.rules.rules = {
     properties = { border_width = beautiful.border_width,
     border_color = beautiful.border_normal,
     focus = true,
-    floating = false,
+    --floating = false,
     keys = clientkeys,
     buttons = clientbuttons, } },
     { rule = { name = "mpv.*" },
@@ -440,12 +444,12 @@ awful.rules.rules = {
     properties = { floating = true } },
     { rule = { class = "feh" },
     properties = { floating = true } },
-    { rule = { class = "*Wine*" },
-    properties = { floating = true } },
     { rule = { class = "Msgcompose" },
     properties = { floating = true } },
     { rule = { class = "Firefox" },
     properties = { tag = tags[1][2], floating = false } },
+    { rule = { class = "Keepassx" },
+    properties = { tag = tags[1][5], floating = false } },
     { rule = { class = "Firefox", instance = "Zapisz*" },
     callback = function(c) awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c) end},
     { rule = { name = "Session Manager*" },
@@ -470,7 +474,7 @@ awful.rules.rules = {
         --maximized_horizontal = true,
         --maximized_vertical   = true
     } },
-    { rule = { name = "StarCraft II*" },
+    { rule = { class = "Wine" },
     properties = {
         tag = tags[2][4],
         floating = true,
