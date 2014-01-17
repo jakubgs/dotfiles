@@ -24,15 +24,13 @@ urxvt*termName:        rxvt-256color
 *termName:             screen-256color
 
 ! Real Transparency
-!urxvt*depth:          32
-!urxvt*background:     rgba:02f0/04f0/04f0/6666
-!urxvt*foreground:     #ffffff
 urxvt*foreground:      #e9e9e9
 
 ! Clickable links
-urxvt*perl-ext-common: default,matcher
+!urxvt*perl-ext-common: default,matcher
+urxvt*perl-ext-common: default,matcher,-option-popup,-selection-popup,-realine
 urxvt*url-launcher:    /usr/bin/firefox
-urxvt*matcher.button:  2
+urxvt*matcher.button:  1
 urxvt*colorUL:         #a6c9f8
 
 *background:           #191919
@@ -55,7 +53,7 @@ urxvt*colorUL:         #a6c9f8
 *color9:  #EF2929
 ! Green (White)
 *color2:  #EBEBEB
-*color10: #FFFFFF
+*color10: #afd700
 ! Yellow
 *color3:  #C4A000
 *color11: #FCE94F
