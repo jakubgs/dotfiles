@@ -309,7 +309,7 @@ function alert {
 }
 
 # add vi mode indicator in the prompt
-vim_ins_mode="$fg[blue]"
+vim_ins_mode="$fg[$COLOR]"
 vim_cmd_mode="$fg[green]"
 vim_mode=$vim_ins_mode
 PROMPT=${vim_mode}${PROMPT_TMP}
