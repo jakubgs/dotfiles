@@ -497,14 +497,20 @@ autocmd BufReadPost *
             \   exe "normal! g`\"" |
             \ endif
 
-" Check awesome configuration after every write
-autocmd BufWritePost $HOME/.config/awesome/rc.lua Dispatch awesome -k
+augroup awesomerc
+    autocmd!
+    " Check awesome configuration after every write
+    autocmd BufWritePost $HOME/.config/awesome/rc.lua Dispatch awesome -k
+augroup END
 
-" per file syntax
-autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
-" per file foldmethod
-autocmd BufRead,BufNewFile rc.lua set foldmethod=marker
-autocmd BufRead,BufNewFile .vimrc set foldmethod=marker
+augroup filesettings
+    autocmd!
+    " per file syntax
+    autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
+    " per file foldmethod
+    autocmd BufRead,BufNewFile rc.lua set foldmethod=marker
+    autocmd BufRead,BufNewFile .vimrc set foldmethod=marker
+augroup END
 
 " }}}
 " Functions {{{
