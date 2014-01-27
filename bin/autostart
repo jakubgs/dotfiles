@@ -42,7 +42,7 @@ run xbindkeys
 run firefox
 run thunderbird
 run remmina > /dev/null 2>&1
-run uzbl http://melchior/rutorrent
+run luakit
 run pidgin
 run skype
 run keepassx
