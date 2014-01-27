@@ -3,40 +3,51 @@
 
 " Preamble {{{
 " VIM instad of VI
-set nocompatible
-" custom statusline
-filetype off " required!
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+
+if has('vim_starting')
+    set rtp+=~/.vim/bundle/neobundle.vim/
+    set nocompatible
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
 
 " }}}
-" Vundle plugin management {{{
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-Bundle 'haya14busa/vim-easymotion'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-dispatch'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-repeat'
-Bundle 'paradigm/TextObjectify'
-Bundle 'LaTeX-Box-Team/LaTeX-Box'
-Bundle 'kien/ctrlp.vim'
-Bundle 'mattn/ctrlp-register'
-Bundle 'PProvost/vim-ps1'
-Bundle 'vim-scripts/vis'
-Bundle 'rking/ag.vim'
-Bundle 'junegunn/vim-easy-align'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'bling/vim-airline'
-Bundle 'takac/vim-hardtime'
+" NeoBundle plugin management {{{
+
+" let Neobundle manage Neobundle
+NeoBundle 'gmarik/vundle'
+
+" Other plugins
+NeoBundle 'haya14busa/vim-easymotion'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'paradigm/TextObjectify'
+NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'mattn/ctrlp-register'
+NeoBundle 'PProvost/vim-ps1'
+NeoBundle 'vim-scripts/vis'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'takac/vim-hardtime'
 if ( has("lua") )
-    Bundle 'Shougo/neocomplete'
+    NeoBundle 'Shougo/neocomplete'
 endif
 " colorschemes
-Bundle 'nanotech/jellybeans.vim'
+NeoBundle 'nanotech/jellybeans.vim'
 
 " }}}
 " Display configuration {{{
+"
+syntax on                         " File-type highlighting
+filetype on                       " enable file type detection
+filetype plugin on                " loading of plugin files for all formats
+filetype indent on                " loading of indent files for all formats
+
 set background=dark
 
 if &t_Co == 256 || has('gui_running')
@@ -52,11 +63,6 @@ if has("gui_running")             " graphical font
         set guifont=Dina:h10:cANSI
     endif
 endif
-
-syntax on                         " File-type highlighting
-filetype on                       " enable file type detection
-filetype plugin on                " loading of plugin files for all formats
-filetype indent on                " loading of indent files for all formats
 
 set guioptions=                   " Get rid of useless GUI elements
 set winwidth=78                   " minimum split width
