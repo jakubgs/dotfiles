@@ -97,13 +97,13 @@ myofficemenu = {
 }
 
 mystoolsmenu = {
-    { "edit rc.lua",        "gvim " .. awful.util.getdir("config") .. "/rc.lua" },
-    { "edit xorg.conf",     "gksudo gvim " .. "/etc/X11/xorg.conf" },
-    { "edit wallpaper", "nitrogen /mnt/melchior/data/Wallpapers/" },
+    { "edit rc.lua",    "gvim " .. awful.util.getdir("config") .. "/rc.lua" },
+    { "e: xorg.conf",   "gksudo gvim " .. "/etc/X11/xorg.conf" },
+    { "e: wallpaper",   "nitrogen /mnt/melchior/data/Wallpapers/" },
     { "---------------",     nil },
-    { "system monitor", "gnome-system-monitor" },
-    { "palimpsest",         "gksudo palimpsest" },
-    { "disk usage",         "baobab" },
+    { "sysmon",         "gnome-system-monitor" },
+    { "palimpsest",     "gksudo palimpsest" },
+    { "disk usage",     "baobab" },
 }
 
 mygamesmenu = {
@@ -137,7 +137,7 @@ mymainmenu = awful.menu({ items = {
     { "vm",         myvmmenu, beautiful.awesome_icon },
     { "-------------", nil },
     { "firefox",    browser },
-    { "rutorrent",  "luakit http://melchior/rutorrent" },
+    { "rutorrent",  "luakit" },
     { "thunderbird","thunderbird" },
     { "-------------", nil },
     { "file manager",   fmanager },
@@ -466,13 +466,13 @@ awful.rules.rules = {
     properties = { tag = tags[1][1] } },
     { rule = { name = "ytdl" },
     properties = { tag = tags[3][1] } },
-    { rule = { class = "Gvim" },
+    { rule = { name = "Vim" },
+    properties = { tag = tags[2][1] } },
+    { rule = { name = "pentadactyl*" },
     properties = {
-        --size_hints_honor = false,
-        floating = false,
-        tag = tags[2][1],
-        --maximized_horizontal = true,
-        --maximized_vertical   = true
+        ontop = true,
+        floating = true,
+        tag = tags[1][2],
     } },
     { rule = { class = "Wine" },
     properties = {
