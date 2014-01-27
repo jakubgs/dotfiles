@@ -18,6 +18,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
+Bundle 'paradigm/TextObjectify'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mattn/ctrlp-register'
@@ -28,7 +29,6 @@ Bundle 'junegunn/vim-easy-align'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'bling/vim-airline'
 Bundle 'takac/vim-hardtime'
-Bundle 'Shougo/neosnippet'
 if ( has("lua") )
     Bundle 'Shougo/neocomplete'
 endif
@@ -281,9 +281,9 @@ let mapleader = ","
 let maplocalleader = "\\"
 
 " easier access to commands
-nnoremap ; :
+nnoremap ; q:
 nnoremap : ;
-xnoremap ; :
+xnoremap ; q:
 xnoremap : ;
 
 " search within visual block
@@ -301,7 +301,7 @@ nnoremap <c-s> :update<cr>
 inoremap <c-s> <c-o>:update<cr>
 
 " make last typed word uppercase
-inoremap <c-u> <esc>viWUEa
+inoremap <c-u> <esc>viuUea
 
 " save and compile
 nnoremap mm :Make<CR>
@@ -428,7 +428,7 @@ nnoremap <space>p/ :CtrlPRoot<CR>
 nnoremap <space>pt :CtrlPBufTagAll<CR>
 nnoremap <space>pl :CtrlPLine<CR>
 nnoremap <space>pq :CtrlPQuickfix<CR>
-nnoremap <space>pb :CtrlPBuffer<CR>
+nnoremap <space>pb :CtrlPBookmarkDir<CR>
 nnoremap <space>pm :CtrlPMRUFiles<CR>
 nnoremap <space>po :CtrlPLastMode --dir<CR>
 
@@ -512,6 +512,11 @@ augroup filesettings
     autocmd BufRead,BufNewFile .vimrc set foldmethod=marker
 augroup END
 
+augroup MyAutoCmd
+    autocmd CmdwinEnter * call s:init_cmdwin()
+    autocmd CmdwinLeave * let g:neocomplcache_enable_auto_select = 1
+augroup END
+
 " }}}
 " Functions {{{
 
@@ -542,4 +547,21 @@ function! CopyMatches(reg)
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
-" }}}
+function! s:init_cmdwin()
+    let g:neocomplcache_enable_auto_select = 0
+    let b:neocomplcache_sources_list = ['vim_complete']
+
+    nnoremap <buffer><silent> <TAB> :<C-u>quit<CR>
+    inoremap <buffer><expr><C-h> col('.') == 1 ?
+        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+    inoremap <buffer><expr><BS> col('.') == 1 ?
+        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+
+    " Completion.
+    inoremap <buffer><expr><TAB>  pumvisible() ?
+        \ "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : "\<C-x>\<C-u>\<C-p>"
+
+    startinsert!
+endfunction
+
+" }}}CtrlPBookmark
