@@ -15,7 +15,7 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 " NeoBundle plugin management {{{
 
 " let Neobundle manage Neobundle
-NeoBundle 'gmarik/vundle'
+NeoBundle 'Shougo/neobundle.vim'
 
 " Other plugins
 NeoBundle 'haya14busa/vim-easymotion'
