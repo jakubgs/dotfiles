@@ -60,7 +60,7 @@ nmap <leader>r :source ~/.pentadactylrc<CR>
 " some bookmarks for most opened web pages
 nmap <leader>y :tabopen http://youtube.com/feed/subscriptions<CR>
 nmap <leader>c :tabopen https://www.google.com/calendar/render<CR>
-nmap <leader>n :tabopen http://www.mangareader.net<CR>
+nmap <leader>n :tabopen http://www.mangahere.com/<CR>
 nmap <leader>p :tabopen https://tls.passthepopcorn.me/<CR>
 nmap <leader>j :tabopen http://warszawa.jakdojade.pl<CR>
 nmap <leader>w :tabopen http://www.meteo.pl/<CR>
