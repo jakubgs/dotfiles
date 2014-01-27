@@ -315,7 +315,7 @@ vim_mode=$vim_ins_mode
 PROMPT=${vim_mode}${PROMPT_TMP}
 
 function prompt-refresh {
-    PROMPT=${vim_mode}${PROMPT_TMP}
+    PROMPT="${vim_mode}${PROMPT_TMP}"
     zle reset-prompt
 }
 zle -N prompt-refresh
