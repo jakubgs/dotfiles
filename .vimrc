@@ -80,6 +80,7 @@ set showmatch                     " show matching brackets
 set t_vb=                         " don't flash the screen on errors
 set previewheight=25              " height of windows for fugitive, etc
 set splitright                    " new windows right to the current
+let g:is_posix=1                  " enable better bash syntax highlighting
 if has("multi_byte")
     set fillchars=vert:│,fold:-       " smooth windows splits
     set listchars=tab:▸\ ,eol:¬       " visible chars for tabs and EOLs
@@ -157,7 +158,7 @@ set foldenable                    " when on all folds are closed
 set foldlevel=1                   " folds with higher level will be closed
 set foldmethod=marker             " by default fold based on markers
 set foldnestmax=1                 " nest fold limit for indent/syntax modes
-set foldtext=NeatFoldText()       " change how folds are desplayed when closed
+"set foldtext=NeatFoldText()       " change how folds are desplayed when closed
 
 " }}}
 " Programming settings {{{
@@ -174,6 +175,10 @@ autocmd FileType cpp set foldmethod=syntax
 " Format for errors in QuickList
 autocmd FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
+" spelling settings
+augroup latexsettings
+    autocmd FileType tex set spell
+augroup END
 
 " }}}
 " Plugin configuration {{{
@@ -239,12 +244,16 @@ let g:neocomplete#sources#syntax#min_keyword_length = 4
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Latex-Box
+" enabel folding by default
+let g:LatexBox_Folding=1
 " don't focus quickfix window
 let g:LatexBox_quickfix=2
 " don't show just warnings
 let g:LatexBox_show_warnings=0
 " compile in the background
 let g:LatexBox_latexmk_async=0
+" fold table of contents
+let g:LatexBox_fold_toc=1
 
 " For snippet_complete marker.
 if has('conceal')
@@ -307,7 +316,7 @@ nnoremap <c-s> :update<cr>
 inoremap <c-s> <c-o>:update<cr>
 
 " make last typed word uppercase
-inoremap <c-u> <esc>viuUea
+inoremap <c-u> <esc>viwUea
 
 " save and compile
 nnoremap mm :Make<CR>
@@ -472,7 +481,7 @@ nnoremap gd :Gdiff<CR>
 nnoremap ge :Gedit<CR>
 nnoremap gr :Gread<CR>
 nnoremap gw :Gwrite<CR><CR>
-nnoremap gl :Glog<CR>
+nnoremap gl :silent! Glog<CR>:bot copen<CR>
 nnoremap gp :Ggrep<Space>
 nnoremap gm :Gmove<Space>
 nnoremap gb :Git branch<Space>
@@ -562,6 +571,8 @@ function! s:init_cmdwin()
         \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
     inoremap <buffer><expr><BS> col('.') == 1 ?
         \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+
+    inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
 
     " Completion.
     inoremap <buffer><expr><TAB>  pumvisible() ?
