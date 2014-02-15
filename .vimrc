@@ -473,21 +473,21 @@ nnoremap <silent> <space>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>"
 " Key mappings - Git {{{
 
 " fugitive git bindings
-nnoremap ga :Git add %:p<CR><CR>
-nnoremap gs :Gstatus<CR>
-nnoremap gc :Gcommit -v -q<CR><c-w>H
-nnoremap gt :Gcommit -v -q %:p<CR><c-w>H
-nnoremap gd :Gdiff<CR>
-nnoremap ge :Gedit<CR>
-nnoremap gr :Gread<CR>
-nnoremap gw :Gwrite<CR><CR>
-nnoremap gl :silent! Glog<CR>:bot copen<CR>
-nnoremap gp :Ggrep<Space>
-nnoremap gm :Gmove<Space>
-nnoremap gb :Git branch<Space>
-nnoremap go :Git checkout<Space>
-nnoremap gps :Dispatch! git push<CR>
-nnoremap gpl :Dispatch! git pull<CR>
+nnoremap <space>ga :Git add %:p<CR><CR>
+nnoremap <space>gs :Gstatus<CR>
+nnoremap <space>gc :Gcommit -v -q<CR><c-w>H
+nnoremap <space>gt :Gcommit -v -q %:p<CR><c-w>H
+nnoremap <space>gd :Gdiff<CR>
+nnoremap <space>ge :Gedit<CR>
+nnoremap <space>gr :Gread<CR>
+nnoremap <space>gw :Gwrite<CR><CR>
+nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <space>gp :Ggrep<Space>
+nnoremap <space>gm :Gmove<Space>
+nnoremap <space>gb :Git branch<Space>
+nnoremap <space>go :Git checkout<Space>
+nnoremap <space>gps :Dispatch! git push<CR>
+nnoremap <space>gpl :Dispatch! git pull<CR>
 
 " }}}
 " Key mappings - Fxx {{{
