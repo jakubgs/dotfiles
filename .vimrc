@@ -450,9 +450,6 @@ nnoremap <space>po :CtrlPLastMode --dir<CR>
 " re-run last CtrlP command
 nnoremap <space><space> :CtrlPBuffer<CR>
 
-" set current dir to that of current file
-nnoremap <space>g :cd %:p:h<CR>:pwd<CR>
-
 " calculate current line with precision of 2
 nnoremap <space>x yy:.!echo "scale=2; <c-r>"<c-h>"\|bc<CR>
 
