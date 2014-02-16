@@ -267,7 +267,7 @@ endif
 " Key mappings - Plugins {{{
 
 " completion for neocomplete
-inoremap <expr><TAB>    " refresh when deleting characters
+inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " refresh completion when deleting a character
 inoremap <buffer><expr><C-h> col('.') == 1 ?
     \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
@@ -578,7 +578,7 @@ function! s:init_cmdwin()
     " confirm selection
     inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
 
-    " Completion.
+    " completion for neocomplete
     inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
     startinsert!
