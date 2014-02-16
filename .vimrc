@@ -573,8 +573,7 @@ function! s:init_cmdwin()
     inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
 
     " Completion.
-    inoremap <buffer><expr><TAB>  pumvisible() ?
-        \ "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : "\<C-x>\<C-u>\<C-p>"
+    inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
     startinsert!
 endfunction
