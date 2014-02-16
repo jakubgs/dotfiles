@@ -276,6 +276,12 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 xnoremap <silent> <cr> :EasyAlign<cr>
 xnoremap <silent> <space><cr> :LiveEasyAlign<cr>
 
+" easymotion
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+
 " easyoperator
 nmap d<space>l <Plug>(easyoperator-line-delete)
 nmap y<space>l <Plug>(easyoperator-line-yank)
