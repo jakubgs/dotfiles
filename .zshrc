@@ -27,9 +27,9 @@ case $HOST in           # change prompt depending on host
         COLOR="green" ;;
 esac
 
-export PROMPT_TMP="%B %n@%m: %1~%#%{$reset_color%}%b "
-export PS1=$PROMPT_TMP
-export PROMPT=$PROMPT_TMP
+export PROMPT=" $fg[$COLOR] %B %n@%m: %1~%#%{$reset_color%}%b "
+export PS1=$PROMPT
+export PROMPT=$PROMPT
 
 # define colors for less to get colored manpages
 # or wget nion.modprobe.de/mostlike.txt && mkdir ~/.terminfo && cp mostlike.txt ~/.terminfo && tic ~/.terminfo/mostlike.txt
@@ -306,36 +306,6 @@ function alert {
             })"
     # send it to awesome
     echo $MESSAGE | awesome-client -
-}
-
-# add vi mode indicator in the prompt
-vim_ins_mode="$fg[$COLOR]"
-vim_cmd_mode="$fg[green]"
-vim_mode=$vim_ins_mode
-PROMPT=${vim_mode}${PROMPT_TMP}
-
-function prompt-refresh {
-    PROMPT="${vim_mode}${PROMPT_TMP}"
-    zle reset-prompt
-}
-zle -N prompt-refresh
-
-function zle-keymap-select {
-    vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-    zle prompt-refresh
-}
-zle -N zle-keymap-select
-
-function zle-line-finish {
-    vim_mode=$vim_ins_mode
-    zle prompt-refresh
-}
-zle -N zle-line-finish
-
-function TRAPINT() {
-    vim_mode=$vim_ins_mode
-    zle prompt-refresh
-    return $(( 128 + $1 ))
 }
 
 # }}}
