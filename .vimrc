@@ -18,7 +18,8 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundle 'Shougo/neobundle.vim'
 
 " Other plugins
-NeoBundle 'haya14busa/vim-easymotion'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'haya14busa/vim-easyoperator-line'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-surround'
@@ -33,7 +34,6 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'takac/vim-hardtime'
 if ( has("lua") )
     NeoBundle 'Shougo/neocomplete'
 endif
@@ -236,11 +236,14 @@ let g:EasyMotion_startofline = 0
 let g:EasyMotion_do_special_mapping = 1
 
 " neocomplete
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" use neocomplete
 let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
+" use smartcase.
 let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 4
+" set minimum syntax keyword length
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Latex-Box
@@ -269,21 +272,13 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-" neosnippet mappings
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
 " easy-align
 xnoremap <silent> <cr> :EasyAlign<cr>
 xnoremap <silent> <space><cr> :LiveEasyAlign<cr>
+
+" easyoperator
+nmap d<space>l <Plug>(easyoperator-line-delete)
+nmap y<space>l <Plug>(easyoperator-line-yank)
 
 " }}}
 " Key mappings - General {{{
