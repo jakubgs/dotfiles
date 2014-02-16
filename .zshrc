@@ -27,7 +27,7 @@ case $HOST in           # change prompt depending on host
         COLOR="green" ;;
 esac
 
-export PROMPT=" $fg[$COLOR] %B %n@%m: %1~%#%{$reset_color%}%b "
+export PROMPT="$fg[$COLOR]%B %n@%m: %1~%#%{$reset_color%}%b "
 export PS1=$PROMPT
 export PROMPT=$PROMPT
 
@@ -240,6 +240,7 @@ alias pbpaste='xclip -selection clipboard -o'
 alias etccommit='sudo etckeeper commit "Quick commit."'
 alias sgit='sudo git'
 alias gitc='git commit -a -m '
+alias livestreamer='livestreamer -p "mpv --cache=524288 --cache-min=0.5 -"'
 
 # }}}
 # Functions {{{
