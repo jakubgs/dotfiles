@@ -32,6 +32,7 @@ map -b k 15k
 
 " easier access to commands
 nmap -builtin ; :
+nmap -builtin : ;
 
 " use ctrl-v as intended
 map -m i,c,t <C-v> <Pass>
@@ -55,38 +56,38 @@ map L :tabmove +1<CR>
 cmap <c-d> <Return>
 
 " source configuration
-nmap <leader>r :source ~/.pentadactylrc<CR>
+nmap -builtin <leader>r :source ~/.pentadactylrc<CR>
 
 " some bookmarks for most opened web pages
-nmap <leader>y :tabopen http://youtube.com/feed/subscriptions<CR>
-nmap <leader>c :tabopen https://www.google.com/calendar/render<CR>
-nmap <leader>n :tabopen http://www.mangahere.com/<CR>
-nmap <leader>p :tabopen https://tls.passthepopcorn.me/<CR>
-nmap <leader>j :tabopen http://warszawa.jakdojade.pl<CR>
-nmap <leader>w :tabopen http://www.meteo.pl/<CR>
-nmap <leader>a :tabopen http://adam/<CR>
-nmap <leader>m :tabopen http://melchior/<CR>
-nmap <leader>t :tabopen https://matariel:8888/<CR>
-nmap <leader>w :tabopen https://portal.microsoftonline.com<CR>
+nmap -builtin <leader>y :tabopen http://youtube.com/feed/subscriptions<CR>
+nmap -builtin <leader>c :tabopen https://www.google.com/calendar/render<CR>
+nmap -builtin <leader>n :tabopen http://www.mangahere.com/<CR>
+nmap -builtin <leader>p :tabopen https://tls.passthepopcorn.me/<CR>
+nmap -builtin <leader>j :tabopen http://warszawa.jakdojade.pl<CR>
+nmap -builtin <leader>w :tabopen http://www.meteo.pl/<CR>
+nmap -builtin <leader>a :tabopen http://adam/<CR>
+nmap -builtin <leader>m :tabopen http://melchior/<CR>
+nmap -builtin <leader>t :tabopen https://matariel:8888/<CR>
+nmap -builtin <leader>w :tabopen https://portal.microsoftonline.com<CR>
 
 " update pentadactyl
-nmap <leader>u :exta http://5digits.org/nightly/pentadactyl-latest.xpi<CR>
+nmap -builtin <leader>u :exta http://5digits.org/nightly/pentadactyl-latest.xpi<CR>
 
 " Session manager
-nmap <leader>s :tabopen about:sessionrestore<CR>
+nmap -builtin <leader>s :tabopen about:sessionrestore<CR>
 
 " start private browsing
-nmap <leader>i :private winopen<CR>
+nmap -builtin <leader>i :private winopen<CR>
 
 " open selected links, replaces spaces between links for propper spearators
-nmap <leader>o :!echo "<S-Insert>" | sed 's/ / | /g' | xclip <CR>:tabopen <S-Insert><CR>
+nmap -builtin <leader>o :!echo "<S-Insert>" | sed 's/ / | /g' | xclip <CR>:tabopen <S-Insert><CR>
 
 " pop out youtube video
-nmap <leader>f y:!echo "<S-Insert>" | sed 's/youtu.be\//www.youtube.com\/tv?vq=high#\/watch?v=/g' | xclip <CR>:tabopen <S-Insert><CR>
+nmap -builtin <leader>f y:!echo "<S-Insert>" | sed 's/youtu.be\//www.youtube.com\/tv?vq=high#\/watch?v=/g' | xclip <CR>:tabopen <S-Insert><CR>
 
 " download youtube video
-nmap <leader>d y:!mpv -- "<S-Insert>" &<CR><CR>
-nmap <leader>D y:!~/bin/urxvtb -hold -e ~/bin/ytdl "<S-Insert>" &<CR><CR>
+nmap -builtin <leader>d y:!mpv -- "<S-Insert>" &<CR><CR>
+nmap -builtin <leader>D y:!~/bin/urxvtb -hold -e ~/bin/ytdl "<S-Insert>" &<CR><CR>
 
 " faster expose
 map e <c-s-e>
