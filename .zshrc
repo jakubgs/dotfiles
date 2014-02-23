@@ -27,7 +27,7 @@ case $HOST in           # change prompt depending on host
         COLOR="green" ;;
 esac
 
-export PROMPT="$fg[$COLOR]%B %n@%m: %1~%#%{$reset_color%}%b "
+export PROMPT="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
 export PS1=$PROMPT
 export PROMPT=$PROMPT
 
