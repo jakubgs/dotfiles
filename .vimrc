@@ -267,14 +267,16 @@ endif
 " Key mappings - Plugins {{{
 
 " completion for neocomplete
-inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" refresh completion when deleting a character
-inoremap <buffer><expr><C-h> col('.') == 1 ?
-    \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
-inoremap <buffer><expr><BS> col('.') == 1 ?
-    \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
-" confirm selection
-inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
+if exists('neocomplete#close_popup')
+    inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    " refresh completion when deleting a character
+    inoremap <buffer><expr><C-h> col('.') == 1 ?
+        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+    inoremap <buffer><expr><BS> col('.') == 1 ?
+        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+    " confirm selection
+    inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
+endif
 
 " easy-align
 xnoremap <silent> <cr> :EasyAlign<cr>
@@ -568,20 +570,22 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 
 " configure neocomplete to complete in command window
 function! s:init_cmdwin()
-    let g:neocomplcache_enable_auto_select = 0
-    let b:neocomplcache_sources_list = ['vim_complete']
+    if exists('neocomplete#close_popup')
+        let g:neocomplcache_enable_auto_select = 0
+        let b:neocomplcache_sources_list = ['vim_complete']
 
-    " refresh completion when deleting a character
-    inoremap <buffer><expr><C-h> col('.') == 1 ?
-        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
-    inoremap <buffer><expr><BS> col('.') == 1 ?
-        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+        " refresh completion when deleting a character
+        inoremap <buffer><expr><C-h> col('.') == 1 ?
+            \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+        inoremap <buffer><expr><BS> col('.') == 1 ?
+            \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
 
-    " confirm selection
-    inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
+        " confirm selection
+        inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
 
-    " completion for neocomplete
-    inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+        " completion for neocomplete
+        inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    endif
 
     startinsert!
 endfunction
