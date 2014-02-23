@@ -267,8 +267,10 @@ endif
 " Key mappings - Plugins {{{
 
 " completion for neocomplete
+" use tab for completion
+inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 if exists('neocomplete#close_popup')
-    inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     " refresh completion when deleting a character
     inoremap <buffer><expr><C-h> col('.') == 1 ?
         \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
@@ -570,6 +572,9 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 
 " configure neocomplete to complete in command window
 function! s:init_cmdwin()
+    " use tab for completion
+    inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
     if exists('neocomplete#close_popup')
         let g:neocomplcache_enable_auto_select = 0
         let b:neocomplcache_sources_list = ['vim_complete']
@@ -582,9 +587,6 @@ function! s:init_cmdwin()
 
         " confirm selection
         inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
-
-        " completion for neocomplete
-        inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     endif
 
     startinsert!
