@@ -56,7 +56,7 @@ else
     colors jellybeans             " or some other 16-color scheme
 endif
 
-if has("gui_running")             " graphical font
+if has("gui_running") && has('vim_starting')
     if has("gui_gtk2")
         set guifont=Terminus\ 10
     elseif has("gui_win32")
@@ -384,6 +384,8 @@ xnoremap <c-c> "+y
 
 " }}}
 " Key mappings - <Leader> {{{
+
+nnoremap <space>v :execute getline(".")<cr>;w
 
 " paste and sellect
 nnoremap <space>/ :Ag<Space>
