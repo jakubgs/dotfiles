@@ -190,13 +190,13 @@ awful.button({ }, 5, function () awful.util.spawn("mpc prev", false) end)
 
 -- Volume bar
 myvolume = wibox.widget.textbox()
-vicious.register(myvolume, vicious.widgets.volume, "| Vol: $1% |", 1, "PCM")
+vicious.register(myvolume, vicious.widgets.volume, "| Vol: $1% |", 1, "Master")
 
 myvolume:buttons(awful.util.table.join(
 awful.button({ }, 2, function () awful.util.spawn(homedir .. "bin/mute", false) end),
 awful.button({ }, 3, function () awful.util.spawn("volti-mixer", true) end),
-awful.button({ }, 4, function () awful.util.spawn("amixer -q set PCM 1dB+", false) end),
-awful.button({ }, 5, function () awful.util.spawn("amixer -q set PCM 1dB-", false) end)
+awful.button({ }, 4, function () awful.util.spawn("amixer -q set Master 1dB+", false) end),
+awful.button({ }, 5, function () awful.util.spawn("amixer -q set Master 1dB-", false) end)
 ))
 
 -- Create a wibox for each screen and add it
