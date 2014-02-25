@@ -24,7 +24,8 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'paradigm/TextObjectify'
+NeoBundle 'wellle/targets.vim'
+NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mattn/ctrlp-register'
@@ -483,8 +484,8 @@ nnoremap <silent> <space>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>"
 " fugitive git bindings
 nnoremap <space>ga :Git add %:p<CR><CR>
 nnoremap <space>gs :Gstatus<CR>
-nnoremap <space>gc :Gcommit -v -q<CR><c-w>H
-nnoremap <space>gt :Gcommit -v -q %:p<CR><c-w>H
+nnoremap <space>gc :Gcommit -v -q<CR>
+nnoremap <space>gt :Gcommit -v -q %:p<CR>
 nnoremap <space>gd :Gdiff<CR>
 nnoremap <space>ge :Gedit<CR>
 nnoremap <space>gr :Gread<CR>
