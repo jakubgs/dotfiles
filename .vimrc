@@ -178,7 +178,7 @@ autocmd FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 " spelling settings
 augroup latexsettings
-    autocmd FileType tex set spell
+    autocmd FileType tex setlocal spell
 augroup END
 
 " }}}
