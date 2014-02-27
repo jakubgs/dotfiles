@@ -65,7 +65,7 @@ if has("gui_running") && has('vim_starting')
     endif
 endif
 
-set guioptions=                   " Get rid of useless GUI elements
+set guioptions=c                  " Get rid of useless GUI elements
 set winwidth=78                   " minimum split width
 set winheight=15                  " minimum split height
 set colorcolumn=80                " highlight this column
@@ -271,7 +271,7 @@ endif
 " use tab for completion
 inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-if exists('neocomplete#close_popup')
+if exists('*neocomplete#close_popup')
     " refresh completion when deleting a character
     inoremap <buffer><expr><C-h> col('.') == 1 ?
         \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
@@ -534,6 +534,7 @@ augroup filesettings
     " per file foldmethod
     autocmd BufRead,BufNewFile rc.lua set foldmethod=marker
     autocmd BufRead,BufNewFile .vimrc set foldmethod=marker
+    autocmd BufWritePost *.tex Latexmk!
 augroup END
 
 augroup MyAutoCmd
@@ -576,7 +577,7 @@ function! s:init_cmdwin()
     " use tab for completion
     inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-    if exists('neocomplete#close_popup')
+    if exists('*neocomplete#close_popup')
         let g:neocomplcache_enable_auto_select = 0
         let b:neocomplcache_sources_list = ['vim_complete']
 
