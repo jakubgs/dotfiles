@@ -317,8 +317,10 @@ let maplocalleader = "\\"
 " easier access to commands
 nnoremap ; q:
 nnoremap : ;
+nnoremap q; :
 xnoremap ; q:
 xnoremap : ;
+nnoremap q; :
 
 " search within visual block
 xnoremap / <esc>/\%V
@@ -455,23 +457,6 @@ nnoremap <space>C :Start<CR>
 nnoremap <space>m :Latexmk<CR>
 nnoremap <space>M :LatexView<CR>
 
-" CtrlP mappings
-nnoremap <c-i>      :CtrlPMixed<CR>
-nnoremap <space>pp :CtrlP<Space>
-nnoremap <space>pc :CtrlP %:p:h<CR>
-nnoremap <space>pr :CtrlPRegister<CR>
-nnoremap <space>p/ :CtrlPRoot<CR>
-nnoremap <space>pt :CtrlPBufTagAll<CR>
-nnoremap <space>pl :CtrlPLine<CR>
-nnoremap <space>pq :CtrlPQuickfix<CR>
-nnoremap <space>pb :CtrlPBookmarkDir<CR>
-nnoremap <space>pm :CtrlPMRUFiles<CR>
-nnoremap <space>po :CtrlPLastMode --dir<CR>
-
-" re-run last CtrlP command
-nnoremap <space><space> :CtrlPBuffer<CR>
-
-" calculate current line with precision of 2
 nnoremap <space>x yy:.!echo "scale=2; <c-r>"<c-h>"\|bc<CR>
 
 " focus the current fold
@@ -487,6 +472,25 @@ nnoremap <silent> <space>DD :exe ":profile start /tmp/profile.log"<cr>
                                     \ <bar> profile file *"<cr>
 nnoremap <silent> <space>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>"
 
+" }}}
+" Key mappings - CtrlP {{{
+
+nnoremap <c-i>      :CtrlPMixed<CR>
+nnoremap <space>pp :CtrlP<Space>
+nnoremap <space>pc :CtrlP %:p:h<CR>
+nnoremap <space>pr :CtrlPRegister<CR>
+nnoremap <space>p/ :CtrlPRoot<CR>
+nnoremap <space>pt :CtrlPBufTagAll<CR>
+nnoremap <space>pl :CtrlPLine<CR>
+nnoremap <space>pq :CtrlPQuickfix<CR>
+nnoremap <space>pb :CtrlPBookmarkDir<CR>
+nnoremap <space>pm :CtrlPMRUFiles<CR>
+nnoremap <space>po :CtrlPLastMode --dir<CR>
+
+" search openned buffers
+nnoremap <space><space> :CtrlPBuffer<CR>
+
+" calculate current line with precision of 2
 " }}}
 " Key mappings - Git {{{
 
@@ -512,22 +516,28 @@ nnoremap <space>gpl :Dispatch! git pull<CR>
 
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
-nnoremap <F9> :vsplit \| enew \| r !ls -l<CR><CR><c-w>L
-nnoremap <F8> :Make!<CR>
-nnoremap <F7> :Copen<CR>
-nnoremap <F6> :tabclose<CR>
-nnoremap <F5> :tabnew<CR>
-nnoremap <F4> :source ~/.vim/session/default<cr>
-nnoremap <F3> :mksession! ~/.vim/session/default<cr>
+nnoremap <F10> :<CR>
+nnoremap <F9> :<CR>
+nnoremap <F8> :<CR>
+nnoremap <F7> :<CR>
+nnoremap <F6> :set hlsearch!<CR>
+nnoremap <F5> :set spell!<CR>
+nnoremap <F4> :<cr>
+nnoremap <F3> :<cr>
+nnoremap <F2> :<cr>
+nnoremap <F1> :<cr>
 
 " }}}
 " autocmd settings {{{
 
 " Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-            \ if line("'\"") > 0 && line("'\"") <= line("$") |
-            \   exe "normal! g`\"" |
-            \ endif
+augroup saveposition
+    autocmd!
+    autocmd BufReadPost *
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal! g`\"" |
+                \ endif
+augroup END
 
 augroup awesomerc
     autocmd!
