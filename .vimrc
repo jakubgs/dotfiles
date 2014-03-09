@@ -176,9 +176,12 @@ autocmd FileType cpp set foldmethod=syntax
 " Format for errors in QuickList
 autocmd FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
+
 " spelling settings
 augroup latexsettings
+    autocmd!
     autocmd FileType tex setlocal spell
+    autocmd FileType tex setlocal foldmethod=expr
 augroup END
 
 " }}}
@@ -258,6 +261,8 @@ let g:LatexBox_show_warnings=0
 let g:LatexBox_latexmk_async=0
 " fold table of contents
 let g:LatexBox_fold_toc=1
+" use evince for viewing pdf
+let g:LatexBox_viewer='evince'
 
 " For snippet_complete marker.
 if has('conceal')
@@ -294,6 +299,10 @@ map  N <Plug>(easymotion-prev)
 " easyoperator
 nmap d<space>l <Plug>(easyoperator-line-delete)
 nmap y<space>l <Plug>(easyoperator-line-yank)
+
+" surround
+" c style comments using *
+let g:surround_42 = "/* \r */"
 
 " }}}
 " Key mappings - General {{{
@@ -503,7 +512,6 @@ nnoremap <space>gpl :Dispatch! git pull<CR>
 
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
-nnoremap <F10> :SyntasticToggleMode<CR>
 nnoremap <F9> :vsplit \| enew \| r !ls -l<CR><CR><c-w>L
 nnoremap <F8> :Make!<CR>
 nnoremap <F7> :Copen<CR>
@@ -538,6 +546,7 @@ augroup filesettings
 augroup END
 
 augroup MyAutoCmd
+    autocmd!
     autocmd CmdwinEnter * call s:init_cmdwin()
     autocmd CmdwinLeave * let g:neocomplcache_enable_auto_select = 1
 augroup END
@@ -574,6 +583,10 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 
 " configure neocomplete to complete in command window
 function! s:init_cmdwin()
+    " leave command window quicker
+    nnoremap <buffer><silent> q :<C-u>quit<CR>
+    nnoremap <buffer><silent> <TAB> :<C-u>quit<CR>
+
     " use tab for completion
     inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -594,4 +607,4 @@ function! s:init_cmdwin()
     startinsert!
 endfunction
 
-" }}}CtrlPBookmark
+" }}}
