@@ -457,6 +457,7 @@ nnoremap <space>C :Start<CR>
 nnoremap <space>m :Latexmk<CR>
 nnoremap <space>M :LatexView<CR>
 
+" calculate current line with precision of 2
 nnoremap <space>x yy:.!echo "scale=2; <c-r>"<c-h>"\|bc<CR>
 
 " focus the current fold
@@ -490,7 +491,6 @@ nnoremap <space>po :CtrlPLastMode --dir<CR>
 " search openned buffers
 nnoremap <space><space> :CtrlPBuffer<CR>
 
-" calculate current line with precision of 2
 " }}}
 " Key mappings - Git {{{
 
