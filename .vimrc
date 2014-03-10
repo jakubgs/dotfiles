@@ -530,7 +530,7 @@ nnoremap <F5> :set spell!<CR>
 nnoremap <F4> :<cr>
 nnoremap <F3> :<cr>
 nnoremap <F2> :<cr>
-nnoremap <F1> :exe ":!info ".shellescape(expand('<cword>'), 1)<cr>
+nnoremap <F1> :exe ":!urxvtc -e man ".shellescape(expand('<cword>'), 1)<cr><cr>
 
 " }}}
 " autocmd settings {{{
