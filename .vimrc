@@ -107,6 +107,7 @@ set history=1000                  " history of vim commands
 set nomodeline                    " no options from first comment in file
 set lazyredraw                    " faster macros processing
 set visualbell                    " tell vim to shut up
+set virtualedit=block             " allow to go beyond blank space in visual m.
 set mouse=a                       " Enable the use of the mouse.
 set scrolloff=5                   " number of lies vim won't scroll below
 set showcmd                       " Show (partial) command in status line.
@@ -116,6 +117,7 @@ set autoread                      " automatically update file changes
 set autoindent                    " breaks pasted in text, use F8 in insert
 set preserveindent
 set clipboard=unnamed             " paste the clipboard to unnamed register
+set backspace=indent,eol,start    " go with backspace insert mode starting pos
 set spelllang=pl,en               " spelling check
 set autochdir                     " Automatically changing working dir
 set shell=zsh                     " Shell
@@ -127,7 +129,7 @@ set backupdir=~/.vim/backup//     " make ~ files in:
 set noswapfile                    " set directory=~/.vim/temp//
 set hlsearch                      " highlighting search results
 set incsearch                     " start searching as you type
-set ignorecase                    " ignore case in search patterns
+set smartcase                     " ignore case unless upper case used
 set iskeyword+=$,@,%,#            " not word dividers
 set iskeyword-=_                  " word dividers
 set hidden                        " buffer change, more undo
@@ -362,6 +364,9 @@ nnoremap g# g#zz
 " to match the behaviour of D
 nnoremap Y y$
 
+" run last used macro with one key
+nnoremap Q @@
+
 " for jumping forward
 nnoremap <c-p> <c-i>
 
@@ -519,13 +524,13 @@ nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F10> :<CR>
 nnoremap <F9> :<CR>
 nnoremap <F8> :<CR>
-nnoremap <F7> :<CR>
+nnoremap <F7> :set wrap!<CR>
 nnoremap <F6> :set hlsearch!<CR>
 nnoremap <F5> :set spell!<CR>
 nnoremap <F4> :<cr>
 nnoremap <F3> :<cr>
 nnoremap <F2> :<cr>
-nnoremap <F1> :<cr>
+nnoremap <F1> :exe ":!info ".shellescape(expand('<cword>'), 1)<cr>
 
 " }}}
 " autocmd settings {{{
