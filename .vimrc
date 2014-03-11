@@ -608,8 +608,8 @@ function! s:init_cmdwin()
         let b:neocomplcache_sources_list = ['vim_complete']
 
         " refresh completion when deleting a character
-        inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-        inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+        inoremap <buffer><expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+        inoremap <buffer><expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
         " confirm selection
         inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
