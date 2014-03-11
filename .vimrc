@@ -281,10 +281,8 @@ inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 if exists('*neocomplete#close_popup')
     " refresh completion when deleting a character
-    inoremap <buffer><expr><C-h> col('.') == 1 ?
-        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
-    inoremap <buffer><expr><BS> col('.') == 1 ?
-        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
     " confirm selection
     inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
 endif
@@ -521,13 +519,13 @@ nnoremap <space>gpl :Dispatch! git pull<CR>
 " Key mappings - Fxx {{{
 
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
-nnoremap <F11> :set guifont=terminus\ 8<CR>
+nnoremap <F11> :set guifont=terminus\ 10<CR>
 nnoremap <F10> :<CR>
 nnoremap <F9>  :<CR>
 nnoremap <F8>  :<CR>
-nnoremap <F7>  :set wrap!<CR>
-nnoremap <F6>  :set hlsearch!<CR>
-nnoremap <F5>  :set spell!<CR>
+nnoremap <F7>  :setlocal wrap!<CR>
+nnoremap <F6>  :setlocal hlsearch!<CR>
+nnoremap <F5>  :setlocal spell!<CR>
 nnoremap <F4>  :<cr>
 nnoremap <F3>  :<cr>
 nnoremap <F2>  :vnew<cr>:setlocal buftype=nofile bufhidden=wipe nobuflisted<cr>
@@ -611,10 +609,8 @@ function! s:init_cmdwin()
         let b:neocomplcache_sources_list = ['vim_complete']
 
         " refresh completion when deleting a character
-        inoremap <buffer><expr><C-h> col('.') == 1 ?
-            \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
-        inoremap <buffer><expr><BS> col('.') == 1 ?
-            \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+        inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+        inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
         " confirm selection
         inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
