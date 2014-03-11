@@ -240,7 +240,7 @@ alias pbpaste='xclip -selection clipboard -o'
 alias etccommit='sudo etckeeper commit "Quick commit."'
 alias sgit='sudo git'
 alias gitc='git commit -a -m '
-alias livestreamer='livestreamer -p "mpv --cache=524288 --cache-min=0.2 -"'
+alias livestreamer='livestreamer -p "mpv --cache=524288 --cache-min=0.1 --fs -"'
 
 # }}}
 # Functions {{{
