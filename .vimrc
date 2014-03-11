@@ -275,16 +275,15 @@ endif
 " }}}
 " Key mappings - Plugins {{{
 
-" completion for neocomplete
-" use tab for completion
-inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" neocomplete
+inoremap <expr><tab>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 if exists('*neocomplete#close_popup')
     " refresh completion when deleting a character
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
     " confirm selection
-    inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
+    inoremap <expr><CR> neocomplete#close_popup()."\<CR>"
 endif
 
 " easy-align
@@ -599,10 +598,10 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 function! s:init_cmdwin()
     " leave command window quicker
     nnoremap <buffer><silent> q :<C-u>quit<CR>
-    nnoremap <buffer><silent> <TAB> :<C-u>quit<CR>
+    nnoremap <buffer><silent> <tab> :<C-u>quit<CR>
 
     " use tab for completion
-    inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <buffer><expr><tab>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
     if exists('*neocomplete#close_popup')
         let g:neocomplcache_enable_auto_select = 0
