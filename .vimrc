@@ -67,6 +67,7 @@ endif
 
 set guioptions=c                  " Get rid of useless GUI elements
 set winwidth=78                   " minimum split width
+
 set winheight=15                  " minimum split height
 set colorcolumn=80                " highlight this column
 set nuw=4                         " number line width
@@ -522,15 +523,15 @@ nnoremap <space>gpl :Dispatch! git pull<CR>
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 8<CR>
 nnoremap <F10> :<CR>
-nnoremap <F9> :<CR>
-nnoremap <F8> :<CR>
-nnoremap <F7> :set wrap!<CR>
-nnoremap <F6> :set hlsearch!<CR>
-nnoremap <F5> :set spell!<CR>
-nnoremap <F4> :<cr>
-nnoremap <F3> :<cr>
-nnoremap <F2> :<cr>
-nnoremap <F1> :exe ":!urxvtc -e man ".shellescape(expand('<cword>'), 1)<cr><cr>
+nnoremap <F9>  :<CR>
+nnoremap <F8>  :<CR>
+nnoremap <F7>  :set wrap!<CR>
+nnoremap <F6>  :set hlsearch!<CR>
+nnoremap <F5>  :set spell!<CR>
+nnoremap <F4>  :<cr>
+nnoremap <F3>  :<cr>
+nnoremap <F2>  :vnew<cr>:setlocal buftype=nofile bufhidden=wipe nobuflisted<cr>
+nnoremap <F1>  :exe ":!urxvtc -e man ".shellescape(expand('<cword>'), 1)<cr><cr>
 
 " }}}
 " autocmd settings {{{
