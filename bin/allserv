@@ -1,0 +1,10 @@
+#!/bin/bash
+
+ACTION=$1
+shift
+SERVICES=$@
+
+for SERVICE in $SERVICES
+do
+    sudo rc-service $SERVICE $ACTION
+done
