@@ -330,8 +330,8 @@ xnoremap / <esc>/\%V
 iabbrev </ </<C-X><C-O>
 
 " jump forward or backward to any type of bracket
-nnoremap <CR> /[][)(}{]<CR>:nohl<cr>
-nnoremap <S-CR> ?[][)(}{]<CR>:nohl<cr>
+nnoremap <CR> /[[({]<CR>:nohl<cr>zz
+nnoremap <S-CR> /[])}]<CR>:nohl<cr>zz
 
 " reselect visual block after indent/outdent
 xnoremap < <gv
