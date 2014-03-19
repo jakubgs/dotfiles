@@ -211,6 +211,7 @@ let g:hardtime_default_on = 1
 let g:hardtime_timeout = 2
 
 " Don't make comments italic
+let g:jellybeans_use_lowcolor_black = 0
 let g:jellybeans_overrides = {
             \ 'Comment':{ 'cterm': 'italic' },
             \ 'Todo':   { 'gui' : 'bold', 'guibg': 'ff0000', 'cterm': '224'},
@@ -220,7 +221,6 @@ let g:jellybeans_overrides = {
 
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
-let g:jellybeans_use_lowcolor_black = 0
 
 " Stop CtrlP from recalculating on files on start
 let g:ctrlp_user_command = 'ag %s -l -a --nocolor -g ""'
