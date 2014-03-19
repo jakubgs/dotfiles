@@ -328,6 +328,10 @@ xnoremap / <esc>/\%V
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
 
+" jump forward or backward to any type of bracket
+nnoremap <CR> /[][)(}{]<CR>
+nnoremap <S-CR> ?[][)(}{]<CR>
+
 " reselect visual block after indent/outdent
 xnoremap < <gv
 xnoremap > >gv
