@@ -215,10 +215,11 @@ let g:jellybeans_overrides = {
             \ 'Comment':{ 'cterm': 'italic' },
             \ 'Todo':   { 'gui' : 'bold', 'guibg': 'ff0000', 'cterm': '224'},
             \ 'Folded': { 'guifg': 'dddddd', 'guibg': '333333'},
+            \ 'MatchParen': { 'guifg': 'dddddd', 'guibg': 'de3a3a'}
             \}
 
-highlight Normal ctermbg=NONE " use terminal background
-highlight nonText ctermbg=NONE " use terminal background
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
 let g:jellybeans_use_lowcolor_black = 0
 
 " Stop CtrlP from recalculating on files on start
@@ -329,8 +330,8 @@ xnoremap / <esc>/\%V
 iabbrev </ </<C-X><C-O>
 
 " jump forward or backward to any type of bracket
-nnoremap <CR> /[][)(}{]<CR>
-nnoremap <S-CR> ?[][)(}{]<CR>
+nnoremap <CR> /[][)(}{]<CR>:nohl<cr>
+nnoremap <S-CR> ?[][)(}{]<CR>:nohl<cr>
 
 " reselect visual block after indent/outdent
 xnoremap < <gv
