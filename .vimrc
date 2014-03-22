@@ -316,12 +316,12 @@ let mapleader = ","
 let maplocalleader = "\\"
 
 " easier access to commands
-nnoremap ; q:
+nnoremap ; :<c-f>
 nnoremap : ;
 nnoremap q; :
-xnoremap ; q:
+xnoremap ; :<c-f>
 xnoremap : ;
-nnoremap q; :
+xnoremap q; :
 
 " search within visual block
 xnoremap / <esc>/\%V
