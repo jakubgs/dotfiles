@@ -132,7 +132,8 @@ set hlsearch                      " highlighting search results
 set incsearch                     " start searching as you type
 set smartcase                     " ignore case unless upper case used
 set iskeyword+=$,@,%,#            " not word dividers
-set iskeyword-=_                  " word dividers
+"set iskeyword-=_                  " word dividers
+set tags=tags;/                   " search for ctags in pwd and go up
 set hidden                        " buffer change, more undo
 set ttyfast                       " Faster standard output
 set wildmenu                      " File menu
@@ -304,6 +305,10 @@ nmap y<space>l <Plug>(easyoperator-line-yank)
 " surround
 " c style comments using *
 let g:surround_42 = "/* \r */"
+" Powershell comments
+let g:surround_35 = "<# \r #>"
+" Powershell variable brackets for strings
+let g:surround_36 = "$(\r)"
 
 " }}}
 " Key mappings - General {{{
