@@ -326,6 +326,10 @@ xnoremap q; :
 " search within visual block
 xnoremap / <esc>/\%V
 
+" same bindings for merging diffs as in normal mode
+xnoremap dp :diffput<cr>
+xnoremap dg :diffget<cr>
+
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
 
@@ -607,6 +611,9 @@ function! s:init_cmdwin()
 
     " use tab for completion
     inoremap <buffer><expr><tab>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+    " get normal <CR> behaviour
+    nnoremap <buffer><cr> <cr>
 
     if exists('*neocomplete#close_popup')
         let g:neocomplcache_enable_auto_select = 0
