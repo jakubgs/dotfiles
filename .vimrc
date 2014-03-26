@@ -330,6 +330,8 @@ xnoremap / <esc>/\%V
 " same bindings for merging diffs as in normal mode
 xnoremap dp :diffput<cr>
 xnoremap do :diffget<cr>
+" easy diff update
+xnoremap du :diffupdate<cr>
 
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
