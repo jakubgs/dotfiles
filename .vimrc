@@ -95,7 +95,7 @@ set expandtab                     " use spaces instead of tabs
 set smarttab                      " ;
 set tabstop=4                     " spaces in <tab>
 set softtabstop=4                 " spaces in <tab> when editing
-set shiftwidth=4                  " spaces for each step of (auto)indendj
+set shiftwidth=4                  " spaces for each step of (auto)indendt
 set cinoptions=>4                 " how cindent indents lines in C programs
 
 " }}}
@@ -206,10 +206,6 @@ let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 0
-
-" Harttime
-let g:hardtime_default_on = 1
-let g:hardtime_timeout = 2
 
 " Don't make comments italic
 let g:jellybeans_use_lowcolor_black = 0
@@ -339,8 +335,8 @@ xnoremap do :diffget<cr>
 iabbrev </ </<C-X><C-O>
 
 " jump forward or backward to any type of bracket
-nnoremap <CR> /[[({]<CR>:nohl<cr>zz
-nnoremap <S-CR> /[])}]<CR>:nohl<cr>zz
+nnoremap <CR> /[[({]<CR>zz
+nnoremap <S-CR> /[])}]<CR>zz
 
 " reselect visual block after indent/outdent
 xnoremap < <gv
@@ -533,8 +529,8 @@ nnoremap <space>gpl :Dispatch! git pull<CR>
 
 nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 10<CR>
-nnoremap <F10> :<CR>
-nnoremap <F9>  :<CR>
+nnoremap <F10> :Start %:p<CR>
+nnoremap <F9>  :Dispatch %:p<CR>
 nnoremap <F8>  :<CR>
 nnoremap <F7>  :setlocal wrap!<CR>
 nnoremap <F6>  :setlocal hlsearch!<CR>
