@@ -327,12 +327,6 @@ xnoremap q; :
 " search within visual block
 xnoremap / <esc>/\%V
 
-" same bindings for merging diffs as in normal mode
-xnoremap dp :diffput<cr>
-xnoremap do :diffget<cr>
-" easy diff update
-xnoremap du :diffupdate<cr>
-
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
 
@@ -560,7 +554,7 @@ augroup awesomerc
     autocmd BufWritePost $HOME/.config/awesome/rc.lua Dispatch awesome -k
 augroup END
 
-augroup filesettings
+augroup file_settings
     autocmd!
     " per file syntax
     autocmd BufRead,BufNewFile .pentadactylrc set filetype=vim
@@ -574,6 +568,15 @@ augroup MyAutoCmd
     autocmd!
     autocmd CmdwinEnter * call s:init_cmdwin()
     autocmd CmdwinLeave * let g:neocomplcache_enable_auto_select = 1
+augroup END
+
+augroup fugitive_settings
+    autocmd!
+    " same bindings for merging diffs as in normal mode
+    autocmd BufRead fugitive://* xnoremap <buffer> dp :diffput<cr>
+    autocmd BufRead fugitive://* xnoremap <buffer> do :diffget<cr>
+    " easy diff update
+    autocmd BufRead fugitive://* xnoremap <buffer> du :diffupdate<cr>
 augroup END
 
 " }}}
