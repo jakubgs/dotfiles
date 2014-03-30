@@ -579,6 +579,11 @@ augroup fugitive_settings
     autocmd BufRead fugitive://* xnoremap <buffer> du :diffupdate<cr>
 augroup END
 
+augroup quickfix_settings
+    autocmd!
+    autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+augroup EN
+
 " }}}
 " Functions {{{
 
