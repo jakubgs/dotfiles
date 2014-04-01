@@ -1,6 +1,7 @@
 [default]
 ao=alsa
 vo=vdpau,opengl-hq,opengl,xv
+hwdec=vdpau
 embeddedfonts= "yes"
 brightness=0
 subcp=cp1250
