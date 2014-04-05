@@ -14,13 +14,6 @@ function run {
 	fi
 }
 
-export VDPAU_DRIVER=nvidia
-export OOO_FORCE_DESKTOP="xfce4"
-export DE="xfce"
-export BROWSER="thunar"
-export TERMINAL="urxvtc"
-TERMINAL_S=~/bin/urxvts
-
 ####### programs to run ########
 
 echo "### Autostarting programs:"
@@ -32,9 +25,9 @@ run gvim
 
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
-	$TERMINAL_S -name mmtail -e ~/bin/mmtail &
+	urxvtc -name mmtail -e ~/bin/mmtail &
 	# Start mpd client
-	$TERMINAL_S -name ncmpcpp -e ncmpcpp &
+	urxvtc -name ncmpcpp -e ncmpcpp &
 fi
 
 run thunar --daemon > /var/log/thunar.log 2>&1
