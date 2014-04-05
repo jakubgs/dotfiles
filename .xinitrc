@@ -1,3 +1,9 @@
+export VDPAU_DRIVER=nvidia
+export OOO_FORCE_DESKTOP="xfce4"
+export DE="xfce"
+export BROWSER="thunar"
+export TERMINAL="urxvtc"
+
 # Keyboard layout
 setxkbmap -layout pl
 
