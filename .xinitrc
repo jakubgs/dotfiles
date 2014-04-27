@@ -15,4 +15,4 @@ xcape
 wmname LG3D
 
 # Start awesome
-exec awesome --no-argb >> ~/.awesome_stdout 2>> ~/.awesome_stderr
+exec awesome >> ~/.awesome_stdout 2>> ~/.awesome_stderr
