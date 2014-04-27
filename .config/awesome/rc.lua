@@ -12,6 +12,8 @@ wibox = require("wibox")
 beautiful = require("beautiful")
 -- Notification library
 vicious = require("vicious")
+-- Widgets and layouts
+lain = require("lain")
 vicious.widgets.mpd = require("vicious.widgets.mpd")
 vicious.widgets.volume = require("vicious.widgets.volume")
 naughty = require('naughty')
@@ -26,7 +28,7 @@ beautiful.init(homedir .. ".awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
-fmanager = "thunar /mnt/melchior/torrent"
+fmanager = "pcmanfm /mnt/melchior/torrent"
 terminal = "urxvtc"
 terminal_s = homedir .. "bin/urxvts"
 editor = os.getenv("EDITOR") or "vim"
@@ -180,6 +182,14 @@ function (widget, args)
     end
 end, 1) -- refresh every 2 seconds
 
+-- CPU
+mycpu = lain.widgets.cpu({
+    timeout = 4,
+    settings = function()
+        widget:set_markup("| CPU " .. cpu_now.usage .. "% |")
+    end
+})
+
 mympdwidget:buttons(awful.util.table.join(
 awful.button({ }, 1, function () awful.util.spawn("mpc toggle", false) end),
 awful.button({ }, 3, function () awful.util.spawn("mpc random", false) end),
@@ -276,6 +286,7 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
+    if s == 1 then right_layout:add(mycpu) end
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     if s == 2 then right_layout:add(mytextclock) end
     if s == 3 then right_layout:add(mympdwidget) end
