@@ -8,6 +8,8 @@ else
     DIRS=$(realpath "$@")
 fi
 
+OPTIONS="--shuffle"
+
 echo "Scanning ${DIRS}"
 
 find "$DIRS" -type f \
@@ -17,15 +19,17 @@ find "$DIRS" -type f \
 -iname "*.mkv" -o \
 -iname "*.avi" -o \
 -iname "*.mpg" -o \
+-iname "*.moV" -o \
 -iname "*.flv" -o \
 -iname "*.divx" -o \
--iname "*.mp4" \
+-iname "*.mp4" | \
+sort \
 > "$PLAYLIST"
 
 COUNT=$(wc -l $PLAYLIST)
 echo "Found $COUNT video files."
 
-mpv --quiet --shuffle --fs --playlist $PLAYLIST \
+mpv $OPTIONS --quiet --fs --playlist $PLAYLIST \
     | awk 'BEGIN{FS="/"}/Playing:/{I++; printf(" *%3d - %s\n", I, $NF)}'
 
 rm $PLAYLIST
