@@ -73,9 +73,13 @@ nmap -builtin <leader>o :!echo "<S-Insert>" | sed 's/ / | /g' | xclip <CR>:tabop
 " pop out youtube video
 nmap -builtin <leader>f y:!echo "<S-Insert>" | sed 's/youtu.be\//www.youtube.com\/tv?vq=high#\/watch?v=/g' | xclip <CR>:tabopen <S-Insert><CR>
 
+" use livestreamer
+nmap -builtin <leader>l y:!livestreamer -p "mpv --fs -" "<S-Insert>" source,best,720p,medium &<CR><CR>d
+
 " download youtube video
-nmap -builtin <leader>d y:!mpv -- "<S-Insert>" &<CR><CR>
-nmap -builtin <leader>D y:!~/bin/urxvtb -hold -e ~/bin/ytdl "<S-Insert>" &<CR><CR>
+nmap -builtin <leader>d y:!mpv -- "<S-Insert>" &<CR><CR>d
+nmap -builtin <leader>D y:!urxvtc -hold -e ~/bin/ytdl "<S-Insert>" &<CR><CR>
+nmap -builtin <leader>A y:!urxvtc -hold -e ~/bin/ytdl "<S-Insert>" &<CR><CR>
 
 " faster expose
 map -builtin e <c-s-e>
