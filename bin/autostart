@@ -30,7 +30,7 @@ if ! pgrep ncmpcpp &>/dev/null; then
 	urxvtc -name ncmpcpp -e ncmpcpp &
 fi
 
-run pcmanfm -d --no-desktop
+run thunar --daemon
 run xbindkeys
 run firefox
 run thunderbird

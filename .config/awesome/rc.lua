@@ -28,7 +28,7 @@ beautiful.init(homedir .. ".awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
-fmanager = "pcmanfm /mnt/melchior/torrent"
+fmanager = "thunar /mnt/melchior/torrent"
 terminal = "urxvtc"
 terminal_s = homedir .. "bin/urxvts"
 editor = os.getenv("EDITOR") or "vim"
