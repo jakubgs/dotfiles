@@ -209,7 +209,7 @@ bindkey "\e[2~" quoted-insert
 
 # Global
 alias -g A='; alert'
-alias -g G='| grep -i'
+alias -g G='| grep --color -iE'
 alias -g V='| vim -'
 
 alias x='startx'
