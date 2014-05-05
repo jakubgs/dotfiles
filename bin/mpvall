@@ -2,13 +2,24 @@
 
 PLAYLIST="/tmp/playlist.m3u"
 
+# parse options
+while getopts ":s" o; do
+    case "${o}" in
+        s)
+            OPTIONS="--shuffle"
+            ;;
+        *)
+            echo "Usage: $0 [-s] [DIRS|FILES] .."
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
 if [[ -z $1 ]]; then
     DIRS=$(pwd)
 else
     DIRS=$(realpath "$@")
 fi
-
-OPTIONS="--shuffle"
 
 echo "Scanning ${DIRS}"
 
