@@ -178,6 +178,11 @@ bindkey -v
 # 10ms for key sequences
 KEYTIMEOUT=1
 
+# edit current command in vim
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
 # fix backspace in append mode
 bindkey "^?" backward-delete-char
 
