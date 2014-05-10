@@ -293,6 +293,8 @@ map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
+" fast search by letter
+nmap <CR> <Plug>(easymotion-s)
 
 " easyoperator
 nmap d<space>l <Plug>(easyoperator-line-delete)
@@ -331,8 +333,8 @@ xnoremap / <esc>/\%V
 iabbrev </ </<C-X><C-O>
 
 " jump forward or backward to any type of bracket
-nnoremap <CR> /[[({]<CR>zz
-nnoremap <S-CR> /[])}]<CR>zz
+"nnoremap <CR> /[[({]<CR>zz
+"nnoremap <S-CR> /[])}]<CR>zz
 
 " reselect visual block after indent/outdent
 xnoremap < <gv
