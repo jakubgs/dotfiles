@@ -1,0 +1,3 @@
+[submodule "/home/sochan/.vim/bundle/vim-hardtime"]
+	path = /home/sochan/.vim/bundle/vim-hardtime
+	url = https://github.com/takac/vim-hardtime
