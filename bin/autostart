@@ -22,14 +22,6 @@ nitrogen --restore
 
 run urxvtd -q -f -o
 run gvim
-
-# start the usual terminal windows
-if ! pgrep ncmpcpp &>/dev/null; then
-	urxvtc -name mmtail -e ~/bin/mmtail &
-	# Start mpd client
-	urxvtc -name ncmpcpp -e ncmpcpp &
-fi
-
 run thunar --daemon
 run xbindkeys
 run firefox
@@ -39,3 +31,10 @@ run uzbl
 run pidgin
 run skype
 run keepassx
+
+# start the usual terminal windows
+if ! pgrep ncmpcpp &>/dev/null; then
+	urxvts -name mmtail -e ~/bin/mmtail &
+	# Start mpd client
+	urxvtc -name ncmpcpp -e ncmpcpp &
+fi
