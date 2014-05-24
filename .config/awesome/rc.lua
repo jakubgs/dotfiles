@@ -68,12 +68,14 @@ layouts =
 tags = {}
 
 -- Each screen has its own tag table.
-tags[1] = awful.tag({ ":admin:", ":web:", ":im:", ":skype:", ":pass:", ":work:" }, 1,
-{ layouts[2], layouts[8], layouts[2], layouts[3], layouts[2], layouts[8] })
-tags[2] = awful.tag({ ":editor:", ":web:", ":mail:", ":images:", ":movies:", ":work:" }, 2,
-{ layouts[2], layouts[8], layouts[5], layouts[8], layouts[1], layouts[8] })
-tags[3] = awful.tag({ ":admin:", ":web:", ":music:", ":files:", ":misc:", ":work:" }, 3,
-{ layouts[3], layouts[8], layouts[4], layouts[2], layouts[3], layouts[8] })
+tags[1] = awful.tag(
+{ ":admin:",    ":web:",      ":music:",    ":im:",     ":skype:",  ":pass:",   ":work:" }, 1,
+{ layouts[3],   layouts[8],   layouts[4],   layouts[3], layouts[3], layouts[8], layouts[8] })
+tags[2] = awful.tag(
+{ ":editor:",   ":web:",      ":mail:",     ":images:",  ":files:", ":movies:", ":work:" }, 2,
+{ layouts[2],   layouts[8],   layouts[5],   layouts[2], layouts[1], layouts[2], layouts[8] })
+--tags[3] = awful.tag({ ":admin:", ":web:", ":music:", ":files:", ":misc:", ":work:" }, 3,
+--{ layouts[3], layouts[8], layouts[4], layouts[2], layouts[3], layouts[8] })
 --end
 -- }}}
 -- {{{ Menu
@@ -186,7 +188,7 @@ end, 1) -- refresh every 2 seconds
 mycpu = lain.widgets.cpu({
     timeout = 4,
     settings = function()
-        widget:set_markup("| CPU " .. cpu_now.usage .. "% |")
+        widget:set_markup("| CPU " .. cpu_now.usage .. "% ")
     end
 })
 
@@ -287,10 +289,10 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(mycpu) end
+    if s == 1 then right_layout:add(mympdwidget) end
+    if s == 1 then right_layout:add(myvolume) end
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     if s == 2 then right_layout:add(mytextclock) end
-    if s == 3 then right_layout:add(mympdwidget) end
-    if s == 3 then right_layout:add(myvolume) end
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -466,17 +468,17 @@ awful.rules.rules = {
     { rule = { name = "Session Manager.*" },
     properties = { floating = true } },
     { rule = { class = "Uzbl-core" },
-    properties = { tag = tags[3][2] } },
+    properties = { tag = tags[1][2] } },
     { rule = { instance = "ncmpcpp" },
-    properties = { tag = tags[3][3] } },
+    properties = { tag = tags[1][3] } },
     { rule = { name = "htop" },
-    properties = { tag = tags[3][3] } },
+    properties = { tag = tags[1][3] } },
     { rule = { name = "mhtop" },
-    properties = { tag = tags[3][3] } },
+    properties = { tag = tags[1][3] } },
     { rule = { name = "mmtail" },
     properties = { tag = tags[1][1] } },
     { rule = { name = "ytdl" },
-    properties = { tag = tags[3][1] } },
+    properties = { tag = tags[1][1] } },
     { rule = { name = "pentadactyl.*" },
     properties = {
         --ontop = true,
@@ -488,21 +490,30 @@ awful.rules.rules = {
     { rule = { class = ".*Wine.*" },
     properties = {
         tag = tags[2][4],
-        floating = true,
+        floating = false,
         fullscreen = true,
         ontop = true
     } },
     { rule = { name = "Windows.*" },
     properties = {
-        tag = tags[2][6],
+        tag = tags[1][7],
         floating = false,
         fullscreen = true,
         maximized_horizontal = true,
         maximized_vertical   = true
     } },
+    { rule = { class = "qemu.*" },
+    properties = {
+        tag = tags[2][7],
+        floating = true,
+        fullscreen = true,
+        ontop = true,
+        --maximized_horizontal = true,
+        --maximized_vertical   = true
+    } },
     { rule = { name = "Gentoo Testing System .*" },
     properties = {
-        tag = tags[3][6],
+        tag = tags[1][7],
         floating = false,
         maximized_horizontal = true,
         maximized_vertical   = true
@@ -522,7 +533,7 @@ awful.rules.rules = {
     { rule = { instance = "plugin-container" },
     properties = { floating = true, fullscreen = true } },
     { rule = { class = "Pidgin" },
-    properties = { floating = false, tag = tags[1][3] } },
+    properties = { floating = false, tag = tags[1][4] } },
     { rule = { class = "Skype" },
     properties = { floating = false, tag = tags[1][4] } },
     { rule = { class = "Thunderbird" },
