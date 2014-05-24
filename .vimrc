@@ -33,8 +33,8 @@ NeoBundle 'PProvost/vim-ps1'
 NeoBundle 'vim-scripts/vis'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'takac/vim-hardtime'
 if ( has("lua") )
     NeoBundle 'Shougo/neocomplete'
 endif
@@ -191,6 +191,11 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
+" Hardtime
+let g:hardtime_maxcount = 2
+"let g:hardtime_allow_different_key = 1
+let g:hardtime_showmsg = 1
+
 " NetRW
 let g:netrw_liststyle= 3
 let g:netrw_browse_split = 4
@@ -259,7 +264,9 @@ let g:LatexBox_quickfix=2
 " don't show just warnings
 let g:LatexBox_show_warnings=0
 " compile in the background
-let g:LatexBox_latexmk_async=0
+let g:LatexBox_latexmk_async=1
+" automatically compile
+let g:LatexBox_latexmk_preview_continuously=1
 " fold table of contents
 let g:LatexBox_fold_toc=1
 " use evince for viewing pdf
@@ -385,16 +392,6 @@ nnoremap <c-l> <c-w>l
 " easier navigation through tabs
 nnoremap <c-Tab>   :tabnext<CR>
 nnoremap <c-s-Tab> :tabprevious<CR>
-
-" Learn to use hjkl
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
 
 " easier newline
 inoremap <c-j> <cr>
