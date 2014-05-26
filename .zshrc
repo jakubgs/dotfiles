@@ -323,9 +323,10 @@ function alert {
     echo $MESSAGE | awesome-client -
 }
 
+# change color based on vimode
 zle-keymap-select () {
     if [ $KEYMAP = vicmd ]; then
-        echo -ne "\033]12;Green\007"
+        echo -ne "\033]12;Red\007"
     else
         echo -ne "\033]12;White\007"
     fi
