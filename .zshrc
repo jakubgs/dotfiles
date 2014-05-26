@@ -1,4 +1,4 @@
-# Author: Jakub Sokołowski <panswiata@gmail.com>
+
 # Source: https://github.com/PonderingGrower/dotfiles
 
 # Preamble {{{
@@ -231,7 +231,6 @@ alias dy='df --sync -hTt ext4'
 alias restart='sudo rc-config restart '
 alias pjwstk='sudo sshfs s5134@sftp.pjwstk.edu.pl: /mnt/pjwstk -o uid=500,allow_other'
 alias sshm='ssh melchior'
-alias sshl='TERM=vt100; ssh leliel'
 alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
@@ -250,6 +249,15 @@ alias livestreamer='livestreamer -p "mpv --cache=524288 --cache-min=0.1 --fs -"'
 
 # }}}
 # Functions {{{
+
+function sshl() {
+    OLDTERM=$TERM
+    TERM="vt100"
+
+    ssh leliel
+
+    TERM=$OLDTERM
+}
 
 # reload zshrc
 function src() {
@@ -314,5 +322,27 @@ function alert {
     # send it to awesome
     echo $MESSAGE | awesome-client -
 }
+
+zle-keymap-select () {
+    if [ $KEYMAP = vicmd ]; then
+        echo -ne "\033]12;Green\007"
+    else
+        echo -ne "\033]12;White\007"
+    fi
+}
+zle -N zle-keymap-select
+
+zle-line-finish () {
+    zle -K viins
+    echo -ne "\033]12;White\007"
+}
+zle -N zle-line-finish
+
+zle-line-init () {
+    zle -K viins
+    echo -ne "\033]12;White\007"
+}
+zle -N zle-line-init
+bindkey -v
 
 # }}}
