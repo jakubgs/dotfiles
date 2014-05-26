@@ -192,9 +192,9 @@ augroup END
 " Plugin configuration {{{
 
 " Hardtime
+let g:hardtime_default_on = 1
 let g:hardtime_maxcount = 2
-"let g:hardtime_allow_different_key = 1
-let g:hardtime_showmsg = 1
+let g:hardtime_allow_different_key = 1
 
 " NetRW
 let g:netrw_liststyle= 3
@@ -332,6 +332,10 @@ nnoremap q; :
 xnoremap ; :<c-f>
 xnoremap : ;
 xnoremap q; :
+
+" easier escape to normal mode
+inoremap jk <esc>
+inoremap kj <esc>
 
 " search within visual block
 xnoremap / <esc>/\%V
