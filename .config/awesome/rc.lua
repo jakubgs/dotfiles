@@ -70,10 +70,10 @@ tags = {}
 -- Each screen has its own tag table.
 tags[1] = awful.tag(
 { ":admin:",    ":web:",      ":music:",    ":im:",     ":skype:",  ":pass:",   ":work:" }, 1,
-{ layouts[3],   layouts[8],   layouts[4],   layouts[3], layouts[3], layouts[8], layouts[8] })
+{ layouts[3],   layouts[8],   layouts[4],   layouts[3], layouts[3], layouts[3], layouts[8] })
 tags[2] = awful.tag(
-{ ":editor:",   ":web:",      ":mail:",     ":images:",  ":files:", ":movies:", ":work:" }, 2,
-{ layouts[2],   layouts[8],   layouts[5],   layouts[2], layouts[1], layouts[2], layouts[8] })
+{ ":editor:",   ":web:",      ":mail:",     ":wine:",   ":files:",  ":remote:", ":work:" }, 2,
+{ layouts[2],   layouts[8],   layouts[5],   layouts[2], layouts[1], layouts[8], layouts[8] })
 --tags[3] = awful.tag({ ":admin:", ":web:", ":music:", ":files:", ":misc:", ":work:" }, 3,
 --{ layouts[3], layouts[8], layouts[4], layouts[2], layouts[3], layouts[8] })
 --end
@@ -141,7 +141,7 @@ mymainmenu = awful.menu({ items = {
     { "vm",         myvmmenu, beautiful.awesome_icon },
     { "-------------", nil },
     { "firefox",    browser },
-    { "rutorrent",  "uzbl" },
+    { "rutorrent",  "dwb" },
     { "thunderbird","thunderbird" },
     { "-------------", nil },
     { "file manager",   fmanager },
@@ -467,7 +467,7 @@ awful.rules.rules = {
     callback = function(c) awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c) end},
     { rule = { name = "Session Manager.*" },
     properties = { floating = true } },
-    { rule = { class = "Uzbl-core" },
+    { rule = { class = "Dwb" },
     properties = { tag = tags[1][2] } },
     { rule = { instance = "ncmpcpp" },
     properties = { tag = tags[1][3] } },
@@ -499,8 +499,8 @@ awful.rules.rules = {
         tag = tags[1][7],
         floating = false,
         fullscreen = true,
-        maximized_horizontal = true,
-        maximized_vertical   = true
+        --maximized_horizontal = true,
+        --maximized_vertical   = true
     } },
     { rule = { class = "qemu.*" },
     properties = {
@@ -520,7 +520,7 @@ awful.rules.rules = {
     } },
     { rule = { class = "Remmina" },
     properties = {
-        tag = tags[1][6],
+        tag = tags[2][6],
         floating = false,
         fullscreen= false,
         --maximized_horizontal = true,

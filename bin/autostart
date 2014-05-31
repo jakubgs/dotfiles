@@ -27,7 +27,7 @@ run xbindkeys
 run firefox
 run thunderbird
 run remmina > /dev/null 2>&1
-run uzbl
+run dwb
 run pidgin
 run skype
 run keepassx
