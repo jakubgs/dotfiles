@@ -1,9 +1,9 @@
 ! Swap caps Lock and escape
 remove Lock = Caps_Lock
 remove Lock = Scroll_Lock
-remove Control = Control_L
-keysym Caps_Lock = Control_L
+remove Control = Control_R
+keysym Caps_Lock = Control_R
 keysym Scroll_Lock = Caps_Lock
 add Lock = Caps_Lock
 add Lock = Scroll_Lock
-add Control = Control_L
+add Control = Control_R
