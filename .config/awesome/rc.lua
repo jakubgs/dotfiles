@@ -69,8 +69,8 @@ tags = {}
 
 -- Each screen has its own tag table.
 tags[1] = awful.tag(
-{ ":admin:",    ":web:",      ":music:",    ":im:",     ":skype:",  ":pass:",   ":work:" }, 1,
-{ layouts[3],   layouts[8],   layouts[4],   layouts[3], layouts[3], layouts[3], layouts[8] })
+{ ":admin:",    ":web:",      ":music:",    ":im:",     ":files:",  ":pass:",   ":work:" }, 1,
+{ layouts[3],   layouts[8],   layouts[4],   layouts[3], layouts[1], layouts[3], layouts[8] })
 tags[2] = awful.tag(
 { ":editor:",   ":web:",      ":mail:",     ":wine:",   ":files:",  ":remote:", ":work:" }, 2,
 { layouts[2],   layouts[8],   layouts[5],   layouts[2], layouts[1], layouts[8], layouts[8] })
@@ -114,7 +114,7 @@ mygamesmenu = {
     { "SC2",        "wine \"/mnt/stuff/Games/StarCraft II/StarCraft II.exe\"" },
     { "EU4",        "wine \"/mnt/stuff/Games/Europa\ Universalis\ IV/eu4.exe\"" },
     { "FTL",        terminal .. " -e cd /mnt/stuff/Games/Faster\ Than\ Light && wine FTLGame.exe" },
-    { "KSP",        "wine \"/mnt/stuff/Games/Kerbal Space Program/KSP.exe\"" },
+    { "KSP",        "wine \"/mnt/stuff/Games/Steam/SteamApps/common/Kerbal Space Program/KSP.exe\"" },
 }
 
 myvmmenu = {
@@ -351,6 +351,12 @@ awful.key({ modkey, "Control" }, "h",       function () awful.tag.incncol( 1)   
 awful.key({ modkey, "Control" }, "l",       function () awful.tag.incncol(-1)         end),
 awful.key({ modkey,           }, "space",   function () awful.layout.inc(layouts,  1) end),
 awful.key({ modkey, "Shift"   }, "space",   function () awful.layout.inc(layouts, -1) end),
+-- Poker II Fn keys
+awful.key({ "Mod4",           }, "w",       function () awful.util.spawn("xdotool key Up") end),
+awful.key({ "Mod4",           }, "s",       function () awful.util.spawn("xdotool key Down") end),
+awful.key({ "Mod4",           }, "a",       function () awful.util.spawn("xdotool key Left") end),
+awful.key({ "Mod4",           }, "d",       function () awful.util.spawn("xdotool key Right") end),
+awful.key({ "Mod4",           }, "q",       function () awful.util.spawn("urxvtc") end),
 -- Prompt
 awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 awful.key({ modkey,           }, "d",       -- toggle between last raised windows
@@ -487,7 +493,7 @@ awful.rules.rules = {
     } },
     { rule = { name = "Vim" },
     properties = { tag = tags[2][1] } },
-    { rule = { class = ".*Wine.*" },
+    { rule = { class = "Wine.*" },
     properties = {
         tag = tags[2][4],
         floating = false,
@@ -496,7 +502,7 @@ awful.rules.rules = {
     } },
     { rule = { name = "Windows.*" },
     properties = {
-        tag = tags[1][7],
+        tag = tags[2][7],
         floating = false,
         fullscreen = true,
         --maximized_horizontal = true,
