@@ -10,12 +10,14 @@ eval "$CMD";'
 if [[ -z $1 ]]; then
     DIRS=$(pwd)
 else
-    DIRS=$(realpath "$@")
+    DIRS=$(echo "$@" | xargs realpath)
 fi
+
+DIRS=$(echo "$DIRS" | tr '\n' ' ')
 
 echo "Scanning ${DIRS}"
 
-find "$DIRS" -type f \
+find $DIRS -type f \
     -iname "*.jpg" -o \
     -iname "*.jpeg" -o \
     -iname "*.png" -o \
