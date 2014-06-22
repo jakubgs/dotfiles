@@ -24,7 +24,7 @@ run urxvtd -q -f -o
 run gvim
 run thunar --daemon
 run xbindkeys
-run firefox
+#run firefox
 run thunderbird
 run remmina > /dev/null 2>&1
 run dwb
@@ -38,3 +38,8 @@ if ! pgrep ncmpcpp &>/dev/null; then
 	# Start mpd client
 	urxvtc -name ncmpcpp -e ncmpcpp &
 fi
+
+# for control with xbox pad
+run xboxdrv --silent --daemon
+run antimicro --profile .config/antimicro/xpad2keyboard.xml -d --tray
+
