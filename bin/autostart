@@ -42,4 +42,3 @@ fi
 # for control with xbox pad
 run xboxdrv --silent --daemon
 run antimicro --profile .config/antimicro/xpad2keyboard.xml -d --tray
-
