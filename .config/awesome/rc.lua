@@ -352,11 +352,8 @@ awful.key({ modkey, "Control" }, "l",       function () awful.tag.incncol(-1)   
 awful.key({ modkey,           }, "space",   function () awful.layout.inc(layouts,  1) end),
 awful.key({ modkey, "Shift"   }, "space",   function () awful.layout.inc(layouts, -1) end),
 -- Poker II Fn keys
-awful.key({ "Mod4",           }, "w",       function () awful.util.spawn("xdotool key Up") end),
-awful.key({ "Mod4",           }, "s",       function () awful.util.spawn("xdotool key Down") end),
-awful.key({ "Mod4",           }, "a",       function () awful.util.spawn("xdotool key Left") end),
-awful.key({ "Mod4",           }, "d",       function () awful.util.spawn("xdotool key Right") end),
-awful.key({ "Mod4",           }, "q",       function () awful.util.spawn("urxvtc") end),
+awful.key({ "Mod4",           }, "Tab",     function () awful.tag.viewnext(mouse.screen) end),
+awful.key({ "Mod4", "Shift"   }, "Tab",     function () awful.tag.viewprev(mouse.screen) end),
 -- Prompt
 awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 awful.key({ modkey,           }, "d",       -- toggle between last raised windows
