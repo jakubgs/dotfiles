@@ -284,7 +284,7 @@ let g:LatexBox_fold_toc=1
 " use evince for viewing pdf
 let g:LatexBox_viewer='evince'
 
-" For snippet_complete marker.
+" for snippet_complete marker.
 if has('conceal')
    set conceallevel=2 concealcursor=i
 endif
@@ -303,6 +303,19 @@ if exists('*neocomplete#close_popup')
     inoremap <expr><CR> neocomplete#close_popup()."\<CR>"
 endif
 
+" neosnippet
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
 " easy-align
 xnoremap <silent> <cr> :EasyAlign<cr>
 xnoremap <silent> <space><cr> :LiveEasyAlign<cr>
@@ -318,10 +331,6 @@ nmap <CR> <Plug>(easymotion-s)
 " easyoperator
 nmap d<space>l <Plug>(easyoperator-line-delete)
 nmap y<space>l <Plug>(easyoperator-line-yank)
-
-" SnipMate
-imap <CR> <Plug>(snipMateNextOrTrigger)
-smap <CR> <Plug>(snipMateNextOrTrigger)
 
 " surround
 " c style comments using *
