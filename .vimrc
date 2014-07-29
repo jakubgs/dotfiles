@@ -36,10 +36,8 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'bling/vim-airline'
 "NeoBundle 'takac/vim-hardtime'
 NeoBundle 'eiginn/netrw'
-NeoBundle "MarcWeber/vim-addon-mw-utils"
-NeoBundle "tomtom/tlib_vim"
-NeoBundle 'garbas/vim-snipmate'
-NeoBundle 'honza/vim-snippets'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 if ( has("lua") )
     NeoBundle 'Shougo/neocomplete'
 endif
@@ -322,9 +320,8 @@ nmap d<space>l <Plug>(easyoperator-line-delete)
 nmap y<space>l <Plug>(easyoperator-line-yank)
 
 " SnipMate
-
-imap <C-S> <Plug>(snipMateNextOrTrigger)
-smap <C-S> <Plug>(snipMateNextOrTrigger)
+imap <CR> <Plug>(snipMateNextOrTrigger)
+smap <CR> <Plug>(snipMateNextOrTrigger)
 
 " surround
 " c style comments using *
