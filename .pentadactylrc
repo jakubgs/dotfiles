@@ -67,6 +67,9 @@ nmap -builtin <leader>s :tabopen about:sessionrestore<CR>
 " start private browsing
 nmap -builtin <leader>i :private winopen<CR>
 
+" search selected text in google
+nmap -builtin K S<S-Insert><CR>
+
 " open selected links, replaces spaces between links for propper spearators
 nmap -builtin <leader>o :!echo "<S-Insert>" | sed 's/ / | /g' | xclip <CR>:tabopen <S-Insert><CR>
 
