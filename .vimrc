@@ -34,7 +34,12 @@ NeoBundle 'vim-scripts/vis'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'takac/vim-hardtime'
+"NeoBundle 'takac/vim-hardtime'
+NeoBundle 'eiginn/netrw'
+NeoBundle "MarcWeber/vim-addon-mw-utils"
+NeoBundle "tomtom/tlib_vim"
+NeoBundle 'garbas/vim-snipmate'
+NeoBundle 'honza/vim-snippets'
 if ( has("lua") )
     NeoBundle 'Shougo/neocomplete'
 endif
@@ -74,9 +79,9 @@ set nuw=4                         " number line width
 set ruler                         " show columns and rows
 set cursorline                    " highlight the current line
 set laststatus=2                  " always show the statusline
-set number                        " shot current line number
+set number                        " show current line number
 set relativenumber                " distance from the current line
-set wrap                          " text wrappingi
+set wrap                          " text wrapping
 set linebreak                     " don't break in middle of words
 set showmatch                     " show matching brackets
 set t_vb=                         " don't flash the screen on errors
@@ -197,10 +202,17 @@ let g:hardtime_maxcount = 2
 let g:hardtime_allow_different_key = 1
 
 " NetRW
-let g:netrw_liststyle= 3
-let g:netrw_browse_split = 4
-let g:netrw_preview = 1
-let g:netrw_altv = 1
+"let g:netrw_winsize       = 30
+let g:netrw_banner        = 0
+let g:netrw_liststyle     = 3
+let g:netrw_browse_split  = 4
+let g:netrw_preview       = 1
+let g:netrw_altv          = 1
+let g:netrw_fastbrowse    = 2
+let g:netrw_keepdir       = 0
+let g:netrw_retmap        = 1
+let g:netrw_silent        = 1
+let g:netrw_special_syntax= 1
 
 " Airline
 let g:airline_left_sep=''
@@ -211,6 +223,8 @@ let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 0
+" disable to improve fugitive performance
+let g:airline#extensions#branch#enabled = 0
 
 " Don't make comments italic
 let g:jellybeans_use_lowcolor_black = 0
@@ -307,6 +321,11 @@ nmap <CR> <Plug>(easymotion-s)
 nmap d<space>l <Plug>(easyoperator-line-delete)
 nmap y<space>l <Plug>(easyoperator-line-yank)
 
+" SnipMate
+
+imap <C-S> <Plug>(snipMateNextOrTrigger)
+smap <C-S> <Plug>(snipMateNextOrTrigger)
+
 " surround
 " c style comments using *
 let g:surround_42 = "/* \r */"
@@ -350,10 +369,6 @@ iabbrev </ </<C-X><C-O>
 " reselect visual block after indent/outdent
 xnoremap < <gv
 xnoremap > >gv
-
-" Fast saving
-nnoremap <c-s> :update<cr>
-inoremap <c-s> <c-o>:update<cr>
 
 " make last typed word uppercase
 inoremap <c-u> <esc>viwUea
@@ -456,9 +471,6 @@ nnoremap <silent> <space>l :bnext<CR>
 " toggle last two buffers
 nnoremap <space>u <c-^>
 
-" roggle showing of newline and tab characters
-nnoremap <space>I :set list!<CR>
-
 " strip all trailing whitespaces in current file
 nnoremap <space>O :%s/\s\+$//<cr>:let @/=''<CR>;
 
@@ -480,10 +492,13 @@ nnoremap <silent> <space>[ :<C-U>call <SID>AddLines(1)<CR>
 nnoremap <silent> <space>] :<C-U>call <SID>AddLines(0)<CR>
 
 " performance debugging
-nnoremap <silent> <space>DD :exe ":profile start /tmp/profile.log"<cr>
-                                    \ <bar> profile func *"<cr>
-                                    \ <bar> profile file *"<cr>
-nnoremap <silent> <space>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>"
+nnoremap <silent> <LocalLeader>dd :exe ":profile start /tmp/profile.log"<cr>
+                                \ :exe ":profile func *"<cr>
+                                \ :exe ":profile file *"<cr>
+                                \ :exe "echo 'Profiling vim performance...'"<cr>
+nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
+                                \ :exe ":!gvim /tmp/profile.log"<cr>
+                                \ :exe ":noautocmd qall!"<cr>
 
 " }}}
 " Key mappings - CtrlP {{{
@@ -507,13 +522,14 @@ nnoremap <space><space> :CtrlPBuffer<CR>
 " Key mappings - Git {{{
 
 " fugitive git bindings
-nnoremap <space>ga :Git add %:p<CR><CR>
+nnoremap <space>ga :Git add -- "%:p"<CR><CR>
 nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gc :Gcommit -v -q<CR>
-nnoremap <space>gt :Gcommit -v -q %:p<CR>
+nnoremap <space>gt :Gcommit -v -q -- "%:p"<CR>
 nnoremap <space>gd :Gdiff<CR>
 nnoremap <space>ge :Gedit<CR>
 nnoremap <space>gr :Gread<CR>
+nnoremap <space>gu :Git reset "%:p"<CR><CR>
 nnoremap <space>gw :Gwrite<CR><CR>
 nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
 nnoremap <space>gp :Ggrep<Space>
@@ -530,13 +546,13 @@ nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
 nnoremap <F11> :set guifont=terminus\ 10<CR>
 nnoremap <F10> :Start %:p<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
-nnoremap <F8>  :<CR>
+nnoremap <F8>  :setlocal list!<CR>
 nnoremap <F7>  :setlocal wrap!<CR>
 nnoremap <F6>  :setlocal hlsearch!<CR>
 nnoremap <F5>  :setlocal spell!<CR>
 nnoremap <F4>  :<cr>
-nnoremap <F3>  :<cr>
-nnoremap <F2>  :vnew<cr>:setlocal buftype=nofile bufhidden=wipe nobuflisted<cr>
+nnoremap <F3>  :vnew<cr>:setlocal buftype=nofile bufhidden=wipe nobuflisted<cr>
+nnoremap <F2>  :<c-f>ivert bot help<space>
 nnoremap <F1>  :exe ":!urxvtc -e man ".shellescape(expand('<cword>'), 1)<cr><cr>
 
 " }}}
