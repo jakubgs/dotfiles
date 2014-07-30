@@ -344,7 +344,7 @@ let g:surround_36 = "$(\r)"
 " Key mappings - General {{{
 
 " Toggle pastemode, doesn't indent
-set pastetoggle=<F8>
+set pastetoggle=<F4>
 
 " Changing leader
 let mapleader = ","
@@ -402,6 +402,9 @@ nnoremap g# g#zz
 " to match the behaviour of D
 nnoremap Y y$
 
+" split lines easilly(you can use cc instead of S)
+nnoremap S i<cr><esc><right>
+
 " run last used macro with one key
 nnoremap Q @@
 
@@ -436,8 +439,11 @@ xnoremap <c-c> "+y
 
 nnoremap <space>v :execute getline(".")<cr>;w
 
-" paste and sellect
-nnoremap <space>/ :Ag<Space>
+" put last searched items into QuickFix window
+nnoremap <space>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+
+" use Ag for searching
+nnoremap <space>? :Ag<Space>
 
 " grep word under cursor
 nnoremap <silent> <space>* :Ag "\b<C-R><C-W>\b"<CR>
@@ -556,7 +562,7 @@ nnoremap <F8>  :setlocal list!<CR>
 nnoremap <F7>  :setlocal wrap!<CR>
 nnoremap <F6>  :setlocal hlsearch!<CR>
 nnoremap <F5>  :setlocal spell!<CR>
-nnoremap <F4>  :<cr>
+" nnoremap <F4> is already set as pastetoggle
 nnoremap <F3>  :vnew<cr>:setlocal buftype=nofile bufhidden=wipe nobuflisted<cr>
 nnoremap <F2>  :<c-f>ivert bot help<space>
 nnoremap <F1>  :exe ":!urxvtc -e man ".shellescape(expand('<cword>'), 1)<cr><cr>
@@ -607,7 +613,10 @@ augroup END
 augroup quickfix_settings
     autocmd!
     autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
-augroup EN
+augroup END
+
+augroup autoresize
+    autocmd VimResized * exe "normal! \<c-w>="
 
 " }}}
 " Functions {{{
