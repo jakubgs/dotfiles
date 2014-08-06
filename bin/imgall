@@ -7,29 +7,31 @@ CMD="rm -r \"$(dirname %F)\"";
 echo "$CMD";
 eval "$CMD";'
 
-if [[ -z $1 ]]; then
-    DIRS=$(pwd)
-else
-    DIRS=$(echo "$@" | xargs realpath)
-fi
+DIRS=$(echo "$@" | sed "s/'/\"/g")
 
-DIRS=$(echo "$DIRS" | tr '\n' ' ')
+echo "Scanning: ${DIRS}"
 
-echo "Scanning ${DIRS}"
+SEARCHCMD="find $DIRS -type f \
+    -iname '*.jpg' -o \
+    -iname '*.jpeg' -o \
+    -iname '*.png' -o \
+    -iname '*.gif' -o \
+    -iname '*.bmp' -o \
+    -iname '*.tif' -o \
+    -iname '*.tiff'"
 
-find $DIRS -type f \
-    -iname "*.jpg" -o \
-    -iname "*.jpeg" -o \
-    -iname "*.png" -o \
-    -iname "*.gif" -o \
-    -iname "*.bmp" -o \
-    -iname "*.tif" -o \
-    -iname "*.tiff" \
-    > "$FILELIST"
+eval $SEARCHCMD > "$FILELIST"
 
 COUNT=$(wc -l "$FILELIST")
 echo "Found $COUNT image files."
 
-feh -A "$ACTION" --zoom max --magick-timeout 5 -dZxrSfilename --filelist "$FILELIST" 2>/dev/null
+feh -A "$ACTION" \
+    --zoom max \
+    --auto-zoom \
+    --geometry 1920x1200 \
+    --magick-timeout 5 \
+    -dZxrSfilename \
+    --filelist \
+    "$FILELIST" 2>/dev/null
 
 rm "$FILELIST"
