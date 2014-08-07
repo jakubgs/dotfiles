@@ -6,7 +6,7 @@
     <sets>
         <set index="1">
             <axis index="1">
-                <deadZone>6000</deadZone>
+                <deadZone>16235</deadZone>
                 <maxZone>32000</maxZone>
                 <throttle>normal</throttle>
                 <axisbutton index="1">
@@ -47,8 +47,8 @@
                 </axisbutton>
             </axis>
             <axis index="2">
-                <deadZone>6000</deadZone>
-                <maxZone>32000</maxZone>
+                <deadZone>16280</deadZone>
+                <maxZone>31100</maxZone>
                 <throttle>normal</throttle>
                 <axisbutton index="1">
                     <toggle>false</toggle>
