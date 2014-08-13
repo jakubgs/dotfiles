@@ -34,7 +34,6 @@ NeoBundle 'vim-scripts/vis'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'bling/vim-airline'
-"NeoBundle 'takac/vim-hardtime'
 NeoBundle 'eiginn/netrw'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
@@ -141,10 +140,11 @@ set hidden                        " buffer change, more undo
 set ttyfast                       " Faster standard output
 set wildmenu                      " File menu
 set wildmode=list:longest,full    " ignore case when opening files
-set wildignore=.so,swp,.zip,.mp3,
+set wildignore=.so,.swp,.zip,.mp3,
             \.bak,.pyc,.o,.ojb,.,a,
             \ojb.pdf,.jpg,.gif,.png,
             \.avi,.mkv,.so,.out,.fls,.pdf
+            \.aux,.fls,.out,.fdb_latexmk
 
 if has('patch072')                " check if patch exists to avoid errors
     set wildignorecase            " ignore case when autocompleting paths
@@ -247,7 +247,7 @@ let g:ctrlp_regexp = 0
 let g:ctrlp_root_markers = ['.root', '.git', 'COPYING' ]
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-    \ 'file': '\v\.(exe|so|dll|tmp|temp|swp|o)$',
+    \ 'file': '\v\.(exe|so|dll|tmp|temp|swp|o|aux|out|fls)$',
     \ }
 
 " EasyMotion leader
@@ -616,7 +616,8 @@ augroup quickfix_settings
 augroup END
 
 augroup autoresize
-    autocmd VimResized * exe "normal! \<c-w>="
+    "autocmd VimResized * exe "normal! \<c-w>="
+augroup END
 
 " }}}
 " Functions {{{
