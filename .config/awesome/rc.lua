@@ -490,6 +490,10 @@ awful.rules.rules = {
     } },
     { rule = { name = "Vim" },
     properties = { tag = tags[2][1] } },
+    { rule = { class = "Steam" },
+    properties = {
+        tag = tags[1][7]
+    } },
     { rule = { class = "Wine.*" },
     properties = {
         tag = tags[2][4],
