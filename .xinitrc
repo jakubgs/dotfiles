@@ -14,5 +14,8 @@ xcape
 # Small hack for java compatibility
 wmname LG3D
 
+# start udevil to monitor for devices(for thunar)
+devmon &
+
 # Start awesome
 exec awesome >> ~/.awesome_stdout 2>> ~/.awesome_stderr
