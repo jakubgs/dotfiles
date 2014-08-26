@@ -3,7 +3,16 @@
 # Functions {{{
 
 show_help() {
-    HELP_MSG="TODO"
+    HELP_MSG="Usage: $0 [-hmwes] <MESSAGE>
+
+Shows a notification in awesome window manager using the naughty library.
+Supports multiple types of notices, dependent on switch used:
+
+    -h - This help message.
+    -w - Notification is a warning.
+    -e - Notification is an error
+    -s - Notification is a syslog message. It receives input through stdin.
+    -m <SENDER> - Mail message notification."
 
     echo "${HELP_MSG}"
 }
