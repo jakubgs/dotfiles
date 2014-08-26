@@ -19,7 +19,7 @@ awesome_notification () {
             fg = \"#ffffff\", \
             margin = 8, \
             width = 380, \
-            run = function () run_or_raise(nill, { class = \"${CLASS}\" }) end
+            run = function () run_or_raise(\"${EXECUTE}\", { name = \"${CLASS}\" }) end
             })"
     # send it to awesome
     echo $COMMAND | awesome-client -
@@ -76,7 +76,7 @@ MESSAGE=$@  # get all arguments as the message for this notifiaction
 if [[ $EMAIL ]] ; then
     TITLE="\"E-Mail \t\t\t\t${DATE}\""
     TEXT="\"Sender: ${SENDER}\" .. newline .. \"Subject: ${MESSAGE}\""
-    CLASS="Thunderbird"
+    CLASS="*Thunderbird"
 elif [[ $ERROR ]] ; then
     TITLE="\"Error  \t\t\t\t${DATE}\""
     TEXT="\"Message: ${MESSAGE}\""
@@ -93,6 +93,10 @@ elif [[ $SYSLOG ]] ; then
 
     TITLE="\"Syslog [${PRIORITY}]\t\t${DATE}\""
     TEXT="\"Host: ${HOST}\tProgram: ${PROGRAM}\tPID: ${PID}\" .. newline .. \"Subject: ${MESSAGE}\""
+
+    # raise or run mmtail to check out DEM logs
+    EXECUTE="mmtail"
+    CLASS="mmtail"
 else
     TITLE="\"Reminder \t\t\t$DATE\""
     TEXT="\"Message: ${MESSAGE}\""
