@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# this script is for reading from stdin and starting anotify
+# for every line received, since that's how syslog-ng sends
+# it's logs to a destination defined with progrem();
+
+LOG_FILE=/tmp/syslog_anotify.log
+
+# for using this script with sudo
+export XAUTHORITY=/home/${USER}/.Xauthority
+export DISPLAY=:0.0
+
+# allow the root user access to the X server
+#xhost local:sochan
+
+while read LINE
+do
+   echo "$LINE" | /home/sochan/bin/anotify -s 2>&1 >> $LOG_FILE
+   
+   # for debugging
+   #echo "$LINE" >> $LOG_FILE
+done

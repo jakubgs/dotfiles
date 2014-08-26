@@ -1,19 +1,102 @@
 #!/bin/bash
 
-DATE=`date +"%a %b %d/%m/%Y, %H:%M:%S"` # get time of completion
-MESSAGE=$@  # get all arguments as the message for this notifiaction
-BG_COLOR="#2f8a2c"
+# Functions {{{
 
-# compose the notification
-COMMAND="naughty.notify({ \
-        title = \"Reminder \t\t\t$DATE\", \
-        text = \"Message: $MESSAGE\", \
-        timeout = 0, \
-        screen = 2, \
-        bg = \"$BG_COLOR\", \
-        fg = \"#ffffff\", \
-        margin = 8, \
-        width = 380, \
-        })"
-# send it to awesome
-echo $COMMAND | awesome-client -
+show_help() {
+    HELP_MSG="TODO"
+
+    echo "${HELP_MSG}"
+}
+
+awesome_notification () {
+    # compose the notification
+    COMMAND="naughty.notify({ \
+            title = ${TITLE}, \
+            text = ${TEXT}, \
+            timeout = 0, \
+            screen = 2, \
+            bg = \"${BG_COLOR}\", \
+            fg = \"#ffffff\", \
+            margin = 8, \
+            width = 380, \
+            run = function () run_or_raise(nill, { class = \"${CLASS}\" }) end
+            })"
+    # send it to awesome
+    echo $COMMAND | awesome-client -
+}
+
+# }}}
+# Variables {{{
+
+# get the damned date as soon as possible
+DATE=`date +"%a %b %d/%m/%Y, %H:%M:%S"` # get time of completion
+
+# default notificaiton color
+BG_COLOR="#417c9d"
+
+# }}}
+# Options {{{
+
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+# Initialize our own variables:
+output_file=""
+verbose=0
+
+while getopts "h?m:wes" opt; do
+    case "$opt" in
+        h|\?)
+            show_help
+            exit 0
+            ;;
+        m)  EMAIL=1
+            BG_COLOR="#2f8a2c"
+            SENDER=$OPTARG
+            ;;
+        w)  WARNING=1
+            BG_COLOR="#a7580b"
+            ;;
+        e)  ERROR=1
+            BG_COLOR="#ba3624"
+            ;;
+        s)  SYSLOG=1
+            BG_COLOR="#985f1d"
+            ;;
+    esac
+done
+
+shift $((OPTIND-1))
+MESSAGE=$@  # get all arguments as the message for this notifiaction
+
+# }}}
+# Main Script {{{
+
+# this formatting with tabs is retarded but I have no better idea
+if [[ $EMAIL ]] ; then
+    TITLE="\"E-Mail \t\t\t\t${DATE}\""
+    TEXT="\"Sender: ${SENDER}\" .. newline .. \"Subject: ${MESSAGE}\""
+    CLASS="Thunderbird"
+elif [[ $ERROR ]] ; then
+    TITLE="\"Error  \t\t\t\t${DATE}\""
+    TEXT="\"Message: ${MESSAGE}\""
+elif [[ $WARNING ]] ; then
+    TITLE="\"Warning\t\t\t\t${DATE}\""
+    TEXT="\"Message: ${MESSAGE}\""
+elif [[ $SYSLOG ]] ; then
+    SYSLOG_INFO=$(cat)
+    PRIORITY=$(echo "${SYSLOG_INFO}" | cut -d: -f1)
+    HOST=$(echo "${SYSLOG_INFO}" | cut -d: -f2)
+    PROGRAM=$(echo "${SYSLOG_INFO}" | cut -d: -f3)
+    PID=$(echo "${SYSLOG_INFO}" | cut -d: -f4)
+    MESSAGE=$(echo "${SYSLOG_INFO}" | cut -d: -f5)
+
+    TITLE="\"Syslog [${PRIORITY}]\t\t${DATE}\""
+    TEXT="\"Host: ${HOST}\tProgram: ${PROGRAM}\tPID: ${PID}\" .. newline .. \"Subject: ${MESSAGE}\""
+else
+    TITLE="\"Reminder \t\t\t$DATE\""
+    TEXT="\"Message: ${MESSAGE}\""
+fi
+
+awesome_notification 
+# }}}
