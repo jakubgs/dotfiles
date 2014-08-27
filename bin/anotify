@@ -28,7 +28,10 @@ awesome_notification () {
             fg = \"#ffffff\", \
             margin = 8, \
             width = 380, \
-            run = function () run_or_raise(\"${EXECUTE}\", { name = \"${CLASS}\" }) end
+            run = function () run_or_raise(
+                                \"${EXECUTE}\",
+                                { name = \"${CLASS}\" }
+                ) end
             })"
     # send it to awesome
     echo $COMMAND | awesome-client -
@@ -94,14 +97,14 @@ elif [[ $WARNING ]] ; then
     TEXT="\"Message: ${MESSAGE}\""
 elif [[ $SYSLOG ]] ; then
     SYSLOG_INFO=$(cat)
-    PRIORITY=$(echo "${SYSLOG_INFO}" | cut -d: -f1)
-    HOST=$(echo "${SYSLOG_INFO}" | cut -d: -f2)
-    PROGRAM=$(echo "${SYSLOG_INFO}" | cut -d: -f3)
-    PID=$(echo "${SYSLOG_INFO}" | cut -d: -f4)
-    MESSAGE=$(echo "${SYSLOG_INFO}" | cut -d: -f5)
+    PRIORITY=$(echo "${SYSLOG_INFO}" | cut -d'|' -f1)
+    HOST=$(echo "${SYSLOG_INFO}" | cut -d'|' -f2)
+    PROGRAM=$(echo "${SYSLOG_INFO}" | cut -d'|' -f3)
+    PID=$(echo "${SYSLOG_INFO}" | cut -d'|' -f4)
+    MESSAGE=$(echo "${SYSLOG_INFO}" | cut -d'|' -f5)
 
-    TITLE="\"Syslog [${PRIORITY}]\t\t${DATE}\""
-    TEXT="\"Host: ${HOST}\tProgram: ${PROGRAM}\tPID: ${PID}\" .. newline .. \"Subject: ${MESSAGE}\""
+    TITLE="\"Syslog [${PRIORITY}]\t\t\t${DATE}\""
+    TEXT="\"Host: ${HOST}\t\tProgram: ${PROGRAM}\t\tPID: ${PID}\" .. newline .. \"Subject: ${MESSAGE}\""
 
     # raise or run mmtail to check out DEM logs
     EXECUTE="mmtail"

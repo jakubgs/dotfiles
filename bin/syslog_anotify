@@ -16,7 +16,7 @@ export DISPLAY=:0.0
 while read LINE
 do
    echo "$LINE" | /home/sochan/bin/anotify -s 2>&1 >> $LOG_FILE
-   
-   # for debugging
-   #echo "$LINE" >> $LOG_FILE
+
+   # for debugging purposes
+   echo "$LINE" >> $LOG_FILE
 done
