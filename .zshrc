@@ -245,7 +245,8 @@ alias pbpaste='xclip -selection clipboard -o'
 alias etccommit='sudo etckeeper commit "Quick commit."'
 alias sgit='sudo git'
 alias gitc='git commit -a -m '
-alias livestreamer='livestreamer -p "mpv --cache=524288 --cache-min=0.1 --fs -"'
+alias livestreamer='livestreamer -p "mpv --cache=524288 --cache-min=0.025 --fs -"'
+alias qapt='sudo aptitude install'
 
 # }}}
 # Functions {{{
@@ -331,19 +332,23 @@ zle-keymap-select () {
         echo -ne "\033]12;White\007"
     fi
 }
-zle -N zle-keymap-select
 
 zle-line-finish () {
     zle -K viins
     echo -ne "\033]12;White\007"
 }
-zle -N zle-line-finish
 
 zle-line-init () {
     zle -K viins
     echo -ne "\033]12;White\007"
 }
-zle -N zle-line-init
+
+# use these only if terminal is graphical
+if [[ $TERM != "linux" ]]; then
+    zle -N zle-keymap-select
+    zle -N zle-line-finish
+    zle -N zle-line-init
+fi
 bindkey -v
 
 # }}}
