@@ -70,9 +70,9 @@ endif
 
 set guioptions=c                  " Get rid of useless GUI elements
 set winwidth=78                   " minimum split width
-set colorcolumn=join(range(81,335) " highlight this column
 
 set winheight=15                  " minimum split height
+set colorcolumn=81                " highlight this column
 set nuw=4                         " number line width
 set ruler                         " show columns and rows
 set cursorline                    " highlight the current line
