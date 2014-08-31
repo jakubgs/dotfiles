@@ -37,6 +37,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'vim-scripts/Conque-GDB'
 if ( has("lua") )
     NeoBundle 'Shougo/neocomplete'
 endif
@@ -193,6 +194,9 @@ augroup END
 
 " }}}
 " Plugin configuration {{{
+
+" Conque GDB
+let g:ConqueGdb_SrcSplit = 'right'
 
 " Hardtime
 let g:hardtime_default_on = 1
@@ -564,7 +568,7 @@ nnoremap <F6>  :setlocal hlsearch!<CR>
 nnoremap <F5>  :setlocal spell!<CR>
 " nnoremap <F4> is already set as pastetoggle
 nnoremap <F3>  :vnew<cr>:setlocal buftype=nofile bufhidden=wipe nobuflisted<cr>
-nnoremap <F2>  :<c-f>ivert bot help<space>
+nnoremap <F2>  :<c-f>vert bot help<space>
 nnoremap <F1>  :exe ":!urxvtc -e man ".shellescape(expand('<cword>'), 1)<cr><cr>
 
 " }}}
