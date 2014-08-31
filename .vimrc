@@ -71,15 +71,17 @@ endif
 set guioptions=c                  " Get rid of useless GUI elements
 set winwidth=78                   " minimum split width
 
+" highlight all columns higher than 81
+execute "set colorcolumn=" . join(range(81,335), ',')
+
 set winheight=15                  " minimum split height
-set colorcolumn=80                " highlight this column
 set nuw=4                         " number line width
 set ruler                         " show columns and rows
 set cursorline                    " highlight the current line
 set laststatus=2                  " always show the statusline
 set number                        " show current line number
 set relativenumber                " distance from the current line
-set wrap                          " text wrapping
+set nowrap                          " text wrapping
 set linebreak                     " don't break in middle of words
 set showmatch                     " show matching brackets
 set t_vb=                         " don't flash the screen on errors
