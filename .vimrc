@@ -104,7 +104,7 @@ set cinoptions=>4                 " how cindent indents lines in C programs
 " }}}
 " General configuration {{{
 
-set notitle                       " keep the console title unchanged
+set title                       " keep the console title unchanged
 set encoding=utf-8                " encoding
 set fileencoding=utf-8
 set history=1000                  " history of vim commands
@@ -405,9 +405,6 @@ nnoremap g# g#zz
 
 " to match the behaviour of D
 nnoremap Y y$
-
-" split lines easilly(you can use cc instead of S)
-nnoremap S i<cr><esc><right>
 
 " run last used macro with one key
 nnoremap Q @@
