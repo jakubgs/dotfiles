@@ -27,17 +27,24 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'wellle/targets.vim'
 NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'mattn/ctrlp-register'
+"NeoBundle 'kien/ctrlp.vim'
+"NeoBundle 'mattn/ctrlp-register'
 NeoBundle 'PProvost/vim-ps1'
 NeoBundle 'vim-scripts/vis'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
+NeoBundle 'vim-scripts/Conque-GDB'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'vim-scripts/Conque-GDB'
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 if ( has("lua") )
     NeoBundle 'Shougo/neocomplete'
 endif
@@ -195,6 +202,23 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
+" Unite
+" default to fuzzy searching
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#profile('default', 'context', { 
+\   'smartcase' : 1,
+\   'no_split' : 0,
+\   'start_insert' : 1 })
+" ignore these hidden directories
+call unite#custom#source('file_rec/async', 'max_candidates', 200)
+"call unite#custom#source('file_rec/async', 'ignore_pattern',
+" \ '\.(wine/\|local/\|icons/\|vim/\|cache/\|git/\|config/\|mozilla/\|themes/\|neocomplete/)')
+" Using ag as recursive command.
+let g:unite_source_rec_async_command =
+                \ 'ag --nocolor --nogroup -g ""'
+
+
 " Conque GDB
 let g:ConqueGdb_SrcSplit = 'right'
 
@@ -325,10 +349,6 @@ xnoremap <silent> <cr> :EasyAlign<cr>
 xnoremap <silent> <space><cr> :LiveEasyAlign<cr>
 
 " easymotion
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
 " fast search by letter
 nmap <CR> <Plug>(easymotion-s)
 
@@ -514,23 +534,21 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
                                 \ :exe ":noautocmd qall!"<cr>
 
 " }}}
-" Key mappings - CtrlP {{{
-
-nnoremap <c-i>      :CtrlPMixed<CR>
-nnoremap <space>pp :CtrlP<Space>
-nnoremap <space>pc :CtrlP %:p:h<CR>
-nnoremap <space>pr :CtrlPRegister<CR>
-nnoremap <space>p/ :CtrlPRoot<CR>
-nnoremap <space>pt :CtrlPBufTagAll<CR>
-nnoremap <space>pl :CtrlPLine<CR>
-nnoremap <space>pq :CtrlPQuickfix<CR>
-nnoremap <space>pb :CtrlPBookmarkDir<CR>
-nnoremap <space>pm :CtrlPMRUFiles<CR>
-nnoremap <space>po :CtrlPLastMode --dir<CR>
+" Key mappings - Units {{{
+nnoremap <c-i>     :Unite -no-split file_mru file_rec/async<CR>
+nnoremap <space>uy :Unite -no-split -quick-match history/yank<CR>
+nnoremap <space>ur :Unite -no-split -quick-match register<CR>
+nnoremap <space>uu :Unite -no-split file:
+nnoremap <space>um :Unite -no-split file_mru<CR>
+nnoremap <space>ub :Unite -no-split buffer<CR>
+nnoremap <space>uf :Unite -no-split file<CR>
+nnoremap <space>uc :Unite -no-split command<CR>
+nnoremap <space>ul :Unite -no-split line<CR>
+nnoremap <space>ug :Unite -no-split grep:$buffers<CR>
+nnoremap <space>uj :Unite -no-split jump<CR>
 
 " search openned buffers
-nnoremap <space><space> :CtrlPBuffer<CR>
-
+nnoremap <space><space> :Unite -no-split buffer<CR>
 " }}}
 " Key mappings - Git {{{
 
@@ -617,8 +635,23 @@ augroup quickfix_settings
 augroup END
 
 augroup autoresize
-    "autocmd VimResized * exe "normal! \<c-w>="
+    autocmd VimResized * exe "normal! \<c-w>="
 augroup END
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+    imap <buffer> <esc> <c-u><bs>
+    nnoremap <buffer><cr> <cr>
+
+    " move between lines
+    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+
+    " open in new splits
+    imap <silent><buffer><expr> <C-x> unite#do_action('split')
+    imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+endfunction
 
 " }}}
 " Functions {{{
