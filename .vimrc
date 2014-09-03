@@ -208,7 +208,7 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('default', 'context', { 
 \   'smartcase' : 1,
-\   'no_split' : 0,
+\   'no_split' : 1,
 \   'start_insert' : 1 })
 " ignore these hidden directories
 call unite#custom#source('file_rec/async', 'max_candidates', 200)
@@ -486,10 +486,6 @@ nnoremap <space>Y :CopyMatches *<CR>
 nnoremap <space>S :%s//<left>
 
 " Window management
-" split vertical and switch
-nnoremap <space>i <C-w>v<C-w>l
-" split horizontal and switch
-nnoremap <space>o <C-w>s<C-w>l
 " close buffer but leave active pane open
 nnoremap <silent> <space>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <silent> <space>Q :q!<CR>
@@ -502,7 +498,7 @@ nnoremap <silent> <space>R :vsp ~/.vimrc<CR>
 nnoremap <silent> <space>h :bprevious<CR>
 nnoremap <silent> <space>l :bnext<CR>
 " toggle last two buffers
-nnoremap <space>u <c-^>
+nnoremap <space>o <c-^>
 
 " strip all trailing whitespaces in current file
 nnoremap <space>O :%s/\s\+$//<cr>:let @/=''<CR>;
@@ -535,20 +531,20 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Units {{{
-nnoremap <c-i>     :Unite -no-split file_mru file_rec/async<CR>
-nnoremap <space>uy :Unite -no-split -quick-match history/yank<CR>
-nnoremap <space>ur :Unite -no-split -quick-match register<CR>
-nnoremap <space>uu :Unite -no-split file:
-nnoremap <space>um :Unite -no-split file_mru<CR>
-nnoremap <space>ub :Unite -no-split buffer<CR>
-nnoremap <space>uf :Unite -no-split file<CR>
-nnoremap <space>uc :Unite -no-split command<CR>
-nnoremap <space>ul :Unite -no-split line<CR>
-nnoremap <space>ug :Unite -no-split grep:$buffers<CR>
-nnoremap <space>uj :Unite -no-split jump<CR>
+nnoremap <c-i>     :Unite file_mru file_rec/async<CR>
+nnoremap <space>uy :Unite -here -quick-match history/yank<CR>
+nnoremap <space>ur :Unite -here -quick-match register<CR>
+nnoremap <space>uu :Unite file<CR>
+nnoremap <space>um :Unite file_mru<CR>
+nnoremap <space>ub :Unite buffer<CR>
+nnoremap <space>uf :Unite file<CR>
+nnoremap <space>uc :Unite command<CR>
+nnoremap <space>ul :Unite line<CR>
+nnoremap <space>ug :Unite grep:$buffers<CR>
+nnoremap <space>uj :Unite jump<CR>
 
 " search openned buffers
-nnoremap <space><space> :Unite -no-split buffer<CR>
+nnoremap <space><space> :Unite buffer<CR>
 " }}}
 " Key mappings - Git {{{
 
