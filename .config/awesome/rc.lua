@@ -22,15 +22,15 @@ awful.util.spawn_with_shell("~/bin/autostart")
 
 -- }}}
 -- {{{ Variable definitions
-homedir = "/home/sochan/"
+homedir = os.getenv("HOME")
 -- Themes define colours, icons, and wallpapers
-beautiful.init(homedir .. ".awesome/themes/default/theme.lua")
+beautiful.init(homedir .. "/.awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
 fmanager = "thunar /mnt/melchior/torrent"
 terminal = "urxvtc"
-terminal_s = homedir .. "bin/urxvts"
+terminal_s = homedir .. "/bin/urxvts"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -81,7 +81,7 @@ tags[2] = awful.tag(
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 mysystemmenu = {
-    { "autostart",  terminal .. " -g 40x11 -hold -e " .. homedir .. "bin/autostart" },
+    { "autostart",  terminal .. " -g 40x11 -hold -e " .. homedir .. "/bin/autostart" },
     { "restart",    awesome.restart },
     { "quit",       awesome.quit },
     { "lock",       "xlock" },
@@ -127,8 +127,8 @@ myvmmenu = {
 
 mymelchiormenu = {
     { "ssh", terminal .. " -e ssh melchior" },
-    { "htop", terminal_s .. " -e " .. homedir .. "bin/mhtop" },
-    { "mmtail", terminal_s .. " -e " .. homedir .. "bin/mmtail" },
+    { "htop", terminal_s .. " -e " .. homedir .. "/bin/mhtop" },
+    { "mmtail", terminal_s .. " -e " .. homedir .. "/bin/mmtail" },
     { "mpd", "gmpc" }
 }
 
@@ -205,7 +205,7 @@ myvolume = wibox.widget.textbox()
 vicious.register(myvolume, vicious.widgets.volume, "| Vol: $1% |", 1, "Master")
 
 myvolume:buttons(awful.util.table.join(
-awful.button({ }, 2, function () awful.util.spawn(homedir .. "bin/mute", false) end),
+awful.button({ }, 2, function () awful.util.spawn(homedir .. "/bin/mute", false) end),
 awful.button({ }, 3, function () awful.util.spawn("volti-mixer", true) end),
 awful.button({ }, 4, function () awful.util.spawn("amixer -q set Master 1dB+", false) end),
 awful.button({ }, 5, function () awful.util.spawn("amixer -q set Master 1dB-", false) end)
@@ -370,7 +370,7 @@ function ()
     function (s)
         awful.util.spawn(terminal .. " -e killall " .. s)
     end,
-    homedir .. ".awesome/killall_history")
+    homedir .. "/.awesome/killall_history")
 end)
 )
 
