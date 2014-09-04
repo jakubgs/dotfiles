@@ -17,18 +17,24 @@ lain = require("lain")
 vicious.widgets.mpd = require("vicious.widgets.mpd")
 vicious.widgets.volume = require("vicious.widgets.volume")
 naughty = require('naughty')
--- Run the autostart script
-awful.util.spawn_with_shell("~/bin/autostart")
+
+-- for automated screen detection
+require("awful.remote")
+require("screenful")
 
 -- }}}
 -- {{{ Variable definitions
 homedir = os.getenv("HOME")
+
+-- Run the autostart script
+awful.util.spawn_with_shell(homedir .. "/bin/autostart")
+
 -- Themes define colours, icons, and wallpapers
 beautiful.init(homedir .. "/.awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
-fmanager = "thunar /mnt/melchior/torrent"
+fmanager = "thunar"
 terminal = "urxvtc"
 terminal_s = homedir .. "/bin/urxvts"
 editor = os.getenv("EDITOR") or "vim"
