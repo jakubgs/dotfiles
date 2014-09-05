@@ -359,9 +359,9 @@ awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:
 awful.key({ modkey,           }, "d",       -- toggle between last raised windows
 function ()
     awful.client.focus.history.previous()
-    if client.focus then
-        client.focus:raise()
-    end
+    --if client.focus then
+    --    client.focus:raise()
+    --end
 end),
 awful.key({ modkey            },  "t",
 function ()
@@ -462,14 +462,12 @@ awful.rules.rules = {
     properties = { floating = true } },
     { rule = { class = "Msgcompose" },
     properties = { floating = true } },
-    { rule = { class = "Firefox" },
+    { rule = { class = "Firefox", name = "Session Manager.*" },
+    properties = { floating = true } },
+    { rule = { class = "Firefox", role = "browser" },
     properties = { tag = tags[1][2], floating = false } },
     { rule = { class = "Keepassx" },
     properties = { tag = tags[1][5], floating = false } },
-    { rule = { class = "Firefox", instance = "Zapisz.*" },
-    callback = function(c) awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c) end},
-    { rule = { name = "Session Manager.*" },
-    properties = { floating = true } },
     { rule = { class = "Dwb" },
     properties = { tag = tags[1][2] } },
     { rule = { instance = "ncmpcpp" },
@@ -488,16 +486,24 @@ awful.rules.rules = {
         floating = true,
         tag = tags[1][2],
     } },
-    { rule = { name = "Vim" },
+    --{ rule = { instance = "ffvim" },
+    { rule = { name = "ffvim" },
+    properties = { floating = true },
+    callback = function(c) 
+        naughty.notify({title = "pentavim"})
+        awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c)
+        awful.client.moveresize(100, 100, 0, 0, c)
+    end},
+    { rule = { class = "Gvim" },
     properties = { tag = tags[2][1] } },
     { rule = { class = "Steam" },
     properties = {
         tag = tags[1][7]
     } },
-    { rule = { class = "Wine.*" },
+    { rule = { name = "StarCraft.*" },
     properties = {
         tag = tags[2][4],
-        floating = false,
+        --floating = false,
         fullscreen = true,
         ontop = true
     } },
