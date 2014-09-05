@@ -72,8 +72,7 @@ urxvt*colorUL:         #a6c9f8
 
 
 ! Xterm
-xterm*font:             -*-terminus-medium-r-*-*-11-140-*-*-*-*-iso10646-1
-xterm*boldFont:         -*-terminus-bold-r-*-*-11-140-*-*-*-*-iso10646-1
+xterm*faceName:         xft:Terminus:size=12
 xterm*toolBar:          false
 xterm*background:       #191919
 xterm*foreground:       white
