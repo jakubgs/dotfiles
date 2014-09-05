@@ -73,7 +73,7 @@ while getopts "h?m:wes" opt; do
             BG_COLOR="#ba3624"
             ;;
         s)  SYSLOG=1
-            BG_COLOR="#985f1d"
+            BG_COLOR="#a44500"
             ;;
     esac
 done
@@ -104,7 +104,7 @@ elif [[ $SYSLOG ]] ; then
     MESSAGE=$(echo "${SYSLOG_INFO}" | cut -d'|' -f5)
 
     TITLE="\"Syslog [${PRIORITY}]\t\t\t${DATE}\""
-    TEXT="\"Host: ${HOST}\t\tProgram: ${PROGRAM}\t\tPID: ${PID}\" .. newline .. \"Subject: ${MESSAGE}\""
+    TEXT="\"Host: ${HOST}\t\tProgram: ${PROGRAM}\t\tPID: ${PID}\" .. newline .. \"${MESSAGE}\""
 
     # raise or run mmtail to check out DEM logs
     EXECUTE="mmtail"
