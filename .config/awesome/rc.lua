@@ -75,13 +75,14 @@ tags = {}
 
 -- Each screen has its own tag table.
 tags[1] = awful.tag(
-{ ":admin:",    ":web:",      ":music:",    ":im:",     ":files:",  ":pass:",   ":work:" }, 1,
-{ layouts[3],   layouts[8],   layouts[4],   layouts[3], layouts[1], layouts[3], layouts[8] })
+{ ":admin:",    ":web:",    ":music:",  ":comm:",   ":files:",  ":remote:", ":vm:" }, 1,
+{ layouts[3],   layouts[8], layouts[4], layouts[3], layouts[1], layouts[8], layouts[8] })
 tags[2] = awful.tag(
-{ ":editor:",   ":web:",      ":mail:",     ":wine:",   ":files:",  ":remote:", ":work:" }, 2,
-{ layouts[2],   layouts[8],   layouts[5],   layouts[2], layouts[1], layouts[8], layouts[8] })
---tags[3] = awful.tag({ ":admin:", ":web:", ":music:", ":files:", ":misc:", ":work:" }, 3,
---{ layouts[3], layouts[8], layouts[4], layouts[2], layouts[3], layouts[8] })
+{ ":editor:",   ":web:",    ":misc:",   ":wine:",   ":files:",  ":remote:", ":work:" }, 2,
+{ layouts[2],   layouts[8], layouts[5], layouts[2], layouts[1], layouts[8], layouts[8] })
+tags[3] = awful.tag(
+{ ":admin:",    ":web:",    ":music:",  ":misc:",   ":fukes:",   ":remote:",   "work" }, 3,
+{ layouts[3],   layouts[8], layouts[4], layouts[2], layouts[1], layouts[8], layouts[6] })
 --end
 -- }}}
 -- {{{ Menu
@@ -208,7 +209,7 @@ awful.button({ }, 5, function () awful.util.spawn("mpc prev", false) end)
 
 -- Volume bar
 myvolume = wibox.widget.textbox()
-vicious.register(myvolume, vicious.widgets.volume, "| Vol: $1% |", 1, "Master")
+vicious.register(myvolume, vicious.widgets.volume, "| Vol: $1% ", 1, "Master")
 
 myvolume:buttons(awful.util.table.join(
 awful.button({ }, 2, function () awful.util.spawn(homedir .. "/bin/mute", false) end),
@@ -297,8 +298,8 @@ for s = 1, screen.count() do
     if s == 1 then right_layout:add(mycpu) end
     if s == 1 then right_layout:add(mympdwidget) end
     if s == 1 then right_layout:add(myvolume) end
+    if s == 1 then right_layout:add(mytextclock) end
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    if s == 2 then right_layout:add(mytextclock) end
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -468,11 +469,11 @@ awful.rules.rules = {
     properties = { floating = true } },
     { rule = { class = "Msgcompose" },
     properties = { floating = true } },
-    { rule = { class = "Firefox" },
+    { rule = { class = "Iceweasel" },
     properties = { tag = tags[1][2], floating = false } },
     { rule = { class = "Keepassx" },
     properties = { tag = tags[1][5], floating = false } },
-    { rule = { class = "Firefox", instance = "Zapisz.*" },
+    { rule = { class = "Iceweasel", instance = "Zapisz.*" },
     callback = function(c) awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c) end},
     { rule = { name = "Session Manager.*" },
     properties = { floating = true } },
@@ -494,22 +495,22 @@ awful.rules.rules = {
         floating = true,
         tag = tags[1][2],
     } },
-    { rule = { name = "Vim" },
-    properties = { tag = tags[2][1] } },
+    { rule = { class = "Gvim" },
+    properties = { tag = tags[1][1] } },
     { rule = { class = "Steam" },
     properties = {
         tag = tags[1][7]
     } },
     { rule = { class = "Wine.*" },
     properties = {
-        tag = tags[2][4],
+        tag = tags[1][4],
         floating = false,
         fullscreen = true,
         ontop = true
     } },
     { rule = { name = "Windows.*" },
     properties = {
-        tag = tags[2][7],
+        tag = tags[1][7],
         floating = false,
         fullscreen = true,
         --maximized_horizontal = true,
@@ -517,7 +518,7 @@ awful.rules.rules = {
     } },
     { rule = { class = "qemu.*" },
     properties = {
-        tag = tags[2][7],
+        tag = tags[1][7],
         floating = true,
         fullscreen = true,
         ontop = true,
@@ -533,7 +534,7 @@ awful.rules.rules = {
     } },
     { rule = { class = "Remmina" },
     properties = {
-        tag = tags[2][6],
+        tag = tags[1][6],
         floating = false,
         fullscreen= false,
         --maximized_horizontal = true,
@@ -550,7 +551,9 @@ awful.rules.rules = {
     { rule = { class = "Skype" },
     properties = { floating = false, tag = tags[1][4] } },
     { rule = { class = "Thunderbird" },
-    properties = { tag = tags[2][3] } },
+    properties = { tag = tags[1][4] } },
+    { rule = { class = "HipChat" },
+    properties = { tag = tags[1][4] } },
 }
 -- }}}
 -- {{{ Signals
