@@ -215,8 +215,17 @@ call unite#custom#source('file_rec/async', 'max_candidates', 200)
 "call unite#custom#source('file_rec/async', 'ignore_pattern',
 " \ '\.(wine/\|local/\|icons/\|vim/\|cache/\|git/\|config/\|mozilla/\|themes/\|neocomplete/)')
 " Using ag as recursive command.
-let g:unite_source_rec_async_command =
+if executable('ag')
+    " Use ag in unite file_rec/async source
+    let g:unite_source_rec_async_command =
                 \ 'ag --nocolor --nogroup -g ""'
+	" Use ag in unite grep source.
+	let g:unite_source_grep_command = 'ag'
+	let g:unite_source_grep_default_opts =
+	            \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+	            \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+	let g:unite_source_grep_recursive_opt = ''
+endif
 
 
 " Conque GDB
