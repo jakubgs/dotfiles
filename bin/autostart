@@ -10,6 +10,7 @@ function run {
     printf "Checking: %-15s" "$command"
 	if ! pgrep -d ", " $command; then
 		echo "STARTING"
+        whereis $command
 		nohup $command $args 2>/dev/null &
 	fi
 }
@@ -24,21 +25,15 @@ run urxvtd -q -f -o
 run gvim
 run thunar --daemon
 run xbindkeys
-#run firefox
+run nm-applet
+run xfce4-power-manager
+run hipchat
 run thunderbird
 run remmina > /dev/null 2>&1
-run dwb
-run pidgin
-run skype
-run keepassx
 
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
-	urxvts -name mmtail -e ~/bin/mmtail &
+	#urxvtc -name mmtail -e ~/bin/mmtail &
 	# Start mpd client
 	urxvtc -name ncmpcpp -e ncmpcpp &
 fi
-
-# for control with xbox pad
-run xboxdrv --silent --daemon
-run antimicro --profile ~/.config/antimicro/xpad2keyboard.xml -d --tray
