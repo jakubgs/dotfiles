@@ -361,9 +361,9 @@ awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:
 awful.key({ modkey,           }, "d",       -- toggle between last raised windows
 function ()
     awful.client.focus.history.previous()
-    if client.focus then
-        client.focus:raise()
-    end
+    --if client.focus then
+    --    client.focus:raise()
+    --end
 end),
 awful.key({ modkey            },  "t",
 function ()
@@ -464,7 +464,9 @@ awful.rules.rules = {
     properties = { floating = true } },
     { rule = { class = "Msgcompose" },
     properties = { floating = true } },
-    { rule = { class = "Iceweasel" },
+    { rule = { class = "Iceweasel", name = "Session Manager.*" },
+    properties = { floating = true } },
+    { rule = { class = "Iceweasel", role = "browser" },
     properties = { tag = tags[1][2], floating = false } },
     { rule = { class = "Iceweasel", role = "GtkFileChooserDialog" },
     callback = function(c) awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c) end},
@@ -492,11 +494,19 @@ awful.rules.rules = {
     } },
     { rule = { class = "Gvim" },
     properties = { tag = tags[1][1] } },
+    --{ rule = { instance = "ffvim" },
+    { rule = { name = "ffvim" },
+    properties = { floating = true },
+    callback = function(c) 
+        naughty.notify({title = "pentavim"})
+        awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c)
+        awful.client.moveresize(100, 100, 0, 0, c)
+    end},
     { rule = { class = "Steam" },
     properties = {
         tag = tags[1][7]
     } },
-    { rule = { class = "Wine.*" },
+    { rule = { name = "StarCraft.*" },
     properties = {
         tag = tags[1][4],
         floating = false,
