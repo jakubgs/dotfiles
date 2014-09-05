@@ -30,5 +30,9 @@ style "thunar-icon-view-reduced-style"
 	ThunarIconView::column-spacing = 0
     ThunarIconView::row-spacing = 0
 }
-
 class "ThunarIconView" style "thunar-icon-view-reduced-style"
+
+style "vimfix" {
+  bg[NORMAL] = "#151515" # this matches my gvim theme 'Normal' bg color.
+}
+widget "vim-main-window.*GtkForm" style "vimfix"
