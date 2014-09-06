@@ -246,7 +246,7 @@ alias etccommit='sudo etckeeper commit "Quick commit."'
 alias sgit='sudo git'
 alias gitc='git commit -a -m '
 alias livestreamer='livestreamer -p "mpv --cache=524288 --cache-min=0.025 --fs -"'
-alias qapt='sudo aptitude install'
+alias qapt='sudo aptitude '
 
 # }}}
 # Functions {{{
