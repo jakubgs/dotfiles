@@ -18,10 +18,6 @@ vicious.widgets.mpd = require("vicious.widgets.mpd")
 vicious.widgets.volume = require("vicious.widgets.volume")
 naughty = require('naughty')
 
--- for automated screen detection
-require("awful.remote")
-require("screenful")
-
 -- }}}
 -- {{{ Variable definitions
 homedir = os.getenv("HOME")
@@ -330,8 +326,7 @@ awful.button({ modkey }, 5, awful.tag.viewnext)
 -- }}}
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-awful.key({ modkey,           }, "Escape",  function () awful.util.spawn("xmodmap ~/.speedswapper && xcape") end),
-awful.key({ modkey,           }, "`",       awful.tag.history.restore),
+awful.key({ modkey,           }, "Escape",       awful.tag.history.restore),
 awful.key({ modkey, "Shift"   }, "Tab",     function () focusby(-1)  end),
 awful.key({ modkey,           }, "Tab",     function () focusby( 1)  end),
 -- Layout manipulation
@@ -345,7 +340,7 @@ awful.key({ modkey, "Shift"   }, "h",       function () awful.client.movetoscree
 awful.key({ modkey, "Shift"   }, "l",       function () awful.client.movetoscreen(client.focus ,client.focus.screen + 1) end),
 -- Run or raise
 awful.key({ modkey,           }, "e",       function () run_or_raise("gvim --servername GVIM", { class = "Gvim" }) end),
-awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Firefox" }) end),
+awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Iceweasel" }) end),
 awful.key({ modkey,           }, "c",       function () awful.util.spawn(terminal) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(terminal_s .. " --name ncmpcpp -e ncmpcpp", { instance = "ncmpcpp" }) end),
@@ -471,10 +466,10 @@ awful.rules.rules = {
     properties = { floating = true } },
     { rule = { class = "Iceweasel" },
     properties = { tag = tags[1][2], floating = false } },
+    { rule = { class = "Iceweasel", role = "GtkFileChooserDialog" },
+    callback = function(c) awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c) end},
     { rule = { class = "Keepassx" },
     properties = { tag = tags[1][5], floating = false } },
-    { rule = { class = "Iceweasel", instance = "Zapisz.*" },
-    callback = function(c) awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c) end},
     { rule = { name = "Session Manager.*" },
     properties = { floating = true } },
     { rule = { class = "Dwb" },
@@ -550,7 +545,7 @@ awful.rules.rules = {
     properties = { floating = false, tag = tags[1][4] } },
     { rule = { class = "Skype" },
     properties = { floating = false, tag = tags[1][4] } },
-    { rule = { class = "Thunderbird" },
+    { rule = { class = "Icedove" },
     properties = { tag = tags[1][4] } },
     { rule = { class = "HipChat" },
     properties = { tag = tags[1][4] } },
