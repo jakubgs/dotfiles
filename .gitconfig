@@ -1,5 +1,5 @@
 [user]
-    email = panswiata@gmail.com
+    email = jacob@codility.com
     name = Jakub Sokołowski
 [core]
     editor = vim
@@ -16,6 +16,7 @@
     sm = submodule
     c = commit --verbose
     a = add 
+    an = annex
     l  = log --decorate
     sl = log --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     df = diff
