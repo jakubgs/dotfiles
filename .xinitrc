@@ -9,7 +9,7 @@ setxkbmap -layout pl
 
 # Caps Lock <-> Esc
 xmodmap .speedswapper
-xcape -e 'Control_L=Escape'
+xcape -e 'Control_R=Escape'
 
 # Small hack for java compatibility
 wmname LG3D
