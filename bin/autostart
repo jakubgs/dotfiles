@@ -10,7 +10,6 @@ function run {
     printf "Checking: %-15s" "$command"
 	if ! pgrep -d ", " $command; then
 		echo "STARTING"
-        whereis $command
 		nohup $command $args 2>/dev/null &
 	fi
 }
