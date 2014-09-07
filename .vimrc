@@ -259,7 +259,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 0
 " disable to improve fugitive performance
-let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#branch#enabled = 1
 
 " Don't make comments italic
 let g:jellybeans_use_lowcolor_black = 0
