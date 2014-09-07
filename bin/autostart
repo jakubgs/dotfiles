@@ -7,7 +7,7 @@ function run {
 	# get the arguments
 	args=$@
 	
-    printf "Checking: %-15s" "$command"
+    printf "Checking: %-20s" "$command"
 	if ! pgrep -d ", " $command; then
 		echo "STARTING"
 		nohup $command $args 2>/dev/null &
