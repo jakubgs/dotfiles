@@ -215,8 +215,17 @@ call unite#custom#source('file_rec/async', 'max_candidates', 200)
 "call unite#custom#source('file_rec/async', 'ignore_pattern',
 " \ '\.(wine/\|local/\|icons/\|vim/\|cache/\|git/\|config/\|mozilla/\|themes/\|neocomplete/)')
 " Using ag as recursive command.
-let g:unite_source_rec_async_command =
+if executable('ag')
+    " Use ag in unite file_rec/async source
+    let g:unite_source_rec_async_command =
                 \ 'ag --nocolor --nogroup -g ""'
+	" Use ag in unite grep source.
+	let g:unite_source_grep_command = 'ag'
+	let g:unite_source_grep_default_opts =
+	            \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+	            \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+	let g:unite_source_grep_recursive_opt = ''
+endif
 
 
 " Conque GDB
@@ -250,7 +259,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 0
 " disable to improve fugitive performance
-let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#branch#enabled = 1
 
 " Don't make comments italic
 let g:jellybeans_use_lowcolor_black = 0
