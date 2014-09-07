@@ -202,6 +202,9 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
+" Orgmode
+let g:org_agenda_files = ['~/org/*.org']
+
 " Unite
 " default to fuzzy searching
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
