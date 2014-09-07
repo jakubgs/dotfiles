@@ -206,9 +206,11 @@ augroup END
 let g:org_agenda_files = ['~/org/*.org']
 
 " Unite
+" max fuzzy match input length
+let g:unite_matcher_fuzzy_max_input_length = 30
 " default to fuzzy searching
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('default', 'context', { 
 \   'smartcase' : 1,
 \   'no_split' : 1,
@@ -259,7 +261,7 @@ let g:airline_left_alt_sep = '|'
 let g:airline_right_alt_sep = '|'
 let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 0
 " disable to improve fugitive performance
 let g:airline#extensions#branch#enabled = 1
