@@ -611,7 +611,7 @@ augroup END
 augroup awesomerc
     autocmd!
     " Check awesome configuration after every write
-    autocmd BufWritePost $HOME/.config/awesome/rc.lua Dispatch awesome -k
+    autocmd BufWritePost */.config/awesome/rc.lua Dispatch awesome -k
 augroup END
 
 augroup file_settings
