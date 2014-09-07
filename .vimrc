@@ -33,6 +33,7 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
+NeoBundle 'jceb/vim-orgmode'
 NeoBundle 'vim-scripts/Conque-GDB'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
@@ -138,7 +139,8 @@ set backupdir=~/.vim/backup//     " make ~ files in:
 set noswapfile                    " set directory=~/.vim/temp//
 set hlsearch                      " highlighting search results
 set incsearch                     " start searching as you type
-set smartcase                     " ignore case unless upper case used
+set ignorecase                    " ignore case...
+set smartcase                     " unless upper case used
 set iskeyword+=$,@,%,#            " not word dividers
 "set iskeyword-=_                  " word dividers
 set tags=tags;/                   " search for ctags in pwd and go up
