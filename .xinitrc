@@ -4,6 +4,9 @@ export DE="xfce"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
 
+# start ssh agent and save variables
+ssh-agent | grep -v echo > ~/.ssh-agent.env
+
 # Keyboard layout
 setxkbmap -layout pl
 
