@@ -187,11 +187,12 @@ function (widget, args)
     end
 end, 1) -- refresh every 2 seconds
 
--- CPU
-mycpu = lain.widgets.cpu({
-    timeout = 4,
+-- Battery
+mybattery = lain.widgets.bat({
+    timeout = 60,
+    battery = "BAT0",
     settings = function()
-        widget:set_markup("| CPU " .. cpu_now.usage .. "% ")
+        widget:set_markup("| Bat " .. bat_now.perc .. "% ")
     end
 })
 
@@ -291,9 +292,9 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(mycpu) end
     if s == 1 then right_layout:add(mympdwidget) end
     if s == 1 then right_layout:add(myvolume) end
+    if s == 1 then right_layout:add(mybattery) end
     if s == 1 then right_layout:add(mytextclock) end
     if s == 1 then right_layout:add(wibox.widget.systray()) end
 
