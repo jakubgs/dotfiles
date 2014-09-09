@@ -546,7 +546,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :Unite file_mru file_rec/async<CR>
+nnoremap <c-i>     :Unite file_mru file_rec/async:~/<CR>
 nnoremap <space>uy :Unite -here -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -here -quick-match register<CR>
 nnoremap <space>uu :Unite file<CR>
@@ -557,7 +557,7 @@ nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>ug :Unite grep:$buffers<CR>
 nnoremap <space>uj :Unite jump<CR>
-nnoremap <space>ui :Unite file:~/work/infrastructure<CR>
+nnoremap <space>ui :Unite file_rec/async:~/work/infrastructure<CR>
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
@@ -671,7 +671,7 @@ endfunction
 " }}}
 " Functions {{{
 
-" toggle fuzzy and glob matchin in unite
+" toggle fuzzy and glob matching in unite
 function! ToggleUniteMatching()
     if g:unite_fuzzy_matching == 1
         echo 'Switching to glob matching'
