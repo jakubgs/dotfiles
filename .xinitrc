@@ -7,6 +7,9 @@ export TERMINAL="urxvtc"
 # adjust screen setup before you start awesome
 autorandr -c
 
+# turn off touchpad by default
+synclient TouchpadOff=1
+
 # start ssh agent and save variables
 ssh-agent | grep -v echo > ~/.ssh-agent.env
 
