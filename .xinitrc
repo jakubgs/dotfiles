@@ -4,6 +4,9 @@ export DE="xfce"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
 
+# adjust screen setup before you start awesome
+autorandr -c
+
 # start ssh agent and save variables
 ssh-agent | grep -v echo > ~/.ssh-agent.env
 
