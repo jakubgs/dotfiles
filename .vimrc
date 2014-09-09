@@ -209,8 +209,9 @@ let g:org_agenda_files = ['~/org/*.org']
 " max fuzzy match input length
 let g:unite_matcher_fuzzy_max_input_length = 30
 " default to fuzzy searching
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#filters#matcher_default#use(['matcher_glob'])
+let g:unite_fuzzy_matching = 0
+call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('default', 'context', { 
 \   'smartcase' : 1,
 \   'no_split' : 1,
@@ -261,7 +262,7 @@ let g:airline_left_alt_sep = '|'
 let g:airline_right_alt_sep = '|'
 let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamemod = ':p'
 let g:airline#extensions#whitespace#enabled = 0
 " disable to improve fugitive performance
 let g:airline#extensions#branch#enabled = 1
@@ -544,7 +545,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
                                 \ :exe ":noautocmd qall!"<cr>
 
 " }}}
-" Key mappings - Units {{{
+" Key mappings - Unite {{{
 nnoremap <c-i>     :Unite file_mru file_rec/async<CR>
 nnoremap <space>uy :Unite -here -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -here -quick-match register<CR>
@@ -556,6 +557,7 @@ nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>ug :Unite grep:$buffers<CR>
 nnoremap <space>uj :Unite jump<CR>
+nnoremap <space>ui :Unite file:~/work/infrastructure<CR>
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
@@ -661,10 +663,29 @@ function! s:unite_settings()
     " open in new splits
     imap <silent><buffer><expr> <C-x> unite#do_action('split')
     imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+
+    " switch between matching methods
+    inoremap <buffer> <C-r> <C-o>:call ToggleUniteMatching()<CR>
 endfunction
 
 " }}}
 " Functions {{{
+
+" toggle fuzzy and glob matchin in unite
+function! ToggleUniteMatching()
+    if g:unite_fuzzy_matching == 1
+        echo 'Switching to glob matching'
+        call unite#filters#matcher_default#use(['matcher_glob'])
+        let g:unite_fuzzy_matching = 0
+    else
+        echo 'Switching to fuzzy matching'
+        call unite#filters#matcher_default#use(['matcher_fuzzy'])
+        let g:unite_fuzzy_matching = 1
+    endif
+
+    normal a
+    normal <Plug>(unite_redraw)
+endfunction
 
 " Add []<space> mappings for adding empty lines
 function! s:AddLines(before)
