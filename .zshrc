@@ -90,6 +90,10 @@ setopt CHECK_JOBS                 # Dont quit console if processes are running
 
 # }}}
 # Completion {{{
+
+# hostname expansion from known_hosts
+zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
 # :completion:<func>:<completer>:<command>:<argument>:<tag>
 # Expansion options
 zstyle ':completion:*' completer _complete _prefix _expand _approximate
