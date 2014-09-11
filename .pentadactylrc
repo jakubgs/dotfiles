@@ -17,7 +17,7 @@ set editor='~/bin/ffvim <line> <column> <file>'
 set complete=slfb
 
 " changed keyword for google to g
-set defsearch=g
+set defsearch=google
 
 " incremental search
 set incfind
@@ -45,12 +45,12 @@ map -b l <c-n>
 map -b h <c-p>
 
 " move in history
-map J :back<CR>
-map K :forward<CR>
+map -b J :back<CR>
+map -b K :forward<CR>
 
 " move tab left and right
-map H :tabmove -1<CR>
-map L :tabmove +1<CR>
+map -b H :tabmove -1<CR>
+map -b L :tabmove +1<CR>
 
 " confirm choice with only left hand
 cmap <c-d> <Return>
@@ -68,7 +68,7 @@ nmap -builtin <leader>s :tabopen about:sessionrestore<CR>
 nmap -builtin <leader>i :private winopen<CR>
 
 " search selected text in google
-nmap -builtin K S<S-Insert><CR>
+"nmap -builtin K S<S-Insert><CR>
 
 " open selected links, replaces spaces between links for propper spearators
 nmap -builtin <leader>o :!echo "<S-Insert>" | sed 's/ / | /g' | xclip <CR>:tabopen <S-Insert><CR>
