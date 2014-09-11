@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MASTER_MUTE="Audigy Analog/Digital Output Jack"
+MASTER_MUTE="Master"
 CARD_NUMBER=0
 
 /usr/bin/amixer -c "$CARD_NUMBER" sget "$MASTER_MUTE" | grep off
