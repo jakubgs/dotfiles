@@ -33,9 +33,9 @@
   XF86AudioLowerVolume
 
 # Volume Mute
-"/home/sochan/bin/mute"
-  m:0x0 + c:121
-  XF86AudioMute
+"~/bin/mute"
+    m:0x0 + c:121
+    XF86AudioMute
 
 # }}}
 # MPD management {{{
