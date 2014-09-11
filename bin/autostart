@@ -25,10 +25,11 @@ run gvim
 run thunar --daemon
 run xbindkeys
 run nm-applet
-run xfce4-power-manager
 run hipchat
-run thunderbird
+run icedove
 run remmina > /dev/null 2>&1
+run mpdstream.sh
+#run xfce4-power-manager
 
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
