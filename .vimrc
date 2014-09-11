@@ -35,6 +35,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
 NeoBundle 'jceb/vim-orgmode'
 NeoBundle 'vim-scripts/Conque-GDB'
+NeoBundle 't9md/vim-chef'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/neosnippet'
@@ -470,6 +471,9 @@ inoremap <c-v> <c-r>+
 " paste to clipboard with ctrl+c in visual mode
 xnoremap <c-c> "+y
 
+" easier toggling between two buffers
+nnoremap <c-cr> <c-^>
+
 " }}}
 " Key mappings - <Leader> {{{
 
@@ -558,6 +562,7 @@ nnoremap <space>ul :Unite line<CR>
 nnoremap <space>ug :Unite grep:$buffers<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ui :Unite file_rec/async:~/work/infrastructure<CR>
+nnoremap <space>up :UniteWithProjectDir file_rec/async:~/<CR>
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
@@ -650,6 +655,10 @@ augroup autoresize
     autocmd VimResized * exe "normal! \<c-w>="
 augroup END
 
+augroup chef_settings
+    autocmd BufNewFile,BufRead */infrastructure/*  call s:SetupChef()
+augroup END
+
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
@@ -739,6 +748,19 @@ function! s:init_cmdwin()
     endif
 
     startinsert!
+endfunction
+
+" for setting up chef
+function! s:SetupChef()
+    " Mouse:
+    " Left mouse click to GO!
+    nnoremap <buffer><silent> <2-LeftMouse> :<C-u>ChefFindAny<CR>
+    " Right mouse click to Back!
+    nnoremap <buffer><silent> <RightMouse> <C-o>
+
+    " Keyboard:
+    nnoremap <buffer><silent> <c-a> :<C-u>ChefFindAny<CR>
+    nnoremap <buffer><silent> <c-f> :<C-u>ChefFindAnyVsplit<CR>
 endfunction
 
 " }}}
