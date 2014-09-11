@@ -39,36 +39,43 @@
 
 # }}}
 # MPD management {{{
-"mpc volume -5"
-  m:0x10 + c:79"
-
 "mpc stop && mpc play"
-  m:0x10 + c:80
-
-"mpc volume +5"
-  m:0x10 + c:81
+    m:0x1 + c:111
+    Shift + Up
 
 "mpc prev"
-  m:0x10 + c:83
+    m:0x1 + c:113
+    Shift + Left
 
 "mpc toggle"
-  m:0x10 + c:84
+    m:0x1 + c:116
+    Shift + Down
 
 "mpc next"
-  m:0x10 + c:85
+    m:0x1 + c:114
+    Shift + Right
+
+"mpc stop"
+    m:0x1 + c:135
+    Shift + Menu
 
 "mpc seek -5"
   m:0x10 + c:87
 
-"mpc stop"
-  m:0x10 + c:88
-
 "mpc seek +5"
   m:0x10 + c:89
 
+"mpc volume -5"
+  m:0x10 + c:79"
+
+"mpc volume +5"
+  m:0x10 + c:81
+
 "mpc random on && mpc next && mpc random off"
-  m:0x0 + c:86
+    m:0x1 + c:104
+    Shift + KP_Enter
 
 "mpc random"
-  m:0x0 + c:82
+    m:0x1 + c:68
+    Shift + F2
 # }}}
