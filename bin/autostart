@@ -29,7 +29,6 @@ run hipchat
 run icedove
 run remmina > /dev/null 2>&1
 run mpdstream.sh
-#run xfce4-power-manager
 
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
