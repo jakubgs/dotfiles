@@ -37,7 +37,7 @@ urxvt*colorUL:         #a6c9f8
 *scrollTtyOutput:      false
 *scrollWithBuffer:     true
 *scrollTtyKeypress:    true
-*mouseWheelScrollPage: true
+*mouseWheelScrollPage: false
 
 *background:           #191919
 *foreground:           #e9e9e9
