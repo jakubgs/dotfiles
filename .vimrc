@@ -35,6 +35,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
 NeoBundle 'jceb/vim-orgmode'
 NeoBundle 'vim-scripts/Conque-GDB'
+NeoBundle 'jggdroot/indentLine'
 NeoBundle 't9md/vim-chef'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
@@ -203,6 +204,9 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
+" indentLine
+let g:indentLine_color_term = 239
+
 " Orgmode
 let g:org_agenda_files = ['~/org/*.org']
 
@@ -214,6 +218,7 @@ call unite#filters#matcher_default#use(['matcher_glob'])
 let g:unite_fuzzy_matching = 0
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('default', 'context', { 
+\   'winheight': 40,
 \   'smartcase' : 1,
 \   'no_split' : 1,
 \   'start_insert' : 1 })
@@ -386,6 +391,12 @@ let g:surround_36 = "$(\r)"
 " Toggle pastemode, doesn't indent
 set pastetoggle=<F4>
 
+" easier resizing
+nnoremap <up>    :resize +5<CR>
+nnoremap <down>  :resize -5<CR>
+nnoremap <left>  :vert resize -5<CR>
+nnoremap <right> :vert resize +5<CR>
+
 " Changing leader
 let mapleader = ","
 let maplocalleader = "\\"
@@ -557,11 +568,12 @@ nnoremap <space>uu :Unite file<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>ub :Unite buffer<CR>
 nnoremap <space>uf :Unite file<CR>
-nnoremap <space>uc :Unite command<CR>
+nnoremap <space>uC :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>ug :Unite grep:$buffers<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ui :Unite file_rec/async:~/work/infrastructure<CR>
+nnoremap <space>uc :Unite file_rec/async:~/work/codility<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/async:~/<CR>
 
 " search openned buffers
@@ -613,6 +625,13 @@ augroup saveposition
                 \ if line("'\"") > 0 && line("'\"") <= line("$") |
                 \   exe "normal! g`\"" |
                 \ endif
+augroup END
+
+augroup ruby_settings
+    autocmd FileType ruby setlocal tabstop=2
+    autocmd FileType ruby setlocal softtabstop=2
+    autocmd FileType ruby setlocal shiftwidth=2
+    autocmd FileType ruby setlocal cinoptions=>2
 augroup END
 
 augroup awesomerc
