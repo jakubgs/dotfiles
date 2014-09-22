@@ -33,6 +33,10 @@ urxvt*url-launcher:    /usr/bin/firefox
 urxvt*matcher.button:  1
 urxvt*colorUL:         #a6c9f8
 
+! configuration for selecting and pasting
+urxvt.copyCommand:      xsel -ib
+urxvt.pasteCommand:     xsel -ob
+
 ! scrolling stops once you go back
 *scrollTtyOutput:      false
 *scrollWithBuffer:     true
