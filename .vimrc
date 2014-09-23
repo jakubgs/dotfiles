@@ -20,6 +20,7 @@ NeoBundle 'Shougo/neobundle.vim'
 " Other plugins
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'haya14busa/vim-easyoperator-line'
+NeoBundle 'gregsexton/gitv'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-surround'
@@ -30,7 +31,6 @@ NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
 NeoBundle 'PProvost/vim-ps1'
 NeoBundle 'vim-scripts/vis'
 NeoBundle 'rking/ag.vim'
-NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
 NeoBundle 'jceb/vim-orgmode'
@@ -204,8 +204,8 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
-" indentLine
-let g:indentLine_color_term = 239
+" Gitv
+let g:Gitv_OpenHorizontal = 1
 
 " Orgmode
 let g:org_agenda_files = ['~/org/*.org']
@@ -371,7 +371,7 @@ xnoremap <silent> <space><cr> :LiveEasyAlign<cr>
 
 " easymotion
 " fast search by letter
-nmap <CR> <Plug>(easymotion-s)
+nmap <s-cr> <Plug>(easymotion-s)
 
 " easyoperator
 nmap d<space>l <Plug>(easyoperator-line-delete)
@@ -418,10 +418,6 @@ xnoremap / <esc>/\%V
 
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
-
-" jump forward or backward to any type of bracket
-"nnoremap <CR> /[[({]<CR>zz
-"nnoremap <S-CR> /[])}]<CR>zz
 
 " reselect visual block after indent/outdent
 xnoremap < <gv
@@ -485,9 +481,14 @@ xnoremap <c-c> "+y
 " easier toggling between two buffers
 nnoremap <c-cr> <c-^>
 
+" jump forward or backward to any type of bracket
+"nnoremap <CR> /[[({]<CR>zz
+"nnoremap <S-CR> /[])}]<CR>zz
+
 " }}}
 " Key mappings - <Leader> {{{
 
+" execute current line in vim
 nnoremap <space>v :execute getline(".")<cr>;w
 
 " put last searched items into QuickFix window
@@ -513,7 +514,7 @@ nnoremap <space>; A;<Esc>
 nnoremap <space>Y :CopyMatches *<CR>
 
 " easier access to substitution
-nnoremap <space>S :%s//<left>
+nnoremap <space>S :%s/\v
 
 " Window management
 " close buffer but leave active pane open
@@ -570,11 +571,17 @@ nnoremap <space>ub :Unite buffer<CR>
 nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uC :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
-nnoremap <space>ug :Unite grep:$buffers<CR>
+nnoremap <space>ug :UniteWithProjectDir grep:$buffers<CR>
+nnoremap <space>uG "syw:Unite grep:.::<c-r>s<CR>
 nnoremap <space>uj :Unite jump<CR>
-nnoremap <space>ui :Unite file_rec/async:~/work/infrastructure<CR>
-nnoremap <space>uc :Unite file_rec/async:~/work/codility<CR>
+nnoremap <space>ul :Unite line<CR>
+nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/async:~/<CR>
+nnoremap <space>ur :Unite -here -quick-match register<CR>
+nnoremap <space>us :Unite source<CR>
+nnoremap <space>uu :Unite file<CR>
+nnoremap <space>uy :Unite -here -quick-match history/yank<CR>
+
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
@@ -598,6 +605,8 @@ nnoremap <space>gb :Git branch<Space>
 nnoremap <space>go :Git checkout<Space>
 nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
+nnoremap <space>gv :Gitv<CR>
+nnoremap <space>gV :Gitv!<CR>
 
 " }}}
 " Key mappings - Fxx {{{
