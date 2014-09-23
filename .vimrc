@@ -561,6 +561,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 nnoremap <c-i>     :Unite file_mru file_rec/async:~/<CR>
 nnoremap <space>uy :Unite -here -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -here -quick-match register<CR>
+nnoremap <space>uy :Unite -here -quick-match history/yank<CR>
 nnoremap <space>uu :Unite file<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>ub :Unite buffer<CR>
@@ -572,12 +573,10 @@ nnoremap <space>uG "syw:Unite grep:.::<c-r>s<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>um :Unite file_mru<CR>
-nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
-nnoremap <space>ui :UniteWithProjectDir file_rec/async:~/work/infrastructure<CR>
-nnoremap <space>ur :Unite -here -quick-match register<CR>
 nnoremap <space>us :Unite source<CR>
 nnoremap <space>uu :Unite file<CR>
-nnoremap <space>uy :Unite -here -quick-match history/yank<CR>
+nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
+nnoremap <space>ui :UniteWithProjectDir file_rec/async:~/work/infrastructure<CR>
 
 
 " search openned buffers
