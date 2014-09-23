@@ -576,7 +576,8 @@ nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>us :Unite source<CR>
 nnoremap <space>uu :Unite file<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
-nnoremap <space>ui :UniteWithProjectDir file_rec/async:~/work/infrastructure<CR>
+nnoremap <space>ui :Unite file_rec/async:~/work/infrastructure<CR>
+nnoremap <space>uw :Unite file_rec/async:~/work/<CR>
 
 
 " search openned buffers
