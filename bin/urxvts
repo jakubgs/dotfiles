@@ -1,6 +1,14 @@
 #!/bin/bash
 
-FONT="xft:Terminus:size=8:lang=pl"
+FONT_SIZE=8
+
+if [[ $1 =~ ^[0-9]+$ ]]; then
+    FONT_SIZE=$1
+    echo "Font size: $FONT_SIZE"
+    shift
+fi
+
+FONT="xft:Terminus:size=${FONT_SIZE}:lang=pl"
 
 urxvtc  -xrm "*font: ${FONT}" \
         -xrm "*boldFont: ${FONT}:style=bold" \
