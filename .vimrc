@@ -365,10 +365,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: "\<TAB>"
 
-" easy-align
-xnoremap <silent> <cr> :EasyAlign<cr>
-xnoremap <silent> <space><cr> :LiveEasyAlign<cr>
-
 " easymotion
 " fast search by letter
 nmap <s-cr> <Plug>(easymotion-s)
