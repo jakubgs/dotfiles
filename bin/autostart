@@ -25,10 +25,11 @@ run gvim
 run thunar --daemon
 run xbindkeys
 run nm-applet
-run hipchat
+run dwb https://codility-com.hipchat.com/chat
 run icedove
 run remmina > /dev/null 2>&1
 run mpdstream.sh
+run blueman-applet
 
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
