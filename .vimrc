@@ -566,7 +566,7 @@ nnoremap <space>uu :Unite file<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>ub :Unite buffer<CR>
 nnoremap <space>uf :Unite file<CR>
-nnoremap <space>uC :Unite command<CR>
+nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>ug :UniteWithProjectDir grep:$buffers<CR>
 nnoremap <space>uG "syw:Unite grep:.::<c-r>s<CR>
@@ -576,7 +576,8 @@ nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>us :Unite source<CR>
 nnoremap <space>uu :Unite file<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
-nnoremap <space>ui :Unite file_rec/async:~/work/infrastructure<CR>
+nnoremap <space>uI :Unite file_rec/async:~/work/infrastructure<CR>
+nnoremap <space>uC :Unite file_rec/async:~/work/codility<CR>
 nnoremap <space>uw :Unite file_rec/async:~/work/<CR>
 
 
