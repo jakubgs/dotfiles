@@ -518,8 +518,8 @@ nnoremap <silent> <space>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <silent> <space>Q :q!<CR>
 
 " Edit .vimrc and refresh configuration
-nnoremap <silent> <space>r :source ~/.vimrc<CR>
-nnoremap <silent> <space>R :vsp ~/.vimrc<CR>
+nnoremap <silent> <space>r :source ~/dotfiles/.vimrc<CR>
+nnoremap <silent> <space>R :vsp ~/dotfiles/.vimrc<CR>
 
 " switch between buffers
 nnoremap <silent> <space>h :bprevious<CR>
