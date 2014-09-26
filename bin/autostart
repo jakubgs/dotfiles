@@ -16,6 +16,8 @@ function run {
 
 ####### programs to run ########
 
+cd /tmp
+
 echo "### Autostarting programs:"
 
 nitrogen --restore
@@ -30,6 +32,7 @@ run icedove
 run remmina > /dev/null 2>&1
 run mpdstream.sh
 run blueman-applet
+run xfce4-power-manager
 
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
