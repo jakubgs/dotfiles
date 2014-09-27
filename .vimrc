@@ -560,16 +560,16 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 " }}}
 " Key mappings - Unite {{{
 nnoremap <c-i>     :Unite file_mru file_rec/async:~/<CR>
-nnoremap <space>uy :Unite -here -quick-match history/yank<CR>
-nnoremap <space>ur :Unite -here -quick-match register<CR>
-nnoremap <space>uy :Unite -here -quick-match history/yank<CR>
+nnoremap <space>uy :Unite -quick-match history/yank<CR>
+nnoremap <space>ur :Unite -quick-match register<CR>
+nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>uu :Unite file<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>ub :Unite buffer<CR>
 nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
-nnoremap <space>ug :UniteWithProjectDir grep:$buffers<CR>
+nnoremap <space>ug :execute('Unite grep:'.system('git rev-parse --show-toplevel'))<CR>
 nnoremap <space>uG "syw:Unite grep:.::<c-r>s<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
