@@ -8,7 +8,7 @@ function run {
 	args=$@
 	
     printf "Checking: %-20s" "$command"
-	if ! pgrep -d ", " $command; then
+	if ! pgrep -f -d ", " $command; then
 		echo "STARTING"
 		nohup $command $args 2>/dev/null &
 	fi
