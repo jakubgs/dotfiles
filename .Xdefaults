@@ -27,11 +27,18 @@ urxvt*termName:        rxvt-256color
 urxvt*foreground:      #e9e9e9
 
 ! Clickable links
-!urxvt*perl-ext-common: default,matcher
-urxvt*perl-ext-common: default,matcher,-option-popup,-selection-popup,-realine
+urxvt*perl-ext-common: default,font-size,matcher,-option-popup,-selection-popup,-realine
 urxvt*url-launcher:    /usr/bin/firefox
 urxvt*matcher.button:  1
 urxvt*colorUL:         #a6c9f8
+
+! on the fly font size manipulation
+urxvt.font-size.step:  2
+! mappings
+urxvt.keysym.C-Up:     perl:font-size:increase
+urxvt.keysym.C-Down:   perl:font-size:decrease
+urxvt.keysym.C-S-Up:   perl:font-size:incglobal
+urxvt.keysym.C-S-Down: perl:font-size:decglobal
 
 ! configuration for selecting and pasting
 urxvt.copyCommand:      xsel -ib
