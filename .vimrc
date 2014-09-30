@@ -569,8 +569,10 @@ nnoremap <space>ub :Unite buffer<CR>
 nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
-nnoremap <space>ug :execute('Unite grep:'.system('git rev-parse --show-toplevel'))<CR>
-nnoremap <space>uG "syw:Unite grep:.::<c-r>s<CR>
+nnoremap <space>ug :execute('Unite grep:'.
+\ system('git rev-parse --show-toplevel \| xargs echo -n'))<CR>
+nnoremap <space>uG :execute('Unite grep:'.
+\ system('git rev-parse --show-toplevel \| xargs echo -n').'::'.expand('<cword>'))<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>um :Unite file_mru<CR>
