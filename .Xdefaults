@@ -6,9 +6,7 @@ Xcursor.theme: Vanilla-DMZ
 !*imLocale:             en_GB.UTF-8
 !*geometry:             120x35
 
-*font:              xft:Terminus:size=10:lang=pl:antialias=true:hinting=true,\
-					xft:Kochi Gothic:antialias=false,\
-					xft:Baekmuk Gulim
+*font:              xft:Terminus:size=10:lang=pl:antialias=true:hinting=true
 *boldFont:          xft:Terminus:size=10:Bold:lang=pl:antialias=true:hinting=true
 
 ! Disable printing
@@ -37,8 +35,6 @@ urxvt.font-size.step:  2
 ! mappings
 urxvt.keysym.C-Up:     perl:font-size:increase
 urxvt.keysym.C-Down:   perl:font-size:decrease
-urxvt.keysym.C-S-Up:   perl:font-size:incglobal
-urxvt.keysym.C-S-Down: perl:font-size:decglobal
 
 ! configuration for selecting and pasting
 urxvt.copyCommand:      xsel -ib
