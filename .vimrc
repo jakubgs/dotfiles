@@ -612,7 +612,7 @@ nnoremap <space>gV :Gitv!<CR>
 " }}}
 " Key mappings - Fxx {{{
 
-nnoremap <F12> :set guifont=Inconsolata\ 12<CR>
+nnoremap <F12> :set guifont=Inconsolata\ 18<CR>
 nnoremap <F11> :set guifont=terminus\ 10<CR>
 nnoremap <F10> :Start %:p<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
@@ -701,29 +701,10 @@ function! s:unite_settings()
     " open in new splits
     imap <silent><buffer><expr> <C-x> unite#do_action('split')
     imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-
-    " switch between matching methods
-    inoremap <buffer> <C-r> <C-o>:call ToggleUniteMatching()<CR>
 endfunction
 
 " }}}
 " Functions {{{
-
-" toggle fuzzy and glob matching in unite
-function! ToggleUniteMatching()
-    if g:unite_fuzzy_matching == 1
-        echo 'Switching to glob matching'
-        call unite#filters#matcher_default#use(['matcher_glob'])
-        let g:unite_fuzzy_matching = 0
-    else
-        echo 'Switching to fuzzy matching'
-        call unite#filters#matcher_default#use(['matcher_fuzzy'])
-        let g:unite_fuzzy_matching = 1
-    endif
-
-    normal a
-    normal <Plug>(unite_redraw)
-endfunction
 
 " Add []<space> mappings for adding empty lines
 function! s:AddLines(before)
