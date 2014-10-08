@@ -136,7 +136,7 @@ set autochdir                     " Automatically changing working dir
 set shell=zsh                     " Shell
 set keywordprg=firefox\ -search   " K searches text in firefox def. search
 set grepprg=ag\ --nogroup\ --nocolor " use ag over grep
-set shortmess=atI                 " remove message at vim start
+set shortmess=aoOtI                 " remove message at vim start
 set cmdheight=1                   " command line length
 set backupdir=~/.vim/backup//     " make ~ files in:
 set noswapfile                    " set directory=~/.vim/temp//
@@ -569,10 +569,8 @@ nnoremap <space>ub :Unite buffer<CR>
 nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
-nnoremap <space>ug :execute('Unite grep:'.
-\ system('git rev-parse --show-toplevel \| xargs echo -n'))<CR>
-nnoremap <space>uG :execute('Unite grep:'.
-\ system('git rev-parse --show-toplevel \| xargs echo -n').'::'.expand('<cword>'))<CR>
+nnoremap <space>ug :execute('Unite -auto-preview grep:'.GetWorkDir())<CR>
+nnoremap <space>uG :execute('Unite -auto-preview grep:'.GetWorkDir().'::'.expand('<cword>'))<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>um :Unite file_mru<CR>
@@ -612,7 +610,7 @@ nnoremap <space>gV :Gitv!<CR>
 " }}}
 " Key mappings - Fxx {{{
 
-nnoremap <F12> :set guifont=Inconsolata\ 18<CR>
+nnoremap <F12> :set guifont=Inconsolata\ 14<CR>
 nnoremap <F11> :set guifont=terminus\ 10<CR>
 nnoremap <F10> :Start %:p<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
@@ -705,6 +703,16 @@ endfunction
 
 " }}}
 " Functions {{{
+
+" get directory in which Unite should search
+function! GetWorkDir()
+    let directory = system('git rev-parse --show-toplevel | xargs echo -n')
+    if v:shell_error != 0
+        let directory = '~/'
+    endif
+
+    return directory
+endfunction
 
 " Add []<space> mappings for adding empty lines
 function! s:AddLines(before)
