@@ -36,8 +36,8 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
 NeoBundle 'jceb/vim-orgmode'
 NeoBundle 'vim-scripts/Conque-GDB'
-NeoBundle 'jggdroot/indentLine'
 NeoBundle 't9md/vim-chef'
+NeoBundle 'kmnk/vim-unite-giti'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/neosnippet'
@@ -235,7 +235,7 @@ if executable('ag')
 	" Use ag in unite grep source.
 	let g:unite_source_grep_command = 'ag'
 	let g:unite_source_grep_default_opts =
-	            \ '-i -u --line-numbers --nocolor --nogroup --hidden --ignore ' .
+	            \ '-i -U --line-numbers --nocolor --nogroup --hidden --ignore ' .
 	            \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
 	let g:unite_source_grep_recursive_opt = ''
 endif
@@ -606,6 +606,8 @@ nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
 nnoremap <space>gv :Gitv<CR>
 nnoremap <space>gV :Gitv!<CR>
+nnoremap <space>gg :Unite giti<CR>
+
 
 " }}}
 " Key mappings - Fxx {{{
