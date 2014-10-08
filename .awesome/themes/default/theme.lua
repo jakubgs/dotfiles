@@ -9,12 +9,14 @@ theme.font          = "terminus 8"
 --theme.font          = "Helvetica 8"
 
 theme.bg_normal     = "#000000" --"#222222"
-theme.bg_focus      = "#3F3F3F" --"#535d6c"
+--theme.bg_focus      = "#3F3F3F" --"#535d6c"
+theme.bg_focus      = "#afd700" --"#535d6c"
 theme.bg_urgent     = "#800000"
 theme.bg_minimize   = "#444444"
 
 theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
+--theme.fg_focus      = "#ffffff"
+theme.fg_focus      = "#000000"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
