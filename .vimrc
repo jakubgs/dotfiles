@@ -235,7 +235,7 @@ if executable('ag')
 	" Use ag in unite grep source.
 	let g:unite_source_grep_command = 'ag'
 	let g:unite_source_grep_default_opts =
-	            \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+	            \ '-i -u --line-numbers --nocolor --nogroup --hidden --ignore ' .
 	            \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
 	let g:unite_source_grep_recursive_opt = ''
 endif
@@ -559,7 +559,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :Unite file_mru file_rec/async:~/<CR>
+nnoremap <c-i>     :execute('Unite file_mru file_rec/async:'.GetWorkDir())<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
