@@ -35,6 +35,12 @@ urxvt.font-size.step:  2
 ! mappings
 urxvt.keysym.C-Up:     perl:font-size:increase
 urxvt.keysym.C-Down:   perl:font-size:decrease
+urxvt.keysym.C-Up:     perl:font-size:incglobal
+urxvt.keysym.C-Down:   perl:font-size:decglobal
+
+! disable default ctrl+shift bindings
+urxvt.iso14755: false
+urxvt.iso14755_52: false
 
 ! configuration for selecting and pasting
 urxvt.copyCommand:      xsel -ib
