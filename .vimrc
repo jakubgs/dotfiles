@@ -562,7 +562,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 nnoremap <c-i>     :Unite file_mru file_rec/async:~/<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
-nnoremap <space>uy :Unite -quick-match history/yank<CR>
+nnoremap <space>uR :Unite resume<CR>
 nnoremap <space>uu :Unite file<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>ub :Unite buffer<CR>
@@ -579,7 +579,7 @@ nnoremap <space>uu :Unite file<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
 nnoremap <space>uI :Unite file_rec/async:~/work/infrastructure<CR>
 nnoremap <space>uC :Unite file_rec/async:~/work/codility<CR>
-nnoremap <space>uw :Unite file_rec/async:~/work/<CR>
+nnoremap <space>uW :Unite file_rec/async:~/work/<CR>
 
 
 " search openned buffers
