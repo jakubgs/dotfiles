@@ -1,24 +1,37 @@
 # Power Management {{{
 # Hibernation
-"slock"
+
+"sudo pm-suspend && slimlock"
+ m:0x40 + c:39
+ Mod4 + s
+
+"slimlock"
  m:0x50 + c:46
  Mod2+Mod4 + l
 
-"~/bin/windows"
- m:0x50 + c:27
- Mod2+Mod4 + r
+"slimlock"
+ m:0x5 + c:46
+ Control+Shift + l
 
-"sudo /usr/sbin/hibernate"
- m:0x50 + c:43
- Mod2+Mod4 + h
+"slimlock && sudo pm-hibernate"
+ m:0x40 + c:43
+ Mod4 + h
 
 "TPAD=$(synclient | awk '/TouchpadOff/{print $3}'); synclient TouchpadOff=$((TPAD==0))"
-  m:0x0 + c:248
-  NoSymbol
+ m:0x0 + c:165
+ XF86MyComputer
 
-"autorandr -c"
-    m:0x40 + c:38
-    Mod4 + a
+"autorandr -c --default common"
+ m:0x0 + c:128
+ XF86LaunchA
+
+"arandr"
+ m:0x0 + c:179
+ XF86Tools
+
+"sudo /usr/sbin/pm-suspend"
+ m:0x0 + c:225
+ XF86Search
 
 # }}}
 # Volume {{{
