@@ -559,7 +559,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite file_mru file_rec/async:'.GetWorkDir())<CR>
+nnoremap <c-i>     :execute('Unite file_mru file_rec/async:'.g:workdir)<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
@@ -569,8 +569,8 @@ nnoremap <space>ub :Unite buffer<CR>
 nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
-nnoremap <space>ug :execute('Unite -auto-preview grep:'.GetWorkDir())<CR>
-nnoremap <space>uG :execute('Unite -auto-preview grep:'.GetWorkDir().'::'.expand('<cword>'))<CR>
+nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:workdir)<CR>
+nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:workdir.'::'.expand('<cword>'))<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>um :Unite file_mru<CR>
@@ -703,14 +703,19 @@ function! s:unite_settings()
     imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
 endfunction
 
+" find work dir for every entered buffer
+augroup set_workdir
+    autocmd BufEnter * let g:workdir = GetWorkDir()
+augroup END
+
 " }}}
 " Functions {{{
 
 " get directory in which Unite should search
 function! GetWorkDir()
     let directory = system('git rev-parse --show-toplevel | xargs echo -n')
-    if v:shell_error != 0
-        let directory = '~/'
+    if v:shell_error != 0 || directory =~ 'fatal'
+        let directory = $HOME
     endif
 
     return directory
