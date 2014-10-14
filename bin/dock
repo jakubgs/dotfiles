@@ -1,23 +1,51 @@
 #!/bin/bash
 
-trap 'echo "Failure!"; xrandr --output eDP1 --auto; exit 1' ERR
+maindisp="eDP1"
 
-mode='1920x1200_60.00'
-modeopts='193.16  1920 2048 2256 2592  1200 1201 1204 1242  -HSync +Vsync'
+dock_disconnect() {
+    displays=$(xrandr | awk '/connected/{print $1}')
+    for display in $displays; do
+        echo "Turning off: $display"
+        xrandr --output $display --off
+    done
+    echo "Resetting: $maindisp"
+    xrandr --output $maindisp --auto
+}
 
-if ! xrandr | grep "$mode" > /dev/null; then
-    echo "Creating mode: $mode"
-    xrandr --newmode $mode $modeopts
+on_failure() {
+    echo 'Failure!'
+    dock_disconnect
+    exit 1
+}
+
+dock_connect() {
+    trap "on_failure" ERR
+    mode='1920x1200_60.00'
+    modeopts='193.16  1920 2048 2256 2592  1200 1201 1204 1242  -HSync +Vsync'
+
+    if ! xrandr | grep "$mode" > /dev/null; then
+        echo "Creating mode: $mode"
+        xrandr --newmode $mode $modeopts
+    fi
+
+    echo 'Adding modes...'
+    xrandr --addmode DP4 $mode
+    xrandr --addmode DP5 $mode
+
+    xrandr --output $maindisp --off
+
+    echo 'Enabling displays...'
+    xrandr --output DP4 --mode $mode --primary
+    xrandr --output DP5 --mode $mode --right-of DP4
+}
+
+if xrandr | grep "^DP. connected"; then
+    dock_disconnect
+elif xrandr | grep "^DP[3-9] disconnected"; then
+    dock_connect
+else
+    echo 'Nothing to do...'
 fi
 
-echo 'Adding modes...'
-xrandr --addmode DP4 $mode
-xrandr --addmode DP5 $mode
-
-xrandr --output eDP1 --off
-
-echo 'Enabling displays...'
-xrandr --output DP4 --mode $mode --primary
-xrandr --output DP5 --mode $mode --right-of DP4
-
+# for debugging purposes
 xrandr > /tmp/xrandr.log
