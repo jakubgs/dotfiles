@@ -136,7 +136,7 @@ set autochdir                     " Automatically changing working dir
 set shell=zsh                     " Shell
 set keywordprg=firefox\ -search   " K searches text in firefox def. search
 set grepprg=ag\ --nogroup\ --nocolor " use ag over grep
-set shortmess=aoOtI                 " remove message at vim start
+set shortmess=aoOtTI                 " remove message at vim start
 set cmdheight=1                   " command line length
 set backupdir=~/.vim/backup//     " make ~ files in:
 set noswapfile                    " set directory=~/.vim/temp//
@@ -600,21 +600,22 @@ nnoremap <space>gw :Gwrite<CR><CR>
 nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
 nnoremap <space>gp :Ggrep<Space>
 nnoremap <space>gm :Gmove<Space>
-nnoremap <space>gb :Git branch<Space>
+nnoremap <space>gB :Gblame<CR>
 nnoremap <space>go :Git checkout<Space>
 nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
 nnoremap <space>gv :Gitv<CR>
 nnoremap <space>gV :Gitv!<CR>
 nnoremap <space>gg :Unite giti<CR>
+nnoremap <space>gb :Unite giti/branch<CR>
 
 
 " }}}
 " Key mappings - Fxx {{{
 
-nnoremap <F12> :set guifont=Inconsolata\ 14<CR>
+nnoremap <F12> :set guifont=terminus\ 14<CR>
 nnoremap <F11> :set guifont=terminus\ 10<CR>
-nnoremap <F10> :Start %:p<CR>
+nnoremap <F10> :Dispatch! knife dwim ./<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
 nnoremap <F8>  :setlocal list!<CR>
 nnoremap <F7>  :setlocal wrap!<CR>
