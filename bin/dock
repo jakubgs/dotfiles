@@ -1,5 +1,23 @@
 #!/bin/bash
 
+trap 'echo "Failure!"; xrandr --output eDP1 --auto; exit 1' ERR
+
+mode='1920x1200_60.00'
+modeopts='193.16  1920 2048 2256 2592  1200 1201 1204 1242  -HSync +Vsync'
+
+if ! xrandr | grep "$mode" > /dev/null; then
+    echo "Creating mode: $mode"
+    xrandr --newmode $mode $modeopts
+fi
+
+echo 'Adding modes...'
+xrandr --addmode DP4 $mode
+xrandr --addmode DP5 $mode
+
 xrandr --output eDP1 --off
-xrandr --output DP4 --auto --primary 
-xrandr --output DP5 --auto --right-of DP4
+
+echo 'Enabling displays...'
+xrandr --output DP4 --mode $mode --primary
+xrandr --output DP5 --mode $mode --right-of DP4
+
+xrandr > /tmp/xrandr.log
