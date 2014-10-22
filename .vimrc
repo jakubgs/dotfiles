@@ -9,7 +9,7 @@ if has('vim_starting')
     set nocompatible
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 " }}}
 " NeoBundle plugin management {{{
@@ -52,6 +52,8 @@ if ( has("lua") )
 endif
 " colorschemes
 NeoBundle 'nanotech/jellybeans.vim'
+
+call neobundle#end()
 
 " }}}
 " Display configuration {{{
@@ -235,7 +237,7 @@ if executable('ag')
 	" Use ag in unite grep source.
 	let g:unite_source_grep_command = 'ag'
 	let g:unite_source_grep_default_opts =
-	            \ '-i -U --line-numbers --nocolor --nogroup --hidden --ignore ' .
+	            \ '-i -U --line-numbers --nocolor --nogroup --ignore ' .
 	            \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
 	let g:unite_source_grep_recursive_opt = ''
 endif
@@ -559,7 +561,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite file_mru file_rec/async:'.g:workdir)<CR>
+nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/async:'.g:workdir)<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
