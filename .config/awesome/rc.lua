@@ -22,6 +22,9 @@ naughty = require('naughty')
 -- {{{ Variable definitions
 homedir = os.getenv("HOME")
 
+-- for reading bat capacity
+local first_line = require("lain.helpers").first_line
+
 -- Run the autostart script
 awful.util.spawn_with_shell(homedir .. "/bin/autostart")
 
@@ -30,9 +33,12 @@ beautiful.init(homedir .. "/.awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
+--hipchat = "dwb https://codility-com.hipchat.com/chat"
+hipchat = "hipchat"
 fmanager = "thunar"
 terminal = "urxvtc"
-terminal_s = homedir .. "/bin/urxvts"
+terminal_s = homedir .. "/bin/urxvts 16"
+ncmpcpp = terminal .. " -name ncmpcpp -e ncmpcpp" 
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -71,14 +77,18 @@ tags = {}
 
 -- Each screen has its own tag table.
 tags[1] = awful.tag(
-{ ":admin:",    ":web:",    ":music:",  ":comm:",   ":files:",  ":remote:", ":vm:" }, 1,
-{ layouts[3],   layouts[8], layouts[4], layouts[3], layouts[1], layouts[8], layouts[8] })
-tags[2] = awful.tag(
-{ ":editor:",   ":web:",    ":misc:",   ":wine:",   ":files:",  ":remote:", ":work:" }, 2,
-{ layouts[2],   layouts[8], layouts[5], layouts[2], layouts[1], layouts[8], layouts[8] })
-tags[3] = awful.tag(
-{ ":admin:",    ":web:",    ":music:",  ":misc:",   ":fukes:",   ":remote:",   "work" }, 3,
-{ layouts[3],   layouts[8], layouts[4], layouts[2], layouts[1], layouts[8], layouts[6] })
+{ ":admin:",    ":editor:", ":web:",    ":music:",  ":comm:",   ":files:",  ":remote:", ":vm:" }, 1,
+{ layouts[3],   layouts[3], layouts[8], layouts[4], layouts[3], layouts[2], layouts[8], layouts[8] })
+if screen.count() == 2 then
+    tags[2] = awful.tag(
+    { ":admin:",    ":editor:", ":web:",    ":misc:",   ":comm:",   ":files:",  ":remote:", ":vm:" }, 2,
+    { layouts[3],   layouts[3], layouts[8], layouts[5], layouts[2], layouts[2], layouts[8], layouts[8] })
+end
+if screen.count() == 3 then
+    tags[3] = awful.tag(
+    { ":admin:",    ":editor:", ":web:",    ":misc:",  ":misc:",   ":files:",  ":remote:", "vm" }, 3,
+    { layouts[3],   layouts[3], layouts[8], layouts[4], layouts[2], layouts[2], layouts[8], layouts[6] })
+end
 --end
 -- }}}
 -- {{{ Menu
@@ -149,8 +159,8 @@ mymainmenu = awful.menu({ items = {
     { "-------------", nil },
     { "file manager",   fmanager },
     { "urxvt",      terminal },
-    { "htop",       terminal_s .. " -e htop" },
-    { "ncmpcpp",    terminal_s .. " -name ncmpcpp -e ncmpcpp" },
+    { "htop",       terminal .. " -e htop" },
+    { "ncmpcpp",    ncmpcpp },
     { "brasero",    "brasero" },
     { "remmina",    "remmina" },
     { "pidgin",     "pidgin" },
@@ -188,13 +198,61 @@ function (widget, args)
 end, 1) -- refresh every 2 seconds
 
 -- Battery
-mybattery = lain.widgets.bat({
-    timeout = 60,
-    battery = "BAT0",
-    settings = function()
-        widget:set_markup("| Bat " .. bat_now.perc .. "% ")
+--mybattery = lain.widgets.bat({
+--    timeout = 60,
+--    battery = "BAT0",
+--    settings = function()
+--        widget:set_markup("| Bat " .. bat_now.perc .. "% ")
+--    end
+--})
+
+function get_time_value(text, time_unit)
+    if text ~= nil then
+        if string.match(bat[i]['time to empty'], time_unit) then
+            return string.match(bat[i]['time to empty'], "([0-9\.]+) "..time_unit)
+        end
     end
-})
+    return 0
+end
+
+mybattery = wibox.widget.textbox()
+mybattimer = timer({ timeout = 5 })
+mybattimer:connect_signal("timeout",
+    function()
+        bat_sum_perc = 0
+        bat_sum_hours = 0
+        bat_sum_minutes = 0
+        i = 0
+        bat = {}
+        handle = assert(io.popen("upower --enumerate | grep battery"))
+        for bat_path in handle:lines() do
+            bat[i] = {}
+            --print("=====BATTERY PATH=====:"..bat_path)
+            upower = assert(io.popen("upower --show-info "..bat_path))
+            for line in upower:lines() do
+                param_name, param_value = string.match(line, " +([a-z- ]+): *(.+)")
+                if param_name ~= nil and param_value ~= nil then
+                    --print("title="..param_name.."\nvalue="..param_value)
+                    bat[i][param_name] = param_value
+                end
+            end
+            bat[i]['hours'] = get_time_value(bat[i]['time to empty'], 'hours')
+            bat_sum_hours = bat_sum_hours + bat[i]['hours']
+            bat_sum_perc = bat_sum_perc + tonumber(string.sub(bat[i]['percentage'], 0, -2))
+            upower:close()
+            i = i + 1
+        end
+        handle:close()
+
+        combined_capacity = bat_sum_perc / i
+        bat_text = '| Bat: ' .. combined_capacity .. '% '
+
+        bat_text = bat_text .. 'Time: ' .. bat_sum_hours .. 'h '
+        
+        mybattery:set_text(bat_text)
+    end)
+mybattimer:start()
+mybattimer:emit_signal("timeout")
 
 mympdwidget:buttons(awful.util.table.join(
 awful.button({ }, 1, function () awful.util.spawn("mpc toggle", false) end),
@@ -327,7 +385,8 @@ awful.button({ modkey }, 5, awful.tag.viewnext)
 -- }}}
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-awful.key({ modkey,           }, "Escape",       awful.tag.history.restore),
+awful.key({ modkey,           }, "Escape",  awful.tag.history.restore),
+awful.key({ modkey,           }, "`",       awful.tag.history.restore),
 awful.key({ modkey, "Shift"   }, "Tab",     function () focusby(-1)  end),
 awful.key({ modkey,           }, "Tab",     function () focusby( 1)  end),
 -- Layout manipulation
@@ -344,7 +403,9 @@ awful.key({ modkey,           }, "e",       function () run_or_raise("gvim --ser
 awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Iceweasel" }) end),
 awful.key({ modkey,           }, "c",       function () awful.util.spawn(terminal) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
-awful.key({ modkey,           }, "m",       function () run_or_raise(terminal_s .. " --name ncmpcpp -e ncmpcpp", { instance = "ncmpcpp" }) end),
+awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { name = "ncmpcpp*" }) end),
+awful.key({ modkey,           }, "i",       function () run_or_raise(hipchat, { class = "HipChat" }) end),
+awful.key({ modkey,           }, "u",       function () run_or_raise(terminal .. "icedove", { class = "Icedove" }) end),
 -- Standard program
 awful.key({ "Control",        }, "BackSpace", function () awful.util.spawn(terminal) end),
 awful.key({ "Control", "Shift"}, "BackSpace", function () awful.util.spawn(terminal_s) end),
@@ -361,7 +422,9 @@ awful.key({ "Mod4", "Shift"   }, "Tab",     function () awful.tag.viewprev(mouse
 awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 awful.key({ modkey,           }, "d",       -- toggle between last raised windows
 function ()
-    awful.client.focus.history.previous()
+    c = client.focus.history.get(0, 1).focus
+    c:raise()
+    --awful.client.focus.history.previous()
     --if client.focus then
     --    client.focus:raise()
     --end
@@ -455,6 +518,8 @@ awful.rules.rules = {
     buttons = clientbuttons, } },
     { rule = { name = "mpv.*" },
     properties = { floating = true } },
+    { rule = { class = "Screenkey" },
+    properties = { floating = true } }, 
     { rule = { class = "Spacefm" },
     properties = { floating = true, border = 5 } },
     { rule = { name = "File Operation Progress" },
@@ -468,21 +533,21 @@ awful.rules.rules = {
     { rule = { class = "Iceweasel", name = "Session Manager.*" },
     properties = { floating = true } },
     { rule = { class = "Iceweasel", role = "browser" },
-    properties = { tag = tags[1][2], floating = false } },
+    properties = { tag = tags[1][3], floating = false } },
     { rule = { class = "Iceweasel", role = "GtkFileChooserDialog" },
     callback = function(c) awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c) end},
     { rule = { class = "Keepassx" },
-    properties = { tag = tags[1][5], floating = false } },
+    properties = { tag = tags[1][6], floating = false } },
     { rule = { name = "Session Manager.*" },
     properties = { floating = true } },
     { rule = { class = "Dwb" },
-    properties = { tag = tags[1][2] } },
-    { rule = { instance = "ncmpcpp" },
     properties = { tag = tags[1][3] } },
+    { rule = { name = "ncmpcpp*" },
+    properties = { tag = tags[1][4] } },
     { rule = { name = "htop" },
-    properties = { tag = tags[1][3] } },
+    properties = { tag = tags[1][4] } },
     { rule = { name = "mhtop" },
-    properties = { tag = tags[1][3] } },
+    properties = { tag = tags[1][4] } },
     { rule = { name = "mmtail" },
     properties = { tag = tags[1][1] } },
     { rule = { name = "ytdl" },
@@ -494,7 +559,7 @@ awful.rules.rules = {
         tag = tags[1][2],
     } },
     { rule = { class = "Gvim" },
-    properties = { tag = tags[1][1] } },
+    properties = { tag = tags[1][2] } },
     --{ rule = { instance = "ffvim" },
     { rule = { name = "ffvim" },
     properties = { floating = true },
@@ -514,9 +579,13 @@ awful.rules.rules = {
         fullscreen = true,
         ontop = true
     } },
+    { rule = { class = "Virt-manager" }, 
+    properties = {
+        tag = tags[1][8],
+    } },
     { rule = { name = "Windows.*" },
     properties = {
-        tag = tags[1][7],
+        tag = tags[1][8],
         floating = false,
         fullscreen = true,
         --maximized_horizontal = true,
@@ -524,7 +593,7 @@ awful.rules.rules = {
     } },
     { rule = { class = "qemu.*" },
     properties = {
-        tag = tags[1][7],
+        tag = tags[1][8],
         floating = true,
         fullscreen = true,
         ontop = true,
@@ -540,7 +609,7 @@ awful.rules.rules = {
     } },
     { rule = { class = "Remmina" },
     properties = {
-        tag = tags[1][6],
+        tag = tags[screen.count()][7],
         floating = false,
         fullscreen= false,
         --maximized_horizontal = true,
@@ -553,18 +622,24 @@ awful.rules.rules = {
     { rule = { instance = "plugin-container" },
     properties = { floating = true, fullscreen = true } },
     { rule = { class = "Pidgin" },
-    properties = { floating = false, tag = tags[1][4] } },
+    properties = { floating = false, tag = tags[1][5] } },
     { rule = { class = "Skype" },
-    properties = { floating = false, tag = tags[1][4] } },
+    properties = { floating = false, tag = tags[1][5] } },
     { rule = { class = "Icedove" },
-    properties = { tag = tags[1][4] } },
+    properties = { tag = tags[1][5] } },
+    { rule = { class = "Dwb" },
+    properties = { tag = tags[1][5] } },
     { rule = { class = "HipChat" },
-    properties = { tag = tags[1][4] } },
+    properties = { tag = tags[screen.count()][5] } },
 }
 -- }}}
 -- {{{ Signals
+
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
+    -- for debugging only
+    --naughty.notify({title = "debug",text = "New client, class is " .. c.class})
+
     -- remove gaps -- IMPORTANT!!
     c.size_hints_honor = false
     -- Enable sloppy focus
