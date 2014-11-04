@@ -18,10 +18,10 @@
  Mod4 + h
 
 "TPAD=$(synclient | awk '/TouchpadOff/{print $3}'); synclient TouchpadOff=$((TPAD==0))"
- m:0x0 + c:165
- XF86MyComputer
+ m:0x0 + c:152
+ XF86Explorer
 
-"autorandr -c --default common"
+"~/bin/dock"
  m:0x0 + c:128
  XF86LaunchA
 
