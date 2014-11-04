@@ -15,7 +15,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " NeoBundle plugin management {{{
 
 " let Neobundle manage Neobundle
-NeoBundle 'Shougo/neobundle.vim'
+NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Other plugins
 NeoBundle 'Lokaltog/vim-easymotion'
@@ -412,9 +412,6 @@ xnoremap q; :
 inoremap jk <esc>
 inoremap kj <esc>
 
-" search within visual block
-xnoremap / <esc>/\%V
-
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
 
@@ -606,6 +603,7 @@ nnoremap <space>gB :Gblame<CR>
 nnoremap <space>go :Git checkout<Space>
 nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
+nnoremap <space>gf :Dispatch! git fetch --all<CR>
 nnoremap <space>gv :Gitv<CR>
 nnoremap <space>gV :Gitv!<CR>
 nnoremap <space>gg :Unite giti<CR>
