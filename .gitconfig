@@ -15,6 +15,7 @@
     ps = push
     pl = pull
     sm = submodule
+    s = stash
     c = commit --verbose
     a = add 
     an = annex
