@@ -21,22 +21,23 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'haya14busa/vim-easyoperator-line'
 NeoBundle 'gregsexton/gitv'
-NeoBundle 'sotte/presenting.vim'
+"NeoBundle 'sotte/presenting.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'wellle/targets.vim'
 NeoBundle 'tommcdo/vim-exchange'
-NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
-NeoBundle 'PProvost/vim-ps1'
+"NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
+"NeoBundle 'PProvost/vim-ps1'
 NeoBundle 'vim-scripts/vis'
-NeoBundle 'rking/ag.vim'
+"NeoBundle 'rking/ag.vim'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
-NeoBundle 'jceb/vim-orgmode'
-NeoBundle 'vim-scripts/Conque-GDB'
-NeoBundle 't9md/vim-chef'
+"NeoBundle 'jceb/vim-orgmode'
+"NeoBundle 'vim-scripts/Conque-GDB'
+NeoBundle 'tell-k/vim-autopep8'
+"NeoBundle 't9md/vim-chef'
 NeoBundle 'kmnk/vim-unite-giti'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
@@ -115,6 +116,7 @@ set cinoptions=>4                 " how cindent indents lines in C programs
 " }}}
 " General configuration {{{
 
+set regexpengine=2                " might affect hanging of vim
 set title                       " keep the console title unchanged
 set encoding=utf-8                " encoding
 set fileencoding=utf-8
@@ -151,6 +153,7 @@ set iskeyword+=$,@,%,#            " not word dividers
 set tags=tags;/                   " search for ctags in pwd and go up
 set hidden                        " buffer change, more undo
 set ttyfast                       " Faster standard output
+set completeopt-=preview          " disable the preview window
 set wildmenu                      " File menu
 set wildmode=list:longest,full    " ignore case when opening files
 set wildignore=.so,.swp,.zip,.mp3,
@@ -253,6 +256,7 @@ let g:hardtime_allow_different_key = 1
 
 " NetRW
 "let g:netrw_winsize       = 30
+let g:netrw_mousemaps     = 0
 let g:netrw_banner        = 0
 let g:netrw_liststyle     = 3
 let g:netrw_browse_split  = 4
@@ -338,7 +342,7 @@ let g:LatexBox_viewer='evince'
 
 " for snippet_complete marker.
 if has('conceal')
-   set conceallevel=2 concealcursor=i
+   set conceallevel=0 concealcursor=i
 endif
 
 " }}}
@@ -604,6 +608,7 @@ nnoremap <space>go :Git checkout<Space>
 nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
 nnoremap <space>gf :Dispatch! git fetch --all<CR>
+
 nnoremap <space>gv :Gitv<CR>
 nnoremap <space>gV :Gitv!<CR>
 nnoremap <space>gg :Unite giti<CR>
@@ -685,9 +690,9 @@ augroup autoresize
     autocmd VimResized * exe "normal! \<c-w>="
 augroup END
 
-augroup chef_settings
-    autocmd BufNewFile,BufRead */infrastructure/*  call s:SetupChef()
-augroup END
+"augroup chef_settings
+    "autocmd BufNewFile,BufRead */infrastructure/*  call s:SetupChef()
+"augroup END
 
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
@@ -708,6 +713,8 @@ endfunction
 augroup set_workdir
     autocmd BufEnter * let g:workdir = GetWorkDir()
 augroup END
+
+au BufRead,BufNewFile *nginx* setfiletype nginx
 
 " }}}
 " Functions {{{
