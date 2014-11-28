@@ -26,7 +26,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
-"NeoBundle 'wellle/targets.vim'
+NeoBundle 'wellle/targets.vim'
 NeoBundle 'tommcdo/vim-exchange'
 "NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
 "NeoBundle 'PProvost/vim-ps1'
@@ -38,6 +38,7 @@ NeoBundle 'eiginn/netrw'
 "NeoBundle 'vim-scripts/Conque-GDB'
 "NeoBundle 'tell-k/vim-autopep8'
 "NeoBundle 't9md/vim-chef'
+NeoBundle 'dbakker/vim-projectroot'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'kmnk/vim-unite-giti'
 NeoBundle 'Shougo/unite.vim'
@@ -566,7 +567,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/async:'.g:workdir)<CR>
+nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/async:'.projectroot#guess())<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
@@ -576,8 +577,8 @@ nnoremap <space>ub :Unite buffer<CR>
 nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
-nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:workdir)<CR>
-nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:workdir.'::'.expand('<cword>'))<CR>
+nnoremap <space>ug :execute('Unite -auto-preview grep:'.projectroot#guess())<CR>
+nnoremap <space>uG :execute('Unite -auto-preview grep:'.projectroot#guess().'::'.expand('<cword>'))<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>um :Unite file_mru<CR>
@@ -713,25 +714,10 @@ function! s:unite_settings()
     imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
 endfunction
 
-" find work dir for every entered buffer
-augroup set_workdir
-    autocmd!
-    autocmd BufEnter * let g:workdir = GetWorkDir()
-augroup END
-
 au BufRead,BufNewFile *nginx* setfiletype nginx
 
 " }}}
 " Functions {{{
-
-" get directory in which Unite should search
-function! GetWorkDir()
-    let directory = system('git rev-parse --show-toplevel | xargs echo -n')
-    if v:shell_error != 0 || directory =~ 'fatal'
-        let directory = $HOME
-    endif
-    return directory
-endfunction
 
 " Add []<space> mappings for adding empty lines
 function! s:AddLines(before)
