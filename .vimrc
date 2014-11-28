@@ -26,18 +26,19 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'wellle/targets.vim'
+"NeoBundle 'wellle/targets.vim'
 NeoBundle 'tommcdo/vim-exchange'
 "NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
 "NeoBundle 'PProvost/vim-ps1'
-NeoBundle 'vim-scripts/vis'
+"NeoBundle 'vim-scripts/vis'
 "NeoBundle 'rking/ag.vim'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
 "NeoBundle 'jceb/vim-orgmode'
 "NeoBundle 'vim-scripts/Conque-GDB'
-NeoBundle 'tell-k/vim-autopep8'
+"NeoBundle 'tell-k/vim-autopep8'
 "NeoBundle 't9md/vim-chef'
+NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'kmnk/vim-unite-giti'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
@@ -274,8 +275,9 @@ let g:airline_right_sep=''
 let g:airline_left_alt_sep = '|'
 let g:airline_right_alt_sep = '|'
 let g:airline_theme='powerlineish'
+let g:airline_section_c='%F'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':p'
+let g:airline#extensions#tabline#fnamemod = ':p:~'
 let g:airline#extensions#whitespace#enabled = 0
 " disable to improve fugitive performance
 let g:airline#extensions#branch#enabled = 1
@@ -371,6 +373,8 @@ imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: "\<TAB>"
+
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " easymotion
 " fast search by letter
@@ -711,6 +715,7 @@ endfunction
 
 " find work dir for every entered buffer
 augroup set_workdir
+    autocmd!
     autocmd BufEnter * let g:workdir = GetWorkDir()
 augroup END
 
@@ -725,7 +730,6 @@ function! GetWorkDir()
     if v:shell_error != 0 || directory =~ 'fatal'
         let directory = $HOME
     endif
-
     return directory
 endfunction
 
