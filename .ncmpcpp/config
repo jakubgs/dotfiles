@@ -7,7 +7,7 @@
 #
 ## set it in order to make tag editor and renaming files work properly
 #
-mpd_host = "1js16as@nerv.no-ip.org"
+mpd_host = "nerv.no-ip.org"
 #
 mpd_port = "6600"
 #
@@ -157,9 +157,21 @@ default_find_mode = "wrapped"
 #header_visibility = "yes"
 #
 #statusbar_visibility = "yes"
-#
-#fancy_scrolling = "yes"
-#
+
+# If enabled, text in header window will scroll if its length is longer then actual screen width, otherwise it won't.
+#header_text_scrolling = yes/no
+
+# If enabled, cyclic scrolling is used (e.g. if you press down arrow being at the end of list, it'll take you to the beginning)
+cyclic_scrolling = yes
+
+# If enabled, mouse wheel will scroll the whole page of item list at a time, otherwise the number of lines specified by lines_scrolled variable.
+#mouse_list_scroll_whole_page = yes/no
+
+mouse_support = yes
+
+# Number of lines that are scrolled with mouse wheel.
+lines_scrolled = 5
+
 #follow_now_playing_lyrics = "no"
 #
 #ncmpc_like_songs_adding = "no" (enabled - add/remove, disabled - always add)
