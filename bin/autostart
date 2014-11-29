@@ -27,16 +27,15 @@ run gvim
 run thunar --daemon
 run xbindkeys
 run nm-applet
-run hipchat
+#run hipchat
 run icedove
 run remmina > /dev/null 2>&1
 run mpdstream.sh
 run blueman-applet
-run xfce4-power-manager
+run mate-power-manager
 
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
-	#urxvtc -name mmtail -e ~/bin/mmtail &
 	# Start mpd client
 	urxvtc -name ncmpcpp -e ncmpcpp &
 fi
