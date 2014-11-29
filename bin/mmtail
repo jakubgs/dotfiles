@@ -3,7 +3,7 @@
 RVALUE=0
 
 while [ RVALUE ]; do
-	ssh melchior -t '. /etc/profile; multitail -P l /var/log/hosts/* /var/log/backup.log'
+	ssh melchior -t '. /etc/profile; multitail --mergeall -P l /var/log/hosts/* /var/log/backup.log'
 	RVALUE=$
 	sleep 2
 done
