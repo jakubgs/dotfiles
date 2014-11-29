@@ -523,7 +523,7 @@ nnoremap <space>S :%s/\v
 
 " Window management
 " close buffer but leave active pane open
-nnoremap <silent> <space>q :b#<bar>bd#<CR>
+nnoremap <silent> <space>q :bnext<bar>bd#<CR>
 nnoremap <silent> <space>Q :q!<CR>
 
 " Edit .vimrc and refresh configuration
