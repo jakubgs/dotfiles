@@ -52,18 +52,23 @@ export GROFF_NO_SGR=1
 # }}}
 # Exports {{{
 
+export VIMRUNTIME="/usr/share/vim/vim74"
 export EDITOR="vim"
 export VISION="vim"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
 export DEITY="fsm"
 export PAGER="less"
-export MPD_HOST="127.0.0.1"
 export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="2.7"
 
 export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin:/opt/java/bin/:~/bin:.
+
+# prepare environment for chef usage
+eval "$(chef shell-init zsh)"
+
+fpath=(~/tools/zsh-completions/src $fpath)
 
 # Export for java classpath
 export CLASSPATH=./:/opt/java/lib:/opt/java:/opt/java/jre/lib:/usr/share/java/hibernate/hibernate3.jar:/usr/share/java/postgresql-jdbc/postgresql-jdbc4.jar
@@ -90,6 +95,9 @@ setopt CHECK_JOBS                 # Dont quit console if processes are running
 
 # }}}
 # Completion {{{
+
+# process autocompletion
+zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 
 # hostname expansion from known_hosts
 zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
@@ -190,6 +198,10 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
+# bash like ctrl-w
+autoload -U select-word-style
+select-word-style bash
+
 # fix backspace in append mode
 bindkey "^?" backward-delete-char
 
@@ -197,10 +209,6 @@ key[Home]=${terminfo[khome]}
 key[End]=${terminfo[kend]}
 key[Insert]=${terminfo[kich1]}
 key[Delete]=${terminfo[kdch1]}
-bindkey "${key[Insert]}"  overwrite-mode
-bindkey "${key[Delete]}"  delete-char
-bindkey "${key[Home]}"    beginning-of-line
-bindkey "${key[End]}"     end-of-line
 bindkey "^A"    beginning-of-line                           # ctrl + a
 bindkey "^S"    end-of-line                                 # ctrl + s
 bindkey "^L"    delete-char                                 # ctrl + l
@@ -235,6 +243,7 @@ alias gv="gvim --servername GVIM --remote-silent"
 alias wq='du -sh'
 alias kt='du -h --max-depth=1 | sort -h'
 alias dy='df --sync -hTt ext4'
+alias grep='grep --color -i'
 alias restart='sudo rc-config restart '
 alias pjwstk='sudo sshfs s5134@sftp.pjwstk.edu.pl: /mnt/pjwstk -o uid=500,allow_other'
 alias ssh='TERM=xterm-256color ssh'
@@ -254,7 +263,8 @@ alias etccommit='sudo etckeeper commit "Quick commit."'
 alias sgit='sudo git'
 alias gitc='git commit -a -m '
 alias livestreamer='livestreamer -p "mpv --cache=524288 --cache-min=0.025 --fs -"'
-alias qapt='sudo aptitude '
+alias qapt='sudo aptitude'
+alias sctl='sudo systemctl'
 
 # }}}
 # Functions {{{
