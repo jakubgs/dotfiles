@@ -1,3 +1,5 @@
+source ~/.secret
+
 export VDPAU_DRIVER=nvidia
 export OOO_FORCE_DESKTOP="xfce4"
 export DE="xfce"
@@ -5,10 +7,10 @@ export BROWSER="thunar"
 export TERMINAL="urxvtc"
 
 # adjust screen setup before you start awesome
-autorandr -c
+#autorandr -c
 
 # turn off touchpad by default
-synclient TouchpadOff=1
+#synclient TouchpadOff=1
 
 # start ssh agent and save variables
 ssh-agent | grep -v echo > ~/.ssh-agent.env
@@ -17,8 +19,7 @@ ssh-agent | grep -v echo > ~/.ssh-agent.env
 setxkbmap -layout pl
 
 # Caps Lock <-> Esc
-xmodmap .speedswapper
-xcape -e 'Control_R=Escape'
+xcape
 
 # Small hack for java compatibility
 wmname LG3D
