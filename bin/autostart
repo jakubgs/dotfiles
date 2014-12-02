@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PATH="$PATH:~/bin"
+
 # daemonize command and ingore all output
 function run {
 	command=$1
@@ -10,7 +12,7 @@ function run {
     printf "Checking: %-20s" "$command"
 	if ! pgrep -f -d ", " $command; then
 		echo "STARTING"
-		nohup $command $args 2>/dev/null &
+		nohup $command $args >> ~/.awesome_apps  2>&1 &
 	fi
 }
 
