@@ -240,14 +240,12 @@ call unite#custom#source('file_rec/async', 'max_candidates', 200)
 if executable('ag')
     " Use ag in unite file_rec/async source
     let g:unite_source_rec_async_command =
-                \ 'ag --nocolor --nogroup -g --ignore ''worker-xquery.js'' ""'
+                \ 'ag --nocolor --nogroup -g ""'
     " worker-xquery.js is a ridiculously huge js file and breaks ag
 	" Use ag in unite grep source.
 	let g:unite_source_grep_command = 'ag'
 	let g:unite_source_grep_default_opts =
-	            \ '-i -U --line-numbers --nocolor --nogroup ' .
-                \ '--ignore ''.hg'' --ignore ''.svn'' --ignore ''.git'' ' .
-                \ '--ignore ''.bzr'' --ignore ''worker-xquery.js'''
+	            \ '-i -U --line-numbers --nocolor --nogroup '
 	let g:unite_source_grep_recursive_opt = ''
 endif
 
@@ -558,7 +556,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/async:'.projectroot#guess())<CR>
+nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/async:'.g:projectroot)<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
@@ -569,8 +567,8 @@ nnoremap <space>uB :Unite -auto-preview grep:$buffers<CR>
 nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
-nnoremap <space>ug :execute('Unite -auto-preview grep:'.projectroot#guess())<CR>
-nnoremap <space>uG :execute('Unite -auto-preview grep:'.projectroot#guess().'::'.expand('<cword>'))<CR>
+nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
+nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>')<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>um :Unite file_mru<CR>
@@ -693,6 +691,11 @@ augroup END
 
 augroup autoresize
     autocmd VimResized * exe "normal! \<c-w>="
+augroup END
+
+augroup projectroot
+    autocmd!
+    autocmd BufEnter * let g:projectroot = projectroot#guess()
 augroup END
 
 "augroup chef_settings
