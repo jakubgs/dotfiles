@@ -21,7 +21,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'haya14busa/vim-easyoperator-line'
 NeoBundle 'gregsexton/gitv'
-"NeoBundle 'sotte/presenting.vim'
+NeoBundle 'sotte/presenting.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-surround'
@@ -30,14 +30,12 @@ NeoBundle 'wellle/targets.vim'
 NeoBundle 'tommcdo/vim-exchange'
 "NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
 "NeoBundle 'PProvost/vim-ps1'
-"NeoBundle 'vim-scripts/vis'
-"NeoBundle 'rking/ag.vim'
+"NeoBundle 'jceb/vim-orgmode'
+NeoBundle 'vim-scripts/vis'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
-"NeoBundle 'jceb/vim-orgmode'
-"NeoBundle 'vim-scripts/Conque-GDB'
-"NeoBundle 'tell-k/vim-autopep8'
-"NeoBundle 't9md/vim-chef'
+NeoBundle 'tell-k/vim-autopep8'
+NeoBundle 't9md/vim-chef'
 NeoBundle 'dbakker/vim-projectroot'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'kmnk/vim-unite-giti'
@@ -212,6 +210,10 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
+" Projectroot
+" by default start in home directory
+let b:projectroot = '~/'
+
 " Gitv
 let g:Gitv_OpenHorizontal = 1
 
@@ -238,12 +240,14 @@ call unite#custom#source('file_rec/async', 'max_candidates', 200)
 if executable('ag')
     " Use ag in unite file_rec/async source
     let g:unite_source_rec_async_command =
-                \ 'ag --nocolor --nogroup -g ""'
+                \ 'ag --nocolor --nogroup -g --ignore ''worker-xquery.js'' ""'
+    " worker-xquery.js is a ridiculously huge js file and breaks ag
 	" Use ag in unite grep source.
 	let g:unite_source_grep_command = 'ag'
 	let g:unite_source_grep_default_opts =
-	            \ '-i -U --line-numbers --nocolor --nogroup --ignore ' .
-	            \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+	            \ '-i -U --line-numbers --nocolor --nogroup ' .
+                \ '--ignore ''.hg'' --ignore ''.svn'' --ignore ''.git'' ' .
+                \ '--ignore ''.bzr'' --ignore ''worker-xquery.js'''
 	let g:unite_source_grep_recursive_opt = ''
 endif
 
@@ -277,6 +281,7 @@ let g:airline_left_alt_sep = '|'
 let g:airline_right_alt_sep = '|'
 let g:airline_theme='powerlineish'
 let g:airline_section_c='%F'
+let g:airline_detect_modified=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:~'
 let g:airline#extensions#whitespace#enabled = 0
@@ -294,20 +299,6 @@ let g:jellybeans_overrides = {
 
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
-
-" Stop CtrlP from recalculating on files on start
-let g:ctrlp_user_command = 'ag %s -l -a --nocolor -g ""'
-let g:ctrlp_cache_dir = $HOME.'/.vim/temp/ctrlp'
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_match_window = 'min:5,max:20'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_working_path_mode = 'raw'
-let g:ctrlp_regexp = 0
-let g:ctrlp_root_markers = ['.root', '.git', 'COPYING' ]
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-    \ 'file': '\v\.(exe|so|dll|tmp|temp|swp|o|aux|out|fls)$',
-    \ }
 
 " EasyMotion leader
 let g:EasyMotion_leader_key = '<space>'
@@ -574,6 +565,7 @@ nnoremap <space>uR :Unite resume<CR>
 nnoremap <space>uu :Unite file<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>ub :Unite buffer<CR>
+nnoremap <space>uB :Unite -auto-preview grep:$buffers<CR>
 nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
@@ -587,7 +579,7 @@ nnoremap <space>uu :Unite file<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
 nnoremap <space>uI :Unite file_rec/async:~/work/infrastructure<CR>
 nnoremap <space>uC :Unite file_rec/async:~/work/codility<CR>
-nnoremap <space>uW :Unite file_rec/async:~/work/<CR>
+nnoremap <space>uW :Unite file:~/work/<CR>
 
 
 " search openned buffers
@@ -619,6 +611,14 @@ nnoremap <space>gV :Gitv!<CR>
 nnoremap <space>gg :Unite giti<CR>
 nnoremap <space>gb :Unite giti/branch<CR>
 
+nnoremap <space>gSs :Git status <bar>
+                    \ if confirm('Do you want to stash changes?') <bar>
+                        \ Git stash --include-untracked <bar>
+                    \ endif<CR><CR>
+nnoremap <space>gSa :Git stash list --date=local <bar>
+                    \ if confirm('Apply stash@{0}?') <bar>
+                        \ Git stash apply <bar>
+                    \ endif<CR><CR>
 
 " }}}
 " Key mappings - Fxx {{{
