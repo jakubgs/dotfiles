@@ -10,15 +10,18 @@
 [alias]
     hist = log --graph
     co = checkout
-    b = branch
-    f = fetch
+    b  = branch
+    f  = fetch
     ps = push
     pl = pull
     sm = submodule
-    s = stash
-    c = commit --verbose
-    a = add 
+    s  = stash
+    c  = commit --verbose
+    a  = add 
     an = annex
+    rh = reset --hard
+    rs = reset
+    ls = ls-files
     l  = log --decorate
     sl = log --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     df = diff
