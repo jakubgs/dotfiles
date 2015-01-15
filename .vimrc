@@ -31,6 +31,7 @@ NeoBundle 'tommcdo/vim-exchange'
 "NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
 "NeoBundle 'PProvost/vim-ps1'
 "NeoBundle 'jceb/vim-orgmode'
+NeoBundle 'Shougo/neossh.vim'
 NeoBundle 'vim-scripts/vis'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
@@ -234,8 +235,6 @@ call unite#custom#profile('default', 'context', {
 \   'start_insert' : 1 })
 " ignore these hidden directories
 call unite#custom#source('file_rec/async', 'max_candidates', 200)
-"call unite#custom#source('file_rec/async', 'ignore_pattern',
-" \ '\.(wine/\|local/\|icons/\|vim/\|cache/\|git/\|config/\|mozilla/\|themes/\|neocomplete/)')
 " Using ag as recursive command.
 if executable('ag')
     " Use ag in unite file_rec/async source
@@ -413,6 +412,9 @@ inoremap kj <esc>
 " For closing tags in HTML
 iabbrev </ </<C-X><C-O>
 
+" search visually selected text
+vnoremap * y/<c-r>"<cr>
+
 " reselect visual block after indent/outdent
 xnoremap < <gv
 xnoremap > >gv
@@ -481,6 +483,9 @@ nnoremap <c-cr> <c-^>
 
 " }}}
 " Key mappings - <Leader> {{{
+
+" copy file path to clipboard
+nnoremap <space>p :let @* = expand("%:p") <bar> let @+ = @*<CR>
 
 " execute current line in vim
 nnoremap <space>v :execute getline(".")<cr>;w
@@ -568,7 +573,7 @@ nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
-nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>')<CR>
+nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>'))<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>um :Unite file_mru<CR>
