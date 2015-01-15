@@ -28,6 +28,7 @@ vendor/
 *.a
 *.map
 *.article
+*.cmake
 LICENSE
 COPYING
 worker-xquery.js
