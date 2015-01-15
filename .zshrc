@@ -2,7 +2,10 @@
 # Source: https://github.com/PonderingGrower/dotfiles
 
 # source ssh-agent variables
+source ~/.secret
 source ~/.ssh-agent.env
+source ~/.gnupg/gpg-agent-info
+export GPG_AGENT_INFO
 
 # Preamble {{{
 autoload colors         # enable colors
@@ -52,7 +55,7 @@ export GROFF_NO_SGR=1
 # }}}
 # Exports {{{
 
-export VIMRUNTIME="/usr/share/vim/vim74"
+export VIMRUNTIME="/usr/local/share/vim/vim74"
 export EDITOR="vim"
 export VISION="vim"
 export BROWSER="thunar"
@@ -262,8 +265,8 @@ alias pbpaste='xclip -selection clipboard -o'
 alias etccommit='sudo etckeeper commit "Quick commit."'
 alias sgit='sudo git'
 alias gitc='git commit -a -m '
-alias livestreamer='livestreamer -p "mpv --cache=524288 --cache-min=0.025 --fs -"'
-alias qapt='sudo aptitude'
+alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
+alias qapt='sudo aptitude --quiet'
 alias sctl='sudo systemctl'
 
 # }}}
@@ -291,11 +294,19 @@ function src() {
 
 # g as simple shortcut for git status or just git if any other arguments are given
 function g {
-   if [[ $# > 0 ]]; then
-     git $@
-   else
-     git status
-   fi
+    if [[ $# > 0 ]]; then
+        git $@
+    else
+        git status
+    fi
+}
+
+function d {
+    if [[ $# > 0 ]]; then
+        docker $@
+    else
+        docker ps
+    fi
 }
 
 # repeat last command with sudo
