@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source ~/.secret
 
 export VDPAU_DRIVER=nvidia
@@ -14,6 +16,9 @@ export TERMINAL="urxvtc"
 
 # start ssh agent and save variables
 ssh-agent | grep -v echo > ~/.ssh-agent.env
+
+# gnu gpg agent
+gpg-agent --daemon --write-env-file="$HOME/.gnupg/gpg-agent-info"
 
 # Keyboard layout
 setxkbmap -layout pl
