@@ -31,6 +31,10 @@ NeoBundle 'tommcdo/vim-exchange'
 "NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
 "NeoBundle 'PProvost/vim-ps1'
 "NeoBundle 'jceb/vim-orgmode'
+NeoBundle 'ntpeters/vim-better-whitespace'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-easytags'
+NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'Shougo/neossh.vim'
 NeoBundle 'vim-scripts/vis'
 NeoBundle 'bling/vim-airline'
@@ -138,7 +142,8 @@ set clipboard=unnamed             " paste the clipboard to unnamed register
 set backspace=indent,eol,start    " go with backspace insert mode starting pos
 set spelllang=pl,en               " spelling check
 set autochdir                     " Automatically changing working dir
-set shell=zsh                     " Shell
+set shell=bash                     " Shell
+let $SSH_AUTH_SOCK='/run/user/1000/ssh-agent.socket'
 set keywordprg=firefox\ -search   " K searches text in firefox def. search
 set grepprg=ag\ --nogroup\ --nocolor " use ag over grep
 set shortmess=aoOtTI                 " remove message at vim start
@@ -151,7 +156,6 @@ set ignorecase                    " ignore case...
 set smartcase                     " unless upper case used
 set iskeyword+=$,@,%,#            " not word dividers
 "set iskeyword-=_                  " word dividers
-set tags=tags;/                   " search for ctags in pwd and go up
 set hidden                        " buffer change, more undo
 set ttyfast                       " Faster standard output
 set completeopt-=preview          " disable the preview window
@@ -211,7 +215,12 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
-" Projectroot
+" Easytags
+" split ctags files by language
+let g:easytags_by_filetype = '~/.vimtags/'
+let g:easytags_always_enabled = 1
+let g:easytags_async = 1
+
 " by default start in home directory
 let b:projectroot = '~/'
 
@@ -372,6 +381,9 @@ nmap <s-cr> <Plug>(easymotion-s)
 " easyoperator
 nmap d<space>l <Plug>(easyoperator-line-delete)
 nmap y<space>l <Plug>(easyoperator-line-yank)
+
+" easytags
+nmap <space>U :execute('UpdateTags -R '.g:projectroot)<CR>
 
 " surround
 " c style comments using *
@@ -578,6 +590,7 @@ nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>us :Unite source<CR>
+nnoremap <space>ut :Unite tag<CR>
 nnoremap <space>uu :Unite file<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
 nnoremap <space>uI :Unite file_rec/async:~/work/infrastructure<CR>
