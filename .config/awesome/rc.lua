@@ -79,15 +79,15 @@ tags = {}
 tags[1] = awful.tag(
 { ":admin:",    ":editor:", ":web:",    ":music:",  ":comm:",   ":files:",  ":remote:", ":vm:" }, 1,
 { layouts[3],   layouts[3], layouts[8], layouts[4], layouts[3], layouts[2], layouts[8], layouts[8] })
-if screen.count() == 2 then
+if screen.count() >= 2 then
     tags[2] = awful.tag(
     { ":admin:",    ":editor:", ":web:",    ":misc:",   ":comm:",   ":files:",  ":remote:", ":vm:" }, 2,
     { layouts[3],   layouts[3], layouts[8], layouts[5], layouts[2], layouts[2], layouts[8], layouts[8] })
-end
-if screen.count() == 3 then
-    tags[3] = awful.tag(
-    { ":admin:",    ":editor:", ":web:",    ":misc:",  ":misc:",   ":files:",  ":remote:", "vm" }, 3,
-    { layouts[3],   layouts[3], layouts[8], layouts[4], layouts[2], layouts[2], layouts[8], layouts[6] })
+    if screen.count() >= 3 then
+        tags[3] = awful.tag(
+        { ":admin:",    ":editor:", ":web:",    ":misc:",  ":comm:",   ":files:",  ":remote:", "vm" }, 3,
+        { layouts[3],   layouts[3], layouts[8], layouts[4], layouts[2], layouts[2], layouts[8], layouts[8] })
+    end
 end
 --end
 -- }}}
@@ -401,12 +401,20 @@ awful.key({ modkey, "Shift"   }, "l",       function () awful.client.movetoscree
 -- Run or raise
 awful.key({ modkey,           }, "e",       function () run_or_raise("gvim --servername GVIM", { class = "Gvim" }) end),
 awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Iceweasel" }) end),
-awful.key({ modkey,           }, "c",       function () awful.util.spawn(terminal) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
-awful.key({ modkey,           }, "i",       function () run_or_raise(hipchat, { class = "HipChat" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("icedove", { class = "Icedove" }) end),
+awful.key({ modkey,           }, "i",       
+    function () 
+        r = run_or_raise(hipchat, { class = "HipChat" }) 
+        c = get_client({class = "HipChat"})
+        if type(r) == 'number' and c == nil then
+            awful.util.spawn('killall hipchat.bin')
+            run_or_raise(hipchat, { class = "HipChat" }) 
+        end
+    end),
 -- Standard program
+awful.key({ modkey,           }, "c",       function () awful.util.spawn(terminal) end),
 awful.key({ "Control",        }, "BackSpace", function () awful.util.spawn(terminal) end),
 awful.key({ "Control", "Shift"}, "BackSpace", function () awful.util.spawn(terminal_s) end),
 awful.key({ modkey, "Control" }, "r",       awesome.restart),
@@ -434,7 +442,7 @@ function ()
     awful.prompt.run({ prompt = "killall: " },
     mypromptbox[mouse.screen].widget,
     function (s)
-        awful.util.spawn(terminal .. " -e killall " .. s)
+        awful.util.spawn(terminal .. " -e 'killall " .. s .. "'")
     end,
     homedir .. "/.awesome/killall_history")
 end)
@@ -570,7 +578,7 @@ awful.rules.rules = {
     end},
     { rule = { class = "Steam" },
     properties = {
-        tag = tags[1][7]
+        tag = tags[1][8]
     } },
     { rule = { name = "StarCraft.*" },
     properties = {
@@ -710,6 +718,16 @@ client.connect_signal("unfocus", function(c)
 end)
 -- }}}
 -- {{{ Custom functions
+
+-- Find a client based on properties
+function get_client(properties)
+    local clients = client.get()
+    for i, c in pairs(clients) do
+        if match(properties, c) then
+            return c
+        end
+    end
+end
 --- Spawns cmd if no client can be found matching properties
 -- If such a client can be found, pop to first tag where it is visible, and give it focus
 -- @param cmd the command to execute
@@ -748,9 +766,9 @@ function run_or_raise(cmd, properties)
         -- And then focus the client
         client.focus = c
         c:raise()
-        return
+        return c
     end
-    awful.util.spawn(cmd)
+    return awful.util.spawn(cmd)
 end
 
 -- Returns true if all pairs in table1 are present in table2
