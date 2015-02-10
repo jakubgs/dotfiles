@@ -4,7 +4,7 @@
 # source ssh-agent variables
 source ~/.secret
 source ~/.ssh-agent.env
-source ~/.gnupg/gpg-agent-info
+source ~/.gnupg/gpg-agent-info-lilim
 export GPG_AGENT_INFO
 
 # Preamble {{{
@@ -212,14 +212,10 @@ key[Home]=${terminfo[khome]}
 key[End]=${terminfo[kend]}
 key[Insert]=${terminfo[kich1]}
 key[Delete]=${terminfo[kdch1]}
-bindkey "^A"    beginning-of-line                           # ctrl + a
-bindkey "^S"    end-of-line                                 # ctrl + s
-bindkey "^L"    delete-char                                 # ctrl + l
-bindkey "^H"    backward-delete-char                        # ctrl + h
+bindkey "^[."   insert-last-word   # Alt + .
+bindkey "^L"    clear-screen                                # ctrl + l
 bindkey "^E"    kill-word                                   # ctrl + e
 bindkey "^W"    backward-kill-word                          # ctrl + w
-bindkey "^K"    history-beginning-search-backward           # ctrl + k
-bindkey "^J"    history-beginning-search-forward            # ctrl + j
 bindkey "^R"    history-incremental-pattern-search-backward # ctrl + r
 bindkey "\e[2~" quoted-insert
 
@@ -235,39 +231,30 @@ alias -g A='; alert'
 alias -g G='| grep --color -iE'
 alias -g V='| vim -'
 
-alias x='startx'
-alias v='vim --servername VIM'
 alias S='sudo'
 alias ll='ls -lh --color'
 alias mm="make -j6"
 alias tt="tree -CdL 2"
-alias vv="vim --servername VIM --remote-silent"
-alias gv="gvim --servername GVIM --remote-silent"
 alias wq='du -sh'
 alias kt='du -h --max-depth=1 | sort -h'
 alias dy='df --sync -hTt ext4'
 alias grep='grep --color -i'
-alias restart='sudo rc-config restart '
-alias pjwstk='sudo sshfs s5134@sftp.pjwstk.edu.pl: /mnt/pjwstk -o uid=500,allow_other'
 alias ssh='TERM=xterm-256color ssh'
 alias sshm='ssh melchior'
 alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
-alias qemerge='sudo emerge --quiet y --quiet-build y --quiet-fail y -v'
-alias qupdate='sudo emerge --quiet y --quiet-build y --quiet-fail y -avuD --with-bdeps=y --keep-going @world'
-alias psync='ssh melchior "sudo emerge --sync > /tmp/portage_sync.log" && sudo eix-update'
 alias httpat='python2 -m SimpleHTTPServer'
-# clipboard in command line
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
-# easier usage of etckeeper
-alias etccommit='sudo etckeeper commit "Quick commit."'
-alias sgit='sudo git'
-alias gitc='git commit -a -m '
 alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
+alias ytdl-audio='youtube-dl -x --audio-format mp3 --output "%(autonumber)s-%(title)s.%(ext)s" --autonumber-size 2'
 alias qapt='sudo aptitude --quiet'
+alias qupdate='sudo aptitude update && sudo aptitude upgrade'
 alias sctl='sudo systemctl'
+alias uctl='systemctl --user'
+alias restart='sudo rc-config restart '
+alias current-frontend='ssh balancer-violet.codility.net ls -l /srv/codility/frontends | grep -E "(current|offline)"'
 
 # }}}
 # Functions {{{
@@ -295,19 +282,23 @@ function src() {
 # g as simple shortcut for git status or just git if any other arguments are given
 function g {
     if [[ $# > 0 ]]; then
-        git $@
+        git "$@"
     else
         git status
     fi
 }
+compdef g=git
 
 function d {
-    if [[ $# > 0 ]]; then
-        docker $@
+    if [[ $1 == 'clean' ]]; then
+        docker rm $(docker ps -a -q)
+    elif [[ $# > 0 ]]; then
+        docker "$@"
     else
         docker ps
     fi
 }
+compdef d=docker
 
 # repeat last command with sudo
 function fuck {
@@ -378,6 +369,5 @@ if [[ $TERM != "linux" ]]; then
     zle -N zle-line-finish
     zle -N zle-line-init
 fi
-bindkey -v
 
 # }}}
