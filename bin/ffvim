@@ -12,6 +12,6 @@ shift 2
 gvim -f +'set titlestring=ffvim' \
         +"set title" \
         +"set ft=python" \
-        +"set guifont=terminus\ 14" \
+        +"set guifont=terminus\ 12" \
         +$LINES \
         +"sil! call cursor(0, $COLUMN)" $@
