@@ -4,12 +4,14 @@ LINES=$1
 COLUMN=$2
 shift 2
 
-xterm -title ffvim -name ffvim -e "vim -f \
-    +'set title' \
-    +$LINES \
-    +'sil! call cursor(0, $COLUMN)' '$@'"
+#xterm -title ffvim -name ffvim -e "vim -f \
+    #+'set title' \
+    #+$LINES \
+    #+'sil! call cursor(0, $COLUMN)' '$@'"
 
-#gvim -f +'set titlestring=ffvim' \
-        #+"set title" \
-        #+$LINES \
-        #+"sil! call cursor(0, $COLUMN)" $@
+gvim -f +'set titlestring=ffvim' \
+        +"set title" \
+        +"set ft=python" \
+        +"set guifont=terminus\ 14" \
+        +$LINES \
+        +"sil! call cursor(0, $COLUMN)" $@
