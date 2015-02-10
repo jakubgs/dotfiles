@@ -38,6 +38,7 @@ nmap -builtin : ;
 map -m i,c,t <C-v> <Pass>
 map -m n,v,i,c,t <C-c> <Pass>
 map -m n,v,i,c,t <C-a> <Pass>
+map -m n,v,i,c,t <C-y> <Pass>
 
 " next tab
 map -b l <c-n>
