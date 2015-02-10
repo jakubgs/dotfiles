@@ -568,11 +568,10 @@ awful.rules.rules = {
     } },
     { rule = { class = "Gvim" },
     properties = { tag = tags[1][2] } },
-    --{ rule = { instance = "ffvim" },
     { rule = { name = "ffvim" },
     properties = { floating = true },
     callback = function(c) 
-        naughty.notify({title = "pentavim"})
+        naughty.notify({title = "ffvim"})
         awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c)
         awful.client.moveresize(100, 100, 0, 0, c)
     end},
