@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PATH="$PATH:~/bin"
+PATH="$PATH:$HOME/bin"
 
 # daemonize command and ingore all output
 function run {
@@ -35,6 +35,7 @@ run remmina > /dev/null 2>&1
 run mpdstream.sh
 run blueman-applet
 run mate-power-manager
+run virt-manager
 
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
