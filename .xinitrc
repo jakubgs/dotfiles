@@ -2,7 +2,7 @@
 
 source ~/.secret
 
-export VDPAU_DRIVER=nvidia
+#export VDPAU_DRIVER=nvidia
 export OOO_FORCE_DESKTOP="xfce4"
 export DE="xfce"
 export BROWSER="thunar"
@@ -14,11 +14,14 @@ export TERMINAL="urxvtc"
 # turn off touchpad by default
 #synclient TouchpadOff=1
 
-# start ssh agent and save variables
-ssh-agent | grep -v echo > ~/.ssh-agent.env
-
 # gnu gpg agent
-gpg-agent --daemon --write-env-file="$HOME/.gnupg/gpg-agent-info"
+#systemctl --user start gpg-agent
+
+# start the ssh-agent
+systemctl --user start ssh-agent
+
+# set screen blank timeout to 1 hour
+xset s 3600 3600
 
 # Keyboard layout
 setxkbmap -layout pl
