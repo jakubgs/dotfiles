@@ -28,10 +28,12 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'wellle/targets.vim'
 NeoBundle 'tommcdo/vim-exchange'
+NeoBundle 'dbext.vim'
+NeoBundle 'ivanov/vim-ipython'
 "NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
 "NeoBundle 'PProvost/vim-ps1'
 "NeoBundle 'jceb/vim-orgmode'
-NeoBundle 'ntpeters/vim-better-whitespace'
+"NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'hynek/vim-python-pep8-indent'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-easytags'
@@ -215,6 +217,11 @@ augroup END
 
 " }}}
 " Plugin configuration {{{
+
+" DBExt
+" Codility database through readonly yunnel
+let g:dbext_default_profile_codility = 
+\ 'type=PGSQL:user=readonly:dbname=codility:passwd=readonly:host=127.0.0.1:port=15432'
 
 " Easytags
 " split ctags files by language
@@ -527,6 +534,9 @@ nnoremap <space>Y :CopyMatches *<CR>
 
 " easier access to substitution
 nnoremap <space>S :%s/\v
+
+" copy whole file
+nnoremap <space>a :%y+<CR>
 
 " Window management
 " close buffer but leave active pane open
