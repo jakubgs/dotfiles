@@ -64,6 +64,9 @@ NeoBundle 'nanotech/jellybeans.vim'
 
 call neobundle#end()
 
+" check for uninstalled bundles
+NeoBundleCheck
+
 " }}}
 " Display configuration {{{
 "
