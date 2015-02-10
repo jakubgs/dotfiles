@@ -5,6 +5,9 @@ maindisp="eDP1"
 dock_disconnect() {
     displays=$(xrandr | awk '/connected/{print $1}')
     for display in $displays; do
+        if [[ "$display" == "$maindisp" ]]; then
+            continue
+        fi
         echo "Turning off: $display"
         xrandr --output $display --off
     done
@@ -20,28 +23,32 @@ on_failure() {
 
 dock_connect() {
     trap "on_failure" ERR
-    mode='1920x1200_60.00'
+    mode='1920x1200'
     modeopts='193.16  1920 2048 2256 2592  1200 1201 1204 1242  -HSync +Vsync'
 
     if ! xrandr | grep "$mode" > /dev/null; then
         echo "Creating mode: $mode"
+        cmd="xrandr --newmode $mode $modeopts"
+        echo $cmd
         xrandr --newmode $mode $modeopts
     fi
 
     echo 'Adding modes...'
-    xrandr --addmode DP4 $mode
-    xrandr --addmode DP5 $mode
+    xrandr --addmode DP2-2 $mode
+    xrandr --addmode DP2-3 $mode
 
     xrandr --output $maindisp --off
 
     echo 'Enabling displays...'
-    xrandr --output DP4 --mode $mode --primary
-    xrandr --output DP5 --mode $mode --right-of DP4
+    xrandr --output DP2-2 --mode $mode --primary
+    xrandr --output DP2-3 --mode $mode --right-of DP2-2
 }
 
-if xrandr | grep "^DP. connected"; then
+if [[ "$1" == "-u" ]] || xrandr | awk "/$maindisp/{getline; if (\$2 ~ /\*/) {exit 1}; exit 0}"; then
+    echo 'Undocking'
     dock_disconnect
-elif xrandr | grep "^DP[3-9] disconnected"; then
+elif [[ "$1" == "-d" ]] || xrandr | awk "/DP[3-9]/{getline; if (\$2 ~ /\*/) {exit 1}; exit 0}"; then
+    echo 'Docking'
     dock_connect
 else
     echo 'Nothing to do...'
