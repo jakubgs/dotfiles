@@ -78,15 +78,15 @@ tags = {}
 -- Each screen has its own tag table.
 tags[1] = awful.tag(
 { ":admin:",    ":editor:", ":web:",    ":music:",  ":comm:",   ":files:",  ":remote:", ":vm:" }, 1,
-{ layouts[3],   layouts[3], layouts[8], layouts[4], layouts[3], layouts[2], layouts[8], layouts[8] })
+{ layouts[3],   layouts[3], layouts[8], layouts[4], layouts[3], layouts[8], layouts[8], layouts[8] })
 if screen.count() >= 2 then
     tags[2] = awful.tag(
     { ":admin:",    ":editor:", ":web:",    ":misc:",   ":comm:",   ":files:",  ":remote:", ":vm:" }, 2,
-    { layouts[3],   layouts[3], layouts[8], layouts[5], layouts[2], layouts[2], layouts[8], layouts[8] })
+    { layouts[3],   layouts[3], layouts[8], layouts[5], layouts[2], layouts[8], layouts[8], layouts[8] })
     if screen.count() >= 3 then
         tags[3] = awful.tag(
         { ":admin:",    ":editor:", ":web:",    ":misc:",  ":comm:",   ":files:",  ":remote:", "vm" }, 3,
-        { layouts[3],   layouts[3], layouts[8], layouts[4], layouts[2], layouts[2], layouts[8], layouts[8] })
+        { layouts[3],   layouts[3], layouts[8], layouts[4], layouts[2], layouts[8], layouts[8], layouts[8] })
     end
 end
 --end
@@ -399,6 +399,7 @@ awful.key({ modkey, "Shift"   }, "j",       function () awful.client.swap.byidx(
 awful.key({ modkey, "Shift"   }, "h",       function () awful.client.movetoscreen(client.focus ,client.focus.screen - 1) end),
 awful.key({ modkey, "Shift"   }, "l",       function () awful.client.movetoscreen(client.focus ,client.focus.screen + 1) end),
 -- Run or raise
+awful.key({ modkey,           }, "z",       function () run_or_raise("zeal", { class = "Zeal" }) end),
 awful.key({ modkey,           }, "e",       function () run_or_raise("gvim --servername GVIM", { class = "Gvim" }) end),
 awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Iceweasel" }) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
@@ -566,6 +567,8 @@ awful.rules.rules = {
         floating = true,
         tag = tags[1][2],
     } },
+    { rule = { class = "Zeal" },
+    properties = { tag = tags[screen.count()][4] } },
     { rule = { class = "Gvim" },
     properties = { tag = tags[1][2] } },
     { rule = { name = "ffvim" },
