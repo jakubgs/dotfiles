@@ -18,6 +18,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Other plugins
+NeoBundle 'ardagnir/vimbed'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'haya14busa/vim-easyoperator-line'
 NeoBundle 'gregsexton/gitv'
@@ -29,12 +30,10 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'wellle/targets.vim'
 NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'dbext.vim'
-NeoBundle 'ivanov/vim-ipython'
 "NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
 "NeoBundle 'PProvost/vim-ps1'
 "NeoBundle 'jceb/vim-orgmode'
 "NeoBundle 'ntpeters/vim-better-whitespace'
-NeoBundle 'hynek/vim-python-pep8-indent'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-easytags'
 NeoBundle 'tsukkee/unite-tag'
@@ -47,6 +46,14 @@ NeoBundle 't9md/vim-chef'
 NeoBundle 'dbakker/vim-projectroot'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'kmnk/vim-unite-giti'
+
+" Python plugins
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'bps/vim-textobj-python'
+NeoBundle 'hynek/vim-python-pep8-indent'
+NeoBundle 'ivanov/vim-ipython'
+
+" Shougo
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/neosnippet'
@@ -93,8 +100,8 @@ endif
 
 set guioptions=c                  " Get rid of useless GUI elements
 set winwidth=78                   " minimum split width
-
 set winheight=15                  " minimum split height
+set ttimeoutlen=50                " avoid lag when updating statusline
 set colorcolumn=81                " highlight this column
 set nuw=4                         " number line width
 set ruler                         " show columns and rows
@@ -220,6 +227,9 @@ augroup END
 
 " }}}
 " Plugin configuration {{{
+
+" IPython response time
+set updatetime=1000
 
 " DBExt
 " Codility database through readonly yunnel
@@ -653,7 +663,7 @@ nnoremap <space>gSa :Git stash list --date=local <bar>
 " }}}
 " Key mappings - Fxx {{{
 
-nnoremap <F12> :set guifont=terminus\ 14<CR>
+nnoremap <F12> :set guifont=terminus\ 16<CR>
 nnoremap <F11> :set guifont=terminus\ 10<CR>
 nnoremap <F10> :Dispatch! knife dwim ./<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
