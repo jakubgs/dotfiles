@@ -30,6 +30,9 @@ map -b j 15j
 " jumping 5 times as far up
 map -b k 15k
 
+" disable url pasting with middle click
+nmap -m n <MiddleMouse> <nul>
+
 " easier access to commands
 nmap -builtin ; :
 nmap -builtin : ;
