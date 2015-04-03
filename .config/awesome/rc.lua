@@ -33,10 +33,10 @@ beautiful.init(homedir .. "/.awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
---hipchat = "dwb https://codility-com.hipchat.com/chat"
 hipchat = "hipchat"
 fmanager = "thunar"
 terminal = "urxvtc"
+geditor = homedir.."/bin/gnvim"
 terminal_s = homedir .. "/bin/urxvts 16"
 ncmpcpp = terminal .. " -name ncmpcpp -e ncmpcpp" 
 editor = os.getenv("EDITOR") or "vim"
@@ -78,7 +78,7 @@ tags = {}
 -- Each screen has its own tag table.
 tags[1] = awful.tag(
 { ":admin:",    ":editor:", ":web:",    ":music:",  ":comm:",   ":files:",  ":remote:", ":vm:" }, 1,
-{ layouts[3],   layouts[3], layouts[8], layouts[4], layouts[3], layouts[8], layouts[8], layouts[8] })
+{ layouts[3],   layouts[8], layouts[8], layouts[4], layouts[3], layouts[8], layouts[8], layouts[8] })
 if screen.count() >= 2 then
     tags[2] = awful.tag(
     { ":admin:",    ":editor:", ":web:",    ":misc:",   ":comm:",   ":files:",  ":remote:", ":vm:" }, 2,
@@ -114,8 +114,8 @@ myofficemenu = {
 }
 
 mystoolsmenu = {
-    { "edit rc.lua",    "gvim " .. awful.util.getdir("config") .. "/rc.lua" },
-    { "e: xorg.conf",   "gksudo gvim " .. "/etc/X11/xorg.conf" },
+    { "edit rc.lua",    geditor .. awful.util.getdir("config") .. "/rc.lua" },
+    { "e: xorg.conf",   "gksudo " .. geditor .. " /etc/X11/xorg.conf" },
     { "e: wallpaper",   "nitrogen /mnt/melchior/data/Wallpapers/" },
     { "---------------",     nil },
     { "sysmon",         "gnome-system-monitor" },
@@ -400,20 +400,12 @@ awful.key({ modkey, "Shift"   }, "h",       function () awful.client.movetoscree
 awful.key({ modkey, "Shift"   }, "l",       function () awful.client.movetoscreen(client.focus ,client.focus.screen + 1) end),
 -- Run or raise
 awful.key({ modkey,           }, "z",       function () run_or_raise("zeal", { class = "Zeal" }) end),
-awful.key({ modkey,           }, "e",       function () run_or_raise("gvim --servername GVIM", { class = "Gvim" }) end),
+awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "nvim" }) end),
 awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Iceweasel" }) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("icedove", { class = "Icedove" }) end),
-awful.key({ modkey,           }, "i",       
-    function () 
-        r = run_or_raise(hipchat, { class = "HipChat" }) 
-        c = get_client({class = "HipChat"})
-        if type(r) == 'number' and c == nil then
-            awful.util.spawn('killall hipchat.bin')
-            run_or_raise(hipchat, { class = "HipChat" }) 
-        end
-    end),
+awful.key({ modkey,           }, "i",       function () run_or_raise("chromium -app=https://codility.slack.com/messages/development/", { name = "Slack" }) end),
 -- Standard program
 awful.key({ modkey,           }, "c",       function () awful.util.spawn(terminal) end),
 awful.key({ "Control",        }, "BackSpace", function () awful.util.spawn(terminal) end),
@@ -428,7 +420,15 @@ awful.key({ modkey, "Shift"   }, "space",   function () awful.layout.inc(layouts
 awful.key({ "Mod4",           }, "Tab",     function () awful.tag.viewnext(mouse.screen) end),
 awful.key({ "Mod4", "Shift"   }, "Tab",     function () awful.tag.viewprev(mouse.screen) end),
 -- Prompt
-awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+awful.key({ modkey,           }, "R",       function () mypromptbox[mouse.screen]:run() end),
+awful.key({ modkey },            "r",     function ()
+    awful.util.spawn("dmenu_run -i -p 'Run command:' -nb '" .. 
+ 		beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. 
+		"' -sb '" .. beautiful.bg_focus .. 
+		"' -sf '" .. beautiful.fg_focus .. 
+        "' -fn '-xos4-terminus-medium-r-*-*-16-*'" ..
+        " -l 10") 
+	end),
 awful.key({ modkey,           }, "d",       -- toggle between last raised windows
 function ()
     c = client.focus.history.get(0, 1).focus
@@ -568,8 +568,8 @@ awful.rules.rules = {
         tag = tags[1][2],
     } },
     { rule = { class = "Zeal" },
-    properties = { tag = tags[screen.count()][4] } },
-    { rule = { class = "Gvim" },
+    properties = { tag = tags[1][2] } },
+    { rule = { name = "nvim" },
     properties = { tag = tags[1][2] } },
     { rule = { name = "ffvim" },
     properties = { floating = true },
@@ -639,7 +639,7 @@ awful.rules.rules = {
     properties = { tag = tags[1][5] } },
     { rule = { class = "Dwb" },
     properties = { tag = tags[1][5] } },
-    { rule = { class = "HipChat" },
+    { rule = { name = "Slack" },
     properties = { tag = tags[screen.count()][5] } },
 }
 -- }}}
