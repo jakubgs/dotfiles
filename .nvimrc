@@ -19,8 +19,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Other plugins
 NeoBundle 'ardagnir/vimbed'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'haya14busa/vim-easyoperator-line'
 NeoBundle 'gregsexton/gitv'
 NeoBundle 'sotte/presenting.vim'
 NeoBundle 'tpope/vim-fugitive'
@@ -32,6 +30,7 @@ NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'dbext.vim'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-easytags'
+NeoBundle 'justinmk/vim-sneak';
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'Shougo/neossh.vim'
 NeoBundle 'vim-scripts/vis'
