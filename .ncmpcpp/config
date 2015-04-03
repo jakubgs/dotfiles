@@ -27,6 +27,8 @@ mpd_crossfade_time = "0"
 #
 #message_delay_time = "4"
 #
+data_fetching_delay = no
+#
 ##### song format #####
 ##
 ## for song format you can use:
