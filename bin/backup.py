@@ -16,7 +16,7 @@ def slow_ping(host):
         return True
     return False
 
-minimal_ping = 2
+minimal_ping = 10
 log_file = '/var/log/backup.log'
 
 assets = [
