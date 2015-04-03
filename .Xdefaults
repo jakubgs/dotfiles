@@ -18,9 +18,6 @@ Xcursor.theme: Vanilla-DMZ
 *thickness:            0
 *borderWidth:          1
 
-urxvt*termName:        rxvt-256color
-*termName:             screen-256color
-
 ! Real Transparency
 urxvt*foreground:      #e9e9e9
 
