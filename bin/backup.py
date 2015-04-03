@@ -8,13 +8,11 @@ except ImportException:
 def show_output(line):
     print line
 
-def slow_ping(host):
+def check_ping(host):
     r = ping()
     m = re.search(r'time=([^ ]*) ', r.stdout)
     time = float(m.group(1))
-    if time > minimal_ping:
-        return True
-    return False
+    return time
 
 minimal_ping = 6
 log_file = '/var/log/backup.log'
@@ -45,8 +43,9 @@ for target in targets:
         print 'Host not available: {}'.format(host)
         continue
 
-    if slow_ping(host):
-        print 'Ping or host too slow, abandoning: {}'.format(host)
+    ping = check_ping(host) 
+    if ping > minimal_ping:
+        print 'Ping or host too slow({}s), abandoning: {}'.format(ping, host)
         continue
 
     for asset in assets:
