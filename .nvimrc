@@ -216,7 +216,7 @@ set updatetime=1000
 
 " DBExt
 " Codility database through readonly yunnel
-let g:dbext_default_profile_codility = 
+let g:dbext_default_profile_codility =
 \ 'type=PGSQL:user=readonly:dbname=codility:passwd=readonly:host=127.0.0.1:port=15432'
 
 " Easytags
@@ -241,7 +241,7 @@ let g:unite_matcher_fuzzy_max_input_length = 30
 call unite#filters#matcher_default#use(['matcher_glob'])
 let g:unite_fuzzy_matching = 0
 call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#profile('default', 'context', { 
+call unite#custom#profile('default', 'context', {
 \   'winheight': 40,
 \   'smartcase' : 1,
 \   'no_split' : 1,
@@ -257,7 +257,7 @@ if executable('ag')
 	" Use ag in unite grep source.
 	let g:unite_source_grep_command = 'ag'
 	let g:unite_source_grep_default_opts =
-	            \ '-i -U --line-numbers --nocolor --nogroup '
+                \ '-i -U --line-numbers --nocolor --nogroup '
 	let g:unite_source_grep_recursive_opt = ''
 endif
 
