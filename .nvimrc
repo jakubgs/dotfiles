@@ -117,7 +117,7 @@ set cinoptions=>4                 " how cindent indents lines in C programs
 " General configuration {{{
 
 set regexpengine=2                " might affect hanging of vim
-"set title                       " keep the console title unchanged
+set title                       " keep the console title unchanged
 set encoding=utf-8                " encoding
 set fileencoding=utf-8
 set history=1000                  " history of vim commands
@@ -231,7 +231,7 @@ let b:projectroot = '~/'
 let g:Gitv_OpenHorizontal = 1
 
 " Orgmode
-let g:org_agenda_files = ['~/org/*.org']
+let g:org_agenda_files = ['~/docs/org/*.org']
 
 " Unite
 " max fuzzy match input length
