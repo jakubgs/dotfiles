@@ -400,8 +400,8 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 nmap <s-cr> <Plug>(easymotion-s)
 
 " easyoperator
-nmap d<space>l <Plug>(easyoperator-line-delete)
-nmap y<space>l <Plug>(easyoperator-line-yank)
+nmap <space>dd <Plug>(easyoperator-line-delete)
+nmap <space>yy <Plug>(easyoperator-line-yank)
 
 " easytags
 nmap <space>U :execute('UpdateTags -R '.g:projectroot)<CR>
@@ -503,7 +503,7 @@ inoremap <c-l> <Del>
 
 inoremap <c-z> <c-v>
 " paste with ctrl+v from clipboard in insert mode
-inoremap <c-v> <c-r>+
+inoremap <c-v> <c-o>:set paste<cr><c-r>+<c-o>:set nopaste<cr>
 " paste to clipboard with ctrl+c in visual mode
 xnoremap <c-c> "+y
 
@@ -601,26 +601,24 @@ nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/async:'.g:projectroo
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
-nnoremap <space>uu :Unite file<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>ub :Unite buffer<CR>
 nnoremap <space>uB :Unite -auto-preview grep:$buffers<CR>
-nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
 nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>'))<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
-nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>us :Unite source<CR>
 nnoremap <space>ut :Unite tag<CR>
-nnoremap <space>uu :Unite file<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
+nnoremap <space>uu :Unite file<CR>
 nnoremap <space>uI :Unite file_rec/async:~/work/infrastructure<CR>
 nnoremap <space>uC :Unite file_rec/async:~/work/codility<CR>
+nnoremap <space>uh :Unite file:~/<CR>
+nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 nnoremap <space>uW :Unite file:~/work/<CR>
-
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
@@ -744,21 +742,6 @@ augroup END
     "autocmd BufNewFile,BufRead */infrastructure/*  call s:SetupChef()
 "augroup END
 
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-    imap <buffer> <esc> <c-u><bs>
-    nnoremap <buffer><cr> <cr>
-
-    " move between lines
-    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-
-    " open in new splits
-    imap <silent><buffer><expr> <C-x> unite#do_action('split')
-    imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-endfunction
-
 au BufRead,BufNewFile *nginx* setfiletype nginx
 
 " }}}
@@ -831,4 +814,21 @@ function! s:SetupChef()
     nnoremap <buffer><silent> <c-f> :<C-u>ChefFindAnyVsplit<CR>
 endfunction
 
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+    imap <buffer> <esc> <c-u><bs>
+    nnoremap <buffer><cr> <cr>
+
+    " move between lines
+    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+
+    " open in new splits
+    imap <silent><buffer><expr> <C-x> unite#do_action('split')
+    imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+
+    " go backwards in path
+    imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
+endfunction
 " }}}
