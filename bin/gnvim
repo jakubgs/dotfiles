@@ -1,0 +1,1 @@
+urxvtc -title 'nvim' -e /usr/local/bin/nvim
