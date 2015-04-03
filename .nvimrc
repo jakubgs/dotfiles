@@ -552,7 +552,7 @@ nnoremap <silent> <LocalLeader>dd :exe ":profile start /tmp/profile.log"<cr>
                                 \ :exe ":profile file *"<cr>
                                 \ :exe "echo 'Profiling vim performance...'"<cr>
 nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
-                                \ :exe ":!gvim /tmp/profile.log"<cr>
+                                \ :exe ":!urxvtc -e nvim /tmp/profile.log"<cr>
                                 \ :exe ":noautocmd qall!"<cr>
 
 " }}}
