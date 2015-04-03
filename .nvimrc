@@ -30,7 +30,7 @@ NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'dbext.vim'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-easytags'
-NeoBundle 'justinmk/vim-sneak';
+NeoBundle 'justinmk/vim-sneak'
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'Shougo/neossh.vim'
 NeoBundle 'vim-scripts/vis'
