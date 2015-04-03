@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+set -x
+
+git push --force testing js-trusty
+ssh testing-trusty 'cd /srv/codility/install && git reset --hard js-trusty'
