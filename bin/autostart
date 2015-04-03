@@ -4,13 +4,28 @@ PATH="$PATH:$HOME/bin"
 
 # daemonize command and ingore all output
 function run {
+    restart=false
+    # restart service if -r flag is present
+    if [[ $1 == '-r' ]]; then
+        restart=true
+        shift
+    fi
+    if [[ $1 == '-c' ]]; then
+        command_name=$2
+        shift 2
+    else
+        command_name=$1
+    fi
 	command=$1
 	shift
 	# get the arguments
 	args=$@
 	
-    printf "Checking: %-20s" "$command"
-	if ! pgrep -f -d ", " $command; then
+    printf "Checking: %-20s" "$command_name"
+    if $restart; then
+        killall $command 2> /dev/null
+    fi
+	if ! pgrep -f -d ", " $command_name; then
 		echo "STARTING"
 		nohup $command $args >> ~/.awesome_apps  2>&1 &
 	fi
@@ -22,20 +37,18 @@ cd /tmp
 
 echo "### Autostarting programs:"
 
-nitrogen --restore
-
 run urxvtd -q -f -o
-run gvim
-run thunar --daemon
+run -r nm-applet
+run -r mate-power-manager
+run -r blueman-applet
 run xbindkeys
-run nm-applet
-#run hipchat
+run -c nvim urxvtc -title -e nvim
+run thunar --daemon
 run icedove
 run remmina > /dev/null 2>&1
 run mpdstream.sh
-run blueman-applet
-run mate-power-manager
 run virt-manager
+run zeal -style=gtk
 
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
