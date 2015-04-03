@@ -7,6 +7,7 @@ export OOO_FORCE_DESKTOP="xfce4"
 export DE="xfce"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
+export QT_STYLE_OVERRIDE="gnome"
 
 # adjust screen setup before you start awesome
 #autorandr -c
@@ -22,6 +23,10 @@ systemctl --user start ssh-agent
 
 # set screen blank timeout to 1 hour
 xset s 3600 3600
+
+# set trackpoint sensitivity
+echo 80 | sudo tee /sys/devices/platform/i8042/serio1/serio2/speed
+echo 250 | sudo tee /sys/devices/platform/i8042/serio1/serio2/sensitivity
 
 # Keyboard layout
 setxkbmap -layout pl
