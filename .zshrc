@@ -55,7 +55,8 @@ export GROFF_NO_SGR=1
 # }}}
 # Exports {{{
 
-export VIMRUNTIME="/usr/local/share/vim/vim74"
+#export VIMRUNTIME="/usr/local/share/vim/vim74"
+export NVIMRUNTIME=/usr/local/share/nvim/runtime
 export EDITOR="vim"
 export VISION="vim"
 export BROWSER="thunar"
@@ -213,6 +214,7 @@ key[End]=${terminfo[kend]}
 key[Insert]=${terminfo[kich1]}
 key[Delete]=${terminfo[kdch1]}
 bindkey "^[."   insert-last-word   # Alt + .
+bindkey -s '\e.' insert-last-word  # Alt + .
 bindkey "^L"    clear-screen                                # ctrl + l
 bindkey "^E"    kill-word                                   # ctrl + e
 bindkey "^W"    backward-kill-word                          # ctrl + w
@@ -231,6 +233,7 @@ alias -g A='; alert'
 alias -g G='| grep --color -iE'
 alias -g V='| vim -'
 
+alias gv='gvim --remote-silent'
 alias S='sudo'
 alias ll='ls -lh --color'
 alias mm="make -j6"
@@ -258,6 +261,15 @@ alias current-frontend='ssh balancer-violet.codility.net ls -l /srv/codility/fro
 
 # }}}
 # Functions {{{
+
+# codility testing container
+function dcodility() {
+    docker run -it --privileged \
+               --name codility_testing_$(date +%H%M_%d%m%y) \
+               -v ~/work/codility:/srv/codility/install \
+               codility:testing \
+               /bin/bash
+}
 
 function sshl() {
     OLDTERM=$TERM
@@ -292,6 +304,8 @@ compdef g=git
 function d {
     if [[ $1 == 'clean' ]]; then
         docker rm $(docker ps -a -q)
+    elif [[ $1 == 'cleanimages' ]]; then
+        docker rmi $(docker images -f dangling=true -q)
     elif [[ $# > 0 ]]; then
         docker "$@"
     else
