@@ -11,7 +11,7 @@ set hintkeys=asdfghjkl;
 set shell=zsh
 
 " usen gvim but focus the screen and tag on which gvim spawns
-set editor='~/bin/ffvim <line> <column> <file>'
+set editor='/home/jso/bin/ffvim <line> <column> <file>'
 
 " complete from search engines, location bar, local files and bookmarks
 set complete=slfb
