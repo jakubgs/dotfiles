@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, sys, time
+import os, sys, time, re
 try:
     import sh
 except ImportException:
@@ -8,14 +8,25 @@ except ImportException:
 def show_output(line):
     print line
 
+def slow_ping(host):
+    r = ping()
+    m = re.search(r'time=([^ ]*) ', r.stdout)
+    time = float(m.group(1))
+    if time > minimal_ping:
+        return True
+    return False
+
+minimal_ping = 2
 log_file = '/var/log/backup.log'
 
 assets = [
     '/home/jso'
 ]
 targets = [
-    { 'user': 'jacob',  'host': 'enpoka',   'dir': '/home/jacob/backup/' },
-    { 'user': 'sochan', 'host': 'melchior', 'dir': '/mnt/raid1/backup/homes/' }
+    { 'user': 'jacob',  'host': 'enpoka',
+        'dir': '/home/jacob/backup/' },
+    { 'user': 'sochan', 'host': 'nerv.no-ip.org',
+        'dir': '/mnt/raid1/backup/homes/' }
 ]
 
 rsync_opts = ''
@@ -27,10 +38,15 @@ for target in targets:
     host = '{}@{}'.format(target['user'], target['host'])
 
     ssh = sh.ssh.bake('-q', host)
+    ping = sh.ping.bake(target['host'], '-c1')
     try:
         ssh.exit()
     except Exception as e:
         print 'Host not available: {}'.format(host)
+        continue
+
+    if slow_ping(host):
+        print 'Ping or host too slow, abandoning: {}'.format(host)
         continue
 
     for asset in assets:
