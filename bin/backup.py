@@ -3,7 +3,8 @@ import os, sys, time, re, logging
 try:
     import sh
 except ImportException:
-    log.info('Failed to import module "sh". Please install it.')
+    print 'Failed to import module "sh". Please install it.'
+    sys.exit(1)
 
 class ContextFilter(logging.Filter):
     def filter(self, record):
@@ -24,7 +25,7 @@ def setup_logging(log_file):
     return log
 
 def show_output(line):
-    log.info(line)
+    print line
 
 def check_ping(host):
     r = ping()
@@ -42,9 +43,9 @@ assets = [
     '/home/jso'
 ]
 targets = [
-    { 'user': 'jacob',  'host': 'enpoka',
+    { 'user': 'jacob',  'host': 'enpoka', 'port': '22',
         'dir': '/home/jacob/backup/' },
-    { 'user': 'sochan', 'host': 'melchior',
+    { 'user': 'sochan', 'host': 'nerv.no-ip.org', 'port': '6666',
         'dir': '/mnt/raid1/backup/homes/' }
 ]
 
@@ -56,7 +57,7 @@ for target in targets:
     dest = "{}@{}:{}".format(target['user'], target['host'], target['dir'])
     host = '{}@{}'.format(target['user'], target['host'])
 
-    ssh = sh.ssh.bake('-q', '-o ConnectTimeout=2', host)
+    ssh = sh.ssh.bake('-q', '-o ConnectTimeout=2', '-p '+target['port'], host)
     ping = sh.ping.bake(target['host'], '-c1')
     try:
         ssh.exit()
@@ -72,6 +73,7 @@ for target in targets:
     for asset in assets:
         log.info("rsync: {} -> {}".format(asset, target['dir']))
         rsync = sh.rsync.bake('-arut', '--delete', rsync_opts,
+                              '-e ssh -p {}'.format(target['port']),
                               '--exclude=.*', '--exclude=.*/', 
                               asset, dest, _out=show_output)
         try:
@@ -80,6 +82,6 @@ for target in targets:
             end = time.time()
         except Exception as e:
             log.error('Failed to execute command: {}'.format(rsync))
-            log.error('Output: {}'.format(host, rsync_output))
+            log.error('Output: {}'.format(e.stderr or rsync_output.stderr))
             continue
         log.info('Finished in: {}'.format(end - start))
