@@ -12,7 +12,7 @@ class ContextFilter(logging.Filter):
         return True
 
 def setup_logging(log_file):
-    FORMAT = '%(asctime)s - %(c_host)-17s - %(levelname)s: %(message)s'
+    FORMAT = '%(asctime)s - %(c_host)21s - %(levelname)s: %(message)s'
     logging.basicConfig(format=FORMAT)
 
     log = logging.getLogger('backup')
