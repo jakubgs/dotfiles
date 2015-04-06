@@ -53,6 +53,11 @@ rsync_opts = ''
 if os.isatty(sys.stdout.fileno()):
     rsync_opts = '--info=progress2'
 
+# TODO check connection speed, not just the ping
+# TODO check if laptop is on battery
+# TODO check when did the last backup happen
+# TODO make backup despite bad connection if last backup is old
+
 for target in targets:
     dest = "{}@{}:{}".format(target['user'], target['host'], target['dir'])
     host = '{}@{}'.format(target['user'], target['host'])
