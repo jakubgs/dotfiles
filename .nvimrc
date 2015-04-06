@@ -234,6 +234,8 @@ let g:Gitv_OpenHorizontal = 1
 let g:org_agenda_files = ['~/docs/org/*.org']
 
 " Unite
+" disable ignore_blobs
+call unite#custom#source('file_rec/async', 'ignore_globs', [])
 " max fuzzy match input length
 let g:unite_matcher_fuzzy_max_input_length = 30
 " default to fuzzy searching
