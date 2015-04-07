@@ -1,4 +1,3 @@
-
 # Source: https://github.com/PonderingGrower/dotfiles
 
 # source ssh-agent variables
@@ -54,7 +53,8 @@ export GROFF_NO_SGR=1
 
 # }}}
 # Exports {{{
-
+#
+export TERMINFO=/usr/share/terminfo
 #export VIMRUNTIME="/usr/local/share/vim/vim74"
 export NVIMRUNTIME=/usr/local/share/nvim/runtime
 export EDITOR="vim"
