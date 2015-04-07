@@ -75,7 +75,6 @@ filetype on                       " enable file type detection
 filetype plugin on                " loading of plugin files for all formats
 filetype indent on                " loading of indent files for all formats
 
-set guioptions=c                  " Get rid of useless GUI elements
 set winwidth=78                   " minimum split width
 set winheight=15                  " minimum split height
 set ttimeoutlen=50                " avoid lag when updating statusline
