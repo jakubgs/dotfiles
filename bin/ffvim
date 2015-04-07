@@ -6,8 +6,7 @@ COLUMN=$3
 
 #echo "ffvim $FILE $LINE $COLUMN" >> /tmp/ffvim.log
 
-# TODO this needs to block and not fork!
-urxvtc +hold -title 'ffvim' \
+urxvt +hold -title 'ffvim' \
         -e nvim \
         -f +'set titlestring=ffvim' \
         +"set ft=markdown" \
