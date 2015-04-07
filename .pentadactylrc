@@ -11,7 +11,7 @@ set hintkeys=asdfghjkl;
 set shell=zsh
 
 " usen gvim but focus the screen and tag on which gvim spawns
-set editor='/home/jso/bin/ffvim <line> <column> <file>'
+set editor='/home/jso/bin/ffvim <file> <line> <column>'
 
 " complete from search engines, location bar, local files and bookmarks
 set complete=slfb
@@ -60,7 +60,7 @@ map -b L :tabmove +1<CR>
 cmap <c-d> <Return>
 
 " source configuration
-nmap -builtin <leader>r :source ~/.pentadactylrc<CR>
+nmap -builtin <leader>r :source ~/.pentadactylrc<CR>:echo 'Config reloaded'<CR>
 
 " update pentadactyl
 nmap -builtin <leader>u :exta http://5digits.org/nightly/pentadactyl-latest.xpi<CR>
@@ -98,5 +98,5 @@ map -builtin v gn
 map -builtin x :history -sort -date 
 
 " bigger more visible hints
-highlight -a Hint font-size: 130% !important;
+highlight -a Hint font-size: 100% !important;
 highlight -a Hint text-transform: uppercase;
