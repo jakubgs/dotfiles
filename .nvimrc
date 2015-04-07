@@ -67,18 +67,13 @@ NeoBundleCheck
 " }}}
 " Display configuration {{{
 
+set background=dark
+colors jellybeans
+
 syntax on                         " File-type highlighting
 filetype on                       " enable file type detection
 filetype plugin on                " loading of plugin files for all formats
 filetype indent on                " loading of indent files for all formats
-
-set background=dark
-
-if &t_Co == 256 || has('gui_running')
-    colors jellybeans
-else
-    colors jellybeans             " or some other 16-color scheme
-endif
 
 set guioptions=c                  " Get rid of useless GUI elements
 set winwidth=78                   " minimum split width
@@ -626,8 +621,6 @@ nnoremap <space>gSa :Git stash list --date=local <bar>
 " }}}
 " Key mappings - Fxx {{{
 
-nnoremap <F12> :set guifont=terminus\ 16<CR>
-nnoremap <F11> :set guifont=terminus\ 10<CR>
 nnoremap <F10> :Dispatch! knife dwim ./<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
 nnoremap <F8>  :setlocal list!<CR>
