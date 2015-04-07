@@ -1,14 +1,15 @@
 #!/bin/bash
 
-LINES=$1
-COLUMN=$2
-shift 2
+FILE=$1
+LINE=$2
+COLUMN=$3
 
-#echo "^[]0;ffvim^G"
+#echo "ffvim $FILE $LINE $COLUMN" >> /tmp/ffvim.log
 
-urxvtc -title 'ffvim' \
+# TODO this needs to block and not fork!
+urxvtc +hold -title 'ffvim' \
         -e nvim \
         -f +'set titlestring=ffvim' \
         +"set ft=markdown" \
-        +$LINES \
-        +"sil! call cursor(0, $COLUMN)" $@
+        +$LINE \
+        +"sil! call cursor(0, $COLUMN)" "$FILE"
