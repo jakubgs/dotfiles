@@ -262,6 +262,14 @@ alias current-frontend='ssh balancer-violet.codility.net ls -l /srv/codility/fro
 # }}}
 # Functions {{{
 
+# codility readonly db access
+function codilitydb() {
+    eval 'ssh -N -L 15432:127.0.0.1:5432 database-crimson.codility.net &'
+    SSH_TUNNEL_PID=$!
+    psql -U readonly -h 127.0.0.1 -p 15432 codility
+    kill $SSH_TUNNEL_PID
+}
+
 # codility testing container
 function dcodility() {
     docker run -it --privileged \
@@ -281,7 +289,7 @@ function batchssh() {
     OLD_PWD=$PWD
     cd ~/work/infrastructure
     knife ssh -a fqdn "$QUERY" "$CMD"
-    cd $OLD_PWD
+    cd -
 }
 
 function sshl() {
