@@ -271,6 +271,19 @@ function dcodility() {
                /bin/bash
 }
 
+function batchssh() {
+    QUERY='*:*'
+    if [[ $1 == '-q' ]]; then
+        QUERY=$2
+        shift 2
+    fi
+    CMD=$@
+    OLD_PWD=$PWD
+    cd ~/work/infrastructure
+    knife ssh -a fqdn "$QUERY" "$CMD"
+    cd $OLD_PWD
+}
+
 function sshl() {
     OLDTERM=$TERM
     TERM="vt100"
