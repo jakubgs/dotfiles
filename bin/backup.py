@@ -57,6 +57,7 @@ if os.isatty(sys.stdout.fileno()):
 # TODO check if laptop is on battery
 # TODO check when did the last backup happen
 # TODO make backup despite bad connection if last backup is old
+# TODO possibly add a backup timeout
 
 for target in targets:
     dest = "{}@{}:{}".format(target['user'], target['host'], target['dir'])
