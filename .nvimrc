@@ -288,10 +288,8 @@ let g:airline_right_sep=''
 let g:airline_left_alt_sep = '|'
 let g:airline_right_alt_sep = '|'
 let g:airline_theme='powerlineish'
-"let g:airline_section_c='%F'
+let g:airline_section_c='%F'
 let g:airline_detect_modified=1
-"let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':p:~'
 let g:airline#extensions#whitespace#enabled = 0
 " disable to improve fugitive performance
 let g:airline#extensions#branch#enabled = 1
