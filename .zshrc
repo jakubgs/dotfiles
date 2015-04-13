@@ -67,7 +67,7 @@ export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="2.7"
 
-export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin:/opt/java/bin/:~/bin:.
+export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin:/opt/java/bin/:/opt/logstash-1.4.2/bin:~/bin:.
 
 # prepare environment for chef usage
 eval "$(chef shell-init zsh)"
@@ -257,7 +257,7 @@ alias qupdate='sudo aptitude update && sudo aptitude upgrade'
 alias sctl='sudo systemctl'
 alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
-alias current-frontend='ssh balancer-violet.codility.net ls -l /srv/codility/frontends | grep -E "(current|offline)"'
+alias current-frontend='ssh balancer-iris.codility.net ls -l /srv/codility/frontends | grep -E "(current|offline)"'
 
 # }}}
 # Functions {{{
@@ -266,6 +266,7 @@ alias current-frontend='ssh balancer-violet.codility.net ls -l /srv/codility/fro
 function codilitydb() {
     eval 'ssh -N -L 15432:127.0.0.1:5432 database-crimson.codility.net &'
     SSH_TUNNEL_PID=$!
+    sleep 2
     psql -U readonly -h 127.0.0.1 -p 15432 codility
     kill $SSH_TUNNEL_PID
 }
@@ -289,7 +290,12 @@ function batchssh() {
     OLD_PWD=$PWD
     cd ~/work/infrastructure
     knife ssh -a fqdn "$QUERY" "$CMD"
-    cd -
+    cd $OLD_PWD
+}
+
+# locate in current directory
+function spot() {
+    locate "${PWD}/*$**"
 }
 
 function sshl() {
