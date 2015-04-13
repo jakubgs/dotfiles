@@ -41,6 +41,7 @@ NeoBundle 't9md/vim-chef'
 NeoBundle 'dbakker/vim-projectroot'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'kmnk/vim-unite-giti'
+NeoBundle 'jceb/vim-orgmode'
 
 " Python plugins
 NeoBundle 'kana/vim-textobj-user'
@@ -111,7 +112,7 @@ set cinoptions=>4                 " how cindent indents lines in C programs
 " General configuration {{{
 
 set regexpengine=2                " might affect hanging of vim
-set title                       " keep the console title unchanged
+"set title                       " keep the console title unchanged
 set encoding=utf-8                " encoding
 set fileencoding=utf-8
 set history=1000                  " history of vim commands
@@ -127,7 +128,7 @@ set showmatch                     " show match when a bracket is inserted
 set autoread                      " automatically update file changes
 set autoindent                    " breaks pasted in text, use F8 in insert
 set preserveindent
-set clipboard=unnamed             " paste the clipboard to unnamed register
+set clipboard+=unnamedplus        " paste the clipboard to unnamed register
 set backspace=indent,eol,start    " go with backspace insert mode starting pos
 set spelllang=pl,en               " spelling check
 set autochdir                     " Automatically changing working dir
@@ -228,6 +229,8 @@ let g:Gitv_OpenHorizontal = 1
 let g:org_agenda_files = ['~/docs/org/*.org']
 
 " Unite
+" shorten time format for buffers, obscured filenames
+let g:unite_source_buffer_time_format = '(%H:%M:%S)'
 " disable ignore_blobs
 call unite#custom#source('file_rec/async', 'ignore_globs', [])
 " max fuzzy match input length
@@ -288,7 +291,7 @@ let g:airline_theme='powerlineish'
 "let g:airline_section_c='%F'
 let g:airline_detect_modified=1
 "let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#fnamemod = ':p:~'
+let g:airline#extensions#tabline#fnamemod = ':p:~'
 let g:airline#extensions#whitespace#enabled = 0
 " disable to improve fugitive performance
 let g:airline#extensions#branch#enabled = 1
@@ -461,7 +464,7 @@ inoremap <c-z> <c-v>
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-o>:set paste<cr><c-r>+<c-o>:set nopaste<cr>
 " paste to clipboard with ctrl+c in visual mode
-xnoremap <c-c> "+y
+xnoremap <c-c> "*y
 
 " easier toggling between two buffers
 nnoremap <c-cr> <c-^>
