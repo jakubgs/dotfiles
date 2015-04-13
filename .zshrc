@@ -295,7 +295,7 @@ function batchssh() {
 
 # locate in current directory
 function spot() {
-    locate "${PWD}/*$**"
+    ag --nocolor --nogroup -g "$*"
 }
 
 function sshl() {
