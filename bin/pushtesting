@@ -1,7 +1,41 @@
 #!/bin/bash
 
-set -e
-set -x
+OLD_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+TMP_BRANCH='js-tmp'
 
-git push --force testing js-trusty
-ssh testing-trusty 'cd /srv/codility/install && git reset --hard js-trusty'
+finish() {
+    git reset HEAD~1
+    git checkout $OLD_BRANCH
+    git branch -D $TMP_BRANCH
+}
+trap finish EXIT 
+
+TARGET_HOST='testing-trusty'
+if [[ -n $1 ]]; then
+    TARGET_HOST=$1
+fi
+TARGET_URL="ssh://${TARGET_HOST}/srv/codility/install/.git/"
+
+git checkout -b $TMP_BRANCH
+
+git commit -m 'temporary commit' .
+
+# for git push to work remote needs to be added
+if git ls-remote --exit-code $TARGET_HOST >/dev/null; then
+    git remote add $TARGET_HOST $TARGET_URL || exit 1
+fi
+
+if ! ping -q -W 1 -c 1 $TARGET_HOST; then
+    echo "Host unavailable: $TARGET_HOST"
+    exit 1
+fi
+
+echo "Pushing to $TARGET_HOST..."
+git push --force $TARGET_HOST $TMP_BRANCH || exit 1
+
+echo "Applying changes..."
+ssh $TARGET_HOST "cd /srv/codility/install && git reset --hard $TMP_BRANCH"
+
+# cleanup is performed by finish() function
+
+echo "DONE"
