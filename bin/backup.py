@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, sys, time, re, logging, signal
+import os, sys, time, re, logging, signal, glob, socket
 try:
     import sh
 except ImportException:
@@ -14,8 +14,17 @@ def signal_handler(signum, frame):
 
 class ContextFilter(logging.Filter):
     def filter(self, record):
-        record.c_host = host
+        if host == '':
+            record.c_host = socket.gethostname()
+        else:
+            record.c_host = host
         return True
+
+def on_battery():
+    for bat_stat_file in glob.glob('/sys/class/power_supply/BAT*/status'):
+        with open(bat_stat_file) as f:
+            if f.read().rstrip()== 'Discharging':
+                return True
 
 def setup_logging(log_file):
     FORMAT = '%(asctime)s - %(c_host)21s - %(levelname)s: %(message)s'
@@ -62,10 +71,12 @@ if os.isatty(sys.stdout.fileno()):
     rsync_opts = '--info=progress2'
 
 # TODO check connection speed, not just the ping
-# TODO check if laptop is on battery
 # TODO check when did the last backup happen
 # TODO make backup despite bad connection if last backup is old
-# TODO possibly add a backup timeout
+
+if on_battery():
+    log.warning('System running on battery. Aborting.')
+    sys.exit(0)
 
 for target in targets:
     dest = "{}@{}:{}".format(target['user'], target['host'], target['dir'])
