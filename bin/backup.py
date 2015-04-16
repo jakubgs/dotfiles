@@ -1,10 +1,16 @@
 #!/usr/bin/env python
-import os, sys, time, re, logging
+import os, sys, time, re, logging, signal
 try:
     import sh
 except ImportException:
     print 'Failed to import module "sh". Please install it.'
     sys.exit(1)
+
+class TimeoutException(Exception):
+    pass
+
+def signal_handler(signum, frame):
+    raise TimeoutException('Timed out!')
 
 class ContextFilter(logging.Filter):
     def filter(self, record):
@@ -38,6 +44,8 @@ log = setup_logging(log_file)
 
 host = ''
 minimal_ping = 6
+# time in seconds after which backup process will be stopped
+timeout = 300
 
 assets = [
     '/home/jso'
@@ -82,10 +90,16 @@ for target in targets:
                               '-e ssh -p {}'.format(target['port']),
                               '--exclude=.*', '--exclude=.*/', 
                               asset, dest, _out=show_output)
+
+        signal.signal(signal.SIGALRM, signal_handler)
+        signal.alarm(timeout)
         try:
             start = time.time()
             rsync_output = rsync()
             end = time.time()
+        except TimeoutException as e:
+            log.error('Rsync timed out after {} seconds!'.format(timeout))
+            sys.exit(1)
         except Exception as e:
             log.error('Failed to execute command: {}'.format(rsync))
             log.error('Output: {}'.format(e.stderr or rsync_output.stderr))
