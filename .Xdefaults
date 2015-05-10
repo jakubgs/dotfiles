@@ -23,12 +23,12 @@ urxvt*foreground:      #e9e9e9
 
 ! Clickable links
 urxvt*perl-ext-common: default,font-size,matcher,-option-popup,-selection-popup,-realine
-urxvt*url-launcher:    /usr/bin/firefox
+urxvt*url-launcher:    /usr/bin/iceweasel
 urxvt*matcher.button:  1
 urxvt*colorUL:         #a6c9f8
 
 ! on the fly font size manipulation
-urxvt.font-size.step:  2
+urxvt.font-size.step:  6
 ! mappings
 urxvt.keysym.C-Up:     perl:font-size:increase
 urxvt.keysym.C-Down:   perl:font-size:decrease
@@ -85,13 +85,13 @@ urxvt.pasteCommand:     xsel -ob
 
 
 ! Xterm
-xterm*faceName:         xft:Terminus:size=12
-xterm*toolBar:          false
-xterm*background:       #191919
-xterm*foreground:       white
-xterm*cursorColor:      LightBlue
-xterm*pointerShape:     arrow
-xterm*pointerColor:     blue
-xterm*scrollTtyOutput:  false
-xterm*scrollKey:        true
-xterm*geometry:         80x25
+!xterm*faceName:         xft:Terminus:size=14
+!xterm*toolBar:          false
+!xterm*background:       #191919
+!xterm*foreground:       white
+!xterm*cursorColor:      LightBlue
+!xterm*pointerShape:     arrow
+!xterm*pointerColor:     blue
+!xterm*scrollTtyOutput:  false
+!xterm*scrollKey:        true
+!xterm*geometry:         80x25
