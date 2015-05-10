@@ -67,7 +67,13 @@ export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="2.7"
 
-export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin:/opt/java/bin/:/opt/logstash-1.4.2/bin:~/bin:.
+export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin
+export PATH=$PATH:/opt/java/bin:/opt/logstash-1.4.2/bin:~/bin:.
+
+# brew
+export PATH=$PATH:~/.linuxbrew/bin
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 # prepare environment for chef usage
 eval "$(chef shell-init zsh)"
@@ -96,6 +102,7 @@ setopt EXTENDEDGLOB               # Regular expressions in files
 setopt COMPLETE_IN_WORD           # allow tab completion in the middle of a word
 setopt AUTO_RESUME                # Resume jobs after typing it's name
 setopt CHECK_JOBS                 # Dont quit console if processes are running
+setopt completealiases
 
 # }}}
 # Completion {{{
@@ -252,6 +259,7 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
 alias ytdl-audio='youtube-dl -x --audio-format mp3 --output "%(autonumber)s-%(title)s.%(ext)s" --autonumber-size 2'
+compdef qapt=apt-get
 alias qapt='sudo aptitude --quiet'
 alias qupdate='sudo aptitude update && sudo aptitude upgrade'
 alias sctl='sudo systemctl'
