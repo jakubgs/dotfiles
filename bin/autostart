@@ -41,6 +41,7 @@ run urxvtd -q -f -o
 run -r nm-applet
 run -r mate-power-manager
 run -r blueman-applet
+run pasystray
 run xbindkeys
 run -c nvim urxvtc -title -e nvim
 run thunar --daemon
