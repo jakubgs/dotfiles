@@ -36,12 +36,12 @@
 # }}}
 # Volume {{{
 # Volume up
-"amixer set "Master" 4+"
+"amixer -D pulse set Master 5%+"
   m:0x0 + c:123
   XF86AudioRaiseVolume
 
 # Volume down
-"amixer set "Master" 4-"
+"amixer -D pulse set Master 5%-"
   m:0x0 + c:122
   XF86AudioLowerVolume
 
