@@ -1,5 +1,5 @@
 [default]
-ao=alsa
+ao=pulse
 vo=vdpau,opengl-hq,opengl,xv
 hwdec=vdpau
 embeddedfonts= "yes"
