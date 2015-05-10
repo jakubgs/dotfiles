@@ -23,7 +23,7 @@
     rs = reset
     ls = ls-files
     l  = log --decorate
-    sl = log --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    sl = log --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
     df = diff
     dt = difftool
 [branch "master"]
