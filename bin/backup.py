@@ -54,7 +54,7 @@ log = setup_logging(log_file)
 host = ''
 minimal_ping = 6
 # time in seconds after which backup process will be stopped
-timeout = 300
+timeout = 120
 
 assets = [
     '/home/jso'
