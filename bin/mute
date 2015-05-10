@@ -1,11 +1,10 @@
 #!/bin/bash
 
-MASTER_MUTE="Master"
+set -x
+
+MASTER_MUTE="Master Playback Switch"
+DEVICE_NAME="pulse"
 CARD_NUMBER=0
 
-/usr/bin/amixer -c "$CARD_NUMBER" sget "$MASTER_MUTE" | grep off
-if [[ $? -eq 0 ]]; then
-	/usr/bin/amixer -q -c "$CARD_NUMBER" set "$MASTER_MUTE" on
-else
-	/usr/bin/amixer -q -c "$CARD_NUMBER" set "$MASTER_MUTE" off
-fi
+/usr/bin/amixer -q -D $DEVICE_NAME set $MASTER_MUTE toggle
+/usr/bin/amixer -q -c $CARD_NUMBER set $MASTER_MUTE toggle
