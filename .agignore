@@ -23,6 +23,8 @@ vendor/
 .vagrant/
 .settings/
 tags
+*.dump
+*.ai
 *.pyc
 *.pyo
 *.swp
