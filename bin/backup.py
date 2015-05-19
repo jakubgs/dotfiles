@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, sys, time, re, logging, signal, glob, socket
+import os, sys, time, re, logging, signal, glob, socket, atexit
 try:
     import sh
 except ImportException:
@@ -8,6 +8,9 @@ except ImportException:
 
 class TimeoutException(Exception):
     pass
+
+def exit_handler():
+    os.remove(pid_file)
 
 def signal_handler(signum, frame):
     raise TimeoutException('Timed out!')
@@ -48,6 +51,7 @@ def check_ping(host):
     time = float(m.group(1))
     return time
 
+pid_file='/run/backup.pid'
 log_file='/var/log/backup.log'
 log = setup_logging(log_file)
 
@@ -77,6 +81,18 @@ if os.isatty(sys.stdout.fileno()):
 if on_battery():
     log.warning('System running on battery. Aborting.')
     sys.exit(0)
+
+if os.path.isfile(pid_file):
+    pid = None
+    with open(pid_file, 'r') as f:
+        pid = f.read()
+    log.warning('Process already in progress: {} ({})'.format(pid, pid_file))
+    sys.exit(0)
+else:
+    with open(pid_file, 'w') as f:
+        f.write(str(os.getpid())[:-1])
+
+atexit.register(exit_handler)
 
 for target in targets:
     dest = "{}@{}:{}".format(target['user'], target['host'], target['dir'])
