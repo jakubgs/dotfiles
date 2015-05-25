@@ -831,4 +831,5 @@ function! s:unite_settings()
     " go backwards in path
     imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
 endfunction
+
 " }}}
