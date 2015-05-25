@@ -382,7 +382,7 @@ function alert {
             title = \"Command completed on: \t\t$DATE\", \
             text = \"$ $LAST\" .. newline .. \"-> $RVAL\", \
             timeout = 0, \
-            screen = 2, \
+            screen = 1, \
             bg = \"$BG_COLOR\", \
             fg = \"#ffffff\", \
             margin = 8, \
