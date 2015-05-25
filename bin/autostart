@@ -38,12 +38,14 @@ cd /tmp
 echo "### Autostarting programs:"
 
 run urxvtd -q -f -o
+run -c nvim urxvtc -title -e nvim
+
 run -r nm-applet
 run -r mate-power-manager
 run -r blueman-applet
-run pasystray
+run -r pasystray
+
 run xbindkeys
-run -c nvim urxvtc -title -e nvim
 run thunar --daemon
 run icedove
 run remmina > /dev/null 2>&1
