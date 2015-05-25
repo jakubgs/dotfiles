@@ -14,7 +14,7 @@ beautiful = require("beautiful")
 vicious = require("vicious")
 -- Widgets and layouts
 lain = require("lain")
-vicious.widgets.mpd = require("vicious.widgets.mpd")
+--vicious.widgets.mpd = require("vicious.widgets.mpd")
 vicious.widgets.volume = require("vicious.widgets.volume")
 naughty = require('naughty')
 
@@ -178,24 +178,24 @@ mytextclock = awful.widget.textclock("| %a %b %d/%m/%Y, %H:%M:%S |", 1 )
 
 -- MPD status
 -- Initialize widget
-mympdwidget = wibox.widget.textbox()
+--mympdwidget = wibox.widget.textbox()
 
 -- Register widget
-vicious.register(mympdwidget, vicious.widgets.mpd,
-function (widget, args)
-    mpdorder = "D"
-    if args["{random}"] == "1" then
-        mpdorder = "R"
-    end
-    if args["{state}"] == "Stop" then
-        return '| - Stopped - |'.. mpdorder
-    else
-        return '| '..args["{state}"] .. ': ' .. 
-                    args["{Artist}"]..' - '.. 
-                    args["{Title}"] .. ' |'..
-                    mpdorder
-    end
-end, 1) -- refresh every 2 seconds
+-- vicious.register(mympdwidget, vicious.widgets.mpd,
+-- function (widget, args)
+--     mpdorder = "D"
+--     if args["{random}"] == "1" then
+--         mpdorder = "R"
+--     end
+--     if args["{state}"] == "Stop" then
+--         return '| - Stopped - |'.. mpdorder
+--     else
+--         return '| '..args["{state}"] .. ': ' .. 
+--                     args["{Artist}"]..' - '.. 
+--                     args["{Title}"] .. ' |'..
+--                     mpdorder
+--     end
+-- end, 1) -- refresh every 2 seconds
 
 -- Battery
 --mybattery = lain.widgets.bat({
@@ -254,12 +254,12 @@ mybattimer:connect_signal("timeout",
 mybattimer:start()
 mybattimer:emit_signal("timeout")
 
-mympdwidget:buttons(awful.util.table.join(
-awful.button({ }, 1, function () awful.util.spawn("mpc toggle", false) end),
-awful.button({ }, 3, function () awful.util.spawn("mpc random", false) end),
-awful.button({ }, 4, function () awful.util.spawn("mpc next", false) end),
-awful.button({ }, 5, function () awful.util.spawn("mpc prev", false) end)
-))
+--mympdwidget:buttons(awful.util.table.join(
+--awful.button({ }, 1, function () awful.util.spawn("mpc toggle", false) end),
+--awful.button({ }, 3, function () awful.util.spawn("mpc random", false) end),
+--awful.button({ }, 4, function () awful.util.spawn("mpc next", false) end),
+--awful.button({ }, 5, function () awful.util.spawn("mpc prev", false) end)
+--))
 --mympdwidget.width = "400"
 
 -- Volume bar
@@ -350,7 +350,7 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(mympdwidget) end
+    --if s == 1 then right_layout:add(mympdwidget) end
     if s == 1 then right_layout:add(myvolume) end
     if s == 1 then right_layout:add(mybattery) end
     if s == 1 then right_layout:add(mytextclock) end
@@ -574,9 +574,9 @@ awful.rules.rules = {
     { rule = { name = "ffvim" },
     properties = { floating = true },
     callback = function(c) 
-        naughty.notify({title = "ffvim"})
+        --naughty.notify({title = "ffvim"})
         awful.client.movetotag(tags[mouse.screen][awful.tag.getidx()], c)
-        awful.client.moveresize(100, 100, 0, 0, c)
+        awful.client.moveresize(400, 400, 0, 0, c)
     end},
     { rule = { class = "Steam" },
     properties = {
@@ -636,8 +636,6 @@ awful.rules.rules = {
     { rule = { class = "Skype" },
     properties = { floating = false, tag = tags[1][5] } },
     { rule = { class = "Icedove" },
-    properties = { tag = tags[1][5] } },
-    { rule = { class = "Dwb" },
     properties = { tag = tags[1][5] } },
     { rule = { name = "Slack" },
     properties = { tag = tags[screen.count()][5] } },
