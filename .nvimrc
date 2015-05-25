@@ -208,6 +208,11 @@ augroup END
 " IPython response time
 set updatetime=1000
 
+" Sneak
+" eneble repeat sneak with s
+let g:sneak#s_next = 1
+let g:sneak#streak = 1
+
 " DBExt
 " Codility database through readonly yunnel
 let g:dbext_default_profile_codility =
@@ -337,19 +342,6 @@ endif
 " }}}
 " Key mappings - Plugins {{{
 
-" neosnippet
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " easymotion
@@ -427,8 +419,8 @@ nnoremap zz za
 " center the screen
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
+nnoremap * *<c-o>zz
+nnoremap # #<c-o>zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
@@ -447,25 +439,17 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
-" easier navigation through tabs
-nnoremap <c-Tab>   :tabnext<CR>
-nnoremap <c-s-Tab> :tabprevious<CR>
-
-" easier newline
-inoremap <c-j> <cr>
-inoremap <c-k> <c-o>O
-
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
 
+" keep normal functionality of c-v
 inoremap <c-z> <c-v>
+
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-o>:set paste<cr><c-r>+<c-o>:set nopaste<cr>
 " paste to clipboard with ctrl+c in visual mode
-xnoremap <c-c> "*y
-
-" easier toggling between two buffers
-nnoremap <c-cr> <c-^>
+xnoremap <c-c> "*y:call system('xclip -i -selection clipboard', @*)<CR>
+nnoremap <c-a> :%y*<CR>:call system('xclip -i -selection clipboard', @*)<CR>
 
 " jump forward or backward to any type of bracket
 nnoremap <CR> /[[({]<CR>zz
@@ -475,7 +459,7 @@ nnoremap <S-CR> /[])}]<CR>zz
 " Key mappings - <Leader> {{{
 
 " copy file path to clipboard
-nnoremap <space>p :let @* = expand("%:p") <bar> let @+ = @*<CR>
+nnoremap <space>f :let @* = expand("%:p") <bar> let @+ = @*<CR>
 
 " execute current line in vim
 nnoremap <space>v :execute getline(".")<cr>;w
@@ -483,15 +467,9 @@ nnoremap <space>v :execute getline(".")<cr>;w
 " put last searched items into QuickFix window
 nnoremap <space>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
-" use Ag for searching
-nnoremap <space>? :Ag<Space>
-
-" grep word under cursor
-nnoremap <silent> <space>* :Ag "\b<C-R><C-W>\b"<CR>
-
 " paste and sellect
-nnoremap <space>o p`[v`]
-nnoremap <space>O P`[v`]
+nnoremap <space>p p`[v`]
+nnoremap <space>P P`[v`]
 
 " help in new vertical split
 nnoremap <space>H :rightb vert help<space>
@@ -505,13 +483,10 @@ nnoremap <space>Y :CopyMatches *<CR>
 " easier access to substitution
 nnoremap <space>S :%s/\v
 
-" copy whole file
-nnoremap <space>a :%y+<CR>
-
 " Window management
 " close buffer but leave active pane open
-nnoremap <silent> <space>q :bnext<bar>bd#<CR>
-nnoremap <silent> <space>Q :q!<CR>
+nnoremap <silent> <space>q :bprevious<bar>bd #<CR>
+nnoremap <silent> <space>Q :<CR>
 
 " Edit .vimrc and refresh configuration
 nnoremap <silent> <space>r :source ~/dotfiles/.nvimrc<CR>
@@ -520,8 +495,6 @@ noremap <silent> <space>R :vsp ~/dotfiles/.nvimrc<CR>
 " switch between buffers
 nnoremap <silent> <space>h :bprevious<CR>
 nnoremap <silent> <space>l :bnext<CR>
-" toggle last two buffers
-nnoremap <space>o <c-^>
 
 " strip all trailing whitespaces in current file
 nnoremap <space>O :%s/\s\+$//<cr>:let @/=''<CR>;
@@ -545,12 +518,12 @@ nnoremap <silent> <space>] :<C-U>call <SID>AddLines(0)<CR>
 
 " performance debugging
 nnoremap <silent> <LocalLeader>dd :exe ":profile start /tmp/profile.log"<cr>
-                                \ :exe ":profile func *"<cr>
-                                \ :exe ":profile file *"<cr>
-                                \ :exe "echo 'Profiling vim performance...'"<cr>
+                            \ :exe ":profile func *"<cr>
+                            \ :exe ":profile file *"<cr>
+                            \ :exe "echo 'Profiling vim performance...'"<cr>
 nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
-                                \ :exe ":!urxvtc -e nvim /tmp/profile.log"<cr>
-                                \ :exe ":noautocmd qall!"<cr>
+                            \ :exe ":!urxvtc -e nvim /tmp/profile.log"<cr>
+                            \ :exe ":noautocmd qall!"<cr>
 
 " }}}
 " Key mappings - Unite {{{
@@ -558,11 +531,9 @@ nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/async:'.g:projectroo
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
-nnoremap <space>uu :Unite file<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>ub :Unite buffer<CR>
 nnoremap <space>uB :Unite -auto-preview grep:$buffers<CR>
-nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
@@ -571,8 +542,9 @@ nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>us :Unite source<CR>
-nnoremap <space>ut :Unite tag<CR>
-nnoremap <space>uu :Unite file<CR>
+nnoremap <space>ut :Unite -auto-preview tag<CR>
+nnoremap <space>uf :Unite file<CR>
+nnoremap <space>uu :Unite file_rec/async<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
 nnoremap <space>uI :Unite file_rec/async:~/work/infrastructure<CR>
 nnoremap <space>uC :Unite file_rec/async:~/work/codility<CR>
@@ -586,7 +558,7 @@ nnoremap <space><space> :Unite buffer<CR>
 " Key mappings - Git {{{
 
 " fugitive git bindings
-nnoremap <space>ga :Git add -- "%:p"<CR><CR>
+nnoremap <space>ga :!git add -- "%:p"<CR><CR>
 nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gc :Gcommit -v -q<CR>
 nnoremap <space>gt :Gcommit -v -q -- "%:p"<CR>
@@ -610,18 +582,18 @@ nnoremap <space>gg :Unite giti<CR>
 nnoremap <space>gb :Unite giti/branch<CR>
 
 nnoremap <space>gSs :Git status <bar>
-                    \ if confirm('Do you want to stash changes?') <bar>
-                        \ Git stash --include-untracked <bar>
-                    \ endif<CR><CR>
+                \ if confirm('Do you want to stash changes?') <bar>
+                    \ Git stash --include-untracked <bar>
+                \ endif<CR><CR>
 nnoremap <space>gSa :Git stash list --date=local <bar>
-                    \ if confirm('Apply stash@{0}?') <bar>
-                        \ Git stash apply <bar>
-                    \ endif<CR><CR>
+                \ if confirm('Apply stash@{0}?') <bar>
+                    \ Git stash apply <bar>
+                \ endif<CR><CR>
 
 " }}}
 " Key mappings - Fxx {{{
 
-nnoremap <F10> :Dispatch! knife dwim ./<CR>
+nnoremap <F10> :Dispatch! knife dwim %:p<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
 nnoremap <F8>  :setlocal list!<CR>
 nnoremap <F7>  :setlocal wrap!<CR>
@@ -637,9 +609,9 @@ nnoremap <F1>  :exe ":!urxvtc -e man ".shellescape(expand('<cword>'), 1)<cr><cr>
 
 " Return to last edit position when opening files (You want this!)
 augroup saveposition
-    autocmd!
-    autocmd BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+autocmd!
+autocmd BufReadPost *
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
                 \   exe "normal! g`\"" |
                 \ endif
 augroup END
@@ -700,6 +672,7 @@ augroup END
 "augroup END
 
 au BufRead,BufNewFile *nginx* setfiletype nginx
+au BufRead,BufNewFile *.trac setfiletype tracwiki
 
 " }}}
 " Functions {{{
