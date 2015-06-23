@@ -36,8 +36,8 @@ tags
 *.tmp*
 *.out
 *.js
-*.css
-*.scss
+#*.css
+#*.scss
 *.old
 *.xml
 *.html
