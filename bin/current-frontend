@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for STATE in 'online' 'offline'; do
+    FILE=/srv/codility/upstream/${STATE}.json
+    echo $FILE
+    ssh jacob@codility.com cat $FILE
+    echo
+done
