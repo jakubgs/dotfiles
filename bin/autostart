@@ -50,6 +50,7 @@ run thunar --daemon
 run icedove
 run remmina > /dev/null 2>&1
 run mpdstream.sh
+run synergy
 run virt-manager
 run zeal -style=gtk
 
