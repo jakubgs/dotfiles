@@ -19,8 +19,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Other plugins
 NeoBundle 'ardagnir/vimbed'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'haya14busa/vim-easyoperator-line'
 NeoBundle 'gregsexton/gitv'
 NeoBundle 'sotte/presenting.vim'
 NeoBundle 'tpope/vim-fugitive'
@@ -56,8 +54,6 @@ NeoBundle 'ivanov/vim-ipython'
 " Shougo
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'unix' : 'make -f make_unix.mak',
@@ -327,13 +323,6 @@ let g:jellybeans_overrides = {
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 
-" EasyMotion leader
-let g:EasyMotion_leader_key = '<space>'
-let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_startofline = 0
-let g:EasyMotion_do_special_mapping = 1
-
 " neocomplete
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -380,28 +369,7 @@ if exists('*neocomplete#close_popup')
     inoremap <expr><CR> neocomplete#close_popup()."\<CR>"
 endif
 
-" neosnippet
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-
-" easymotion
-" fast search by letter
-nmap <s-cr> <Plug>(easymotion-s)
-
-" easyoperator
-nmap <space>dd <Plug>(easyoperator-line-delete)
-nmap <space>yy <Plug>(easyoperator-line-yank)
 
 " easytags
 nmap <space>U :execute('UpdateTags -R '.g:projectroot)<CR>
