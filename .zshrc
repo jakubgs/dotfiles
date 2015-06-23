@@ -6,6 +6,8 @@ source ~/.ssh-agent.env
 source ~/.gnupg/gpg-agent-info-lilim
 export GPG_AGENT_INFO
 
+source ~/.vim/bundle/fzf/shell/*.zsh
+
 # Preamble {{{
 autoload colors         # enable colors
 autoload -U compinit    # enable auto completion
@@ -265,7 +267,6 @@ alias qupdate='sudo aptitude update && sudo aptitude upgrade'
 alias sctl='sudo systemctl'
 alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
-alias current-frontend='ssh balancer-iris.codility.net ls -l /srv/codility/frontends | grep -E "(current|offline)"'
 
 # }}}
 # Functions {{{
