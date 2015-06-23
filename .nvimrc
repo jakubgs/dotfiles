@@ -42,6 +42,7 @@ NeoBundle 'dbakker/vim-projectroot'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'kmnk/vim-unite-giti'
 NeoBundle 'jceb/vim-orgmode'
+NeoBundle 'junegunn/fzf'
 
 " Python plugins
 NeoBundle 'kana/vim-textobj-user'
@@ -112,7 +113,6 @@ set cinoptions=>4                 " how cindent indents lines in C programs
 " General configuration {{{
 
 set regexpengine=2                " might affect hanging of vim
-"set title                       " keep the console title unchanged
 set encoding=utf-8                " encoding
 set fileencoding=utf-8
 set history=1000                  " history of vim commands
@@ -182,7 +182,7 @@ set foldnestmax=1                 " nest fold limit for indent/syntax modes
 " }}}
 " Programming settings {{{
 
-compiler gcc                      " real men use gcc
+" compiler gcc                      " real men use gcc
 set makeprg=make\ -j6\ --silent   " default compilation command
 
 " Different compiler depending on type of file
@@ -205,6 +205,12 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
+" Sneak
+let g:sneak#use_ic_scs = 1
+hi link SneakStreakTarget ErrorMsg
+hi link SneakStreakMask   Comment
+hi link SneakPluginScope  String
+
 " IPython response time
 set updatetime=1000
 
@@ -212,6 +218,7 @@ set updatetime=1000
 " eneble repeat sneak with s
 let g:sneak#s_next = 1
 let g:sneak#streak = 1
+let g:sneak#use_ic_scs = 1
 
 " DBExt
 " Codility database through readonly yunnel
@@ -268,11 +275,6 @@ endif
 " Conque GDB
 let g:ConqueGdb_SrcSplit = 'right'
 
-" Hardtime
-let g:hardtime_default_on = 1
-let g:hardtime_maxcount = 2
-let g:hardtime_allow_different_key = 1
-
 " NetRW
 "let g:netrw_winsize       = 30
 let g:netrw_mousemaps     = 0
@@ -311,13 +313,6 @@ let g:jellybeans_overrides = {
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 
-" EasyMotion leader
-let g:EasyMotion_leader_key = '<space>'
-let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_startofline = 0
-let g:EasyMotion_do_special_mapping = 1
-
 " Latex-Box
 " enabel folding by default
 let g:LatexBox_Folding=1
@@ -344,13 +339,10 @@ endif
 
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
-" easymotion
-" fast search by letter
-nmap <s-cr> <Plug>(easymotion-s)
-
-" easyoperator
-nmap d<space>l <Plug>(easyoperator-line-delete)
-nmap y<space>l <Plug>(easyoperator-line-yank)
+" Sneak easier repeat
+nmap <CR> <Plug>(SneakStreak)
+nmap s <Plug>(SneakStreak)
+nmap S <Plug>(SneakStreakBackward)
 
 " easytags
 nmap <space>U :execute('UpdateTags -R '.g:projectroot)<CR>
@@ -430,6 +422,9 @@ nnoremap Y y$
 " run last used macro with one key
 nnoremap Q @@
 
+" source current file
+nnoremap <c-s> :source %:p<CR>
+
 " for jumping forward
 nnoremap <c-p> <c-i>
 
@@ -449,17 +444,12 @@ inoremap <c-z> <c-v>
 inoremap <c-v> <c-o>:set paste<cr><c-r>+<c-o>:set nopaste<cr>
 " paste to clipboard with ctrl+c in visual mode
 xnoremap <c-c> "*y:call system('xclip -i -selection clipboard', @*)<CR>
-nnoremap <c-a> :%y*<CR>:call system('xclip -i -selection clipboard', @*)<CR>
-
-" jump forward or backward to any type of bracket
-nnoremap <CR> /[[({]<CR>zz
-nnoremap <S-CR> /[])}]<CR>zz
 
 " }}}
 " Key mappings - <Leader> {{{
 
 " copy file path to clipboard
-nnoremap <space>f :let @* = expand("%:p") <bar> let @+ = @*<CR>
+nnoremap <space>p :let @* = expand("%:p") <bar> let @+ = @*<CR>
 
 " execute current line in vim
 nnoremap <space>v :execute getline(".")<cr>;w
@@ -482,6 +472,10 @@ nnoremap <space>Y :CopyMatches *<CR>
 
 " easier access to substitution
 nnoremap <space>S :%s/\v
+
+" copy whole file
+"nnoremap <space>a :%y+<CR>
+nnoremap <space>a :%y*<CR>:call system('xclip -i -selection clipboard', @*)<CR>
 
 " Window management
 " close buffer but leave active pane open
@@ -554,6 +548,17 @@ nnoremap <space>uW :Unite file:~/work/<CR>
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
+
+" }}}
+" Key mappings - FZF {{{
+
+nnoremap <c-i>     :FZFMix<CR>
+
+nnoremap <space>fm :FZFMru<CR>
+nnoremap <space>fb :FZFBuffer<CR>
+nnoremap <space>fw :FZFFile<CR>
+nnoremap <space>fh :FZFFile ~/<CR>
+
 " }}}
 " Key mappings - Git {{{
 
