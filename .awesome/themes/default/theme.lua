@@ -5,7 +5,7 @@
 theme = {}
 
 --theme.font          = "sans 8"
-theme.font          = "terminus 10"
+theme.font          = "terminus 12"
 --theme.font          = "Helvetica 8"
 
 theme.bg_normal     = "#000000" --"#222222"
