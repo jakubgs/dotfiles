@@ -14,7 +14,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " }}}
 " NeoBundle plugin management {{{
 
-" let Neobundle manage Neobundle
+" let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Other plugins
@@ -714,9 +714,6 @@ function! s:init_cmdwin()
     " leave command window quicker
     nnoremap <buffer><silent> q :<C-u>quit<CR>
     nnoremap <buffer><silent> <tab> :<C-u>quit<CR>
-
-    " use tab for completion
-    inoremap <buffer><expr><tab>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
     " get normal <CR> behaviour
     nnoremap <buffer><cr> <cr>
