@@ -2,75 +2,60 @@
 " Source: https://github.com/PonderingGrower/dotfiles
 
 " Preamble {{{
-" VIM instad of VI
 
-if has('vim_starting')
-    set rtp+=~/.vim/bundle/neobundle.vim/
-    set nocompatible
-endif
-
-call neobundle#begin(expand('~/.vim/bundle/'))
+set rtp+=~/.fzf
 
 " }}}
-" NeoBundle plugin management {{{
+" Plugin management {{{
 
-" let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
+call plug#begin('~/.vim/bundle')
 
 " Other plugins
-NeoBundle 'ardagnir/vimbed'
-NeoBundle 'gregsexton/gitv'
-NeoBundle 'sotte/presenting.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'wellle/targets.vim'
-NeoBundle 'tommcdo/vim-exchange'
-NeoBundle 'dbext.vim'
-NeoBundle 'xolox/vim-misc'
-NeoBundle 'xolox/vim-easytags'
-NeoBundle 'justinmk/vim-sneak'
-NeoBundle 'tsukkee/unite-tag'
-NeoBundle 'Shougo/neossh.vim'
-NeoBundle 'vim-scripts/vis'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'eiginn/netrw'
-NeoBundle 'tell-k/vim-autopep8'
-NeoBundle 't9md/vim-chef'
-NeoBundle 'dbakker/vim-projectroot'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'kmnk/vim-unite-giti'
-NeoBundle 'jceb/vim-orgmode'
-NeoBundle 'junegunn/fzf'
-
+Plug 'bling/vim-airline'
+Plug 'dbakker/vim-projectroot'
+Plug 'sotte/presenting.vim'
+Plug 'tpope/vim-dispatch'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
+Plug 'eiginn/netrw'
+Plug 't9md/vim-chef'
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+Plug 'justinmk/vim-sneak'
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'latex' }
+" Text manipulation
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'wellle/targets.vim'
+Plug 'tommcdo/vim-exchange'
+" Git plugins
+Plug 'tpope/vim-fugitive'
+Plug 'gregsexton/gitv'
+Plug 'kmnk/vim-unite-giti'
 " Python plugins
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'bps/vim-textobj-python'
-NeoBundle 'hynek/vim-python-pep8-indent'
-NeoBundle 'ivanov/vim-ipython'
-
-" Shougo
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/vimproc.vim', { 'build': { 'unix': 'make -f make_unix.mak'}}
-" completion
-NeoBundle 'Valloric/YouCompleteMe', { 'build': {
-     \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-     \    }}
+Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
+Plug 'kana/vim-textobj-user',       { 'for': 'python' }
+Plug 'bps/vim-textobj-python',      { 'for': 'python' }
+Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
+Plug 'ivanov/vim-ipython',          { 'for': 'python' }
+" Unite plugins
+Plug 'tsukkee/unite-tag'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neossh.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
+" Completion
+Plug 'Valloric/YouCompleteMe', { 'do':
+\   './install.sh --clang-completer --system-libclang --omnisharp-completer'
+\}
 " colorschemes
-NeoBundle 'nanotech/jellybeans.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'chriskempson/base16-vim'
 
-call neobundle#end()
-
-" check for uninstalled bundles
-NeoBundleCheck
+call plug#end()
 
 " }}}
 " Display configuration {{{
-
-set background=dark
-colors jellybeans
 
 syntax on                         " File-type highlighting
 filetype on                       " enable file type detection
@@ -132,7 +117,7 @@ set clipboard+=unnamedplus        " paste the clipboard to unnamed register
 set backspace=indent,eol,start    " go with backspace insert mode starting pos
 set spelllang=pl,en               " spelling check
 set autochdir                     " Automatically changing working dir
-set shell=bash                     " Shell
+set shell=zsh                     " Shell
 let $SSH_AUTH_SOCK='/run/user/1000/ssh-agent.socket'
 set keywordprg=firefox\ -search   " K searches text in firefox def. search
 set grepprg=ag\ --nogroup\ --nocolor " use ag over grep
@@ -182,7 +167,7 @@ set foldnestmax=1                 " nest fold limit for indent/syntax modes
 " }}}
 " Programming settings {{{
 
-" compiler gcc                      " real men use gcc
+"compiler gcc                      " real men use gcc
 set makeprg=make\ -j6\ --silent   " default compilation command
 
 " Different compiler depending on type of file
@@ -207,23 +192,15 @@ augroup END
 
 " Sneak
 let g:sneak#use_ic_scs = 1
+let g:sneak#s_next = 1
+let g:sneak#streak = 1
+let g:sneak#prompt = 'sneak>'
 hi link SneakStreakTarget ErrorMsg
 hi link SneakStreakMask   Comment
 hi link SneakPluginScope  String
 
 " IPython response time
 set updatetime=1000
-
-" Sneak
-" eneble repeat sneak with s
-let g:sneak#s_next = 1
-let g:sneak#streak = 1
-let g:sneak#use_ic_scs = 1
-
-" DBExt
-" Codility database through readonly yunnel
-let g:dbext_default_profile_codility =
-\ 'type=PGSQL:user=readonly:dbname=codility:passwd=readonly:host=127.0.0.1:port=15432'
 
 " Easytags
 " split ctags files by language
@@ -296,6 +273,9 @@ let g:airline_left_alt_sep = '|'
 let g:airline_right_alt_sep = '|'
 let g:airline_theme='powerlineish'
 let g:airline_section_c='%F'
+"let g:airline_section_c='%F'
+let g:airline_detect_modified=1
+"let g:airline#extensions#tabline#enabled = 1
 let g:airline_detect_modified=1
 let g:airline#extensions#whitespace#enabled = 0
 " disable to improve fugitive performance
@@ -340,7 +320,7 @@ endif
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " Sneak easier repeat
-nmap <CR> <Plug>(SneakStreak)
+nmap <CR> H<Plug>(SneakStreak)
 nmap s <Plug>(SneakStreak)
 nmap S <Plug>(SneakStreakBackward)
 
@@ -360,6 +340,9 @@ let g:surround_36 = "$(\r)"
 
 " Toggle pastemode, doesn't indent
 set pastetoggle=<F4>
+
+" easier escaping of :term
+tnoremap <c-a> <c-\><c-n>
 
 " easier resizing
 nnoremap <up>    :resize +5<CR>
@@ -411,8 +394,8 @@ nnoremap zz za
 " center the screen
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap * *<c-o>zz
-nnoremap # #<c-o>zz
+nnoremap * *zz
+nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
@@ -433,6 +416,19 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
+" samething for :term
+tnoremap <c-h> <c-\><c-n><c-w>h
+tnoremap <c-j> <c-\><c-n><c-w>j
+tnoremap <c-k> <c-\><c-n><c-w>k
+tnoremap <c-l> <c-\><c-n><c-w>l
+
+" easier navigation through tabs
+nnoremap <c-Tab>   :tabnext<CR>
+nnoremap <c-s-Tab> :tabprevious<CR>
+
+" easier newline
+inoremap <c-j> <cr>
+inoremap <c-k> <c-o>O
 
 " counterpart to <c-h> in insert mode
 inoremap <c-l> <Del>
@@ -479,7 +475,7 @@ nnoremap <space>a :%y*<CR>:call system('xclip -i -selection clipboard', @*)<CR>
 
 " Window management
 " close buffer but leave active pane open
-nnoremap <silent> <space>q :bprevious<bar>bd #<CR>
+nnoremap <silent> <space>q :bprevious<bar>bd! #<CR>
 nnoremap <silent> <space>Q :<CR>
 
 " Edit .vimrc and refresh configuration
@@ -512,34 +508,42 @@ nnoremap <silent> <space>] :<C-U>call <SID>AddLines(0)<CR>
 
 " performance debugging
 nnoremap <silent> <LocalLeader>dd :exe ":profile start /tmp/profile.log"<cr>
-                            \ :exe ":profile func *"<cr>
-                            \ :exe ":profile file *"<cr>
-                            \ :exe "echo 'Profiling vim performance...'"<cr>
+                                \ :exe ":profile func *"<cr>
+                                \ :exe ":profile file *"<cr>
+                                \ :exe "echo 'Profiling vim performance...'"<cr>
 nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
-                            \ :exe ":!urxvtc -e nvim /tmp/profile.log"<cr>
-                            \ :exe ":noautocmd qall!"<cr>
+                                \ :exe ":!urxvtc -e nvim /tmp/profile.log"<cr>
+                                \ :exe ":noautocmd qall!"<cr>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/async:'.g:projectroot)<CR>
+nnoremap <c-i>     :execute('Unite buffer file:~/work file_mru file_rec/async:'.g:projectroot)<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
+nnoremap <space>uu :Unite file<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>ub :Unite buffer<CR>
-nnoremap <space>uB :Unite -auto-preview grep:$buffers<CR>
+nnoremap <space>uf :Unite file<CR>
 nnoremap <space>uc :Unite command<CR>
 nnoremap <space>ul :Unite line<CR>
-nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
-nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>'))<CR>
 nnoremap <space>uj :Unite jump<CR>
 nnoremap <space>ul :Unite line<CR>
 nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>us :Unite source<CR>
-nnoremap <space>ut :Unite -auto-preview tag<CR>
-nnoremap <space>uf :Unite file<CR>
-nnoremap <space>uu :Unite file_rec/async<CR>
+nnoremap <space>ut :Unite tag<CR>
+nnoremap <space>uu :Unite file<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
+nnoremap <space>uh :Unite file:~/<CR>
+nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
+
+" grep
+nnoremap <space>uB :Unite -auto-preview grep:$buffers<CR>
+nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
+nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>'))<CR>
+
+" location specific
+nnoremap <space>uW :Unite file_rec/async:~/work/<CR>
 nnoremap <space>uI :Unite file_rec/async:~/work/infrastructure<CR>
 nnoremap <space>uC :Unite file_rec/async:~/work/codility<CR>
 nnoremap <space>uh :Unite file:~/<CR>
@@ -552,7 +556,7 @@ nnoremap <space><space> :Unite buffer<CR>
 " }}}
 " Key mappings - FZF {{{
 
-nnoremap <c-i>     :FZFMix<CR>
+nnoremap <space>ff :FZFMix<CR>
 
 nnoremap <space>fm :FZFMru<CR>
 nnoremap <space>fb :FZFBuffer<CR>
