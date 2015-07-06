@@ -17,6 +17,7 @@ Plug 'sotte/presenting.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+Plug 'bruno-/vim-man'
 Plug 'eiginn/netrw'
 Plug 't9md/vim-chef'
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
@@ -32,6 +33,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'kmnk/vim-unite-giti'
+Plug 'jceb/vim-orgmode'
 " Python plugins
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'kana/vim-textobj-user',       { 'for': 'python' }
@@ -56,6 +58,9 @@ call plug#end()
 
 " }}}
 " Display configuration {{{
+
+set background=dark
+colorscheme jellybeans
 
 syntax on                         " File-type highlighting
 filetype on                       " enable file type detection
@@ -247,7 +252,6 @@ if executable('ag')
                 \ '-i -U --line-numbers --nocolor --nogroup '
 	let g:unite_source_grep_recursive_opt = ''
 endif
-
 
 " Conque GDB
 let g:ConqueGdb_SrcSplit = 'right'
@@ -611,7 +615,7 @@ nnoremap <F5>  :setlocal spell!<CR>
 " nnoremap <F4> is already set as pastetoggle
 nnoremap <F3>  :vnew<cr>:setlocal buftype=nofile bufhidden=wipe nobuflisted<cr>
 nnoremap <F2>  :<c-f>vert bot help<space>
-nnoremap <F1>  :exe ":!urxvtc -e man ".shellescape(expand('<cword>'), 1)<cr><cr>
+nmap     <F1>  <Plug>(Vman)
 
 " }}}
 " autocmd settings {{{
