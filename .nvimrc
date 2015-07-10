@@ -10,6 +10,8 @@ set rtp+=~/.fzf
 
 call plug#begin('~/.vim/bundle')
 
+" for vim plugins
+Plug 'Shougo/neobundle.vim'
 " Other plugins
 Plug 'bling/vim-airline'
 Plug 'dbakker/vim-projectroot'
@@ -24,6 +26,8 @@ Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'justinmk/vim-sneak'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'latex' }
+" Linting
+Plug 'benekastah/neomake'
 " Text manipulation
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -34,6 +38,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'kmnk/vim-unite-giti'
 Plug 'jceb/vim-orgmode'
+" R plugins
+Plug 'jalvesaq/Nvim-R'
 " Python plugins
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'kana/vim-textobj-user',       { 'for': 'python' }
@@ -195,6 +201,9 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
+" R
+let R_term = "urxvtc"
+
 " Sneak
 let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
@@ -226,7 +235,7 @@ let g:org_agenda_files = ['~/docs/org/*.org']
 " shorten time format for buffers, obscured filenames
 let g:unite_source_buffer_time_format = '(%H:%M:%S)'
 " disable ignore_blobs
-call unite#custom#source('file_rec/async', 'ignore_globs', [])
+call unite#custom#source('file_rec/neovim', 'ignore_globs', [])
 " max fuzzy match input length
 let g:unite_matcher_fuzzy_max_input_length = 30
 " default to fuzzy searching
@@ -239,7 +248,7 @@ call unite#custom#profile('default', 'context', {
 \   'no_split' : 1,
 \   'start_insert' : 1 })
 " ignore these hidden directories
-call unite#custom#source('file_rec/async', 'max_candidates', 200)
+call unite#custom#source('file_rec/neovim', 'max_candidates', 200)
 " Using ag as recursive command.
 if executable('ag')
     " Use ag in unite file_rec/async source
@@ -324,7 +333,7 @@ endif
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " Sneak easier repeat
-nmap <CR> H<Plug>(SneakStreak)
+"nmap <CR> H<Plug>(SneakStreak)
 nmap s <Plug>(SneakStreak)
 nmap S <Plug>(SneakStreakBackward)
 
@@ -521,7 +530,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite buffer file:~/work file_mru file_rec/async:'.g:projectroot)<CR>
+nnoremap <c-i>     :execute('Unite buffer file:~/work file_mru file_rec/neovim:'.g:projectroot.' file/new')<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
@@ -537,7 +546,7 @@ nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>us :Unite source<CR>
 nnoremap <space>ut :Unite tag<CR>
 nnoremap <space>uu :Unite file<CR>
-nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
+nnoremap <space>up :UniteWithProjectDir file_rec/neovim<CR>
 nnoremap <space>uh :Unite file:~/<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 
@@ -547,9 +556,9 @@ nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
 nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>'))<CR>
 
 " location specific
-nnoremap <space>uW :Unite file_rec/async:~/work/<CR>
-nnoremap <space>uI :Unite file_rec/async:~/work/infrastructure<CR>
-nnoremap <space>uC :Unite file_rec/async:~/work/codility<CR>
+nnoremap <space>uW :Unite file_rec/neovim:~/work/<CR>
+nnoremap <space>uI :Unite file_rec/neovim:~/work/infrastructure<CR>
+nnoremap <space>uC :Unite file_rec/neovim:~/work/codility<CR>
 nnoremap <space>uh :Unite file:~/<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 nnoremap <space>uW :Unite file:~/work/<CR>
@@ -606,6 +615,7 @@ nnoremap <space>gSa :Git stash list --date=local <bar>
 " }}}
 " Key mappings - Fxx {{{
 
+nnoremap <F11> :Neomake<CR>
 nnoremap <F10> :Dispatch! knife dwim %:p<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
 nnoremap <F8>  :setlocal list!<CR>
