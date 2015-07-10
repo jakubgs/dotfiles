@@ -51,7 +51,6 @@ Plug 'tsukkee/unite-tag'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neossh.vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
 " Completion
 Plug 'Valloric/YouCompleteMe', { 'do':
 \   './install.sh --clang-completer --system-libclang --omnisharp-completer'
