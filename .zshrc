@@ -68,9 +68,13 @@ export PAGER="less"
 export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="2.7"
+export FZF_DEFAULT_OPTS="--extended-exact"
 
 export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin
 export PATH=$PATH:/opt/java/bin:/opt/logstash-1.4.2/bin:~/bin:.
+
+# terraform
+export PATH=$PATH:/opt/terraform/bin
 
 # brew
 export PATH=$PATH:~/.linuxbrew/bin
@@ -262,11 +266,12 @@ alias pbpaste='xclip -selection clipboard -o'
 alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
 alias ytdl-audio='youtube-dl -x --audio-format mp3 --output "%(autonumber)s-%(title)s.%(ext)s" --autonumber-size 2'
 compdef qapt=apt-get
-alias qapt='sudo aptitude --quiet'
-alias qupdate='sudo aptitude update && sudo aptitude upgrade'
+alias qapt='sudo apt-get --quiet'
+alias qupdate='sudo apt-get update && sudo apt-get upgrade'
 alias sctl='sudo systemctl'
 alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
+alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard)"
 
 # }}}
 # Functions {{{
@@ -303,7 +308,7 @@ function batchssh() {
 }
 
 # locate in current directory
-function spot() {
+function see() {
     ag --nocolor --nogroup -g "$*"
 }
 
@@ -421,3 +426,4 @@ if [[ $TERM != "linux" ]]; then
 fi
 
 # }}}
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
