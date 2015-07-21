@@ -201,7 +201,9 @@ augroup END
 " Plugin configuration {{{
 
 " R
-let R_term = "urxvtc"
+let g:R_assign = 0
+let g:R_term = "urxvtc"
+let g:R_insert_mode_cmds = 0
 
 " Sneak
 let g:sneak#use_ic_scs = 1
