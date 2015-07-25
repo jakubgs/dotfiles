@@ -563,6 +563,7 @@ nnoremap <space>uC :Unite file_rec/neovim:~/work/codility<CR>
 nnoremap <space>uh :Unite file:~/<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 nnoremap <space>uW :Unite file:~/work/<CR>
+nnoremap <space>uD :Unite file:~/docs/<CR>
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
@@ -585,6 +586,8 @@ nnoremap <space>ga :!git add -- "%:p"<CR><CR>
 nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gc :Gcommit -v -q<CR>
 nnoremap <space>gt :Gcommit -v -q -- "%:p"<CR>
+nnoremap <space>gC :Gcommit -v -q --amend<CR>
+nnoremap <space>gT :Gcommit -v -q --amend -- "%:p"<CR>
 nnoremap <space>gd :Gvdiff<CR>
 nnoremap <space>ge :Gedit<CR>
 nnoremap <space>gr :Gread<CR>
