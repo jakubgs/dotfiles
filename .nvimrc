@@ -252,9 +252,6 @@ call unite#custom#profile('default', 'context', {
 call unite#custom#source('file_rec/neovim', 'max_candidates', 200)
 " Using ag as recursive command.
 if executable('ag')
-    " Use ag in unite file_rec/async source
-    let g:unite_source_rec_async_command =
-                \ 'ag --nocolor --nogroup -g ""'
     " worker-xquery.js is a ridiculously huge js file and breaks ag
 	" Use ag in unite grep source.
 	let g:unite_source_grep_command = 'ag'
