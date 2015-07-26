@@ -68,7 +68,8 @@ urxvt.pasteCommand:     xsel -ob
 *color1:  #CC0000
 *color9:  #EF2929
 ! Green (White)
-*color2:  #EBEBEB
+#*color2:  #EBEBEB
+*color2:  #afd700
 *color10: #afd700
 ! Yellow
 *color3:  #C4A000
