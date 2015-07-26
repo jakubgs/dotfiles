@@ -123,7 +123,7 @@ set showmatch                     " show match when a bracket is inserted
 set autoread                      " automatically update file changes
 set autoindent                    " breaks pasted in text, use F8 in insert
 set preserveindent
-set clipboard+=unnamedplus        " paste the clipboard to unnamed register
+set clipboard=unnamedplus         " paste the clipboard to unnamed register
 set backspace=indent,eol,start    " go with backspace insert mode starting pos
 set spelllang=pl,en               " spelling check
 set autochdir                     " Automatically changing working dir
@@ -564,16 +564,6 @@ nnoremap <space>uD :Unite file:~/docs/<CR>
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
-
-" }}}
-" Key mappings - FZF {{{
-
-nnoremap <space>ff :FZFMix<CR>
-
-nnoremap <space>fm :FZFMru<CR>
-nnoremap <space>fb :FZFBuffer<CR>
-nnoremap <space>fw :FZFFile<CR>
-nnoremap <space>fh :FZFFile ~/<CR>
 
 " }}}
 " Key mappings - Git {{{
