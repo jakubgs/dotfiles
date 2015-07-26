@@ -18,7 +18,6 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Other plugins
-NeoBundle 'ardagnir/vimbed'
 NeoBundle 'gregsexton/gitv'
 NeoBundle 'sotte/presenting.vim'
 NeoBundle 'tpope/vim-fugitive'
@@ -27,16 +26,10 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'wellle/targets.vim'
 NeoBundle 'tommcdo/vim-exchange'
-NeoBundle 'dbext.vim'
-"NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
-"NeoBundle 'PProvost/vim-ps1'
-"NeoBundle 'jceb/vim-orgmode'
-"NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-easytags'
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'Shougo/neossh.vim'
-NeoBundle 'vim-scripts/vis'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'eiginn/netrw'
 NeoBundle 'tell-k/vim-autopep8'
@@ -253,14 +246,13 @@ let g:unite_matcher_fuzzy_max_input_length = 30
 " default to fuzzy searching
 call unite#filters#matcher_default#use(['matcher_glob'])
 let g:unite_fuzzy_matching = 0
-call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('default', 'context', { 
-\   'winheight': 40,
 \   'smartcase' : 1,
 \   'no_split' : 1,
 \   'start_insert' : 1 })
 " ignore these hidden directories
-call unite#custom#source('file_rec/async', 'max_candidates', 200)
+"call unite#custom#source('file_rec/async', 'max_candidates', 200)
 " Using ag as recursive command.
 if executable('ag')
     " Use ag in unite file_rec/async source
