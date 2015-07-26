@@ -1,6 +1,6 @@
 command! FZFMix call s:fzf_wrap({
     \'source':  'bash -c "'.
-    \               'echo -e \"'.s:old_files().'\";'.
+    \               'echo -e \"'.join(s:old_files(), '\n').'\";'.
     \               'ag -l -g \"\"'.
     \           '"',
     \})
@@ -11,7 +11,7 @@ command! FZFBuffer call s:fzf_wrap({
     \})
 
 command! FZFMru call s:fzf_wrap({
-    \'source': v:oldfiles,
+    \'source': s:old_files(),
     \})
 
 command! -nargs=? FZFFile call s:fzf_wrap({
@@ -32,8 +32,11 @@ function! s:fzf_wrap(dict)
 endfunction
 
 function! s:old_files()
-    let oldfiles = filter(copy(v:oldfiles), 'v:val !~ "[[unite]]"')
-    return join(oldfiles, '\n')
+    let oldfiles = copy(v:oldfiles)
+    call filter(oldfiles, 'v:val !~ "[[unite]]"')
+    call filter(oldfiles, 'v:val !~ "fugitive:\/\/"')
+    call filter(oldfiles, 'v:val !~ "\/.git\/"')
+    return oldfiles
 endfunction
 
 function! s:ag_handler(lines)
