@@ -271,10 +271,15 @@ alias qupdate='sudo apt-get update && sudo apt-get upgrade'
 alias sctl='sudo systemctl'
 alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
-alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard)"
+alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
 
 # }}}
 # Functions {{{
+
+# locate in current directory
+function see() {
+    ag --nocolor --nogroup -g "$*"
+}
 
 # codility readonly db access
 function codilitydb() {
@@ -305,11 +310,6 @@ function batchssh() {
     cd ~/work/infrastructure
     knife ssh -a fqdn "$QUERY" "$CMD"
     cd $OLD_PWD
-}
-
-# locate in current directory
-function see() {
-    ag --nocolor --nogroup -g "$*"
 }
 
 function sshl() {
