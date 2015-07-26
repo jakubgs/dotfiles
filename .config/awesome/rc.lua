@@ -36,7 +36,7 @@ browser = "firefox"
 hipchat = "hipchat"
 fmanager = "thunar"
 terminal = "urxvtc"
-geditor = homedir.."/bin/gnvim"
+geditor = terminal .. " -title 'neovim' -e /usr/bin/nvim"
 terminal_s = homedir .. "/bin/urxvts 16"
 ncmpcpp = terminal .. " -name ncmpcpp -e ncmpcpp" 
 editor = os.getenv("EDITOR") or "vim"
@@ -400,7 +400,7 @@ awful.key({ modkey, "Shift"   }, "h",       function () awful.client.movetoscree
 awful.key({ modkey, "Shift"   }, "l",       function () awful.client.movetoscreen(client.focus ,client.focus.screen + 1) end),
 -- Run or raise
 awful.key({ modkey,           }, "z",       function () run_or_raise("zeal", { class = "Zeal" }) end),
-awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "nvim" }) end),
+awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "neovim" }) end),
 awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Iceweasel" }) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
@@ -548,8 +548,8 @@ awful.rules.rules = {
     { rule = { class = "Keepassx" },
     properties = { tag = tags[1][6], floating = false } },
     { rule = { name = "Session Manager.*" },
-    properties = { floating = true } },
-    { rule = { class = "Dwb" },
+    --properties = { floating = true } },
+    --{ rule = { class = "Dwb" },
     properties = { tag = tags[1][3] } },
     { rule = { instance = "ncmpcpp" },
     properties = { tag = tags[1][4] } },
