@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, sys, time, re, logging, signal, glob, socket, atexit
+import os, sys, time, re, logging, signal, glob, socket, atexit, argparse
 try:
     import sh
 except ImportException:
@@ -29,6 +29,13 @@ def on_battery():
             if f.read().rstrip()== 'Discharging':
                 return True
 
+def proc_exists(pid):
+    try:
+        os.kill(pid, 0)
+    except Exception as e:
+        return False
+    return True
+
 def setup_logging(log_file):
     FORMAT = '%(asctime)s - %(c_host)21s - %(levelname)s: %(message)s'
     logging.basicConfig(format=FORMAT)
@@ -46,12 +53,21 @@ def show_output(line):
     print line
 
 def check_ping(host):
-    r = ping()
+    if args.force:
+        return
+    ping = sh.ping.bake(target['host'], '-c1')
+    try:
+        r = ping()
+    except Exception as e:
+        # failed ping does not mean host is unavailable
+        return
     m = re.search(r'time=([^ ]*) ', r.stdout)
     time = float(m.group(1))
-    return time
+    if ping > minimal_ping:
+        log.warning('Ping or host too slow({}s), abandoning.'.format(ping))
+        return os.exit(1)
 
-pid_file='/run/backup.pid'
+pid_file='/run/backup/backup.pid'
 log_file='/var/log/backup.log'
 log = setup_logging(log_file)
 
@@ -74,11 +90,24 @@ rsync_opts = ''
 if os.isatty(sys.stdout.fileno()):
     rsync_opts = '--info=progress2'
 
+HELP_MESSAGE = '''
+This script backups following directories:
+
+ * {}
+'''.rstrip().format('\n * '.join(assets))
+
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, 
+                                 description=HELP_MESSAGE)
+# options for setting locations
+parser.add_argument("--force", action='store_true',
+                    help="When used things like running on battery are ignored.")
+args = parser.parse_args()
+
 # TODO check connection speed, not just the ping
 # TODO check when did the last backup happen
 # TODO make backup despite bad connection if last backup is old
 
-if on_battery():
+if on_battery() and not args.force:
     log.warning('System running on battery. Aborting.')
     sys.exit(0)
 
@@ -86,8 +115,17 @@ if os.path.isfile(pid_file):
     pid = None
     with open(pid_file, 'r') as f:
         pid = f.read()
-    log.warning('Process already in progress: {} ({})'.format(pid, pid_file))
-    sys.exit(0)
+    if proc_exists(pid):
+        log.warning('Process already in progress: {} ({})'.format(pid, pid_file))
+        sys.exit(0)
+    else:
+        log.warning('Pid file process is dead: {} ({})'.format(pid, pid_file))
+        if args.force:
+            log.warning('Removing: {}'.format(pid_file))
+            exit_handler()
+        else:
+            sys.exit(0)
+
 else:
     with open(pid_file, 'w') as f:
         f.write(str(os.getpid())[:-1])
@@ -99,21 +137,18 @@ for target in targets:
     host = '{}@{}'.format(target['user'], target['host'])
 
     ssh = sh.ssh.bake('-q', '-o ConnectTimeout=2', '-p '+target['port'], host)
-    ping = sh.ping.bake(target['host'], '-c1')
     try:
         ssh.exit()
     except Exception as e:
         log.info('Host not available')
         continue
 
-    ping = check_ping(host) 
-    if ping > minimal_ping:
-        log.warning('Ping or host too slow({}s), abandoning.'.format(ping))
-        continue
+    check_ping(host) 
 
     for asset in assets:
         log.info("rsync: {} -> {}".format(asset, target['dir']))
-        rsync = sh.rsync.bake('-arut', '--delete', rsync_opts,
+        rsync = sh.rsync.bake('-arut', rsync_opts,
+                              '--delete', '--delete-excluded',
                               '-e ssh -p {}'.format(target['port']),
                               '--exclude=.*', '--exclude=.*/', 
                               asset, dest, _out=show_output)
