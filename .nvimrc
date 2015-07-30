@@ -40,6 +40,8 @@ Plug 'kmnk/vim-unite-giti'
 Plug 'jceb/vim-orgmode'
 " R plugins
 Plug 'jalvesaq/Nvim-R'
+" Ansible plugins
+Plug 'chase/vim-ansible-yaml'
 " Python plugins
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'kana/vim-textobj-user',       { 'for': 'python' }
@@ -51,6 +53,7 @@ Plug 'tsukkee/unite-tag'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neossh.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Completion
 Plug 'Valloric/YouCompleteMe', { 'do':
 \   './install.sh --clang-completer --system-libclang --omnisharp-completer'
@@ -236,7 +239,7 @@ let g:org_agenda_files = ['~/docs/org/*.org']
 " shorten time format for buffers, obscured filenames
 let g:unite_source_buffer_time_format = '(%H:%M:%S)'
 " disable ignore_blobs
-call unite#custom#source('file_rec/neovim', 'ignore_globs', [])
+call unite#custom#source('file_rec/async', 'ignore_globs', [])
 " max fuzzy match input length
 let g:unite_matcher_fuzzy_max_input_length = 30
 " default to fuzzy searching
@@ -249,9 +252,12 @@ call unite#custom#profile('default', 'context', {
 \   'no_split' : 1,
 \   'start_insert' : 1 })
 " ignore these hidden directories
-call unite#custom#source('file_rec/neovim', 'max_candidates', 200)
+call unite#custom#source('file_rec/async', 'max_candidates', 200)
 " Using ag as recursive command.
 if executable('ag')
+    " Use ag in unite file_rec/async source
+    let g:unite_source_rec_async_command =
+                \ 'ag --nocolor --nogroup -g ""'
     " worker-xquery.js is a ridiculously huge js file and breaks ag
 	" Use ag in unite grep source.
 	let g:unite_source_grep_command = 'ag'
@@ -528,7 +534,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite buffer file:~/work file_mru file_rec/neovim:'.g:projectroot.' file/new')<CR>
+nnoremap <c-i>     :execute('Unite buffer file:~/work file_mru file_rec/async:'.g:projectroot.' file/new')<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
@@ -544,7 +550,7 @@ nnoremap <space>um :Unite file_mru<CR>
 nnoremap <space>us :Unite source<CR>
 nnoremap <space>ut :Unite tag<CR>
 nnoremap <space>uu :Unite file<CR>
-nnoremap <space>up :UniteWithProjectDir file_rec/neovim<CR>
+nnoremap <space>up :UniteWithProjectDir file_rec/async<CR>
 nnoremap <space>uh :Unite file:~/<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 
@@ -554,9 +560,9 @@ nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
 nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>'))<CR>
 
 " location specific
-nnoremap <space>uW :Unite file_rec/neovim:~/work/<CR>
-nnoremap <space>uI :Unite file_rec/neovim:~/work/infrastructure<CR>
-nnoremap <space>uC :Unite file_rec/neovim:~/work/codility<CR>
+nnoremap <space>uW :Unite file_rec/async:~/work/<CR>
+nnoremap <space>uI :Unite file_rec/async:~/work/infrastructure<CR>
+nnoremap <space>uC :Unite file_rec/async:~/work/codility<CR>
 nnoremap <space>uh :Unite file:~/<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 nnoremap <space>uW :Unite file:~/work/<CR>
