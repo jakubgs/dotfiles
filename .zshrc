@@ -265,12 +265,13 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
 alias ytdl-audio='youtube-dl -x --audio-format mp3 --output "%(autonumber)s-%(title)s.%(ext)s" --autonumber-size 2'
-compdef qapt=apt-get
-alias qapt='sudo apt-get --quiet'
-alias qupdate='sudo apt-get update && sudo apt-get upgrade'
 alias sctl='sudo systemctl'
 alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
+alias qupdate='sudo apt-get update && sudo apt-get upgrade'
+alias qapt='sudo aptitude --quiet'
+compdef qapt=aptitude
+
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
 
 # }}}
