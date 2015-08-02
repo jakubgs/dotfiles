@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+GREEN='\x1b[32;01m'
+YELLOW='\x1b[33;01m'
+RED='\x1b[31;01m'
+BLD='\x1b[1m'
+RST='\x1b[0m'
+
 USAGE="$0 <pass_arguments> ..."
 if [[ $1 == '-h' ]]; then
     echo "${USAGE}"
@@ -32,4 +38,5 @@ if [[ -z "${RESULTS}" ]]; then
     PASS_ARGS="generate $PASS_LENGTH"
 fi
 
+echo -e "${YELLOW}${RESULTS}${RST}"
 echo "${RESULTS}" | xargs -I{} pass ${PASS_ARGS} "{}"
