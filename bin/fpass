@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+USAGE="$0 <pass_arguments> ..."
+if [[ $1 == '-h' ]]; then
+    echo "${USAGE}"
+    exit
+fi
+
+PASS_LENGTH=16
+
+PASS_ARGS="show"
+if [[ -n "$@" ]]; then
+    PASS_ARGS=$@
+fi
+FZF_OPTS='--prompt=pass> --select-1 --print-query --extended-exact'
+
+PASS_STORAGE="$HOME/.password-store"
+
+FILES=$(find "${PASS_STORAGE}" -type f -name "*.gpg")
+ENTRIES=$(echo "${FILES}" | sed \
+                            -e "s#${PASS_STORAGE}/##" \
+                            -e "s#.gpg##")
+
+OUTPUT=$(echo "$ENTRIES" | fzf ${FZF_OPTS})
+
+QUERY=$(echo "${OUTPUT}" | head -n 1)
+RESULTS=$(echo "${OUTPUT}" | sed 1d)
+
+# if there are no results use query as a path to new entry
+if [[ -z "${RESULTS}" ]]; then
+    RESULTS=$QUERY
+    PASS_ARGS="generate $PASS_LENGTH"
+fi
+
+echo "${RESULTS}" | xargs -I{} pass ${PASS_ARGS} "{}"
