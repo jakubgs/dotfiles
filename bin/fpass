@@ -6,11 +6,23 @@ RED='\x1b[31;01m'
 BLD='\x1b[1m'
 RST='\x1b[0m'
 
-USAGE="$0 <pass_arguments> ..."
-if [[ $1 == '-h' ]]; then
-    echo "${USAGE}"
-    exit
-fi
+FZF='/home/sochan/dotfiles/bin/fzf'
+
+show_help() {
+    echo "$0 <pass_arguments> ..."
+}
+
+while getopts "h?a" opt; do
+    case "$opt" in
+        h|\?)
+            show_help
+            exit 0
+            ;;
+        a)  ANOTIFY=1
+            shift
+            ;;
+    esac
+done
 
 PASS_LENGTH=16
 
@@ -27,7 +39,7 @@ ENTRIES=$(echo "${FILES}" | sed \
                             -e "s#${PASS_STORAGE}/##" \
                             -e "s#.gpg##")
 
-OUTPUT=$(echo "$ENTRIES" | fzf ${FZF_OPTS})
+OUTPUT=$(echo "$ENTRIES" | ${FZF} ${FZF_OPTS})
 
 QUERY=$(echo "${OUTPUT}" | head -n 1)
 RESULTS=$(echo "${OUTPUT}" | sed 1d)
@@ -39,4 +51,12 @@ if [[ -z "${RESULTS}" ]]; then
 fi
 
 echo -e "${YELLOW}${RESULTS}${RST}"
-echo "${RESULTS}" | xargs -I{} pass ${PASS_ARGS} "{}"
+OUTPUT=$(echo "${RESULTS}" | xargs -I{} pass ${PASS_ARGS} "{}")
+KEY=$(echo "${OUTPUT}" | head -n 1)
+REST=$(echo "${OUTPUT}" | sed 1d)
+
+echo "$KEY"
+
+if [[ $ANOTIFY ]]; then
+    echo "$REST" | anotify -p
+fi

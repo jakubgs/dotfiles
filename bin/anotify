@@ -17,17 +17,17 @@ Supports multiple types of notices, dependent on switch used:
     echo "${HELP_MSG}"
 }
 
-awesome_notification () {
+awesome_notification() {
     # compose the notification
     COMMAND="naughty.notify({ \
             title = ${TITLE}, \
             text = ${TEXT}, \
-            timeout = 0, \
+            timeout = ${TIMEOUT}, \
             screen = 1, \
             bg = \"${BG_COLOR}\", \
-            fg = \"#ffffff\", \
+            fg = \"${FG_COLOR}\", \
             margin = 8, \
-            width = 380, \
+            width = 500, \
             run = function () run_or_raise(
                                 \"${EXECUTE}\",
                                 { name = \"${CLASS}\" }
@@ -45,6 +45,10 @@ DATE=`date +"%a %b %d/%m/%Y, %H:%M:%S"` # get time of completion
 
 # default notificaiton color
 BG_COLOR="#417c9d"
+FG_COLOR="#ffffff"
+
+# don't timeout notifications
+TIMEOUT=0
 
 # }}}
 # Options {{{
@@ -56,7 +60,7 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 output_file=""
 verbose=0
 
-while getopts "h?m:wes" opt; do
+while getopts "h?m:wesp" opt; do
     case "$opt" in
         h|\?)
             show_help
@@ -75,11 +79,24 @@ while getopts "h?m:wes" opt; do
         s)  SYSLOG=1
             BG_COLOR="#a44500"
             ;;
+        p)  PASS=1
+            TIMEOUT=45
+            BG_COLOR="#f3be08"
+            FG_COLOR="#000000"
+            ;;
     esac
 done
 
 shift $((OPTIND-1))
-MESSAGE=$@  # get all arguments as the message for this notifiaction
+if [[ -n "$@" ]]; then
+    MESSAGE=$@  # get all arguments as the message for this notifiaction
+else
+    MESSAGE=$(cat)
+fi
+
+echo "--------------"
+echo "$MESSAGE"
+echo "--------------"
 
 # }}}
 # Main Script {{{
@@ -95,6 +112,11 @@ elif [[ $ERROR ]] ; then
 elif [[ $WARNING ]] ; then
     TITLE="\"Warning\t\t\t\t${DATE}\""
     TEXT="\"Message: ${MESSAGE}\""
+elif [[ $PASS ]] ; then
+    # replace real newline with lua newline
+    MESSAGE=$(echo "$MESSAGE" | sed ':a;N;$!ba;s/\n/\" .. newline .. \"/g')
+    TITLE="\"Pass\t\t\t\t\tWill expire in: ${TIMEOUT}s\""
+    TEXT="\"${MESSAGE}\""
 elif [[ $SYSLOG ]] ; then
     SYSLOG_INFO=$(cat)
     PRIORITY=$(echo "${SYSLOG_INFO}" | cut -d'|' -f1)
