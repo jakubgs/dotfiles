@@ -36,11 +36,17 @@ browser = "firefox"
 hipchat = "hipchat"
 fmanager = "thunar"
 terminal = "urxvtc"
-geditor = terminal .. " -title 'neovim' -e /usr/bin/nvim"
-terminal_s = homedir .. "/bin/urxvts 16"
-ncmpcpp = terminal .. " -name ncmpcpp -e ncmpcpp" 
-editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. " -e " .. editor
+
+function term(command, name, args)
+    args = args or ''
+    name = name or command:match("([^%s]+)")
+    naughty.notify({ name = 'name', text = name })
+    return terminal .. args .. " -name '"..name.."' -title '"..name.."' -e '"..command.."'"
+end
+
+geditor = term('nvim')
+ncmpcpp = term('ncmpcpp')
+fpass   = term(homedir .. '/bin/fpass -a', 'pass')
 
 naughty.config.padding = 10
 naughty.config.spacing = 6
@@ -94,7 +100,7 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 mysystemmenu = {
-    { "autostart",  terminal .. " -g 40x11 -hold -e " .. homedir .. "/bin/autostart" },
+    { "autostart",  term(homedir .. "/bin/autostart", 'autostart', ' -g 40x11 -hold') },
     { "restart",    awesome.restart },
     { "quit",       awesome.quit },
     { "lock",       "xlock" },
@@ -126,7 +132,7 @@ mystoolsmenu = {
 mygamesmenu = {
     { "SC2",        "wine \"/mnt/stuff/Games/StarCraft II/StarCraft II.exe\"" },
     { "EU4",        "wine \"/mnt/stuff/Games/Europa\ Universalis\ IV/eu4.exe\"" },
-    { "FTL",        terminal .. " -e cd /mnt/stuff/Games/Faster\ Than\ Light && wine FTLGame.exe" },
+    { "FTL",        term('/mnt/stuff/Games/Faster\ Than\ Light && wine FTLGame.exe', 'ftl') },
     { "KSP",        "wine \"/mnt/stuff/Games/Steam/SteamApps/common/Kerbal Space Program/KSP.exe\"" },
 }
 
@@ -139,9 +145,7 @@ myvmmenu = {
 }
 
 mymelchiormenu = {
-    { "ssh", terminal .. " -e ssh melchior" },
-    { "htop", terminal_s .. " -e " .. homedir .. "/bin/mhtop" },
-    { "mmtail", terminal_s .. " -e " .. homedir .. "/bin/mmtail" },
+    { "ssh", term('sshm', 'ssh melchior') },
     { "mpd", "gmpc" }
 }
 
@@ -159,7 +163,7 @@ mymainmenu = awful.menu({ items = {
     { "-------------", nil },
     { "file manager",   fmanager },
     { "urxvt",      terminal },
-    { "htop",       terminal .. " -e htop" },
+    { "htop",       term('htop') },
     { "ncmpcpp",    ncmpcpp },
     { "brasero",    "brasero" },
     { "remmina",    "remmina" },
@@ -403,13 +407,15 @@ awful.key({ modkey,           }, "z",       function () run_or_raise("zeal", { c
 awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "neovim" }) end),
 awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Iceweasel" }) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
+awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, 
+                                                                     { instance = "pass" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("icedove", { class = "Icedove" }) end),
 awful.key({ modkey,           }, "i",       function () run_or_raise("chromium -app=https://codility.slack.com/messages/development/", { name = "Slack" }) end),
 -- Standard program
 awful.key({ modkey,           }, "c",       function () awful.util.spawn(terminal) end),
 awful.key({ "Control",        }, "BackSpace", function () awful.util.spawn(terminal) end),
-awful.key({ "Control", "Shift"}, "BackSpace", function () awful.util.spawn(terminal_s) end),
+awful.key({ "Control", "Shift"}, "BackSpace", function () awful.util.spawn(terminal) end),
 awful.key({ modkey, "Control" }, "r",       awesome.restart),
 awful.key({ modkey, "Control" }, "q",       awesome.quit),
 awful.key({ modkey, "Control" }, "h",       function () awful.tag.incncol( 1)         end),
