@@ -47,12 +47,12 @@ run -r pasystray
 
 run xbindkeys
 run thunar --daemon
-run icedove
-run remmina > /dev/null 2>&1
-run mpdstream.sh
 run synergy
-run virt-manager
-run zeal -style=gtk
+#run icedove
+#run remmina > /dev/null 2>&1
+#run mpdstream.sh
+#run virt-manager
+#run zeal -style=gtk
 
 # start the usual terminal windows
 if ! pgrep ncmpcpp &>/dev/null; then
