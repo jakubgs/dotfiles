@@ -47,16 +47,17 @@ Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'kana/vim-textobj-user',       { 'for': 'python' }
 Plug 'bps/vim-textobj-python',      { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
-Plug 'ivanov/vim-ipython',          { 'for': 'python' }
+Plug 'bfredl/nvim-ipy',             { 'for': 'python' }
 " Unite plugins
 Plug 'tsukkee/unite-tag'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neossh.vim'
 " Completion
-Plug 'Valloric/YouCompleteMe', { 'do':
-\   './install.sh --clang-completer --system-libclang --omnisharp-completer'
-\}
+Plug 'Shougo/deoplete.nvim'
+"Plug 'Valloric/YouCompleteMe', { 'do':
+"\   './install.sh --clang-completer --system-libclang'
+"\}
 " colorschemes
 Plug 'nanotech/jellybeans.vim'
 Plug 'chriskempson/base16-vim'
@@ -110,7 +111,7 @@ set cinoptions=>4                 " how cindent indents lines in C programs
 " General configuration {{{
 
 set regexpengine=2                " might affect hanging of vim
-set encoding=utf-8                " encoding
+"set encoding=utf-8                " encoding
 set fileencoding=utf-8
 set history=1000                  " history of vim commands
 set nomodeline                    " no options from first comment in file
@@ -562,6 +563,7 @@ nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expan
 nnoremap <space>uW :Unite file_rec/neovim:~/work/<CR>
 nnoremap <space>uI :Unite file_rec/neovim:~/work/infrastructure<CR>
 nnoremap <space>uC :Unite file_rec/neovim:~/work/codility<CR>
+nnoremap <space>uO :Unite file_rec/neovim:~/own<CR>
 nnoremap <space>uP :Unite file_rec/neovim:/mnt/melchior/projects<CR>
 nnoremap <space>uh :Unite file:~/<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
