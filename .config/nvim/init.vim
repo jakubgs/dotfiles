@@ -8,7 +8,7 @@ set rtp+=~/.fzf
 " }}}
 " Plugin management {{{
 
-call plug#begin('~/.vim/bundle')
+call plug#begin('~/.config/nvim/bundle')
 
 " for vim plugins
 Plug 'Shougo/neobundle.vim'
@@ -136,7 +136,7 @@ set keywordprg=firefox\ -search   " K searches text in firefox def. search
 set grepprg=ag\ --nogroup\ --nocolor " use ag over grep
 set shortmess=aoOtTI                 " remove message at vim start
 set cmdheight=1                   " command line length
-set backupdir=~/.vim/backup//     " make ~ files in:
+set backupdir=~/.config/nvim/backup//     " make ~ files in:
 set noswapfile                    " set directory=~/.vim/temp//
 set hlsearch                      " highlighting search results
 set incsearch                     " start searching as you type
@@ -160,7 +160,7 @@ if has('patch072')                " check if patch exists to avoid errors
 endif
 if has('persistent_undo')         " persistend undo history
     set undofile                  " Save undo's after file closes
-    set undodir=~/.vim/undo//     " where to save undo histories
+    set undodir=~/.config/nvim/undo//     " where to save undo histories
     set undolevels=100            " How many undos
     set undoreload=1000           " number of lines to save for undo
 endif
@@ -202,6 +202,11 @@ augroup END
 
 " }}}
 " Plugin configuration {{{
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_completion_start_length = 0
+let g:deoplete#enable_smart_case = 1
 
 " R
 let g:R_assign = 0
@@ -496,8 +501,8 @@ nnoremap <silent> <space>q :bprevious<bar>bd! #<CR>
 nnoremap <silent> <space>Q :<CR>
 
 " Edit .vimrc and refresh configuration
-nnoremap <silent> <space>r :source ~/dotfiles/.nvimrc<CR>
-noremap <silent> <space>R :vsp ~/dotfiles/.nvimrc<CR>
+nnoremap <silent> <space>r :source ~/dotfiles/.config/nvim/init.vim<CR>
+noremap <silent> <space>R :vsp ~/dotfiles/.config/nvim/init.vim<CR>
 
 " switch between buffers
 nnoremap <silent> <space>h :bprevious<CR>
