@@ -6,7 +6,7 @@ source ~/.ssh-agent.env
 source ~/.gnupg/gpg-agent-info-lilim
 export GPG_AGENT_INFO
 
-source ~/.vim/bundle/fzf/shell/*.zsh
+source ~/.config/nvim/bundle/fzf/shell/*.zsh
 
 # Preamble {{{
 autoload colors         # enable colors
@@ -55,12 +55,19 @@ export GROFF_NO_SGR=1
 
 # }}}
 # Exports {{{
-#
+
+if which nvim 2>/dev/null; then
+    EDITOR="nvim"
+    alias vim='nvim'
+else
+    EDITOR="vim"
+fi
+
+export EDITOR
 export TERMINFO=/usr/share/terminfo
 #export VIMRUNTIME="/usr/local/share/vim/vim74"
 export NVIMRUNTIME=/usr/local/share/nvim/runtime
-export EDITOR="vim"
-export VISION="vim"
+export VISION="$EDITOR"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
 export DEITY="fsm"
@@ -71,7 +78,7 @@ export USE_PYTHON="2.7"
 export FZF_DEFAULT_OPTS="--extended-exact"
 
 export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin
-export PATH=$PATH:/opt/java/bin:/opt/logstash-1.4.2/bin:~/bin:.
+export PATH=$PATH:/opt/java/bin:/opt/logstash-1.4.2/bin:~/bin
 
 # terraform
 export PATH=$PATH:/opt/terraform/bin
@@ -80,9 +87,6 @@ export PATH=$PATH:/opt/terraform/bin
 export PATH=$PATH:~/.linuxbrew/bin
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-
-# prepare environment for chef usage
-eval "$(chef shell-init zsh)"
 
 fpath=(~/tools/zsh-completions/src $fpath)
 
@@ -244,7 +248,6 @@ bindkey "\e[2~" quoted-insert
 # Global
 alias -g A='; alert'
 alias -g G='| grep --color -iE'
-alias -g V='| vim -'
 
 alias gv='gvim --remote-silent'
 alias S='sudo'
