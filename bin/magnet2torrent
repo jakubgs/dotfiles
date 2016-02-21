@@ -5,6 +5,13 @@
     exit 1
 }
 
+START_FILE="/tmp/zenity_last_location"
+
+START_PATH="$HOME/Downloads"
+if [[ -r "$START_FILE" ]]; then
+    START_PATH=$(cat "$START_FILE" 2>/dev/null)
+fi
+
 TITLE="Save magnet link as..."
 TEXT="Save magnet link as a torrent file."
 
@@ -12,6 +19,7 @@ TORRENT="d10:magnet-uri${#1}:${1}e"
 
 FILENAME="meta-${BASH_REMATCH[1]}.torrent"
 
+cd "$START_PATH"
 LOCATION=$(zenity --file-selection --save --confirm-overwrite \
             --file-filter='Torrent files | *.torrent' \
             --filename "$FILENAME" --title "$TITLE" --text "$TEXT")
@@ -20,8 +28,11 @@ if [[ -z "$LOCATION" ]]; then
     echo "No location specified for torrent file!" >&2
     exit 1
 elif [[ ! "$LOCATION" =~ .*.torrent$ ]]; then
-    # add torrent file extension if not done so
+    # add torrent file extension if missing
     LOCATION="${LOCATION}.torrent"
 fi
 
 echo "$TORRENT" > "$LOCATION"
+
+START_PATH=$(dirname "$LOCATION")
+echo "$START_PATH" > "$START_FILE"
