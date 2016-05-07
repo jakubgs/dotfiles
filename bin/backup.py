@@ -77,13 +77,15 @@ minimal_ping = 6
 timeout = 120
 
 assets = [
-    '/home/jso'
+    '/home/sochan'
 ]
 targets = [
-    { 'user': 'jacob',  'host': 'enpoka', 'port': '22',
-        'dir': '/home/jacob/backup/' },
-    { 'user': 'sochan', 'host': 'nerv.no-ip.org', 'port': '6666',
-        'dir': '/mnt/raid1/backup/homes/' }
+    {
+        'user': 'sochan',
+        'host': 'nerv.no-ip.org',
+        'port': '6666',
+        'dir': '/mnt/raid1/backup/homes/'
+    }
 ]
 
 rsync_opts = ''
