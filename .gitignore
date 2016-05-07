@@ -3,3 +3,4 @@ tags
 .nvim/.netrwhist
 .nvim/spell
 .pentadactyl/info
+.config/nvim/autoload/plug.vim.old
