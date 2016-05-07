@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 untgzf () {
     tar xvzf "$1" -C "$2"
@@ -52,5 +52,3 @@ for ARG in "$@"; do
         unpack "$ARG"
     fi
 done
-
-sleep 10
