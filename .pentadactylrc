@@ -25,11 +25,6 @@ set incfind
 " highlight search results
 set hlfind
 
-" jumping 5 times as far down
-map -b j 15j
-" jumping 5 times as far up
-map -b k 15k
-
 " disable url pasting with middle click
 nmap -m n <MiddleMouse> <nul>
 
@@ -42,11 +37,18 @@ map -m i,c,t <C-v> <Pass>
 map -m n,v,i,c,t <C-c> <Pass>
 map -m n,v,i,c,t <C-a> <Pass>
 map -m n,v,i,c,t <C-y> <Pass>
+map -m n,v,i,c,t <left> <Pass>
+map -m n,v,i,c,t <right> <Pass>
 
-" next tab
+" switching tabs
 map -b l <c-n>
-" previous tab
 map -b h <c-p>
+
+" fast scrolling
+unmap j
+unmap k
+map -b j <c-d>
+map -b k <c-u>
 
 " move in history
 map -b J :back<CR>
