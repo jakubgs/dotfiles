@@ -13,7 +13,7 @@ export QT_STYLE_OVERRIDE="gnome"
 #autorandr -c
 
 # turn off touchpad by default
-#synclient TouchpadOff=1
+synclient TouchpadOff=1
 
 # gnu gpg agent
 #systemctl --user start gpg-agent
@@ -37,5 +37,8 @@ xcape
 # Small hack for java compatibility
 wmname LG3D
 
+# wallpaper
+nitrogen --restore
+
 # Start awesome
-exec awesome >> ~/.awesome_stdout 2>> ~/.awesome_stderr
+ck-launch-session awesome >> ~/.awesome_stdout 2>> ~/.awesome_stderr
