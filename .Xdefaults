@@ -31,7 +31,7 @@ urxvt*matcher.button:  1
 urxvt*colorUL:         #a6c9f8
 
 ! on the fly font size manipulation
-urxvt.font-size.step:  6
+urxvt.font-size.step:  4
 ! mappings
 urxvt.keysym.C-Up:     perl:font-size:increase
 urxvt.keysym.C-Down:   perl:font-size:decrease
