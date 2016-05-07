@@ -21,6 +21,7 @@ naughty = require('naughty')
 -- }}}
 -- {{{ Variable definitions
 homedir = os.getenv("HOME")
+startdir = '/mnt/data'
 
 -- for reading bat capacity
 local first_line = require("lain.helpers").first_line
@@ -40,7 +41,7 @@ terminal = "urxvtc"
 function term(command, name, args)
     args = args or ''
     name = name or command:match("([^%s]+)")
-    naughty.notify({ name = 'name', text = name })
+    --naughty.notify({ name = 'name', text = name })
     return terminal .. args .. " -name '"..name.."' -title '"..name.."' -e '"..command.."'"
 end
 
@@ -404,11 +405,11 @@ awful.key({ modkey, "Shift"   }, "h",       function () awful.client.movetoscree
 awful.key({ modkey, "Shift"   }, "l",       function () awful.client.movetoscreen(client.focus ,client.focus.screen + 1) end),
 -- Run or raise
 awful.key({ modkey,           }, "z",       function () run_or_raise("zeal", { class = "Zeal" }) end),
-awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "neovim" }) end),
+awful.key({ modkey,           }, "n",       function () run_or_raise(terminal .. " --name ranger -t ranger -e ranger " .. startdir, { class = "Ranger" }) end),
+awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "nvim" }) end),
 awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Iceweasel" }) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
-awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, 
-                                                                     { instance = "pass" }) end),
+awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { instance = "pass" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("icedove", { class = "Icedove" }) end),
 awful.key({ modkey,           }, "i",       function () run_or_raise("chromium -app=https://codility.slack.com/messages/development/", { name = "Slack" }) end),
@@ -461,7 +462,6 @@ awful.key({ modkey,           }, "q",      function (c) c:kill()                
 awful.key({ modkey,           }, "s",       awful.client.floating.toggle                     ),
 awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
 awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
-awful.key({ modkey,           }, "n",      function (c) c.minimized = not c.minimized    end),
 --awful.key({ modkey,           }, "w",      function () mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible   end),
 awful.key({ modkey,           }, "a",
 function (c)
