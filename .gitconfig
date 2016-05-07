@@ -2,7 +2,7 @@
     email = jacob@codility.com
     name = Jakub Sokołowski
 [core]
-    editor = vim
+    editor = nvim
 [diff]
     tool = vimdiff
 [merge]
