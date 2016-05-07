@@ -1,12 +1,12 @@
 # Source: https://github.com/PonderingGrower/dotfiles
 
 # source ssh-agent variables
+source ~/.fzf.zsh
 source ~/.secret
 source ~/.ssh-agent.env
 source ~/.gnupg/gpg-agent-info-lilim
 export GPG_AGENT_INFO
 
-source ~/.config/nvim/bundle/fzf/shell/*.zsh
 
 # Preamble {{{
 autoload colors         # enable colors
@@ -56,7 +56,7 @@ export GROFF_NO_SGR=1
 # }}}
 # Exports {{{
 
-if which nvim 2>/dev/null; then
+if which nvim >/dev/null; then
     EDITOR="nvim"
     alias vim='nvim'
 else
@@ -271,11 +271,14 @@ alias ytdl-audio='youtube-dl -x --audio-format mp3 --output "%(autonumber)s-%(ti
 alias sctl='sudo systemctl'
 alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
-alias qupdate='sudo apt-get update && sudo apt-get upgrade'
-alias qapt='sudo aptitude --quiet'
-compdef qapt=aptitude
+alias qupdate='sudo apt update && sudo apt upgrade'
+alias qapt='sudo apt --quiet'
+compdef qapt=apt
 
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
+
+# wake up caspair
+alias cwake='wakeonlan d8:cb:8a:31:9d:5e'
 
 # }}}
 # Functions {{{
