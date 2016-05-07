@@ -1,3 +1,6 @@
+def_key "insert"
+    select_item
+
 def_key "j"
     scroll_down 
 
@@ -55,3 +58,11 @@ def_key "N"
 def_key "P"
     toggle_display_mode 
 
+def_key "+"
+    show_clock
+
+def_key "="
+    volume_up
+
+def_key "-"
+    volume_down
