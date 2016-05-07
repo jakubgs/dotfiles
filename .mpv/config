@@ -1,7 +1,5 @@
 [default]
-ao=pulse
-vo=vdpau,opengl-hq,opengl,xv
-hwdec=vdpau
+ao=alsa
 embeddedfonts= "yes"
 brightness=0
 #cache=65536
