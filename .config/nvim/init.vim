@@ -3,25 +3,31 @@
 
 " Plugin management {{{
 
+" auto-install vim-plug                                                                                                                
+if empty(glob('~/.config/nvim/autoload/plug.vim'))                                                                                    
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \                                                                  
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim                                                             
+  autocmd VimEnter * PlugInstall                                                                                                      
+endif  
 call plug#begin('~/.config/nvim/bundle')
 
-" Other plugins
+" Misc plugins
 Plug 'dbakker/vim-projectroot'
 Plug 'sotte/presenting.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'bruno-/vim-man'
-Plug 'eiginn/netrw'
+" Movement
 Plug 'justinmk/vim-sneak'
-Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'latex' }
-" Linting
-Plug 'benekastah/neomake'
+Plug 'takac/vim-hardtime'
 " Text manipulation
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'wellle/targets.vim'
 Plug 'tommcdo/vim-exchange'
+" Text objects
+Plug 'kana/vim-textobj-user'
+Plug 'Julian/vim-textobj-brace'
 " Git plugins
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
@@ -30,11 +36,10 @@ Plug 'kmnk/vim-unite-giti'
 Plug 'chase/vim-ansible-yaml'
 " Python plugins
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
-Plug 'kana/vim-textobj-user',       { 'for': 'python' }
-Plug 'bps/vim-textobj-python',      { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
 Plug 'bfredl/nvim-ipy',             { 'for': 'python' }
 Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
+Plug 'bps/vim-textobj-python',      { 'for': 'python' }
 " Unite plugins
 Plug 'tsukkee/unite-tag'
 Plug 'Shougo/unite.vim'
@@ -43,7 +48,7 @@ Plug 'Shougo/neossh.vim'
 " Completion
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-vim'
-" colorschemes
+" Style
 Plug 'nanotech/jellybeans.vim'
 Plug 'itchyny/lightline.vim'
 
@@ -67,7 +72,6 @@ set colorcolumn=81                " highlight this column
 set nuw=4                         " number line width
 set ruler                         " show columns and rows
 set cursorline                    " highlight the current line
-set laststatus=2                  " always show the statusline
 set number                        " show current line number
 set relativenumber                " distance from the current line
 set nowrap                          " text wrapping
@@ -86,7 +90,6 @@ endif
 " Formatting settings {{{
 
 set expandtab                     " use spaces instead of tabs
-set smarttab                      " ;
 set tabstop=4                     " spaces in <tab>
 set softtabstop=4                 " spaces in <tab> when editing
 set shiftwidth=4                  " spaces for each step of (auto)indendt
@@ -98,38 +101,30 @@ set cinoptions=>4                 " how cindent indents lines in C programs
 set regexpengine=2                " might affect hanging of vim
 "set encoding=utf-8                " encoding
 set fileencoding=utf-8
-set history=1000                  " history of vim commands
 set nomodeline                    " no options from first comment in file
 set lazyredraw                    " faster macros processing
 set visualbell                    " tell vim to shut up
 set virtualedit=block             " allow to go beyond blank space in visual m.
-set mouse=a                       " Enable the use of the mouse.
 set scrolloff=5                   " number of lies vim won't scroll below
 set sidescroll=1                  " scroll sideways like a normal editor
 set showcmd                       " Show (partial) command in status line.
 set noshowmode                    " don't show mode in command line
 set showmatch                     " show match when a bracket is inserted
-set autoread                      " automatically update file changes
-set autoindent                    " breaks pasted in text, use F8 in insert
 set preserveindent
 set clipboard=unnamedplus         " paste the clipboard to unnamed register
-set backspace=indent,eol,start    " go with backspace insert mode starting pos
-set spelllang=pl,en               " spelling check
+set spelllang=en                  " spelling check
 set autochdir                     " Automatically changing working dir
 set shell=zsh                     " Shell
-let $SSH_AUTH_SOCK='/run/user/1000/ssh-agent.socket'
-set keywordprg=firefox\ -search   " K searches text in firefox def. search
+set keywordprg=firefox\ --new-tab\ --search " K searches text in firefox def. search
 set grepprg=ag\ --nogroup\ --nocolor " use ag over grep
 set shortmess=aoOtTI                 " remove message at vim start
 set cmdheight=1                   " command line length
 set backupdir=~/.config/nvim/backup//     " make ~ files in:
 set noswapfile                    " set directory=~/.vim/temp//
-set hlsearch                      " highlighting search results
-set incsearch                     " start searching as you type
 set ignorecase                    " ignore case...
 set smartcase                     " unless upper case used
 set iskeyword+=$,@,%,#            " not word dividers
-"set iskeyword-=_                  " word dividers
+set iskeyword-=.,_                " word dividers
 set hidden                        " buffer change, more undo
 set ttyfast                       " Faster standard output
 set completeopt-=preview          " disable the preview window
@@ -170,8 +165,8 @@ set foldnestmax=1                 " nest fold limit for indent/syntax modes
 set makeprg=make\ -j6\ --silent   " default compilation command
 
 " Different compiler depending on type of file
-autocmd FileType lua set makeprg=awesome\ -k
 autocmd FileType c set makeprg=make\ -j6\ --silent
+autocmd FileType lua set makeprg=awesome\ -k
 autocmd FileType c set cindent
 autocmd FileType c set foldmethod=syntax
 autocmd FileType cpp set foldmethod=syntax
@@ -189,6 +184,12 @@ augroup END
 
 " Lightline
 let g:lightline = { 'colorscheme': 'powerline', }
+" HardTime
+let g:hardtime_default_on = 1
+let g:hardtime_allow_different_key = 1
+let g:hardtime_maxcount = 2
+let g:hardtime_timeout = 5000
+
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
@@ -197,18 +198,13 @@ let g:deoplete#enable_smart_case = 1
 inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
-" R
-let g:R_assign = 0
-let g:R_term = "urxvtc"
-let g:R_insert_mode_cmds = 0
-
 " Sneak
-let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
-let g:sneak#streak = 1
-let g:sneak#prompt = 'sneak>'
+let g:sneak#use_ic_scs = 1
+let g:sneak#prompt = 'STREAK>>>'
 hi link SneakStreakTarget ErrorMsg
 hi link SneakStreakMask   Comment
+hi link SneakPluginTarget Search
 hi link SneakPluginScope  String
 
 " IPython response time
@@ -216,7 +212,7 @@ set updatetime=1000
 
 " Easytags
 " split ctags files by language
-let g:easytags_by_filetype = '~/.vimtags/'
+let g:easytags_by_filetype = '~/.config/nvim/tags/'
 let g:easytags_always_enabled = 1
 let g:easytags_async = 1
 
@@ -225,9 +221,6 @@ let b:projectroot = '~/'
 
 " Gitv
 let g:Gitv_OpenHorizontal = 1
-
-" Orgmode
-let g:org_agenda_files = ['~/docs/org/*.org']
 
 " Unite
 " shorten time format for buffers, obscured filenames
@@ -263,65 +256,48 @@ endif
 let g:unite_source_file_mru_ignore_pattern = 
     \ substitute(g:neomru#file_mru_ignore_pattern, '|\/mnt\/\\', '', '')
 
-" Conque GDB
-let g:ConqueGdb_SrcSplit = 'right'
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ }
+" for snippet_complete marker.
+if has('conceal')
+   set conceallevel=0 concealcursor=i
+endif
 
-" NetRW
-"let g:netrw_winsize       = 30
-let g:netrw_mousemaps     = 0
-let g:netrw_banner        = 0
-let g:netrw_liststyle     = 3
-let g:netrw_browse_split  = 4
-let g:netrw_preview       = 1
-let g:netrw_altv          = 1
-let g:netrw_fastbrowse    = 2
-let g:netrw_keepdir       = 0
-let g:netrw_retmap        = 1
-let g:netrw_silent        = 1
-let g:netrw_special_syntax= 1
+" }}}
+" Key mappings - Plugins {{{
 
-" Airline
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_left_alt_sep = '|'
-let g:airline_right_alt_sep = '|'
-let g:airline_theme='powerlineish'
-let g:airline_section_c='%F'
-"let g:airline_section_c='%F'
-let g:airline_detect_modified=1
-"let g:airline#extensions#tabline#enabled = 1
-let g:airline_detect_modified=1
-let g:airline#extensions#whitespace#enabled = 0
-" disable to improve fugitive performance
-let g:airline#extensions#branch#enabled = 1
-
-" Don't make comments italic
-let g:jellybeans_use_lowcolor_black = 0
-let g:jellybeans_overrides = {
-            \ 'Comment':{ 'cterm': 'italic' },
-            \ 'Todo':   { 'gui' : 'bold', 'guibg': 'ff0000', 'cterm': '224'},
-            \ 'Folded': { 'guifg': 'dddddd', 'guibg': '333333'},
-            \ 'MatchParen': { 'guifg': 'dddddd', 'guibg': 'de3a3a'}
-            \}
-
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
-
-" Latex-Box
-" enabel folding by default
-let g:LatexBox_Folding=1
-" don't focus quickfix window
-let g:LatexBox_quickfix=2
-" don't show just warnings
-let g:LatexBox_show_warnings=0
-" compile in the background
-let g:LatexBox_latexmk_async=1
-" automatically compile
-let g:LatexBox_latexmk_preview_continuously=1
-" fold table of contents
-let g:LatexBox_fold_toc=1
-" use evince for viewing pdf
-let g:LatexBox_viewer='evince'
+" Sneak
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+xmap t <Plug>Sneak_t
+xmap T <Plug>Sneak_T
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+omap t <Plug>Sneak_t
+omap T <Plug>Sneak_T
+" Sneak easier repeat
+nmap s <Plug>(SneakStreak)
+nmap S <Plug>(SneakStreakBackward)
 
 " for snippet_complete marker.
 if has('conceal')
@@ -331,12 +307,31 @@ endif
 " }}}
 " Key mappings - Plugins {{{
 
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-
+" Sneak
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+xmap t <Plug>Sneak_t
+xmap T <Plug>Sneak_T
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+omap t <Plug>Sneak_t
+omap T <Plug>Sneak_T
 " Sneak easier repeat
-"nmap <CR> H<Plug>(SneakStreak)
 nmap s <Plug>(SneakStreak)
 nmap S <Plug>(SneakStreakBackward)
+
+" Deoplete
+" Movement within 'ins-completion-menu'
+inoremap <silent><expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <silent><expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+" use tab to cycle
+inoremap <silent><expr> <tab> pumvisible() ? "\<c-y>" : "\<tab>"
+" dont select things with Enter
+inoremap <silent><expr> <cr>  pumvisible() ? "\<c-e>\<cr>" : "\<cr>"
 
 " easytags
 nmap <space>U :execute('UpdateTags -R '.g:projectroot)<CR>
@@ -518,6 +513,7 @@ nnoremap <space>ut :Unite tag<CR>
 nnoremap <space>uu :Unite file<CR>
 nnoremap <space>up :UniteWithProjectDir file_rec/neovim<CR>
 nnoremap <space>uh :Unite file:~/<CR>
+nnoremap <space>up :execute('Unite file_rec/neovim:'.g:projectroot)<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 
 " grep
@@ -543,7 +539,7 @@ nnoremap <space><space> :Unite buffer<CR>
 " Key mappings - Git {{{
 
 " fugitive git bindings
-nnoremap <space>ga :!git add -- "%:p"<CR><CR>
+nnoremap <space>ga :Git add -- "%:p"<CR><CR>
 nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gc :Gcommit -v -q<CR>
 nnoremap <space>gt :Gcommit -v -q -- "%:p"<CR>
@@ -559,9 +555,9 @@ nnoremap <space>gp :Ggrep<Space>
 nnoremap <space>gm :Gmove<Space>
 nnoremap <space>gB :Gblame<CR>
 nnoremap <space>go :Git checkout<Space>
+nnoremap <space>gf  :Dispatch! git fetch --all<CR>
 nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
-nnoremap <space>gf :Dispatch! git fetch --all<CR>
 
 nnoremap <space>gv :Gitv<CR>
 nnoremap <space>gV :Gitv!<CR>
@@ -569,13 +565,13 @@ nnoremap <space>gg :Unite giti<CR>
 nnoremap <space>gb :Unite giti/branch<CR>
 
 nnoremap <space>gSs :Git status <bar>
-                \ if confirm('Do you want to stash changes?') <bar>
-                    \ Git stash --include-untracked <bar>
-                \ endif<CR><CR>
+                    \ if confirm('Do you want to stash changes?') <bar>
+                        \ Git stash --include-untracked <bar>
+                    \ endif<CR><CR>
 nnoremap <space>gSa :Git stash list --date=local <bar>
-                \ if confirm('Apply stash@{0}?') <bar>
-                    \ Git stash apply <bar>
-                \ endif<CR><CR>
+                    \ if confirm('Apply stash@{0}?') <bar>
+                        \ Git stash apply <bar>
+                    \ endif<CR><CR>
 
 " }}}
 " Key mappings - Fxx {{{
@@ -597,9 +593,9 @@ nmap     <F1>  <Plug>(Vman)
 
 " Return to last edit position when opening files (You want this!)
 augroup saveposition
-autocmd!
-autocmd BufReadPost *
-            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    autocmd!
+    autocmd BufReadPost *
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
                 \   exe "normal! g`\"" |
                 \ endif
 augroup END
@@ -622,7 +618,7 @@ augroup END
 
 augroup MyAutoCmd
     autocmd!
-    autocmd CmdwinEnter * call s:init_cmdwin()
+    autocmd CmdwinEnter * silent! call s:init_cmdwin()
 augroup END
 
 augroup fugitive_settings
@@ -636,16 +632,16 @@ augroup END
 
 augroup quickfix_settings
     autocmd!
-    autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+    autocmd BufReadPost quickfix silent! nnoremap <buffer> <CR> <CR>
 augroup END
 
 augroup autoresize
-    autocmd VimResized * exe "normal! \<c-w>="
+    autocmd VimResized * silent! exe "normal! \<c-w>="
 augroup END
 
 augroup projectroot
     autocmd!
-    autocmd BufEnter * let g:projectroot = projectroot#guess()
+    autocmd BufEnter * silent! let g:projectroot = projectroot#guess()
 augroup END
 
 au BufRead,BufNewFile *nginx* setfiletype nginx
@@ -674,17 +670,22 @@ endfunction
 
 " configure completion to complete in command window
 function! s:init_cmdwin()
+    " unmap <tab>
+    iunmap <buffer> <Tab>
+    nunmap <buffer> <Tab>
+
     " leave command window quicker
     nnoremap <buffer><silent> q :<C-u>quit<CR>
     nnoremap <buffer><silent> <tab> :<C-u>quit<CR>
 
+    " Movement within 'ins-completion-menu'
+    inoremap <buffer><expr><silent> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+    inoremap <buffer><expr><silent> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+    " use tab to cycle
+    inoremap <buffer><expr><silent> <tab> pumvisible() ? "\<c-y>" : "\<tab>"
     " get normal <CR> behaviour
-    nnoremap <buffer><cr> <cr>
-
-    " enable completion with tab in cmd window
-    inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-
+    inoremap <buffer><expr><silent> <cr>  pumvisible() ? "\<c-e>\<cr>" : "\<cr>"
+    
     startinsert!
 endfunction
 
