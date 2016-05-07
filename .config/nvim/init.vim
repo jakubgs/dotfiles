@@ -1,19 +1,11 @@
 " Author: Jakub Sokołowski <panswiata@gmail.com>
 " Source: https://github.com/PonderingGrower/dotfiles
 
-" Preamble {{{
-
-set rtp+=~/.fzf
-
-" }}}
 " Plugin management {{{
 
 call plug#begin('~/.config/nvim/bundle')
 
-" for vim plugins
-Plug 'Shougo/neobundle.vim'
 " Other plugins
-Plug 'bling/vim-airline'
 Plug 'dbakker/vim-projectroot'
 Plug 'sotte/presenting.vim'
 Plug 'tpope/vim-dispatch'
@@ -21,10 +13,7 @@ Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'bruno-/vim-man'
 Plug 'eiginn/netrw'
-Plug 't9md/vim-chef'
-Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'justinmk/vim-sneak'
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'latex' }
 " Linting
 Plug 'benekastah/neomake'
@@ -37,9 +26,6 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'kmnk/vim-unite-giti'
-Plug 'jceb/vim-orgmode'
-" R plugins
-Plug 'jalvesaq/Nvim-R'
 " Ansible plugins
 Plug 'chase/vim-ansible-yaml'
 " Python plugins
@@ -48,6 +34,7 @@ Plug 'kana/vim-textobj-user',       { 'for': 'python' }
 Plug 'bps/vim-textobj-python',      { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
 Plug 'bfredl/nvim-ipy',             { 'for': 'python' }
+Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
 " Unite plugins
 Plug 'tsukkee/unite-tag'
 Plug 'Shougo/unite.vim'
@@ -55,12 +42,10 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neossh.vim'
 " Completion
 Plug 'Shougo/deoplete.nvim'
-"Plug 'Valloric/YouCompleteMe', { 'do':
-"\   './install.sh --clang-completer --system-libclang'
-"\}
+Plug 'Shougo/neco-vim'
 " colorschemes
 Plug 'nanotech/jellybeans.vim'
-Plug 'chriskempson/base16-vim'
+Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
@@ -120,6 +105,7 @@ set visualbell                    " tell vim to shut up
 set virtualedit=block             " allow to go beyond blank space in visual m.
 set mouse=a                       " Enable the use of the mouse.
 set scrolloff=5                   " number of lies vim won't scroll below
+set sidescroll=1                  " scroll sideways like a normal editor
 set showcmd                       " Show (partial) command in status line.
 set noshowmode                    " don't show mode in command line
 set showmatch                     " show match when a bracket is inserted
@@ -184,13 +170,11 @@ set foldnestmax=1                 " nest fold limit for indent/syntax modes
 set makeprg=make\ -j6\ --silent   " default compilation command
 
 " Different compiler depending on type of file
-autocmd FileType c set makeprg=make\ -j6\ --silent
 autocmd FileType lua set makeprg=awesome\ -k
+autocmd FileType c set makeprg=make\ -j6\ --silent
 autocmd FileType c set cindent
 autocmd FileType c set foldmethod=syntax
 autocmd FileType cpp set foldmethod=syntax
-" Format for errors in QuickList
-autocmd FileType java set errorformat=%A%f:%l:\ %m,%-Z%p^,%C\ \ :\ %m,%-C%.%#
 autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 
 " spelling settings
@@ -203,10 +187,15 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
+" Lightline
+let g:lightline = { 'colorscheme': 'powerline', }
+
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_completion_start_length = 0
 let g:deoplete#enable_smart_case = 1
+inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " R
 let g:R_assign = 0
@@ -244,19 +233,17 @@ let g:org_agenda_files = ['~/docs/org/*.org']
 " shorten time format for buffers, obscured filenames
 let g:unite_source_buffer_time_format = '(%H:%M:%S)'
 " disable ignore_blobs
-call unite#custom#source('file_rec/neovim', 'ignore_globs', [])
+"call unite#custom#source('file_rec/neovim', 'ignore_globs', [])
 " max fuzzy match input length
-let g:unite_matcher_fuzzy_max_input_length = 30
+"let g:unite_matcher_fuzzy_max_input_length = 30
 " default to fuzzy searching
-call unite#filters#matcher_default#use(['matcher_glob'])
-let g:unite_fuzzy_matching = 0
-call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#filters#matcher_default#use(['matcher_glob'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('default', 'context', {
-\   'winheight': 40,
 \   'smartcase' : 1,
 \   'no_split' : 1,
-\   'start_insert' : 1 })
-" ignore these hidden directories
+\   'start_insert' : 1 }) " https://github.com/Shougo/unite.vim/issues/1079
+"" ignore these hidden directories
 call unite#custom#source('file_rec/neovim', 'max_candidates', 200)
 " Using ag as recursive command.
 if executable('ag')
@@ -270,6 +257,11 @@ if executable('ag')
                 \ '-i -U --line-numbers --nocolor --nogroup '
 	let g:unite_source_grep_recursive_opt = ''
 endif
+
+" NeoMRU
+" remember /mnt paths
+let g:unite_source_file_mru_ignore_pattern = 
+    \ substitute(g:neomru#file_mru_ignore_pattern, '|\/mnt\/\\', '', '')
 
 " Conque GDB
 let g:ConqueGdb_SrcSplit = 'right'
@@ -349,14 +341,6 @@ nmap S <Plug>(SneakStreakBackward)
 " easytags
 nmap <space>U :execute('UpdateTags -R '.g:projectroot)<CR>
 
-" surround
-" c style comments using *
-let g:surround_42 = "/* \r */"
-" Powershell comments
-let g:surround_35 = "<# \r #>"
-" Powershell variable brackets for strings
-let g:surround_36 = "$(\r)"
-
 " }}}
 " Key mappings - General {{{
 
@@ -384,13 +368,6 @@ xnoremap ; :<c-f>
 xnoremap : ;
 xnoremap q; :
 
-" easier escape to normal mode
-inoremap jk <esc>
-inoremap kj <esc>
-
-" For closing tags in HTML
-iabbrev </ </<C-X><C-O>
-
 " search visually selected text
 vnoremap * y/<c-r>"<cr>
 
@@ -400,9 +377,6 @@ xnoremap > >gv
 
 " make last typed word uppercase
 inoremap <c-u> <esc>viwUea
-
-" save and compile
-nnoremap mm :Make<CR>
 
 " for moving in wrapped lines
 nnoremap j gj
@@ -445,22 +419,15 @@ tnoremap <c-k> <c-\><c-n><c-w>k
 tnoremap <c-l> <c-\><c-n><c-w>l
 
 " easier navigation through tabs
-nnoremap <c-Tab>   :tabnext<CR>
+nnoremap <c-Tab>   :wtabnext<CR>
 nnoremap <c-s-Tab> :tabprevious<CR>
-
-" easier newline
-inoremap <c-j> <cr>
-inoremap <c-k> <c-o>O
-
-" counterpart to <c-h> in insert mode
-inoremap <c-l> <Del>
 
 " keep normal functionality of c-v
 inoremap <c-z> <c-v>
 
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-o>:set paste<cr><c-r>+<c-o>:set nopaste<cr>
-" paste to clipboard with ctrl+c in visual mode
+" copy to clipboard with ctrl+c in visual mode
 xnoremap <c-c> "*y:call system('xclip -i -selection clipboard', @*)<CR>
 
 " }}}
@@ -481,12 +448,6 @@ nnoremap <space>P P`[v`]
 
 " help in new vertical split
 nnoremap <space>H :rightb vert help<space>
-
-" append a semicolon
-nnoremap <space>; A;<Esc>
-
-" insert spaces between brackets
-nnoremap <space>Y :CopyMatches *<CR>
 
 " easier access to substitution
 nnoremap <space>S :%s/\v
@@ -643,13 +604,6 @@ autocmd BufReadPost *
                 \ endif
 augroup END
 
-augroup ruby_settings
-    autocmd FileType ruby setlocal tabstop=2
-    autocmd FileType ruby setlocal softtabstop=2
-    autocmd FileType ruby setlocal shiftwidth=2
-    autocmd FileType ruby setlocal cinoptions=>2
-augroup END
-
 augroup awesomerc
     autocmd!
     " Check awesome configuration after every write
@@ -694,10 +648,6 @@ augroup projectroot
     autocmd BufEnter * let g:projectroot = projectroot#guess()
 augroup END
 
-"augroup chef_settings
-    "autocmd BufNewFile,BufRead */infrastructure/*  call s:SetupChef()
-"augroup END
-
 au BufRead,BufNewFile *nginx* setfiletype nginx
 au BufRead,BufNewFile *.trac setfiletype tracwiki
 
@@ -722,15 +672,6 @@ function! NeatFoldText()
   return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 
-" copies all found matches to provided register
-function! CopyMatches(reg)
-  let hits = []
-  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
-  let reg = empty(a:reg) ? '+' : a:reg
-  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
-endfunction
-command! -register CopyMatches call CopyMatches(<q-reg>)
-
 " configure completion to complete in command window
 function! s:init_cmdwin()
     " leave command window quicker
@@ -740,20 +681,11 @@ function! s:init_cmdwin()
     " get normal <CR> behaviour
     nnoremap <buffer><cr> <cr>
 
+    " enable completion with tab in cmd window
+    inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+
     startinsert!
-endfunction
-
-" for setting up chef
-function! s:SetupChef()
-    " Mouse:
-    " Left mouse click to GO!
-    nnoremap <buffer><silent> <2-LeftMouse> :<C-u>ChefFindAny<CR>
-    " Right mouse click to Back!
-    nnoremap <buffer><silent> <RightMouse> <C-o>
-
-    " Keyboard:
-    nnoremap <buffer><silent> <c-a> :<C-u>ChefFindAny<CR>
-    nnoremap <buffer><silent> <c-f> :<C-u>ChefFindAnyVsplit<CR>
 endfunction
 
 " Custom mappings for the unite buffer
