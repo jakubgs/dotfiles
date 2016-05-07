@@ -26,6 +26,7 @@ COUNT=$(wc -l "$FILELIST")
 echo "Found $COUNT image files."
 
 feh -A "$ACTION" \
+    --scale-down \
     --zoom max \
     --auto-zoom \
     --geometry 1920x1200 \
