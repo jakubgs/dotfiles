@@ -6,7 +6,7 @@ RED='\x1b[31;01m'
 BLD='\x1b[1m'
 RST='\x1b[0m'
 
-FZF='/home/sochan/dotfiles/bin/fzf'
+FZF=$(which fzf)
 
 show_help() {
     echo "$0 <pass_arguments> ..."
@@ -44,6 +44,11 @@ OUTPUT=$(echo "$ENTRIES" | ${FZF} ${FZF_OPTS})
 QUERY=$(echo "${OUTPUT}" | head -n 1)
 RESULTS=$(echo "${OUTPUT}" | sed 1d)
 
+if [[ -z "$QUERY" ]]; then
+    echo "Cancelled"
+    exit
+fi
+
 # if there are no results use query as a path to new entry
 if [[ -z "${RESULTS}" ]]; then
     RESULTS=$QUERY
@@ -51,12 +56,14 @@ if [[ -z "${RESULTS}" ]]; then
 fi
 
 echo -e "${YELLOW}${RESULTS}${RST}"
-OUTPUT=$(echo "${RESULTS}" | xargs -I{} pass ${PASS_ARGS} "{}")
+OUTPUT=$(pass ${PASS_ARGS} "${RESULTS}")
 KEY=$(echo "${OUTPUT}" | head -n 1)
 REST=$(echo "${OUTPUT}" | sed 1d)
 
-echo "$KEY"
+echo -n "$KEY" | xclip -selection clipboard
 
 if [[ $ANOTIFY ]]; then
-    echo "$REST" | anotify -p
+    echo -e "${RESULTS}\n${REST}" | anotify -p
+else
+    echo -e "${KEY}\n${REST}"
 fi
