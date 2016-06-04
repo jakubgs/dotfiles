@@ -339,6 +339,10 @@ nmap <space>U :execute('UpdateTags -R '.g:projectroot)<CR>
 " }}}
 " Key mappings - General {{{
 
+" moving selected lines
+xnoremap <silent> <c-k> :move-2<CR>gv=gv
+xnoremap <silent> <c-j> :move'>+<CR>gv=gv
+
 " Toggle pastemode, doesn't indent
 set pastetoggle=<F4>
 
