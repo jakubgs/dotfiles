@@ -1,5 +1,15 @@
 #!/usr/bin/env python
-import os, sys, time, re, json, logging, signal, glob, socket, atexit, argparse
+import os
+import re
+import sys
+import time
+import json
+import glob
+import signal
+import socket
+import atexit
+import logging
+import argparse
 try:
     import sh
 except ImportError:
