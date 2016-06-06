@@ -28,12 +28,18 @@ Plug 'tommcdo/vim-exchange'
 " Text objects
 Plug 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-brace'
+Plug 'kana/vim-textobj-indent'
 " Git plugins
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'kmnk/vim-unite-giti'
 " Ansible plugins
 Plug 'chase/vim-ansible-yaml'
+" JS
+Plug 'jaxbot/browserlink.vim'
+Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
+Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
 " Python plugins
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
@@ -46,13 +52,18 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neossh.vim'
 " Completion
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim',
 Plug 'Shougo/neco-vim'
 " Style
 Plug 'nanotech/jellybeans.vim'
 Plug 'itchyny/lightline.vim'
 
 call plug#end()
+
+" }}}
+" Start Server {{{
+
+"call serverstart($NVIM_LISTEN_ADDRESS)
 
 " }}}
 " Display configuration {{{
@@ -65,7 +76,7 @@ filetype on                       " enable file type detection
 filetype plugin on                " loading of plugin files for all formats
 filetype indent on                " loading of indent files for all formats
 
-set winwidth=78                   " minimum split width
+set winwidth=40                   " minimum split width
 set winheight=15                  " minimum split height
 set ttimeoutlen=50                " avoid lag when updating statusline
 set colorcolumn=81                " highlight this column
@@ -182,10 +193,14 @@ augroup END
 " }}}
 " Plugin configuration {{{
 
+" Surround
+" /* TEXT */ comments
+let g:surround_42 = "/* \r */"
+
 " Lightline
 let g:lightline = { 'colorscheme': 'powerline', }
 " HardTime
-let g:hardtime_default_on = 1
+let g:hardtime_default_on = 0
 let g:hardtime_allow_different_key = 1
 let g:hardtime_maxcount = 2
 let g:hardtime_timeout = 5000
@@ -193,10 +208,9 @@ let g:hardtime_timeout = 5000
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_completion_start_length = 0
+let g:deoplete#auto_completion_start_length = 2
 let g:deoplete#enable_smart_case = 1
-inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+set completeopt+=noinsert " Enable auto selection
 
 " Sneak
 let g:sneak#s_next = 1
@@ -223,19 +237,18 @@ let b:projectroot = '~/'
 let g:Gitv_OpenHorizontal = 1
 
 " Unite
+let g:unite_source_rec_min_cache_files = 500
 " shorten time format for buffers, obscured filenames
 let g:unite_source_buffer_time_format = '(%H:%M:%S)'
-" disable ignore_blobs
-"call unite#custom#source('file_rec/neovim', 'ignore_globs', [])
-" max fuzzy match input length
-"let g:unite_matcher_fuzzy_max_input_length = 30
 " default to fuzzy searching
 "call unite#filters#matcher_default#use(['matcher_glob'])
 "call unite#filters#sorter_default#use(['sorter_rank'])
+" https://github.com/Shougo/unite.vim/issues/1079
 call unite#custom#profile('default', 'context', {
-\   'smartcase' : 1,
-\   'no_split' : 1,
-\   'start_insert' : 1 }) " https://github.com/Shougo/unite.vim/issues/1079
+\   'smartcase': 1,
+\   'no_split': 1,
+\   'start_insert': 1,
+\   'ignore_globs': []})
 "" ignore these hidden directories
 call unite#custom#source('file_rec/neovim', 'max_candidates', 200)
 " Using ag as recursive command.
@@ -338,6 +351,10 @@ nmap <space>U :execute('UpdateTags -R '.g:projectroot)<CR>
 
 " }}}
 " Key mappings - General {{{
+
+" moving selected lines
+xnoremap <silent> <c-k> :move-2<CR>gv=gv
+xnoremap <silent> <c-j> :move'>+<CR>gv=gv
 
 " Toggle pastemode, doesn't indent
 set pastetoggle=<F4>
@@ -458,7 +475,7 @@ nnoremap <silent> <space>Q :<CR>
 
 " Edit .vimrc and refresh configuration
 nnoremap <silent> <space>r :source ~/dotfiles/.config/nvim/init.vim<CR>
-noremap <silent> <space>R :vsp ~/dotfiles/.config/nvim/init.vim<CR>
+nnoremap <silent> <space>R :vsp ~/dotfiles/.config/nvim/init.vim<CR>
 
 " switch between buffers
 nnoremap <silent> <space>h :bprevious<CR>
@@ -495,7 +512,7 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite buffer file:~/work file_mru file_rec/neovim:'.g:projectroot.' file/new')<CR>
+nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/neovim file_rec/neovim:'.g:projectroot.' file/new')<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
@@ -516,21 +533,16 @@ nnoremap <space>uh :Unite file:~/<CR>
 nnoremap <space>up :execute('Unite file_rec/neovim:'.g:projectroot)<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 
-" grep
-nnoremap <space>uB :Unite -auto-preview grep:$buffers<CR>
-nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
-nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>'))<CR>
+" grep - require vimproc
+"nnoremap <space>uB :Unite -auto-preview grep:$buffers<CR>
+"nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
+"nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>'))<CR>
 
 " location specific
 nnoremap <space>uW :Unite file_rec/neovim:~/work/<CR>
-nnoremap <space>uI :Unite file_rec/neovim:~/work/infrastructure<CR>
-nnoremap <space>uC :Unite file_rec/neovim:~/work/codility<CR>
-nnoremap <space>uO :Unite file_rec/neovim:~/own<CR>
 nnoremap <space>uP :Unite file_rec/neovim:/mnt/melchior/projects<CR>
 nnoremap <space>uh :Unite file:~/<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
-nnoremap <space>uW :Unite file:~/work/<CR>
-nnoremap <space>uD :Unite file:~/docs/<CR>
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>

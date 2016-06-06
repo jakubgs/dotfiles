@@ -8,6 +8,7 @@ export DE="xfce"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
 export QT_STYLE_OVERRIDE="gnome"
+export NVIM_LISTEN_ADDRESS="127.0.0.1:33333"
 
 # adjust screen setup before you start awesome
 #autorandr -c
