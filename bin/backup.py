@@ -23,7 +23,7 @@ DEFAULT_PID_FILE = '/tmp/backup.pid'
 DEFAULT_LOG_FILE = '/tmp/backup.log'
 
 # time in seconds that the ping response have to be under
-DEFAULT_MINIMAL_PING = 5
+DEFAULT_MINIMAL_PING = 10
 # time in seconds after which backup process will be stopped
 DEFAULT_TIMEOUT = 72000
 
@@ -107,14 +107,16 @@ class Target(object):
     def sync(self, asset, timeout=DEFAULT_TIMEOUT):
         dest_full = '{}@{}:{}'.format(self.user, self.host,
                                       os.path.join(self.dir, asset['dest']))
-        rsync_full = self.rsync.bake(asset['src'], dest_full)
+        rsync_full = self.rsync
         # bake in additional options for asset
         if len(asset['opts']) > 0:
-            rsync_full = self.rsync.bake(asset['opts'])
+            rsync_full = rsync_full.bake(asset['opts'])
         if len(asset['exclude']) > 0:
             for entry in asset['exclude']:
-                rsync_full = self.rsync.bake(exclude=entry)
+                rsync_full = rsync_full.bake(exclude=entry)
 
+        # add main arguments, source and destination
+        rsync_full = rsync_full.bake(asset['src'], dest_full)
         LOG.info('Starting rsync: %s -> %s', asset['src'], dest_full)
         LOG.debug('CMD: %s', rsync_full)
 
@@ -135,7 +137,7 @@ class Target(object):
             return None
 
         LOG.info('Finished in: {}'.format(end - start))
-        return rsync_output
+        return rsync_output.stdout
 
 def on_battery():
     for bat_stat_file in glob.glob('/sys/class/power_supply/BAT*/status'):
