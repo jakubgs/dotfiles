@@ -12,13 +12,14 @@ DEFAULT_CONFIG_FILE = os.path.join(SCRIPT_PATH, 'backup.json')
 DEFAULT_PID_FILE = '/tmp/backup.pid'
 DEFAULT_LOG_FILE = '/tmp/backup.log'
 
+# time in seconds that the ping response have to be under
 DEFAULT_MINIMAL_PING = 5
 # time in seconds after which backup process will be stopped
-DEFAULT_TIMEOUT = 120
+DEFAULT_TIMEOUT = 72000
 
-HELP_MESSAGE = '''
+HELP_MESSAGE = """
 This script backups directories configred as 'assets' in the JSON config file.
-'''
+"""
 
 
 class TimeoutException(Exception):
@@ -97,6 +98,9 @@ class Target(object):
         dest_full = '{}@{}:{}'.format(self.user, self.host,
                                       os.path.join(self.dir, asset['dest']))
         rsync_full = self.rsync.bake(asset['src'], dest_full)
+        # bake in additional options for asset
+        if len(asset['opts']) > 0:
+            rsync_full = self.rsync.bake(asset['opts'])
 
         LOG.info('Starting rsync: %s -> %s', asset['src'], dest_full)
         LOG.debug('CMD: %s', rsync_full)
