@@ -1,12 +1,11 @@
 # Source: https://github.com/PonderingGrower/dotfiles
 
-# source ssh-agent variables
-source ~/.fzf.zsh
-source ~/.secret
-source ~/.ssh-agent.env
-source ~/.gnupg/gpg-agent-info-lilim
-export GPG_AGENT_INFO
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh 
+[[ -f ~/.secret ]] && source ~/.secret
+[[ -f ~/.ssh-agent.env ]] && source ~/.ssh-agent.env
+[[ -f ~/.gnupg/gpg-agent-info-lilim ]] && source ~/.gnupg/gpg-agent-info-lilim
 
+export GPG_AGENT_INFO
 
 # Preamble {{{
 autoload colors         # enable colors
