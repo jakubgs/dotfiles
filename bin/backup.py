@@ -218,6 +218,8 @@ def create_arguments():
                         help="Location of the log file.")
     parser.add_argument("-c", "--config", type=str, default=DEFAULT_CONFIG_FILE,
                         help="Location of JSON config file.")
+    parser.add_argument("-o", "--one-instance", action='store_true',
+                        help="Check if there is another instance running.")
     parser.add_argument("-d", "--debug", action='store_true',
                         help="Enable debug logging.")
     parser.add_argument("-b", "--battery-check", action='store_true',
@@ -231,12 +233,10 @@ def main():
     opts = create_arguments()
     global LOG
     LOG = setup_logging(opts.log_file, opts.debug)
-    verify_process_is_alone(opts.pid_file)
     conf = read_config_file(opts.config)
 
-    extra_rsync_opts = ''
-    if os.isatty(sys.stdout.fileno()):
-        extra_rsync_opts = '--info=progress2'
+    if opts.one_instance:
+        verify_process_is_alone(opts.pid_file)
 
     if opts.battery_check and not opts.force and on_battery():
         LOG.warning('System running on battery. Aborting.')
