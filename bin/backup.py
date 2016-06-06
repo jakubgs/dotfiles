@@ -39,10 +39,14 @@ class Target(object):
         self.dir = dir
 
         # prepare the rsync command
-        self.rsync = sh.rsync.bake("-arut", 
-                                   "--delete",
-                                   "--delete-excluded",
-                                   "--port=" + self.port,
+        self.rsync = sh.rsync.bake(archive=True,
+                                   recursive=True,
+                                   update=True,
+                                   times=True,
+                                   partial=True,
+                                   delete_after=True,
+                                   delete_excluded=True,
+                                   port=self.port,
                                    _out=show_output)
 
     @classmethod
@@ -56,7 +60,7 @@ class Target(object):
             )
     
     def available(self):
-        return self.ssh_check() and self.ping_check()
+        return self.ping_check() and self.ssh_check()
 
     def ssh_check(self, timeout=1):
         host_str = '{}@{}'.format(self.user, self.host)
@@ -77,6 +81,7 @@ class Target(object):
     
     def ping_check(self, min_ping=DEFAULT_MINIMAL_PING):
         ping = sh.ping.bake(self.host, '-c1')
+        LOG.debug('CMD: %s', ping)
         try:
             r = ping()
         except Exception as e:
@@ -99,6 +104,7 @@ class Target(object):
         # prepare timer to kill command if it runs too long
         signal.signal(signal.SIGALRM, signal_handler)
         signal.alarm(timeout)
+        LOG.debug('Command timeout: %s', timeout)
         try:
             start = time.time()
             rsync_output = rsync_full()
