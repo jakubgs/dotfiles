@@ -101,6 +101,9 @@ class Target(object):
         # bake in additional options for asset
         if len(asset['opts']) > 0:
             rsync_full = self.rsync.bake(asset['opts'])
+        if len(asset['exclude']) > 0:
+            for entry in asset['exclude']:
+                rsync_full = self.rsync.bake(exclude=entry)
 
         LOG.info('Starting rsync: %s -> %s', asset['src'], dest_full)
         LOG.debug('CMD: %s', rsync_full)
