@@ -1,27 +1,118 @@
 #!/usr/bin/env python
-import os, sys, time, re, logging, signal, glob, socket, atexit, argparse
+import os, sys, time, re, json, logging, signal, glob, socket, atexit, argparse
 try:
     import sh
-except ImportException:
+except ImportError:
     print 'Failed to import module "sh". Please install it.'
     sys.exit(1)
+
+
+SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
+DEFAULT_CONFIG_FILE = os.path.join(SCRIPT_PATH, 'backup.json')
+DEFAULT_PID_FILE = '/tmp/backup.pid'
+DEFAULT_LOG_FILE = '/tmp/backup.log'
+
+DEFAULT_MINIMAL_PING = 5
+# time in seconds after which backup process will be stopped
+DEFAULT_TIMEOUT = 120
+
+HELP_MESSAGE = '''
+This script backups directories configred as 'assets' in the JSON config file.
+'''
+
 
 class TimeoutException(Exception):
     pass
 
 def exit_handler():
-    os.remove(pid_file)
+    os.remove(DEFAULT_PID_FILE)
 
 def signal_handler(signum, frame):
     raise TimeoutException('Timed out!')
 
-class ContextFilter(logging.Filter):
-    def filter(self, record):
-        if host == '':
-            record.c_host = socket.gethostname()
-        else:
-            record.c_host = host
+class Target(object):
+    def __init__(self, id, user, host, port, dir):
+        self.id = id
+        self.user = user
+        self.host = host
+        self.port = port
+        self.dir = dir
+
+        # prepare the rsync command
+        self.rsync = sh.rsync.bake("-arut", 
+                                   "--delete",
+                                   "--delete-excluded",
+                                   "--port=" + self.port,
+                                   _out=show_output)
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+                data['id'],
+                data['user'],
+                data['host'],
+                data['port'],
+                data['dir'],
+            )
+    
+    def available(self):
+        return self.ssh_check() and self.ping_check()
+
+    def ssh_check(self, timeout=1):
+        host_str = '{}@{}'.format(self.user, self.host)
+
+        ssh = sh.ssh.bake(o='ConnectTimeout={}'.format(timeout),
+                          F='/dev/null', # ignore configuration
+                          q=True,
+                          l=self.user,
+                          p=self.port)
+        ssh = ssh.bake(self.host)
+        LOG.debug('CMD: %s', ssh)
+        try:
+            ssh.exit()
+        except Exception as e:
+            LOG.info('Host not available: %s', host_str)
+            return False
         return True
+    
+    def ping_check(self, min_ping=DEFAULT_MINIMAL_PING):
+        ping = sh.ping.bake(self.host, '-c1')
+        try:
+            r = ping()
+        except Exception as e:
+            return False
+        m = re.search(r'time=([^ ]*) ', r.stdout)
+        time = float(m.group(1))
+        if time > min_ping:
+            LOG.warning('Ping or host too slow({}s), abandoning.'.format(ping))
+            return False
+        return True
+
+    def sync(self, asset, timeout=DEFAULT_TIMEOUT):
+        dest_full = '{}@{}:{}'.format(self.user, self.host,
+                                      os.path.join(self.dir, asset['dest']))
+        rsync_full = self.rsync.bake(asset['src'], dest_full)
+
+        LOG.info('Starting rsync: %s -> %s', asset['src'], dest_full)
+        LOG.debug('CMD: %s', rsync_full)
+
+        # prepare timer to kill command if it runs too long
+        signal.signal(signal.SIGALRM, signal_handler)
+        signal.alarm(timeout)
+        try:
+            start = time.time()
+            rsync_output = rsync_full()
+            end = time.time()
+        except TimeoutException as e:
+            LOG.error('Rsync timed out after {} seconds!'.format(timeout))
+            return None
+        except Exception as e:
+            LOG.error('Failed to execute command: %s', rsync_full)
+            LOG.error('Output: {}'.format(e.stderr or rsync_output.stderr))
+            return None
+
+        LOG.info('Finished in: {}'.format(end - start))
+        return rsync_output
 
 def on_battery():
     for bat_stat_file in glob.glob('/sys/class/power_supply/BAT*/status'):
@@ -36,13 +127,26 @@ def proc_exists(pid):
         return False
     return True
 
-def setup_logging(log_file):
+def setup_logging(log_file, debug):
     FORMAT = '%(asctime)s - %(c_host)21s - %(levelname)s: %(message)s'
     logging.basicConfig(format=FORMAT)
 
     log = logging.getLogger('backup')
+    if debug:
+        log.setLevel(logging.DEBUG)
+    else:
+        log.setLevel(logging.INFO)
+
+    class ContextFilter(logging.Filter):
+        def filter(self, record):
+            global host_str
+            if host_str == '':
+                record.c_host = socket.gethostname()
+            else:
+                record.c_host = host_str
+            return True
+
     log.addFilter(ContextFilter())
-    log.setLevel(logging.DEBUG)
 
     fhandler = logging.FileHandler(log_file)
     fhandler.setFormatter(logging.Formatter(FORMAT))
@@ -52,75 +156,32 @@ def setup_logging(log_file):
 def show_output(line):
     print line
 
-def check_ping(host):
-    if args.force:
-        return
-    ping = sh.ping.bake(target['host'], '-c1')
-    try:
-        r = ping()
-    except Exception as e:
-        # failed ping does not mean host is unavailable
-        return
-    m = re.search(r'time=([^ ]*) ', r.stdout)
-    time = float(m.group(1))
-    if ping > minimal_ping:
-        log.warning('Ping or host too slow({}s), abandoning.'.format(ping))
-        return os.exit(1)
-
-pid_file='/run/backup/backup.pid'
-log_file='/var/log/backup.log'
-log = setup_logging(log_file)
-
-host = ''
-minimal_ping = 6
-# time in seconds after which backup process will be stopped
-timeout = 120
-
-assets = [
-    '/home/sochan'
-]
-targets = [
-    {
-        'user': 'sochan',
-        'host': 'nerv.no-ip.org',
-        'port': '6666',
-        'dir': '/mnt/raid1/backup/homes/'
-    }
-]
-
-rsync_opts = ''
-if os.isatty(sys.stdout.fileno()):
-    rsync_opts = '--info=progress2'
-
-HELP_MESSAGE = '''
-This script backups following directories:
-
- * {}
-'''.rstrip().format('\n * '.join(assets))
-
-parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, 
-                                 description=HELP_MESSAGE)
-# options for setting locations
-parser.add_argument("--force", action='store_true',
-                    help="When used things like running on battery are ignored.")
-args = parser.parse_args()
-
 # TODO check connection speed, not just the ping
 # TODO check when did the last backup happen
 # TODO make backup despite bad connection if last backup is old
 
-if on_battery() and not args.force:
-    log.warning('System running on battery. Aborting.')
-    sys.exit(0)
+def check_process(pid_file):
+    if os.path.isfile(pid_file):
+        pid = None
+        with open(pid_file, 'r') as f:
+            pid = f.read()
+        if proc_exists(pid):
+            return True, True
+        else:
+            return True, False
 
-if os.path.isfile(pid_file):
-    pid = None
-    with open(pid_file, 'r') as f:
-        pid = f.read()
-    if proc_exists(pid):
+    else:
+        with open(pid_file, 'w') as f:
+            f.write(str(os.getpid())[:-1])
+        return False, False
+
+def verify_process_is_alone(pid_file=DEFAULT_PID_FILE):
+    atexit.register(exit_handler)
+    file_is, process_is = check_process(pid_file)
+    if file_is and process_is:
         log.warning('Process already in progress: {} ({})'.format(pid, pid_file))
         sys.exit(0)
-    else:
+    elif file_is and not process_is:
         log.warning('Pid file process is dead: {} ({})'.format(pid, pid_file))
         if args.force:
             log.warning('Removing: {}'.format(pid_file))
@@ -128,44 +189,66 @@ if os.path.isfile(pid_file):
         else:
             sys.exit(0)
 
-else:
-    with open(pid_file, 'w') as f:
-        f.write(str(os.getpid())[:-1])
+def read_config_file(config_file=DEFAULT_CONFIG_FILE):
+    with open(config_file, 'r') as f:
+        return json.load(f)
 
-atexit.register(exit_handler)
+def set_host(new_host_str=None):
+    # this is for nice logging
+    global host_str
+    host_str = new_host_str or '{}@{}'.format(os.getlogin(), socket.gethostname())
 
-for target in targets:
-    dest = "{}@{}:{}".format(target['user'], target['host'], target['dir'])
-    host = '{}@{}'.format(target['user'], target['host'])
+def create_arguments():
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, 
+                                     description=HELP_MESSAGE)
 
-    ssh = sh.ssh.bake('-q', '-o ConnectTimeout=2', '-p '+target['port'], host)
-    try:
-        ssh.exit()
-    except Exception as e:
-        log.info('Host not available')
-        continue
+    parser.add_argument("-a", "--assets", nargs='+', type=str, default=DEFAULT_PID_FILE,
+                        help="List of assets to process.")
+    parser.add_argument("-t", "--timeout", type=int, default=DEFAULT_TIMEOUT,
+                        help="Time after which rsync command will be stopped.")
+    parser.add_argument("-p", "--pid-file", type=str, default=DEFAULT_PID_FILE,
+                        help="Location of the PID file.")
+    parser.add_argument("-l", "--log-file", type=str, default=DEFAULT_LOG_FILE,
+                        help="Location of the log file.")
+    parser.add_argument("-c", "--config", type=str, default=DEFAULT_CONFIG_FILE,
+                        help="Location of JSON config file.")
+    parser.add_argument("-d", "--debug", action='store_true',
+                        help="Enable debug logging.")
+    parser.add_argument("-b", "--battery-check", action='store_true',
+                        help="Enable checking for battery power before running.")
+    parser.add_argument("-f", "--force", action='store_true',
+                        help="When used things like running on battery are ignored.")
+    return parser.parse_args()
 
-    check_ping(host) 
+def main():
+    set_host()
+    opts = create_arguments()
+    global LOG
+    LOG = setup_logging(opts.log_file, opts.debug)
+    verify_process_is_alone(opts.pid_file)
+    conf = read_config_file(opts.config)
 
-    for asset in assets:
-        log.info("rsync: {} -> {}".format(asset, target['dir']))
-        rsync = sh.rsync.bake('-arut', rsync_opts,
-                              '--delete', '--delete-excluded',
-                              '-e ssh -p {}'.format(target['port']),
-                              '--exclude=.*', '--exclude=.*/', 
-                              asset, dest, _out=show_output)
+    extra_rsync_opts = ''
+    if os.isatty(sys.stdout.fileno()):
+        extra_rsync_opts = '--info=progress2'
 
-        signal.signal(signal.SIGALRM, signal_handler)
-        signal.alarm(timeout)
-        try:
-            start = time.time()
-            rsync_output = rsync()
-            end = time.time()
-        except TimeoutException as e:
-            log.error('Rsync timed out after {} seconds!'.format(timeout))
-            sys.exit(1)
-        except Exception as e:
-            log.error('Failed to execute command: {}'.format(rsync))
-            log.error('Output: {}'.format(e.stderr or rsync_output.stderr))
+    if opts.battery_check and not opts.force and on_battery():
+        LOG.warning('System running on battery. Aborting.')
+        sys.exit(0)
+
+    targets = dict()
+    for target in conf['targets'].itervalues():
+        targets[target['id']] = Target.from_dict(target)
+
+    for asset in conf['assets'].itervalues():
+        target = targets[asset['target']]
+        set_host('{}@{}'.format(target.user, target.host))
+
+        if not target.available() and not opts.force:
+            LOG.error('Skipping asset: %s', asset['id'])
             continue
-        log.info('Finished in: {}'.format(end - start))
+
+        output = target.sync(asset, opts.timeout)
+
+if __name__ == "__main__":
+    main()

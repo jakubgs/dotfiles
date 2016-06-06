@@ -1,0 +1,21 @@
+{ 
+    "assets": {
+        "sochan_home": {
+            "id": "sochan_home",
+            "src": "/home/sochan",
+            "target": "melchior",
+            "dest": "homes/",
+            "exclude": ["Downloads"],
+            "opts": []
+        }
+    },
+    "targets": {
+        "melchior": {
+            "id": "melchior",
+            "user": "sochan",
+            "host": "melchior",
+            "port": "22",
+            "dir": "/mnt/raid1/backup"
+        }
+    }
+}
