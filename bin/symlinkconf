@@ -3,11 +3,12 @@
 # force overriding files
 if [[ $1 == '-f' ]]; then
     FORCE=1
+    echo 'FORCE'
 fi
 
 CONFIG_FILES='
 bin .vim .nvim .vimrc .nvimrc
-.zshrc
+.zshrc .gitconfig
 .speedswapper
 .gnupg/*.conf
 .mpv .ncmpcpp .tmux.conf    .agignore
@@ -18,6 +19,7 @@ bin .vim .nvim .vimrc .nvimrc
 '
 
 GIT_ROOT=$(git rev-parse --show-toplevel)
+echo $GIT_ROOT
 
 for CONFIG_FILE in ${CONFIG_FILES}; do
     SOURCE="${GIT_ROOT}/${CONFIG_FILE}" 
@@ -26,12 +28,12 @@ for CONFIG_FILE in ${CONFIG_FILES}; do
     if [[ ! -d "${DEST_DIR}" ]]; then
         mkdir -p "${DEST_DIR}"
     fi
-    if [[ ! ${FORCE} && ! -h "${DEST}" && -f "${DEST}" ]]; then
+    if [[ ! ${FORCE} && -f "${DEST}" ]]; then
         echo "IS_FILE: ${DEST}"
-    elif [[ -h "${DEST}" ]]; then
+    elif [[ ! ${FORCE} && -h "${DEST}" ]]; then
         echo "SYMLINK: ${DEST}"
     else
         echo "LINKING: ${SOURCE} -> ${DEST}"
-        ln -s "${SOURCE}" "${DEST}"
+        ln -sf "${SOURCE}" "${DEST}"
     fi
 done
