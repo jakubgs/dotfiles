@@ -30,12 +30,9 @@ tags
 *.tsv
 *.tmp*
 *.out
-*.js
-*.css
 *.scss
 *.old
 *.xml
-*.html
 *.plist
 *.vmdk
 *.deb
