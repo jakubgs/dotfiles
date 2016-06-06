@@ -3,4 +3,7 @@ tags
 .nvim/.netrwhist
 .nvim/spell
 .pentadactyl/info
+.config/nvim/temp
+.config/nvim/bundle
+.config/nvim/.init.vim-rplugin~
 .config/nvim/autoload/plug.vim.old
