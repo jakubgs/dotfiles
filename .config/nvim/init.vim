@@ -44,7 +44,7 @@ Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
 Plug 'bfredl/nvim-ipy',             { 'for': 'python' }
-Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
+"Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
 Plug 'bps/vim-textobj-python',      { 'for': 'python' }
 " Unite plugins
 Plug 'tsukkee/unite-tag'
