@@ -44,7 +44,7 @@ Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
 Plug 'bfredl/nvim-ipy',             { 'for': 'python' }
-"Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
+Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
 Plug 'bps/vim-textobj-python',      { 'for': 'python' }
 " Unite plugins
 Plug 'tsukkee/unite-tag'
@@ -363,8 +363,8 @@ set pastetoggle=<F4>
 tnoremap <c-a> <c-\><c-n>
 
 " easier resizing
-nnoremap <up>    :resize +5<CR>
-nnoremap <down>  :resize -5<CR>
+nnoremap <up>    :resize -5<CR>
+nnoremap <down>  :resize +5<CR>
 nnoremap <left>  :vert resize -5<CR>
 nnoremap <right> :vert resize +5<CR>
 
