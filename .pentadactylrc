@@ -32,6 +32,12 @@ nmap -m n <MiddleMouse> <nul>
 nmap -builtin ; :
 nmap -builtin : ;
 
+" disable
+map <c-h> <nop>
+map <c-j> <nop>
+map <c-k> <nop>
+map <c-l> <nop>
+
 " use ctrl-v as intended
 map -m i,c,t <C-v> <Pass>
 map -m n,v,i,c,t <C-c> <Pass>
