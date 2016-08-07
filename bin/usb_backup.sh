@@ -4,6 +4,8 @@ set -e
 
 ASSETS=(
     "/mnt/melchior/git"
+    "/mnt/melchior/secret"
+    "/mnt/melchior/data/Work"
     "${HOME}/.password-store"
     "${HOME}/.gnupg"
     "${HOME}/.ssh"
