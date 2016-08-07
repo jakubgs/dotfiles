@@ -3,6 +3,7 @@
 set -e
 
 ASSETS=(
+    "/mnt/melchior/git"
     "${HOME}/.password-store"
     "${HOME}/.gnupg"
     "${HOME}/.ssh"
