@@ -26,7 +26,7 @@ for ASSET in ${ASSETS[@]}; do
     NAME=$(basename ${ASSET})
     TARGET="${DEST}/$(remove_dot ${NAME})"
     echo "* Copying: ${ASSET} -> ${TARGET}"
-    sudo rsync --delete -qr "${ASSET}" "${TARGET}"
+    sudo rsync --delete -aqr "${ASSET}" "${TARGET}"
 done
 
 echo
