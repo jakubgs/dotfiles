@@ -48,7 +48,7 @@ run -r pasystray
 run xbindkeys
 run thunar --daemon
 run synergy
-#run icedove
+run skype
 #run remmina > /dev/null 2>&1
 #run mpdstream.sh
 #run virt-manager
