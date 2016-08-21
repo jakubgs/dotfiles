@@ -188,13 +188,6 @@ autocmd FileType c set foldmethod=syntax
 autocmd FileType cpp set foldmethod=syntax
 autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 
-" spelling settings
-augroup latexsettings
-    autocmd!
-    autocmd FileType tex setlocal spell
-    autocmd FileType tex setlocal foldmethod=expr
-augroup END
-
 " }}}
 " Plugin configuration {{{
 
@@ -585,17 +578,17 @@ nnoremap <space><space> :Unite buffer<CR>
 " Key mappings - Git {{{
 
 " fugitive git bindings
-nnoremap <space>ga :Git add -- "%:p"<CR><CR>
 nnoremap <space>gs :Gstatus<CR>
+nnoremap <space>gr :Gread<CR>
+nnoremap <space>gw :Gwrite<CR>
+nnoremap <space>ga :Gwrite<CR>
 nnoremap <space>gc :Gcommit -v -q<CR>
 nnoremap <space>gt :Gcommit -v -q -- "%:p"<CR>
 nnoremap <space>gC :Gcommit -v -q --amend<CR>
 nnoremap <space>gT :Gcommit -v -q --amend -- "%:p"<CR>
 nnoremap <space>gd :Gvdiff<CR>
 nnoremap <space>ge :Gedit<CR>
-nnoremap <space>gr :Gread<CR>
 nnoremap <space>gu :Git reset "%:p"<CR><CR>
-nnoremap <space>gw :Gwrite<CR><CR>
 nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
 nnoremap <space>gp :Ggrep<Space>
 nnoremap <space>gm :Gmove<Space>
