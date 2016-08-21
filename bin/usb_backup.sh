@@ -12,9 +12,9 @@ ASSETS=(
 )
 
 DEVICE_PATH="/dev/disk/by-label"
-DEVICE_LABEL="KEYCHAIN_EXTRA"
+DEVICE_LABEL="KEYCHAIN"
 DEVICE="${DEVICE_PATH}/${DEVICE_LABEL}"
-DEST="/mnt/plugged"
+DEST="/mnt/keychain"
 
 echo "Mounting device: ${DEVICE} -> ${DEST}"
 sudo umount "${DEST}" 2>/dev/null | echo
@@ -35,6 +35,9 @@ echo
 echo "Syncing..."
 sync
 
+if [[ $1 == '-u' ]]; then
+    exit 0
+fi
 echo "Removing device..."
 sudo umount -f "${DEST}"
 
