@@ -200,13 +200,20 @@ augroup END
 
 " Startify
 let g:startify_session_dir = '~/.config/nvim/session'
+let g:startify_session_persistence = 1
+let g:startify_session_delete_buffers = 1
+let g:startify_list_order = ['sessions', 'files' ]
+let g:startify_files_number = 30
 let g:startify_custom_header = [
-    \ '      8888b. 88888b.d88b.  8888b. 88888888 .d88b. 88888b.',
-    \ '        "88b888 "888 "88b    "88b   d88P d88""88b888 "88b',
-    \ '    .d888888888  888  888.d888888  d88P  888  888888  888',
-    \ '    888  888888  888  888888  888 d88P   Y88..88P888  888',
-    \ '    "Y888888888  888  888"Y88888888888888 "Y88P" 888  888',
-    \ ]
+\ '      8888b. 88888b.d88b.  8888b. 88888888 .d88b. 88888b.',
+\ '        "88b888 "888 "88b    "88b   d88P d88""88b888 "88b',
+\ '    .d888888888  888  888.d888888  d88P  888  888888  888',
+\ '    888  888888  888  888888  888 d88P   Y88..88P888  888',
+\ '    "Y888888888  888  888"Y88888888888888 "Y88P" 888  888',
+\]
+highlight link StartifyPath   LineNr
+highlight link StartifyFile   ModeMsg
+highlight StartifyHeader      ctermfg=215 cterm=bold gui=bold
 
 " Surround
 " /* TEXT */ comments
@@ -522,10 +529,10 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 " }}}
 " Key mappings - Startify {{{
 
-nnoremap <space>ss :Startify<CR>
-nnoremap <space>sS :SSave<CR>
+nnoremap <space>S :Startify<CR>
+nnoremap <space>ss :SSave<CR>
 nnoremap <space>sl :SLoad<CR>
-nnoremap <space>sc :Sclose<CR>
+nnoremap <space>sc :SClose<CR>
 nnoremap <space>sd :SDelete<CR>
 
 " }}}
