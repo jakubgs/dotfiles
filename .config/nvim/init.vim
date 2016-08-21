@@ -204,6 +204,7 @@ let g:startify_custom_header = [
 \ '    888  888888  888  888888  888 d88P   Y88..88P888  888',
 \ '    "Y888888888  888  888"Y88888888888888 "Y88P" 888  888',
 \]
+let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
 highlight link StartifyPath   LineNr
 highlight link StartifyFile   ModeMsg
 highlight StartifyHeader      ctermfg=215 cterm=bold gui=bold
@@ -559,11 +560,6 @@ nnoremap <space>up :UniteWithProjectDir file_rec/neovim<CR>
 nnoremap <space>uh :Unite file:~/<CR>
 nnoremap <space>up :execute('Unite file_rec/neovim:'.g:projectroot)<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
-
-" grep - require vimproc
-"nnoremap <space>uB :Unite -auto-preview grep:$buffers<CR>
-"nnoremap <space>ug :execute('Unite -auto-preview grep:'.g:projectroot)<CR>
-"nnoremap <space>uG :execute('Unite -auto-preview grep:'.g:projectroot.'::'.expand('<cword>'))<CR>
 
 " location specific
 nnoremap <space>uW :Unite file_rec/neovim:~/work/<CR>
