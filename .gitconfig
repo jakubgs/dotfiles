@@ -39,3 +39,5 @@
     default = current
 [difftool]
     prompt = false
+[web]
+    browser = firefox
