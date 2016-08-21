@@ -18,6 +18,9 @@ Plug 'tpope/vim-dispatch'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'bruno-/vim-man'
+Plug 'tpope/vim-vinegar'
+Plug 'metakirby5/codi.vim', { 'branch': 'user/metakirby5' }
+Plug 'mhinz/vim-startify'
 " Movement
 Plug 'justinmk/vim-sneak'
 Plug 'takac/vim-hardtime'
@@ -33,6 +36,8 @@ Plug 'kana/vim-textobj-indent'
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'kmnk/vim-unite-giti'
+" Latex
+Plug 'LaTeX-Box-Team/LaTeX-Box'
 " Ansible plugins
 Plug 'chase/vim-ansible-yaml'
 " JS
@@ -79,7 +84,7 @@ filetype indent on                " loading of indent files for all formats
 set winwidth=40                   " minimum split width
 set winheight=15                  " minimum split height
 set ttimeoutlen=50                " avoid lag when updating statusline
-set colorcolumn=81                " highlight this column
+"set colorcolumn=81                " highlight this column
 set nuw=4                         " number line width
 set ruler                         " show columns and rows
 set cursorline                    " highlight the current line
@@ -192,6 +197,16 @@ augroup END
 
 " }}}
 " Plugin configuration {{{
+
+" Startify
+let g:startify_session_dir = '~/.config/nvim/session'
+let g:startify_custom_header = [
+    \ '      8888b. 88888b.d88b.  8888b. 88888888 .d88b. 88888b.',
+    \ '        "88b888 "888 "88b    "88b   d88P d88""88b888 "88b',
+    \ '    .d888888888  888  888.d888888  d88P  888  888888  888',
+    \ '    888  888888  888  888888  888 d88P   Y88..88P888  888',
+    \ '    "Y888888888  888  888"Y88888888888888 "Y88P" 888  888',
+    \ ]
 
 " Surround
 " /* TEXT */ comments
@@ -461,9 +476,6 @@ nnoremap <space>P P`[v`]
 " help in new vertical split
 nnoremap <space>H :rightb vert help<space>
 
-" easier access to substitution
-nnoremap <space>S :%s/\v
-
 " copy whole file
 "nnoremap <space>a :%y+<CR>
 nnoremap <space>a :%y*<CR>:call system('xclip -i -selection clipboard', @*)<CR>
@@ -483,9 +495,6 @@ nnoremap <silent> <space>l :bnext<CR>
 
 " strip all trailing whitespaces in current file
 nnoremap <space>O :%s/\s\+$//<cr>:let @/=''<CR>;
-
-" open console in current directory
-nnoremap <space>C :Start<CR>
 
 " make latex
 nnoremap <space>m :Latexmk<CR>
@@ -510,6 +519,24 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
                                 \ :exe ":!urxvtc -e nvim /tmp/profile.log"<cr>
                                 \ :exe ":noautocmd qall!"<cr>
 
+" }}}
+" Key mappings - Startify {{{
+
+nnoremap <space>ss :Startify<CR>
+nnoremap <space>sS :SSave<CR>
+nnoremap <space>sl :SLoad<CR>
+nnoremap <space>sc :Sclose<CR>
+nnoremap <space>sd :SDelete<CR>
+
+" }}}
+" Key mappings - Codi {{{
+nnoremap <space>cc :Codi<CR>
+nnoremap <space>cd :Codi!<CR>
+nnoremap <space>ct :Codi!!<CR>
+nnoremap <space>cu :CodiUpdate<CR>
+nnoremap <space>cp :Codi python<CR>
+nnoremap <space>cr :Codi ruby<CR>
+nnoremap <space>cj :Codi javascript<CR>
 " }}}
 " Key mappings - Unite {{{
 nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/neovim file_rec/neovim:'.g:projectroot.' file/new')<CR>
