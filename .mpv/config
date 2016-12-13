@@ -1,6 +1,6 @@
 [default]
 ao=alsa
-embeddedfonts= "yes"
+embeddedfonts="yes"
 brightness=0
 #cache=65536
 cache=32768
@@ -8,3 +8,4 @@ cache=32768
 #cache-min = 8.0
 # Prefill 50% of the cache before restarting playback after the cache emptied.
 #cache-seek-min = 4.0
+loop="inf"
