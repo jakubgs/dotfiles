@@ -7,3 +7,4 @@ tags
 .config/nvim/bundle
 .config/nvim/.init.vim-rplugin~
 .config/nvim/autoload/plug.vim.old
+.config/nvim/autoload/plug.vim
