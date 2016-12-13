@@ -1,6 +1,8 @@
 " colorscheme
 colorscheme zenburn
 
+"set guioptions=brCsT
+
 " for special key bindings
 map <Space> <leader>
 
@@ -33,10 +35,10 @@ nmap -builtin ; :
 nmap -builtin : ;
 
 " disable
-map <c-h> <nop>
 map <c-j> <nop>
 map <c-k> <nop>
-map <c-l> <nop>
+map <c-k> <nop>
+map <c-k> <nop>
 
 " use ctrl-v as intended
 map -m i,c,t <C-v> <Pass>
@@ -50,6 +52,10 @@ map -m n,v,i,c,t <right> <Pass>
 map -b l <c-n>
 map -b h <c-p>
 
+" disable smooth scrolling
+set scroll=20
+set scrollsteps=1
+set scrolltime=1
 " fast scrolling
 unmap j
 unmap k
@@ -106,5 +112,5 @@ map -builtin v gn
 map -builtin x :history -sort -date 
 
 " bigger more visible hints
-highlight -a Hint font-size: 100% !important;
+highlight -a Hint font-size: 150% !important;
 highlight -a Hint text-transform: uppercase;
