@@ -13,7 +13,7 @@
  m:0x5 + c:46
  Control+Shift + l
 
-"slimlock && sudo pm-hibernate"
+"sudo pm-hibernate"
  m:0x40 + c:43
  Mod4 + h
 
