@@ -19,7 +19,7 @@ Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'bruno-/vim-man'
 Plug 'tpope/vim-vinegar'
-Plug 'metakirby5/codi.vim', { 'branch': 'user/metakirby5' }
+Plug 'metakirby5/codi.vim'
 Plug 'mhinz/vim-startify'
 " Movement
 Plug 'justinmk/vim-sneak'
