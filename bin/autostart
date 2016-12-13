@@ -21,7 +21,7 @@ function run {
 	# get the arguments
 	args=$@
 	
-    printf "Checking: %-20s" "$command_name"
+    printf " - %-20s" "$command_name"
     if $restart; then
         killall $command 2> /dev/null
     fi
@@ -44,10 +44,10 @@ run -r nm-applet
 run -r mate-power-manager
 run -r blueman-applet
 run -r pasystray
+run -r synergys
 
 run xbindkeys
 run thunar --daemon
-run synergy
 run skype
 #run remmina > /dev/null 2>&1
 #run mpdstream.sh
