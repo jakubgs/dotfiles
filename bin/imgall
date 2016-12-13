@@ -11,7 +11,7 @@ DIRS=$(echo "$@" | sed "s/'/\"/g")
 
 echo "Scanning: ${DIRS}"
 
-SEARCHCMD="find $DIRS -type f \
+SEARCHCMD="find \"$DIRS\" -type f \
     -iname '*.jpg' -o \
     -iname '*.jpeg' -o \
     -iname '*.png' -o \
