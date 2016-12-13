@@ -128,7 +128,8 @@ set noshowmode                    " don't show mode in command line
 set showmatch                     " show match when a bracket is inserted
 set preserveindent
 set clipboard=unnamedplus         " paste the clipboard to unnamed register
-set spelllang=en                  " spelling check
+set spelllang=en,pl               " spelling check
+set nospell
 set autochdir                     " Automatically changing working dir
 set shell=zsh                     " Shell
 set keywordprg=firefox\ --new-tab\ --search " K searches text in firefox def. search
@@ -196,18 +197,32 @@ let g:startify_session_dir = '~/.config/nvim/session'
 let g:startify_session_persistence = 1
 let g:startify_session_delete_buffers = 1
 let g:startify_list_order = ['sessions', 'files' ]
-let g:startify_files_number = 30
+let g:startify_files_number = 16
 let g:startify_custom_header = [
-\ '      8888b. 88888b.d88b.  8888b. 88888888 .d88b. 88888b.',
-\ '        "88b888 "888 "88b    "88b   d88P d88""88b888 "88b',
-\ '    .d888888888  888  888.d888888  d88P  888  888888  888',
-\ '    888  888888  888  888888  888 d88P   Y88..88P888  888',
-\ '    "Y888888888  888  888"Y88888888888888 "Y88P" 888  888',
+\ '                           .oooooooooooooo.',
+\ '                        .d888888888888888P',
+\ '               db       88888888888888888boo.',
+\ '              `Y8b      888888888888888888888b.',
+\ '                `Yb....d88888888888888888888888b',
+\ '                  `Y8888888888888888888888888888',
+\ '          "8b  "8" "88888888888888888888888888P',
+\ '           8Yb  8   88`Y8888888888888bo. """',
+\ '           8 Yb 8   88-<`Y88888888888888bo.',
+\ '           8  Yb8   88    `Y888888888888888b',
+\ '          .8.  Y8  .88...d `Y88888888888888',
+\ '                              `Y888888888888b',
+\ '                       "88""Yb. YY88888888888b',
+\ '                        88..bP"  YbY8888888888.',
+\ '                        88""Yb    Yb`Y888888888',
+\ '                        88   Yb    YdP`Y888888P',
+\ '                       .88.   Yb    V   `Y8888b',
+\ '                                          `Y888',
+\ '                                            `Y8',
 \]
 let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
 highlight link StartifyPath   LineNr
 highlight link StartifyFile   ModeMsg
-highlight StartifyHeader      ctermfg=215 cterm=bold gui=bold
+highlight StartifyHeader      ctermfg=196 cterm=bold gui=bold
 
 " Surround
 " /* TEXT */ comments
