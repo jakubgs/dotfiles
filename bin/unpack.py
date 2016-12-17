@@ -4,6 +4,7 @@ import re
 import sys
 import glob
 import shutil
+import logging
 import argparse
 
 try:
@@ -38,24 +39,25 @@ def unpack(filename, overwrite=False):
             continue
 
         if os.path.isdir(basename) and not overwrite:
-            print 'SKIP - Exists:', basename
+            LOG.info('SKIP - Exists: %s', basename)
             return None
 
-        print 'Unpacking: {} -> {}'.format(filename, basename)
+        LOG.info('Unpacking: %s -> %s', filename, basename)
         rval = cmd(filename, basename)
-        print rval
+        LOG.info(rval.stdout)
+        LOG.error(rval.stderr)
         return basename
     
-    print 'SKIP - Unknown file extension:', ext
+    LOG.info('SKIP - Unknown file extension: %s', ext)
     return None
 
 
 def cleanup(unpacked):
-    print 'Cleanup:', unpacked
+    LOG.info('Cleanup: %s', unpacked)
     contents = gob.glob('{}/*'.format(unpacked))
 
     if len(contents) == 1:
-        print ' * Removing useless dir:', contents[0]
+        LOG.info(' * Removing useless dir: %s', contents[0])
         for filename in glob.glob('{}/*', contents[0]):
             shutil.move(filename, unpacked)
 
@@ -71,13 +73,28 @@ def parse_opts():
                         help='Unpack again even if dir exists.')
     parser.add_argument('-c', '--cleanup', action='store_true',
                         help='Clean inside of upaced dirs by removing depth.')
-    parser.add_argument('-v', '--verbose', action='store_true',
-                        help='Enable verbose messages')
+    parser.add_argument('-d', '--debug', action='store_true',
+                        help='Enable debug messages.')
     return parser.parse_args()
+
+
+def setup_logging( debug):
+    FORMAT = '%(asctime)s - %(levelname)s: %(message)s'
+    logging.basicConfig(format=FORMAT)
+
+    log = logging.getLogger()
+    if debug:
+        log.setLevel(logging.DEBUG)
+    else:
+        log.setLevel(logging.INFO)
+
+    return log
 
 
 def main():
     opts = parse_opts()
+    global LOG
+    LOG = setup_logging(opts.debug)
 
     files = glob.glob(opts.glob)
 
@@ -86,13 +103,13 @@ def main():
         if not os.path.isfile(filename):
             continue
 
-        print '-'*100
+        LOG.info('-'*100)
         unpacked = unpack(filename, opts.overwrite)
 
         if opts.cleanup:
             cleanup(unpacked)
 
-    print '-'*100
+    LOG.info('-'*100)
 
 if __name__ == "__main__":
     main()
