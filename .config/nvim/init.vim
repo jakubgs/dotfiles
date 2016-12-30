@@ -36,10 +36,10 @@ Plug 'kana/vim-textobj-indent'
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'kmnk/vim-unite-giti'
-" Latex
-Plug 'LaTeX-Box-Team/LaTeX-Box'
 " Ansible plugins
 Plug 'chase/vim-ansible-yaml'
+" Latex
+Plug 'LaTeX-Box-Team/LaTeX-Box',    { 'for': 'markdown' }
 " JS
 Plug 'jaxbot/browserlink.vim'
 Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
@@ -743,7 +743,6 @@ endfunction
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
     imap <buffer> <esc> <c-u><bs>
-    nnoremap <buffer><cr> <cr>
 
     " move between lines
     imap <buffer> <C-j>   <Plug>(unite_select_next_line)
