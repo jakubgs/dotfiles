@@ -20,7 +20,7 @@ HELP_MESSAGE='''
 This script is intended for mass unpacking of directories.
 '''.strip()
 
-cmds = {
+ARCH_CMDS = {
     r'.*\.(tar\.gz|tgz)':       lambda f,d: sh.tar.bake('xvzf')(f, C=d),
     r'.*\.(tar.bz2|tbz2|tbz)':  lambda f,d: sh.tar.bake('xvjf')(f, C=d),
     r'.*\.(zip)':               lambda f,d: sh.unzip.bake()(o=f, d=d),
@@ -30,7 +30,7 @@ cmds = {
 }
 
 def unpack(filename, overwrite=False):
-    for regex, cmd in cmds.iteritems():
+    for regex, cmd in ARCH_CMDS.iteritems():
         basename, ext = os.path.splitext(filename)
 
         matches = re.findall(regex, filename)
@@ -73,13 +73,18 @@ def parse_opts():
                         help='Unpack again even if dir exists.')
     parser.add_argument('-c', '--cleanup', action='store_true',
                         help='Clean inside of upaced dirs by removing depth.')
+    parser.add_argument('-t', '--timestamps', action='store_true',
+                        help='Show timestmaps for log messages.')
     parser.add_argument('-d', '--debug', action='store_true',
                         help='Enable debug messages.')
     return parser.parse_args()
 
 
-def setup_logging( debug):
-    FORMAT = '%(asctime)s - %(levelname)s: %(message)s'
+def setup_logging(debug, timestamps=False):
+    FORMAT = '%(levelname)s: %(message)s'
+    if timestamps:
+        FORMAT = '%(asctime)s - ' + FORMAT
+
     logging.basicConfig(format=FORMAT)
 
     log = logging.getLogger()
@@ -94,7 +99,7 @@ def setup_logging( debug):
 def main():
     opts = parse_opts()
     global LOG
-    LOG = setup_logging(opts.debug)
+    LOG = setup_logging(opts.debug, opts.timestamps)
 
     files = glob.glob(opts.glob)
 
@@ -103,13 +108,13 @@ def main():
         if not os.path.isfile(filename):
             continue
 
-        LOG.info('-'*100)
+        LOG.info('-'*60)
         unpacked = unpack(filename, opts.overwrite)
 
         if opts.cleanup:
             cleanup(unpacked)
 
-    LOG.info('-'*100)
+    LOG.info('-'*60)
 
 if __name__ == "__main__":
     main()
