@@ -31,7 +31,7 @@ if [[ $1 == '-c' ]]; then
     if [[ $prompt =~ [yY](es)* ]]; then
         cryptsetup luksFormat -d "${PASS_FILE}" -q -y -v "${DEVICE}" && \
         cryptsetup luksOpen -d "${PASS_FILE}" "${DEVICE}" "${LABEL}" && \
-        mkfs.ext4 -m 0 "/dev/mapper/${LABEL}" && \
+        mkfs.ext4 -m 0 -L "${LABEL}" "/dev/mapper/${LABEL}" && \
         cryptsetup luksClose "${LABEL}"
     fi
     exit 0
