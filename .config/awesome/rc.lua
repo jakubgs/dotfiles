@@ -569,11 +569,7 @@ awful.rules.rules = {
       -- Callback-based rules
     { rule = { name = "ffvim" },
         properties = { floating = true },
-        callback = function(c) 
-            naughty.notify({title = "ffvim"})
-            awful.client.movetotag(screen.tags[awful.tag.getidx()], c)
-            awful.client.moveresize(400, 400, 0, 0, c)
-        end},
+        callback = function(c) awful.placement.centered(c) end },
 }
 -- }}}
 -- {{{ Signals
