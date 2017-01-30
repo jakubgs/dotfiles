@@ -41,7 +41,7 @@ run urxvtd -q -f -o
 run -c nvim urxvtc -title -e nvim
 
 run -r nm-applet
-run -r mate-power-manager
+run -r xfce4-power-manager
 run -r blueman-applet
 run -r pasystray
 run -r synergys
