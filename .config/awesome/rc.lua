@@ -189,12 +189,16 @@ end
 handle:close()
 
 mybattery = wibox.widget.textbox()
-mybattimer = timer({ timeout = 5 })
-mybattimer:connect_signal("timeout",
+function show_bat_status(cap, time)
+    bat_text = '| Bat: ' .. cap .. '% '
+    bat_text = bat_text .. 'Time: ' .. time .. 'h '
+    mybattery:set_text(bat_text)
+end
+show_bat_status("?", "?")
+
+mybattimer = gears.timer.start_new(5,
     function()
-        bat_sum_perc = 0
-        bat_sum_hours = 0
-        bat_sum_minutes = 0
+        bat_sum_perc, bat_sum_hours, bat_sum_minutes = 0, 0, 0
         bat = {}
         for i, bat_path in pairs(bat_paths) do
             bat[i] = {}
@@ -210,17 +214,11 @@ mybattimer:connect_signal("timeout",
             bat_sum_perc = bat_sum_perc + tonumber(string.sub(bat[i]['percentage'], 0, -2))
             upower:close()
         end
-
         combined_capacity = bat_sum_perc / #bat
-        bat_text = '| Bat: ' .. combined_capacity .. '% '
-
-        bat_text = bat_text .. 'Time: ' .. bat_sum_hours .. 'h '
-        
-        mybattery:set_text(bat_text)
+        show_bat_status(combined_capacity, bat_sum_hours)
+        return true
     end)
 mybattimer:start()
-mybattimer:emit_signal("timeout")
-
 
 -- Volume bar
 myvolume = wibox.widget.textbox()
