@@ -53,7 +53,7 @@ startdir = '/mnt/data'
 local first_line = require("lain.helpers").first_line
 
 -- Run the autostart script
-awful.util.spawn_with_shell(homedir .. "/bin/autostart")
+awful.spawn.with_shell(homedir .. "/bin/autostart")
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init(homedir .. "/.awesome/themes/default/theme.lua")
@@ -67,7 +67,6 @@ terminal = "urxvtc"
 function term(command, name, args)
     args = args or ''
     name = name or command:match("([^%s]+)")
-    --naughty.notify({ name = 'name', text = name })
     return terminal .. args .. " -name '"..name.."' -title '"..name.."' -e '"..command.."'"
 end
 
@@ -112,7 +111,6 @@ tags = { ":admin:", ":edit:", ":web:", ":music:", ":comm:", ":fs:", ":net:", ":v
 mysystemmenu = {
     { "edit rc.lua",    geditor .. awful.util.getdir("config") .. "/rc.lua" },
     { "e: xorg.conf",   "gksudo " .. geditor .. " /etc/X11/xorg.conf" },
-    { "e: wallpaper",   "nitrogen /mnt/melchior/data/Wallpapers/" },
     { "---------------",     nil },
     { "sysmon",         "gnome-system-monitor" },
     { "palimpsest",     "gksudo palimpsest" },
@@ -169,7 +167,7 @@ menu = mymainmenu })
 -- {{{ Wibox
 
 -- Create a textclock widget
-mytextclock = awful.widget.textclock("| %a %b %d/%m/%Y, %H:%M:%S |", 1 )
+mytextclock = wibox.widget.textclock("| %a %b %d/%m/%Y, %H:%M:%S |", 1 )
 
 function get_time_value(text, time_unit)
     if text ~= nil then
