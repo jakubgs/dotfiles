@@ -100,16 +100,11 @@ layouts = {
     awful.layout.suit.max,              -- 8
     awful.layout.suit.corner.nw,        -- 9
     --awful.layout.suit.magnifier
-    --awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
 }
 -- }}}
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = {}
-tags[1] = { ":admin:", ":edit:", ":web:", ":music:", ":comm:", ":files:", ":remote:", ":vm:" }
-tags[2] = { ":admin:", ":edit:", ":web:", ":misc:",  ":comm:", ":files:", ":remote:", ":vm:" }
-tags[3] = { ":admin:", ":edit:", ":web:", ":misc:",  ":comm:", ":files:", ":remote:", ":vm:" }
+tags = { ":admin:", ":edit:", ":web:", ":music:", ":comm:", ":fs:", ":net:", ":vm:" }
 
 -- }}}
 -- {{{ Menu
@@ -288,7 +283,7 @@ end))
 
 awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
-    awful.tag(tags[s.index], s, awful.layout.suit.tile)
+    awful.tag(tags, s, awful.layout.suit.tile)
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -366,7 +361,7 @@ awful.key({ modkey, "Shift"   }, "h",       function () awful.client.movetoscree
 awful.key({ modkey, "Shift"   }, "l",       function () awful.client.movetoscreen(client.focus ,client.focus.screen + 1) end),
 -- Run or raise
 awful.key({ modkey,           }, "z",       function () run_or_raise("zeal", { class = "Zeal" }) end),
-awful.key({ modkey,           }, "n",       function () run_or_raise(terminal .. " --name ranger -t ranger -e ranger " .. startdir, { class = "Ranger" }) end),
+awful.key({ modkey,           }, "n",       function () run_or_raise(terminal .. " --name ranger -t ranger -e ranger " .. startdir, { name = "ranger" }) end),
 awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "nvim" }) end),
 awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Iceweasel" }) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
@@ -564,8 +559,12 @@ awful.rules.rules = {
           name = { "htop", "mhtop" },
     },
         properties = { screen = 1, tag = ":music:" } },
-    { rule_any = { class = {"Pidgin", "Skype" } },
+    { rule_any = { class = { "Pidgin", "Skype" } },
         properties = { screen = 1, tag = ":comm:" } },
+    { rule_any = { name = { "ranger" } },
+        properties = { screen = 1, tag = ":fs:" } },
+    { rule_any = { name = { "Transmission" } },
+        properties = { screen = 1, tag = ":net:" } },
 
       -- Callback-based rules
     { rule = { name = "ffvim" },
