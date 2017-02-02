@@ -161,8 +161,10 @@ mymainmenu = awful.menu({ items = {
 }
 })
 
-mylauncher = awful.widget.launcher({ image = awesome.load_image(beautiful.awesome_icon),
-menu = mymainmenu })
+mylauncher = awful.widget.launcher({
+    image = awesome.load_image(beautiful.awesome_icon),
+    menu = mymainmenu
+})
 -- }}}
 -- {{{ Wibox
 
@@ -231,7 +233,6 @@ awful.button({ }, 5, function () awful.util.spawn("amixer -q set Master 1dB-", f
 
 -- Create a wibox for each screen and add it
 mywibox = {}
-mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
@@ -379,32 +380,24 @@ awful.key({ "Mod4",           }, "Tab",     function () awful.tag.viewnext(mouse
 awful.key({ "Mod4", "Shift"   }, "Tab",     function () awful.tag.viewprev(mouse.screen) end),
 -- Prompt
 awful.key({ modkey,           }, "R",       function () mypromptbox[mouse.screen]:run() end),
-awful.key({ modkey },            "r",     function ()
-    awful.util.spawn("dmenu_run -i -p 'Run command:' -nb '" .. 
- 		beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. 
-		"' -sb '" .. beautiful.bg_focus .. 
-		"' -sf '" .. beautiful.fg_focus .. 
-        "' -fn '-xos4-terminus-medium-r-*-*-16-*'" ..
-        " -l 10") 
+awful.key({ modkey },            "r",       function ()
+    awful.util.spawn("dmenu_run -i " ..
+        " -p 'Run:' " ..
+        " -fn 'Terminus-10'" ..
+        " -nb '" .. beautiful.bg_normal .. "'" ..
+        " -nf '" .. beautiful.fg_normal .. "'" ..
+		" -sb '" .. beautiful.bg_focus .. "'" ..
+		" -sf '" .. beautiful.fg_focus .. "'" ..
+        " -l 14") 
 	end),
-awful.key({ modkey,           }, "d",       -- toggle between last raised windows
-function ()
-    c = client.focus.history.get(0, 1).focus
-    c:raise()
-    --awful.client.focus.history.previous()
-    --if client.focus then
-    --    client.focus:raise()
-    --end
-end),
-awful.key({ modkey            },  "t",
-function ()
-    awful.prompt.run({ prompt = "killall: " },
-    mypromptbox[mouse.screen].widget,
-    function (s)
-        awful.util.spawn(terminal .. " -e 'killall " .. s .. "'")
-    end,
-    homedir .. "/.awesome/killall_history")
-end)
+awful.key({ modkey            },  "t", function ()
+        awful.prompt.run({ prompt = "killall: " },
+        awful.screen.focused().mypromptbox.widget,
+        function (s)
+            awful.util.spawn(terminal .. " -e 'killall " .. s .. "'")
+        end,
+        homedir .. "/.awesome/killall_history")
+    end)
 )
 
 clientkeys = awful.util.table.join(

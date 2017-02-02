@@ -4,9 +4,7 @@
 
 theme = {}
 
---theme.font          = "sans 8"
-theme.font          = "terminus 12"
---theme.font          = "Helvetica 8"
+theme.font          = "terminus 10"
 
 theme.bg_normal     = "#000000" --"#222222"
 --theme.bg_focus      = "#3F3F3F" --"#535d6c"
