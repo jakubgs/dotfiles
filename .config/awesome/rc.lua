@@ -103,14 +103,14 @@ newline = '\n'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts = {
-    awful.layout.suit.floating,         -- 1
-    awful.layout.suit.tile,             -- 2
-    awful.layout.suit.tile.left,        -- 3
-    awful.layout.suit.tile.bottom,      -- 4
-    awful.layout.suit.tile.top,         -- 5
-    awful.layout.suit.fair,             -- 6
-    awful.layout.suit.fair.horizontal,  -- 7
-    awful.layout.suit.max,              -- 8
+    awful.layout.suit.max,              -- 1
+    awful.layout.suit.floating,         -- 2
+    awful.layout.suit.tile,             -- 3
+    awful.layout.suit.tile.left,        -- 4
+    awful.layout.suit.tile.bottom,      -- 5
+    awful.layout.suit.tile.top,         -- 6
+    awful.layout.suit.fair,             -- 7
+    awful.layout.suit.fair.horizontal,  -- 8
     awful.layout.suit.corner.nw,        -- 9
     --awful.layout.suit.magnifier
 }
@@ -356,8 +356,6 @@ awful.key({ modkey,           }, "k",       function () awful.client.focus.globa
 awful.key({ modkey,           }, "j",       function () awful.client.focus.global_bydirection("down") end),
 awful.key({ modkey, "Shift"   }, "k",       function () awful.client.swap.byidx( -1) end),
 awful.key({ modkey, "Shift"   }, "j",       function () awful.client.swap.byidx(  1) end),
-awful.key({ modkey, "Shift"   }, "h",       function () awful.client.movetoscreen(client.focus ,client.focus.screen - 1) end),
-awful.key({ modkey, "Shift"   }, "l",       function () awful.client.movetoscreen(client.focus ,client.focus.screen + 1) end),
 -- Run or raise
 awful.key({ modkey,           }, "z",       function () run_or_raise("zeal", { class = "Zeal" }) end),
 awful.key({ modkey,           }, "n",       function () run_or_raise(terminal .. " --name ranger -t ranger -e ranger " .. startdir, { name = "ranger" }) end),
@@ -403,26 +401,37 @@ awful.key({ modkey            },  "t", function ()
 )
 
 clientkeys = awful.util.table.join(
-awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-awful.key({ modkey,           }, "q",      function (c) c:kill()                         end),
-awful.key({ modkey,           }, "s",       awful.client.floating.toggle                     ),
-awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
---awful.key({ modkey,           }, "w",      function () mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible   end),
-awful.key({ modkey,           }, "a",
-function (c)
-    c.maximized_horizontal = not c.maximized_horizontal
-    c.maximized_vertical   = not c.maximized_vertical
-end),
+awful.key({ modkey,           }, "f",
+        function (c)
+            c.fullscreen = not c.fullscreen
+            c:raise()
+        end,
+        {description = "toggle fullscreen", group = "client"}),
+awful.key({ modkey,           }, "q",      function (c) c:kill() end,
+        {description = "close", group = "client"}),
+awful.key({ modkey,           }, "s",      awful.client.floating.toggle,
+        {description = "toggle floating", group = "client"}),
+awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
+        {description = "move to master", group = "client"}),
+awful.key({ modkey, "Shift"   }, "h",      function (c) c:move_to_screen(c.screen.index+1) end,
+        {description = "move to screen +1", group = "client"}),
+awful.key({ modkey, "Shift"   }, "l",      function (c) c:move_to_screen(c.screen.index-1) end,
+        {description = "move to screen -1", group = "client"}),
+--awful.key({ modkey,           }, "w",    function () mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible   end),
+awful.key({ modkey,           }, "a", function (c)
+            c.maximized = not c.maximized
+            c:raise()
+        end,
+        {description = "maximize", group = "client"}),
 awful.key({ modkey, "Shift" }, "t", function (c)
-    if   c.titlebar then awful.titlebar.remove(c)
-    else awful.titlebar.add(c, { modkey = modkey }) end
-end),
+        if   c.titlebar then awful.titlebar.remove(c)
+        else awful.titlebar.add(c, { modkey = modkey }) end
+    end),
 awful.key({ modkey,           }, "Escape", function ()
-    -- If you want to always position the menu on the same place set coordinates
-    awful.menu.menu_keys.down = { "Down", "Alt_L" }
-    local cmenu = awful.menu.clients({width=245}, { keygrabber=true, coords={x=525, y=330} })
-end)
+        -- If you want to always position the menu on the same place set coordinates
+        awful.menu.menu_keys.down = { "Down", "Alt_L" }
+        local cmenu = awful.menu.clients({width=245}, { keygrabber=true, coords={x=525, y=330} })
+    end)
 )
 
 -- Bind all key numbers to tags.
