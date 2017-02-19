@@ -401,11 +401,19 @@ awful.key({ modkey            },  "t", function ()
 )
 
 clientkeys = awful.util.table.join(
-awful.key({ modkey,           }, "f",
-        function (c)
+awful.key({ modkey,           }, "f", function (c)
             c.fullscreen = not c.fullscreen
             c:raise()
         end,
+awful.key({ modkey,           }, "a", function (c)
+            c.maximized = not c.maximized
+            c:raise()
+        end,
+        {description = "maximize", group = "client"}),
+awful.key({ modkey, "Shift" }, "t", function (c)
+            if   c.titlebar then awful.titlebar.remove(c)
+            else awful.titlebar.add(c, { modkey = modkey }) end
+        end),
         {description = "toggle fullscreen", group = "client"}),
 awful.key({ modkey,           }, "q",      function (c) c:kill() end,
         {description = "close", group = "client"}),
@@ -417,21 +425,6 @@ awful.key({ modkey, "Shift"   }, "h",      function (c) c:move_to_screen(c.scree
         {description = "move to screen +1", group = "client"}),
 awful.key({ modkey, "Shift"   }, "l",      function (c) c:move_to_screen(c.screen.index-1) end,
         {description = "move to screen -1", group = "client"}),
---awful.key({ modkey,           }, "w",    function () mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible   end),
-awful.key({ modkey,           }, "a", function (c)
-            c.maximized = not c.maximized
-            c:raise()
-        end,
-        {description = "maximize", group = "client"}),
-awful.key({ modkey, "Shift" }, "t", function (c)
-        if   c.titlebar then awful.titlebar.remove(c)
-        else awful.titlebar.add(c, { modkey = modkey }) end
-    end),
-awful.key({ modkey,           }, "Escape", function ()
-        -- If you want to always position the menu on the same place set coordinates
-        awful.menu.menu_keys.down = { "Down", "Alt_L" }
-        local cmenu = awful.menu.clients({width=245}, { keygrabber=true, coords={x=525, y=330} })
-    end)
 )
 
 -- Bind all key numbers to tags.
