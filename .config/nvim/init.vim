@@ -20,7 +20,7 @@ Plug 'xolox/vim-misc'
 Plug 'bruno-/vim-man'
 Plug 'tpope/vim-vinegar'
 Plug 'metakirby5/codi.vim'
-Plug 'mhinz/vim-startify'
+"Plug 'mhinz/vim-startify'
 " Movement
 Plug 'justinmk/vim-sneak'
 Plug 'takac/vim-hardtime'
@@ -39,12 +39,13 @@ Plug 'kmnk/vim-unite-giti'
 " Ansible plugins
 Plug 'chase/vim-ansible-yaml'
 " Latex
-Plug 'LaTeX-Box-Team/LaTeX-Box',    { 'for': 'markdown' }
+Plug 'LaTeX-Box-Team/LaTeX-Box'
 " JS
 Plug 'jaxbot/browserlink.vim'
 Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
 Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
+Plug 'nikvdp/ejs-syntax'
 " Python plugins
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
@@ -75,6 +76,9 @@ call plug#end()
 
 set background=dark
 colorscheme jellybeans
+let g:jellybeans_overrides = {
+\    'background': { 'ctermbg': 'NONE', '256ctermbg': 'NONE', 'guibg': 'NONE' },
+\}
 
 syntax on                         " File-type highlighting
 filetype on                       " enable file type detection
@@ -247,10 +251,9 @@ set completeopt+=noinsert " Enable auto selection
 let g:sneak#s_next = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#prompt = 'STREAK>>>'
-hi link SneakStreakTarget ErrorMsg
-hi link SneakStreakMask   Comment
-hi link SneakPluginTarget Search
-hi link SneakPluginScope  String
+hi link SneakLabel Error
+hi link Sneak Comment
+hi link SneakScope  String
 
 " IPython response time
 set updatetime=1000
@@ -342,6 +345,8 @@ omap T <Plug>Sneak_T
 " Sneak easier repeat
 nmap s <Plug>(SneakStreak)
 nmap S <Plug>(SneakStreakBackward)
+" easier access
+nmap <cr> H<Plug>(SneakStreak)
 
 " for snippet_complete marker.
 if has('conceal')
@@ -653,7 +658,7 @@ augroup END
 augroup awesomerc
     autocmd!
     " Check awesome configuration after every write
-    autocmd BufWritePost */.config/awesome/rc.lua Dispatch awesome -k
+    autocmd BufWritePost */.config/awesome/rc.lua Dispatch! awesome -k
 augroup END
 
 augroup file_settings
@@ -755,4 +760,16 @@ function! s:unite_settings()
     " go backwards in path
     imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
 endfunction
+
+" use ranger for 
+function! RangerExplorer()
+    exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+    if filereadable('/tmp/vim_ranger_current_file')
+        exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+        call system('rm /tmp/vim_ranger_current_file')
+    endif
+    redraw!
+endfun
+map <space>e :call RangerExplorer()<CR>
+
 " }}}
