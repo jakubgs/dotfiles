@@ -248,12 +248,13 @@ let g:deoplete#enable_smart_case = 1
 set completeopt+=noinsert " Enable auto selection
 
 " Sneak
+let g:sneak#label = 1
 let g:sneak#s_next = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#prompt = 'STREAK>>>'
-hi link SneakLabel Error
 hi link Sneak Comment
-hi link SneakScope  String
+hi link SneakLabel Error
+hi link SneakScope String
 
 " IPython response time
 set updatetime=1000
@@ -338,40 +339,11 @@ xmap f <Plug>Sneak_f
 xmap F <Plug>Sneak_F
 xmap t <Plug>Sneak_t
 xmap T <Plug>Sneak_T
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
-omap t <Plug>Sneak_t
-omap T <Plug>Sneak_T
-" Sneak easier repeat
-nmap s <Plug>(SneakStreak)
-nmap S <Plug>(SneakStreakBackward)
-" easier access
-nmap <cr> H<Plug>(SneakStreak)
 
 " for snippet_complete marker.
 if has('conceal')
    set conceallevel=0 concealcursor=i
 endif
-
-" }}}
-" Key mappings - Plugins {{{
-
-" Sneak
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-nmap t <Plug>Sneak_t
-nmap T <Plug>Sneak_T
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-xmap t <Plug>Sneak_t
-xmap T <Plug>Sneak_T
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
-omap t <Plug>Sneak_t
-omap T <Plug>Sneak_T
-" Sneak easier repeat
-nmap s <Plug>(SneakStreak)
-nmap S <Plug>(SneakStreakBackward)
 
 " Deoplete
 " Movement within 'ins-completion-menu'
