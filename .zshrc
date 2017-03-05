@@ -30,7 +30,7 @@ case $HOST in           # change prompt depending on host
     zeruel)
         COLOR="red" ;;
     *)
-        COLOR="green" ;;
+        COLOR="yellow" ;;
 esac
 
 export PROMPT="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
