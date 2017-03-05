@@ -7,7 +7,8 @@ if [[ $1 == '-f' ]]; then
 fi
 
 CONFIG_FILES='
-bin .vim .nvim .vimrc .nvimrc
+bin .vimrc
+.config/nvim
 .zshrc .gitconfig
 .speedswapper
 .gnupg/*.conf
