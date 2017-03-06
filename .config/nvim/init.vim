@@ -275,9 +275,11 @@ let g:Gitv_OpenHorizontal = 1
 let g:unite_source_rec_min_cache_files = 500
 " shorten time format for buffers, obscured filenames
 let g:unite_source_buffer_time_format = '(%H:%M:%S)'
-" default to fuzzy searching
-"call unite#filters#matcher_default#use(['matcher_glob'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
+" default to fuzzy searching, hide current file
+call unite#filters#sorter_default#use([
+\   'matcher_fuzzy',
+\   'matcher_hide_current_file'
+\])
 " https://github.com/Shougo/unite.vim/issues/1079
 call unite#custom#profile('default', 'context', {
 \   'smartcase': 1,
@@ -285,7 +287,7 @@ call unite#custom#profile('default', 'context', {
 \   'start_insert': 1,
 \   'ignore_globs': [],
 \   'short_source_names': 1,
-\ })
+\})
 "" ignore these hidden directories
 call unite#custom#source('file_rec/neovim', 'max_candidates', 200)
 " Using ag as recursive command.
