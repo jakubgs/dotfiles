@@ -283,7 +283,9 @@ call unite#custom#profile('default', 'context', {
 \   'smartcase': 1,
 \   'no_split': 1,
 \   'start_insert': 1,
-\   'ignore_globs': []})
+\   'ignore_globs': [],
+\   'short_source_names': 1,
+\ })
 "" ignore these hidden directories
 call unite#custom#source('file_rec/neovim', 'max_candidates', 200)
 " Using ag as recursive command.
