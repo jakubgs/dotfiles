@@ -280,6 +280,7 @@ alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection c
 
 # wake up caspair
 alias cwake='wakeonlan d8:cb:8a:31:9d:5e'
+alias mwake='wakeonlan 00:1b:21:06:f1:cc'
 
 # }}}
 # Functions {{{
