@@ -290,46 +290,6 @@ function see() {
     ag --nocolor --nogroup -g "$*"
 }
 
-# codility readonly db access
-function codilitydb() {
-    eval 'ssh -N -L 15432:127.0.0.1:5432 database-crimson.codility.net &'
-    SSH_TUNNEL_PID=$!
-    sleep 2
-    psql -U readonly -h 127.0.0.1 -p 15432 codility
-    kill $SSH_TUNNEL_PID
-}
-
-# codility testing container
-function dcodility() {
-    docker run -it --privileged \
-               --name codility_testing_$(date +%H%M_%d%m%y) \
-               -v ~/work/codility:/srv/codility/install \
-               codility:testing \
-               /bin/bash
-}
-
-function batchssh() {
-    QUERY='*:*'
-    if [[ $1 == '-q' ]]; then
-        QUERY=$2
-        shift 2
-    fi
-    CMD=$@
-    OLD_PWD=$PWD
-    cd ~/work/infrastructure
-    knife ssh -a fqdn "$QUERY" "$CMD"
-    cd $OLD_PWD
-}
-
-function sshl() {
-    OLDTERM=$TERM
-    TERM="vt100"
-
-    ssh leliel
-
-    TERM=$OLDTERM
-}
-
 # reload zshrc
 function src() {
     autoload -U zrecompile
