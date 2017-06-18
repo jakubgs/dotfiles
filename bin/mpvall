@@ -32,6 +32,7 @@ find "$DIRS" -type f \
 -iname "*.mpg" -o \
 -iname "*.moV" -o \
 -iname "*.flv" -o \
+-iname "*.asf" -o \
 -iname "*.divx" -o \
 -iname "*.mp4" | \
 sort \

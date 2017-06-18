@@ -2,7 +2,7 @@
 
 # continously wait for a stream
 
-STREAM_URL="http://nerv.no-ip.org:8000/mpd.ogg"
+STREAM_URL="http://melchior.magi.blue:8000/mpd.ogg"
 MPV_OPTS="--no-cache --cache-pause --really-quiet --loop=no --stream-lavf-o=timeout=1"
 
 while true ; do

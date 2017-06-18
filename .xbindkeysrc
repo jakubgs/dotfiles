@@ -1,7 +1,7 @@
 # Power Management {{{
 # Hibernation
 
-"sudo pm-suspend && slimlock"
+"sudo pm-suspend"
  m:0x40 + c:39
  Mod4 + s
 

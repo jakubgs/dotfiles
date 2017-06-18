@@ -1,10 +1,11 @@
 [default]
 loop="inf"
-vo=drm,opengl
+vo=opengl,drm
+#hwdec=vaapi
 ao=alsa
 embeddedfonts="yes"
 brightness=0
-cache=65536
+#cache=524288
 # Prefill 20% of the cache before starting playback.
 #cache-min = 8.0
 # Prefill 50% of the cache before restarting playback after the cache emptied.

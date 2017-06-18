@@ -1,7 +1,7 @@
 " colorscheme
 colorscheme zenburn
 
-"set guioptions=brCsT
+set guioptions=brCs
 
 " for special key bindings
 map <Space> <leader>
@@ -19,7 +19,7 @@ set editor='/home/jso/bin/ffvim <file> <line> <column>'
 set complete=slfb
 
 " changed keyword for google to g
-set defsearch=google
+set defsearch=duckduckgo
 
 " incremental search
 set incfind
@@ -37,8 +37,8 @@ nmap -builtin : ;
 " disable
 map <c-j> <nop>
 map <c-k> <nop>
-map <c-k> <nop>
-map <c-k> <nop>
+map <c-h> <nop>
+map <c-l> <nop>
 
 " use ctrl-v as intended
 map -m i,c,t <C-v> <Pass>

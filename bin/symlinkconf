@@ -19,7 +19,10 @@ bin .vimrc
 .Xdefaults .xinitrc .Xresources
 '
 
+SCRIPT_DIR=$(basedir "$0")
+cd "$SCRIPT_DIR"
 GIT_ROOT=$(git rev-parse --show-toplevel)
+cd -
 echo $GIT_ROOT
 
 for CONFIG_FILE in ${CONFIG_FILES}; do

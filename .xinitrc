@@ -7,7 +7,7 @@ export OOO_FORCE_DESKTOP="xfce4"
 export DE="xfce"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
-export QT_STYLE_OVERRIDE="gnome"
+#export QT_STYLE_OVERRIDE="gtk2"
 export NVIM_LISTEN_ADDRESS="127.0.0.1:33333"
 
 # adjust screen setup before you start awesome

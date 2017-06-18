@@ -73,7 +73,7 @@ awful.spawn.with_shell(homedir .. "/bin/autostart")
 beautiful.init(homedir .. "/.awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-browser = "firefox"
+browser = "chromium"
 hipchat = "hipchat"
 fmanager = "thunar"
 terminal = "urxvtc"
@@ -163,7 +163,7 @@ mymainmenu = awful.menu({ items = {
     { "office",     myofficemenu, beautiful.awesome_icon },
     { "games",      mygamesmenu, beautiful.awesome_icon },
     { "-------------", nil },
-    { "firefox",    browser },
+    { "chromium",    browser },
     { "rutorrent",  "dwb" },
     { "-------------", nil },
     { "file manager",   fmanager },
@@ -183,7 +183,7 @@ mylauncher = awful.widget.launcher({
 -- {{{ Wibox
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("| %a %b %d/%m/%Y, %H:%M:%S |", 1 )
+mytextclock = wibox.widget.textclock("| %Y/%m/%d %H:%M:%S |", 1 )
 
 function get_time_value(text, time_unit)
     if text ~= nil then
@@ -205,14 +205,13 @@ handle:close()
 mybattery = wibox.widget.textbox()
 function show_bat_status(cap, time)
     bat_text = '| Bat: ' .. cap .. '% '
-    bat_text = bat_text .. 'Time: ' .. time .. 'h '
     mybattery:set_text(bat_text)
 end
 show_bat_status("?", "?")
 
 mybattimer = gears.timer.start_new(5,
     function()
-        bat_sum_perc, bat_sum_hours, bat_sum_minutes = 0, 0, 0
+        bat_sum_perc, bat_sum_minutes = 0, 0, 0
         bat = {}
         for i, bat_path in pairs(bat_paths) do
             bat[i] = {}
@@ -223,13 +222,11 @@ mybattimer = gears.timer.start_new(5,
                     bat[i][param_name] = param_value
                 end
             end
-            bat[i]['hours'] = get_time_value(bat[i]['time to empty'], 'hours')
-            bat_sum_hours = bat_sum_hours + bat[i]['hours']
             bat_sum_perc = bat_sum_perc + tonumber(string.sub(bat[i]['percentage'], 0, -2))
             upower:close()
         end
         combined_capacity = bat_sum_perc / #bat
-        show_bat_status(combined_capacity, bat_sum_hours)
+        show_bat_status(combined_capacity)
         return true
     end)
 mybattimer:start()
@@ -360,7 +357,7 @@ awful.key({ modkey, "Shift"   }, "j",       function () awful.client.swap.byidx(
 awful.key({ modkey,           }, "z",       function () run_or_raise("zeal", { class = "Zeal" }) end),
 awful.key({ modkey,           }, "n",       function () run_or_raise(terminal .. " --name ranger -t ranger -e ranger " .. startdir, { name = "ranger" }) end),
 awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "nvim" }) end),
-awful.key({ modkey,           }, "w",       function () run_or_raise("firefox", { class = "Iceweasel" }) end),
+awful.key({ modkey,           }, "w",       function () run_or_raise(browser, { class = "Chromium" }) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
 awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { instance = "pass" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
@@ -424,7 +421,7 @@ awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getm
 awful.key({ modkey, "Shift"   }, "h",      function (c) c:move_to_screen(c.screen.index+1) end,
         {description = "move to screen +1", group = "client"}),
 awful.key({ modkey, "Shift"   }, "l",      function (c) c:move_to_screen(c.screen.index-1) end,
-        {description = "move to screen -1", group = "client"}),
+        {description = "move to screen -1", group = "client"})
 )
 
 -- Bind all key numbers to tags.
@@ -536,7 +533,7 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = { type = { "dialog" } },
+    { rule_any = { type = { "dialog" }, name = { "mpv.*" } },
          properties = { titlebars_enabled = true } },
 
     -- Screen/tag allocation
@@ -544,7 +541,7 @@ awful.rules.rules = {
         properties = { screen = 1, tag = ":admin:" } },
     { rule_any = { name = { "nvim" } },
         properties = { screen = 1, tag = ":edit:" } },
-    { rule_any = { class = { "Iceweasel", "Firefox" } },
+    { rule_any = { class = { "Iceweasel", "Chromium" } },
         properties = { screen = 1, tag = ":web:" } },
     { rule_any = {
           instance = { "ncmpcpp" },
