@@ -61,7 +61,6 @@ end
 -- }}}
 -- {{{ Variable definitions
 homedir = os.getenv("HOME")
-startdir = '/mnt/data'
 
 -- for reading bat capacity
 local first_line = require("lain.helpers").first_line
@@ -207,7 +206,7 @@ function show_bat_status(cap, time)
     bat_text = '| Bat: ' .. cap .. '% '
     mybattery:set_text(bat_text)
 end
-show_bat_status("?", "?")
+show_bat_status("?", "ww?")
 
 mybattimer = gears.timer.start_new(5,
     function()
@@ -355,7 +354,7 @@ awful.key({ modkey, "Shift"   }, "k",       function () awful.client.swap.byidx(
 awful.key({ modkey, "Shift"   }, "j",       function () awful.client.swap.byidx(  1) end),
 -- Run or raise
 awful.key({ modkey,           }, "z",       function () run_or_raise("zeal", { class = "Zeal" }) end),
-awful.key({ modkey,           }, "n",       function () run_or_raise(terminal .. " --name ranger -t ranger -e ranger " .. startdir, { name = "ranger" }) end),
+awful.key({ modkey,           }, "n",       function () run_or_raise(terminal .. " -name ranger -title ranger -e ranger ", { name = "ranger" }) end),
 awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "nvim" }) end),
 awful.key({ modkey,           }, "w",       function () run_or_raise(browser, { class = "Chromium" }) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
@@ -678,7 +677,7 @@ function run_or_raise(cmd, properties)
             awful.client.movetotag(curtag, c)
         else
             -- Otherwise, pop to first tag client is visible on
-            awful.tag.viewonly(ctags[1])
+            ctags[1]:view_only()
         end
         -- And then focus the client
         client.focus = c
