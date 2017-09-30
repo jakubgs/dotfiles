@@ -361,6 +361,13 @@ awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, {
 awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { instance = "pass" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("icedove", { class = "Icedove" }) end),
+--- Power & Screen
+awful.key({ "Mod4",           }, "s",       function () awful.spawn("sudo systemctl suspend") end),
+awful.key({ "Mod4",           }, "h",       function () awful.spawn("sudo systemctl hibernate") end),
+awful.key({ "Mod4", "Control" }, "Left",    function () awful.spawn("xrandr --orientation left") end),
+awful.key({ "Mod4", "Control" }, "Right",   function () awful.spawn("xrandr --orientation right") end),
+awful.key({ "Mod4", "Control" }, "Up",      function () awful.spawn("xrandr --orientation normal") end),
+awful.key({ "Mod4", "Control" }, "Down",    function () awful.spawn("xrandr --orientation inverted") end),
 --- Standard program
 awful.key({ modkey,           }, "c",       function () awful.util.spawn(terminal) end),
 awful.key({ "Control",        }, "BackSpace", function () awful.util.spawn(terminal) end),
