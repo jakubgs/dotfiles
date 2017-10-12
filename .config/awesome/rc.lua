@@ -362,8 +362,8 @@ awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { in
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("icedove", { class = "Icedove" }) end),
 --- Power & Screen
-awful.key({ "Mod4",           }, "s",       function () awful.spawn("sudo systemctl suspend") end),
-awful.key({ "Mod4",           }, "h",       function () awful.spawn("sudo systemctl hibernate") end),
+awful.key({ "Mod4",           }, "s",       function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
+awful.key({ "Mod4",           }, "h",       function () awful.spawn("sudo /usr/sbin/pm-hibernate") end),
 awful.key({ "Mod4", "Control" }, "Left",    function () awful.spawn("xrandr --orientation left") end),
 awful.key({ "Mod4", "Control" }, "Right",   function () awful.spawn("xrandr --orientation right") end),
 awful.key({ "Mod4", "Control" }, "Up",      function () awful.spawn("xrandr --orientation normal") end),
@@ -643,65 +643,11 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- {{{ Custom functions
 
 -- Find a client based on properties
-function get_client(properties)
-    local clients = client.get()
-    for i, c in pairs(clients) do
-        if match(properties, c) then
-            return c
-        end
+function run_or_raise(cmd, rule)
+    local matcher = function (c)
+        return awful.rules.match(c, rule)
     end
-end
---- Spawns cmd if no client can be found matching properties
--- If such a client can be found, pop to first tag where it is visible, and give it focus
--- @param cmd the command to execute
--- @param properties a table of properties to match against clients.  Possible entries: any properties of the client object
-function run_or_raise(cmd, properties)
-    local clients = client.get()
-    local focused = awful.client.next(0)
-    local findex = 0
-    local matched_clients = {}
-    local n = 0
-    for i, c in pairs(clients) do
-        --make an array of matched clients
-        if match(properties, c) then
-            n = n + 1
-            matched_clients[n] = c
-            if c == focused then
-                findex = n
-            end
-        end
-    end
-    if n > 0 then
-        local c = matched_clients[1]
-        -- if the focused window matched switch focus to next in list
-        if 0 < findex and findex < n then
-            c = matched_clients[findex+1]
-        end
-        local ctags = c:tags()
-        if #ctags == 0 then
-            -- ctags is empty, show client on current tag
-            local curtag = awful.tag.selected()
-            awful.client.movetotag(curtag, c)
-        else
-            -- Otherwise, pop to first tag client is visible on
-            ctags[1]:view_only()
-        end
-        -- And then focus the client
-        client.focus = c
-        c:raise()
-        return c
-    end
-    return awful.util.spawn(cmd)
-end
-
--- Returns true if all pairs in table1 are present in table2
-function match(table1, table2)
-    for k, v in pairs(table1) do
-        if table2[k] ~= v and not table2[k]:find(v) then
-            return false
-        end
-    end
-    return true
+    awful.client.run_or_raise(cmd, matcher)
 end
 
 -- Function for focusing
