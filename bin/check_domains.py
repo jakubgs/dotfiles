@@ -1,43 +1,52 @@
 #!/usr/bin/env python3
+import os
 import json
 import string
 import backoff
 import itertools
 from time import sleep
 from boto3 import client
+from boto.route53.domains.exceptions import UnsupportedTLD
 from botocore.exceptions import ClientError
+from requests.exceptions import ConnectTimeout
 
-RETRIES=8
 LENGTH=3
+RETRIES=8
+OUTPUT_FILE='/tmp/domains.json'
 
-@backoff.on_exception(backoff.expo, ClientError, max_tries=RETRIES)
-def check_availability(c, fqdn):
-    return c.check_domain_availability(DomainName=fqdn)
-
-def check_fqdns(names, domain):
+@backoff.on_exception(backoff.expo, (ClientError, ConnectTimeout), max_tries=RETRIES)
+def check_fqdn(fqdn):
     c = client('route53domains')
-    results = {}
-    for name in names:
-        fqdn = '{}.{}'.format(name, domain)
-        rval = check_availability(c, fqdn)
-
-        if rval is None:
-            continue
-        print(' - {:>18} > {}'.format(fqdn, rval['Availability']))
-        # save result
-        results.setdefault(rval['Availability'], []).append(fqdn)
-    return results
-
+    try:
+        return c.check_domain_availability(DomainName=fqdn)
+    except UnsupportedTLD as ex:
+        return None
 
 #combinations = list(itertools.product(list(string.ascii_lowercase), repeat=LENGTH))
 #names = [''.join(w) for w in combinations]
 #names = [c*LENGTH for c in list(string.ascii_lowercase)]
 names = ['falcon', 'magi', 'nerv', 'sokolowski', 'gsokolowski', 'jgs']
-domains = ['name', 'info', 'pro', 'org', 'net', 'biz', 'red', 'eu', 'it', 'nl', 'de', 'ca', 'cc' 'be']
+domains = [
+    #'name', 'info', 'blue', 'pink',
+    'pro', 'org', 'net', 'biz', 'red',
+    'eu', 'it', 'nl', 'de', 'ca', 'cc' 'be', 'ch',
+]
 
-results = {}
-for domain in domains:
-    results.update(check_fqdns(names, domain))
+if os.path.isfile(OUTPUT_FILE):
+    with open(OUTPUT_FILE, 'r') as f:
+        results = json.load(f)
+else:
+    results = {}
 
-with open('/tmp/domains.json', 'w') as f:
-    json.dump(results, f)
+try:
+    for domain in domains:
+        for name in names:
+            fqdn = '{}.{}'.format(name, domain)
+            if fqdn not in results:
+                rval = check_fqdn(fqdn)
+                status = rval['Availability'] if rval is not None else 'ERROR'
+                results[fqdn] = status
+            print(' - {:>18} > {}'.format(fqdn, results[fqdn]))
+finally:
+    with open('/tmp/domains.json', 'w') as f:
+        json.dump(results, f, indent=4)
