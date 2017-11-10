@@ -148,19 +148,11 @@ myofficemenu = {
     { "math",       "libreoffice --math" }
 }
 
-mygamesmenu = {
-    { "SC2",        "wine \"/mnt/stuff/Games/StarCraft II/StarCraft II.exe\"" },
-    { "EU4",        "wine \"/mnt/stuff/Games/Europa\ Universalis\ IV/eu4.exe\"" },
-    { "FTL",        term('/mnt/stuff/Games/Faster\ Than\ Light && wine FTLGame.exe', 'ftl') },
-    { "KSP",        "wine \"/mnt/stuff/Games/Steam/SteamApps/common/Kerbal Space Program/KSP.exe\"" },
-}
-
 mymainmenu = awful.menu({ items = {
     { "debian",     debian.menu.Debian_menu.Debian, beautiful.awesome_icon },
     { "system",     mysystemmenu, beautiful.awesome_icon },
     { "systools",   mystoolsmenu, beautiful.awesome_icon },
     { "office",     myofficemenu, beautiful.awesome_icon },
-    { "games",      mygamesmenu, beautiful.awesome_icon },
     { "-------------", nil },
     { "chromium",    browser },
     { "rutorrent",  "dwb" },
@@ -184,14 +176,14 @@ mylauncher = awful.widget.launcher({
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("| %Y/%m/%d %H:%M:%S |", 1 )
 
-function get_time_value(text, time_unit)
-    if text ~= nil then
-        if string.match(bat[i]['time to empty'], time_unit) then
-            return string.match(bat[i]['time to empty'], "([0-9\.]+) "..time_unit)
-        end
-    end
-    return 0
-end
+--function get_time_value(text, time_unit)
+--    if text ~= nil then
+--        if string.match(bat[i]['time to empty'], time_unit) then
+--            return string.match(bat[i]['time to empty'], '([0-9\.]+) '..time_unit)
+--        end
+--    end
+--    return 0
+--end
 
 
 handle = assert(io.popen("upower --enumerate | grep battery"))
