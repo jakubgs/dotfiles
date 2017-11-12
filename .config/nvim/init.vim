@@ -518,6 +518,12 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
 
 " }}}
 " Key mappings - Startify {{{
+"
+" MASTER STROKE - Repeat last command
+nnoremap <c-space> @:<CR>
+
+" Dispatch a command
+nnoremap <space>d :Dispatch!<space>
 
 nnoremap <space>S :Startify<CR>
 nnoremap <space>ss :SSave<CR>
