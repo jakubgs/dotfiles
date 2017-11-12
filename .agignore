@@ -69,3 +69,4 @@ LICENSE
 COPYING
 worker-xquery.js
 *.auto.*
+node_modules
