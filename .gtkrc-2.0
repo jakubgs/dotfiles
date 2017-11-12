@@ -2,9 +2,10 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 #gtk-theme-name="Murrina-Night-Owl-Darkest"
-gtk-theme-name="Murrine-Gray"
-gtk-icon-theme-name="ALLWHITE"
-gtk-font-name="Droid Sans Arabic 9"
+#gtk-theme-name="Murrine-Gray"
+gtk-theme-name="Breeze-Dark"
+gtk-icon-theme-name="Adwaita"
+gtk-font-name="Droid Sans Arabic 8"
 gtk-cursor-theme-name="SmoothGNOME"
 gtk-cursor-theme-size=0
 gtk-can-change-accels=1
@@ -21,7 +22,7 @@ gtk-xft-hintstyle="hintfull"
 gtk-xft-rgba = rgb #vrgb
 
 style "user-font" {
-	font_name = "Droid Sans Arabic 9"
+	font_name = "Droid Sans Arabic 8"
 }
 
 widget_class "*" style "user-font"
@@ -32,8 +33,3 @@ style "thunar-icon-view-reduced-style"
     ThunarIconView::row-spacing = 0
 }
 class "ThunarIconView" style "thunar-icon-view-reduced-style"
-
-style "vimfix" {
-  bg[NORMAL] = "#151515" # this matches my gvim theme 'Normal' bg color.
-}
-widget "vim-main-window.*GtkForm" style "vimfix"
