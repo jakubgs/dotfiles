@@ -19,6 +19,7 @@
     c  = commit --verbose
     a  = add 
     an = annex
+    ax = annex
     rh = reset --hard
     rs = reset
     ls = ls-files
