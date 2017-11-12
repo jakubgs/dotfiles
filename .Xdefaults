@@ -1,4 +1,4 @@
-Xft.dpi: 96
+Xft.dpi: 120
 
 Xcursor.theme: Vanilla-DMZ
 
@@ -6,8 +6,8 @@ Xcursor.theme: Vanilla-DMZ
 !*imLocale:             en_GB.UTF-8
 !*geometry:             120x35
 
-*font:              xft:Terminus:size=10:lang=pl:antialias=true:hinting=true
-*boldFont:          xft:Terminus:size=10:Bold:lang=pl:antialias=true:hinting=true
+*font:              xft:Terminus:size=12:lang=pl:antialias=true:hinting=true
+*boldFont:          xft:Terminus:size=12:Bold:lang=pl:antialias=true:hinting=true
 
 ! Disable printing
 *print-pipe:           "cat > /dev/null"
@@ -19,8 +19,8 @@ Xcursor.theme: Vanilla-DMZ
 *borderWidth:          1
 
 ! Fake Transparency
-*transparent: true
-*shading:35 
+!*transparent: true
+!*shading:35 
 
 ! for colors
 *depth: 32
@@ -53,7 +53,7 @@ Xcursor.theme: Vanilla-DMZ
 *scrollTtyKeypress:    true
 *mouseWheelScrollPage: false
 
-*background:           #191919
+*background:           #242424
 *foreground:           #e9e9e9
 *cursorColor:          #ffffff
 *cursorColor2:         #000000
@@ -69,7 +69,7 @@ Xcursor.theme: Vanilla-DMZ
 *color1:  #CC0000
 *color9:  #EF2929
 ! Green (White)
-#*color2:  #EBEBEB
+!*color2:  #EBEBEB
 *color2:  #afd700
 *color10: #afd700
 ! Yellow
