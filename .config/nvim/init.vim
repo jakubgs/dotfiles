@@ -18,12 +18,11 @@ Plug 'tpope/vim-dispatch'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'bruno-/vim-man'
-Plug 'tpope/vim-vinegar'
-Plug 'metakirby5/codi.vim'
-"Plug 'mhinz/vim-startify'
+"Plug 'metakirby5/codi.vim'
 " Movement
 Plug 'justinmk/vim-sneak'
 Plug 'takac/vim-hardtime'
+"Plug 'rhysd/clever-f.vim'
 " Text manipulation
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -42,6 +41,7 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 " JS
 Plug 'jaxbot/browserlink.vim'
+Plug 'moll/vim-node'
 Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
 Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
@@ -52,7 +52,8 @@ Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
 Plug 'bfredl/nvim-ipy',             { 'for': 'python' }
 Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
 Plug 'bps/vim-textobj-python',      { 'for': 'python' }
-" Unite plugins
+" Searching Plugins
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tsukkee/unite-tag'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
@@ -105,6 +106,10 @@ if has("multi_byte")
     set fillchars=vert:│,fold:-       " smooth windows splits
     set listchars=tab:▸\ ,eol:¬       " visible chars for tabs and EOLs
 endif
+
+" Make visual selection match lightline
+hi! link Visual LightlineLeft_visual_0
+hi! link Cursor LightlineLeft_normal_0
 
 " }}}
 " Formatting settings {{{
@@ -249,12 +254,15 @@ set completeopt+=noinsert " Enable auto selection
 
 " Sneak
 let g:sneak#label = 1
+let g:sneak#target_labels = "abcdefghijklmnopqrstuvwxyz"
 let g:sneak#s_next = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#prompt = 'STREAK>>>'
-hi link Sneak Comment
-hi link SneakLabel Error
-hi link SneakScope String
+
+"hi link Sneak Visual
+hi Sneak ctermfg=white ctermbg=88
+hi SneakLabel ctermfg=white ctermbg=88
+hi SneakScope ctermfg=grey ctermbg=grey
 
 " IPython response time
 set updatetime=1000
@@ -343,6 +351,8 @@ xmap f <Plug>Sneak_f
 xmap F <Plug>Sneak_F
 xmap t <Plug>Sneak_t
 xmap T <Plug>Sneak_T
+nmap s <Plug>SneakLabel_s
+nmap S <Plug>SneakLabel_S
 
 " for snippet_complete marker.
 if has('conceal')
@@ -755,3 +765,6 @@ endfun
 map <space>e :call RangerExplorer()<CR>
 
 " }}}
+
+"noremap <expr> <c-j> sneak#s_next('{')
+"noremap <expr> <c-k> sneak#s_next('}')
