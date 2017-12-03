@@ -18,11 +18,10 @@ Plug 'tpope/vim-dispatch'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'bruno-/vim-man'
-"Plug 'metakirby5/codi.vim'
+Plug 'metakirby5/codi.vim'
 " Movement
 Plug 'justinmk/vim-sneak'
 Plug 'takac/vim-hardtime'
-"Plug 'rhysd/clever-f.vim'
 " Text manipulation
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -53,7 +52,6 @@ Plug 'bfredl/nvim-ipy',             { 'for': 'python' }
 Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
 Plug 'bps/vim-textobj-python',      { 'for': 'python' }
 " Searching Plugins
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tsukkee/unite-tag'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
