@@ -354,8 +354,8 @@ awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { in
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("icedove", { class = "Icedove" }) end),
 --- Power & Screen
-awful.key({ "Mod4",           }, "s",       function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
-awful.key({ "Mod4",           }, "h",       function () awful.spawn("sudo /usr/sbin/pm-hibernate") end),
+awful.key({ "Mod4", "Control" }, "s",       function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
+awful.key({ "Mod4", "Control" }, "h",       function () awful.spawn("sudo /usr/sbin/pm-hibernate") end),
 awful.key({ "Mod4", "Control" }, "Left",    function () awful.spawn("xrandr --orientation left") end),
 awful.key({ "Mod4", "Control" }, "Right",   function () awful.spawn("xrandr --orientation right") end),
 awful.key({ "Mod4", "Control" }, "Up",      function () awful.spawn("xrandr --orientation normal") end),
