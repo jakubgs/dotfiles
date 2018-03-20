@@ -101,22 +101,24 @@ modkey = "Mod1"
 newline = '\n'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
+lain.layout.termfair.center.nmaster = 3
+lain.layout.termfair.center.ncol    = 3
 layouts = {
     awful.layout.suit.max,              -- 1
-    awful.layout.suit.floating,         -- 2
     awful.layout.suit.tile,             -- 3
     awful.layout.suit.tile.left,        -- 4
     awful.layout.suit.tile.bottom,      -- 5
     awful.layout.suit.tile.top,         -- 6
     awful.layout.suit.fair,             -- 7
     awful.layout.suit.fair.horizontal,  -- 8
-    awful.layout.suit.corner.nw,        -- 9
-    --awful.layout.suit.magnifier
+    awful.layout.suit.corner.sw,        -- 9
+    lain.layout.termfair.center,
+    lain.layout.centerwork,
 }
 -- }}}
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = { ":admin:", ":edit:", ":web:", ":music:", ":comm:", ":fs:", ":net:", ":vm:" }
+tags = { ":admin:", ":edit:", ":web:", ":comm:", ":misc:", ":fs:", ":net:", ":vm:" }
 
 -- }}}
 -- {{{ Menu
@@ -248,8 +250,8 @@ local taglist_buttons = awful.util.table.join(
                                                   client.focus:toggle_tag(t)
                                               end
                                           end),
-                    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-                    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+                    awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
+                    awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end)
                 )
 
 local tasklist_buttons = awful.util.table.join(
@@ -395,30 +397,36 @@ awful.key({ modkey            },  "t", function ()
     end)
 )
 
-clientkeys = awful.util.table.join(
-awful.key({ modkey,           }, "f", function (c)
+clientkeys = gears.table.join(
+    awful.key({ modkey,           }, "q",
+        function (c)
+            c:kill()
+        end,
+        {description = "close", group = "client"}),
+    awful.key({ modkey,           }, "f",
+        function (c)
             c.fullscreen = not c.fullscreen
             c:raise()
         end,
-awful.key({ modkey,           }, "a", function (c)
+        {description = "toggle fullscreen", group = "client"}),
+    awful.key({ modkey,           }, "a",
+        function (c)
             c.maximized = not c.maximized
             c:raise()
-        end,
-        {description = "maximize", group = "client"}),
-awful.key({ modkey, "Shift" }, "t", function (c)
-            if   c.titlebar then awful.titlebar.remove(c)
-            else awful.titlebar.add(c, { modkey = modkey }) end
-        end),
-        {description = "toggle fullscreen", group = "client"}),
-awful.key({ modkey,           }, "q",      function (c) c:kill() end,
-        {description = "close", group = "client"}),
-awful.key({ modkey,           }, "s",      awful.client.floating.toggle,
+        end ,
+        {description = "(un)maximize", group = "client"}),
+    awful.key({ modkey,           }, "s",
+        awful.client.floating.toggle,
         {description = "toggle floating", group = "client"}),
-awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
-        {description = "move to master", group = "client"}),
-awful.key({ modkey, "Shift"   }, "h",      function (c) c:move_to_screen(c.screen.index+1) end,
+    awful.key({ modkey, "Shift"   }, "h",
+        function (c)
+            c:move_to_screen(c.screen.index+1)
+        end,
         {description = "move to screen +1", group = "client"}),
-awful.key({ modkey, "Shift"   }, "l",      function (c) c:move_to_screen(c.screen.index-1) end,
+    awful.key({ modkey, "Shift"   }, "l",
+        function (c)
+            c:move_to_screen(c.screen.index-1)
+        end,
         {description = "move to screen -1", group = "client"})
 )
 
@@ -506,23 +514,9 @@ awful.rules.rules = {
         },
         class = {
             "feh",
-            "Msgcompose",
             "Arandr",
-            "Gpick",
             "Screenkey",
-            "Sxiv",
-            "Wpa_gui",
             "pinentry",
-            "veromix",
-            "xtightvncviewer",
-            "File Operation Progress" ,
-        },
-
-        name = {
-            "mpv.*",
-            "Rename.*",
-            "Session Manager.*", -- firefox
-            "Event Tester",  -- xev.
         },
         role = {
             "AlarmWindow",  -- Thunderbird's calendar.
@@ -541,23 +535,18 @@ awful.rules.rules = {
         properties = { screen = 1, tag = ":edit:" } },
     { rule_any = { class = { "Iceweasel", "Chromium" } },
         properties = { screen = 1, tag = ":web:" } },
-    { rule_any = {
-          instance = { "ncmpcpp" },
-          class = { "Zeal", "ncmpcpp" },
-          name = { "htop", "mhtop" },
-    },
-        properties = { screen = 1, tag = ":music:" } },
-    { rule_any = { class = { "Pidgin", "Skype" } },
+    --{ rule_any = {
+    --      instance = { "ncmpcpp" },
+    --      class = { "Zeal", "ncmpcpp" },
+    --      name = { "htop", "mhtop" },
+    --},
+    --    properties = { screen = 1, tag = ":music:" } }w,
+    { rule_any = { class = { "Pidgin", "Skype", "Geary" } },
         properties = { screen = 1, tag = ":comm:" } },
     { rule_any = { name = { "ranger" } },
         properties = { screen = 1, tag = ":fs:" } },
     { rule_any = { name = { "Transmission" } },
         properties = { screen = 1, tag = ":net:" } },
-
-      -- Callback-based rules
-    { rule = { name = "ffvim" },
-        properties = { floating = true },
-        callback = function(c) awful.placement.centered(c) end },
 }
 -- }}}
 -- {{{ Signals
