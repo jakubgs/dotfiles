@@ -7,7 +7,7 @@
 #
 ## set it in order to make tag editor and renaming files work properly
 #
-mpd_host = "melchior.magi.blue"
+mpd_host = "melchior.magi.local"
 #
 mpd_port = "6600"
 #
@@ -200,14 +200,16 @@ color1 = "white"
 #
 color2 = "green"
 #
-main_window_highlight_color = "white"
+#main_window_highlight_color = "white"
 #
 progressbar_color = "white"
 progressbar_elapsed_color = "blue"
 #
 #statusbar_color = "default"
 #
-active_column_color = "blue"
+#active_column_color = "blue"
+#current_item_inactive_column_prefix =
+#current_item_inactive_column_suffix = 
 #
 #window_border_color = "green"
 #
