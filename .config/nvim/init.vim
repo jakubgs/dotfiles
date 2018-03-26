@@ -3,6 +3,9 @@
 
 " Plugin management {{{
 
+let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python3'
+
 " auto-install vim-plug                                                                                                                
 if empty(glob('~/.config/nvim/autoload/plug.vim'))                                                                                    
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -15,6 +18,7 @@ call plug#begin('~/.config/nvim/bundle')
 Plug 'dbakker/vim-projectroot'
 Plug 'sotte/presenting.vim'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-vinegar'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'bruno-/vim-man'
@@ -34,8 +38,9 @@ Plug 'kana/vim-textobj-indent'
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'kmnk/vim-unite-giti'
-" Ansible plugins
+" Provisioning plugins
 Plug 'chase/vim-ansible-yaml'
+Plug 'hashivim/vim-terraform'
 " Latex
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 " JS
@@ -43,13 +48,18 @@ Plug 'jaxbot/browserlink.vim'
 Plug 'moll/vim-node'
 Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
-Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
-Plug 'nikvdp/ejs-syntax'
+Plug 'mxw/vim-jsx'
+Plug 'styled-components/vim-styled-components'
+" Go
+Plug 'fatih/vim-go'
+Plug 'tomlion/vim-solidity'
+"Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
+Plug 'jparise/vim-graphql',         { 'for': 'javascript' }
 " Python plugins
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
 Plug 'bfredl/nvim-ipy',             { 'for': 'python' }
-Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
+"Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
 Plug 'bps/vim-textobj-python',      { 'for': 'python' }
 " Searching Plugins
 Plug 'tsukkee/unite-tag'
@@ -199,6 +209,11 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 " }}}
 " Plugin configuration {{{
 
+let g:terraform_align = 1
+let g:terraform_fold_sections = 1
+
+let g:jsx_ext_required = 0
+
 " Startify
 let g:startify_session_dir = '~/.config/nvim/session'
 let g:startify_session_persistence = 1
@@ -333,7 +348,7 @@ let g:lightline = {
       \ },
       \ }
 " for snippet_complete marker.
-if has('conceal')
+if has('cSonceal')
    set conceallevel=0 concealcursor=i
 endif
 
@@ -351,6 +366,8 @@ xmap t <Plug>Sneak_t
 xmap T <Plug>Sneak_T
 nmap s <Plug>SneakLabel_s
 nmap S <Plug>SneakLabel_S
+nmap <c-j> f{
+nmap <c-k> F]
 
 " for snippet_complete marker.
 if has('conceal')
@@ -584,8 +601,8 @@ nnoremap <space><space> :Unite buffer<CR>
 " Key mappings - Git {{{
 
 " fugitive git bindings
-nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gr :Gread<CR>
+nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gw :Gwrite<CR>
 nnoremap <space>ga :Gwrite<CR>
 nnoremap <space>gc :Gcommit -v -q<CR>
@@ -763,6 +780,3 @@ endfun
 map <space>e :call RangerExplorer()<CR>
 
 " }}}
-
-"noremap <expr> <c-j> sneak#s_next('{')
-"noremap <expr> <c-k> sneak#s_next('}')
