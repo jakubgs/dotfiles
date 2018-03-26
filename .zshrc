@@ -2,10 +2,9 @@
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh 
 [[ -f ~/.secret ]] && source ~/.secret
-[[ -f ~/.ssh-agent.env ]] && source ~/.ssh-agent.env
-[[ -f ~/.gnupg/gpg-agent-info-lilim ]] && source ~/.gnupg/gpg-agent-info-lilim
-
-export GPG_AGENT_INFO
+#[[ -f ~/.ssh-agent.env ]] && source ~/.ssh-agent.env
+#[[ -f ~/.gnupg/gpg-agent-info-lilim ]] && source ~/.gnupg/gpg-agent-info-lilim
+#export GPG_AGENT_INFO
 
 # Preamble {{{
 autoload colors         # enable colors
@@ -76,7 +75,7 @@ export PAGER="less"
 export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="2.7"
-export FZF_DEFAULT_OPTS="--extended-exact"
+export FZF_DEFAULT_OPTS="--extended-exact --height=100%"
 
 export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin
 export PATH=$PATH:/opt/java/bin:/opt/logstash-1.4.2/bin:~/bin
@@ -268,7 +267,7 @@ alias httpat='python2 -m SimpleHTTPServer'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
-alias ytdl-audio='youtube-dl -x --audio-format mp3 --output "%(autonumber)s-%(title)s.%(ext)s" --autonumber-size 2'
+alias ytdl-audio='youtube-dl --add-metadata -x --audio-format mp3 --output "%(autonumber)s-%(title)s.%(ext)s" --autonumber-size 2'
 alias sctl='sudo systemctl'
 alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
@@ -281,6 +280,8 @@ alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection c
 # wake up caspair
 alias cwake='wakeonlan d8:cb:8a:31:9d:5e'
 alias mwake='wakeonlan 00:1b:21:06:f1:cc'
+
+alias tr='truffle'
 
 # }}}
 # Functions {{{
