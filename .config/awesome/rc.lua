@@ -10,12 +10,8 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
-local vicious = require("vicious")
 -- Widgets and layouts
 local lain = require("lain")
---vicious.widgets.mpd = require("vicious.widgets.mpd")
-vicious.widgets.volume = require("vicious.widgets.volume")
 local naughty = require('naughty')
 
 -- Load Debian menu entries
@@ -223,18 +219,6 @@ mybattimer = gears.timer.start_new(5,
         return true
     end)
 mybattimer:start()
-
--- Volume bar
-myvolume = wibox.widget.textbox()
-vicious.register(myvolume, vicious.widgets.volume, "| Vol: $1% ", 1, "Master")
-
-myvolume:buttons(awful.util.table.join(
-    awful.button({ }, 2, function () awful.util.spawn(homedir .. "/bin/mute", false) end),
-    awful.button({ }, 3, function () awful.util.spawn("volti-mixer", true) end),
-    awful.button({ }, 4, function () awful.util.spawn("amixer -q set Master 1dB+", false) end),
-    awful.button({ }, 5, function () awful.util.spawn("amixer -q set Master 1dB-", false) end)
-))
-
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
