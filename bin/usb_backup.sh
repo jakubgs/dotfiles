@@ -60,21 +60,28 @@ remove_dot() {
     echo "$1" | sed 's/^\.//'
 }
 
-for ASSET in ${ASSETS[@]}; do
-    NAME=$(basename ${ASSET})
-    TARGET="${DEST}/$(remove_dot ${NAME})"
-    FREE=$(df ${DEST} | awk '/dev/{print $4}')
-    SIZE_NOW=$(du -sb "${ASSET}"  | cut -f1)
+check_size() {
+    ASSET=$1
+    TARGET=$2
+    SIZE_NOW=$(du -sb "${ASSET}" | cut -f1)
     SIZE_OLD=0
     if [[ -d "${TARGET}" ]]; then
         SIZE_OLD=$(du -sb "${TARGET}" | cut -f1 2>/dev/null)
     fi
-    if [[ $FREE -gt $(($SIZE_NEW-$SIZE_OLD)) ]]; then
-        echo "* Copying: ${ASSET} -> ${TARGET} ($((${SIZE_NOW}/1024)) KBytes)"
-        rsync --delete -aqr "${ASSET}" "${TARGET}"
-    else
+    echo $(($SIZE_NOW-$SIZE_OLD))
+}
+
+for ASSET in ${ASSETS[@]}; do
+    NAME=$(basename ${ASSET})
+    TARGET="${DEST}/$(remove_dot ${NAME})"
+    FREE=$(df ${DEST} | awk '/dev/{print $4}')
+    SIZE=$(check_size "$ASSET" "$TARGET")
+    if [[ $FREE -lt $SIZE ]]; then
         echo "* Skipping: ${ASSET} - Not enough space."
+        continue
     fi
+    echo "* Copying: ${ASSET} -> ${TARGET} ($((${SIZE}/1024)) KBytes)"
+    rsync --delete -aqr "${ASSET}" "${TARGET}"
 done
 
 echo
