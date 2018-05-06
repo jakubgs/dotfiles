@@ -77,7 +77,7 @@ for ASSET in ${ASSETS[@]}; do
     FREE=$(df ${DEST} | awk '/dev/{print $4}')
     SIZE=$(check_size "$ASSET" "$TARGET")
     if [[ $FREE -lt $SIZE ]]; then
-        echo "* Skipping: ${ASSET} - Not enough space."
+        echo "* Skipping: ${ASSET} - Not enough space. ($((${SIZE}/1024)) KBytes)"
         continue
     fi
     echo "* Copying: ${ASSET} -> ${TARGET} ($((${SIZE}/1024)) KBytes)"
