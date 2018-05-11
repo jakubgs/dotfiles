@@ -34,7 +34,7 @@ FZF_OPTS='--prompt=pass> --select-1 --print-query --extended-exact'
 
 PASS_STORAGE="$HOME/.password-store"
 
-FILES=$(find "${PASS_STORAGE}" -type f -name "*.gpg")
+FILES=$(find -L "${PASS_STORAGE}" -type f -name "*.gpg")
 ENTRIES=$(echo "${FILES}" | sed \
                             -e "s#${PASS_STORAGE}/##" \
                             -e "s#.gpg##")
