@@ -47,6 +47,9 @@ export LESS_TERMCAP_so=$'\E[01;47;34m' # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m'        # end underline
 export GROFF_NO_SGR=1
 
+# fix for inputting gpg pass in console
+export GPG_TTY=$(tty)
+
 # color stderr red
 #exec 2>>(while read line; do
 #  print '\e[91m'${(q)line}'\e[0m' > /dev/tty; print -n $'\0'; done &)
@@ -74,12 +77,16 @@ export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="2.7"
 export FZF_DEFAULT_OPTS="--extended-exact --height=100%"
+export GOPATH="$HOME/go/"
 
 export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin
 export PATH=$PATH:/opt/java/bin:/opt/logstash-1.4.2/bin:~/bin
 
 # terraform
 export PATH=$PATH:/opt/terraform/bin
+
+# go
+export PATH=$PATH:~/go/bin
 
 # brew
 export PATH=$PATH:~/.linuxbrew/bin
@@ -366,6 +373,14 @@ function alert {
     # send it to awesome
     echo $MESSAGE | awesome-client -
 }
+
+function select-work-dir() {
+    cd /home/sochan/work/$(ls ~/work | fzf)
+    echo
+    zle reset-prompt
+}
+zle     -N   select-work-dir
+bindkey '^W' select-work-dir
 
 # change color based on vimode
 zle-keymap-select () {
