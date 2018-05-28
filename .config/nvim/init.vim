@@ -41,18 +41,21 @@ Plug 'kmnk/vim-unite-giti'
 " Provisioning plugins
 Plug 'chase/vim-ansible-yaml'
 Plug 'hashivim/vim-terraform'
-" Latex
+" Syntax
 Plug 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'LnL7/vim-nix'
+Plug 'lepture/vim-jinja'
+Plug 'pearofducks/ansible-vim'
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
+Plug 'mxw/vim-jsx'
+Plug 'fatih/vim-go'
+Plug 'tomlion/vim-solidity'
 " JS
 Plug 'jaxbot/browserlink.vim'
 Plug 'moll/vim-node'
 Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
-Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
-Plug 'mxw/vim-jsx'
 Plug 'styled-components/vim-styled-components'
-" Go
-Plug 'fatih/vim-go'
-Plug 'tomlion/vim-solidity'
 "Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
 Plug 'jparise/vim-graphql',         { 'for': 'javascript' }
 " Python plugins
@@ -510,6 +513,9 @@ nnoremap <silent> <space>Q :<CR>
 " Edit .vimrc and refresh configuration
 nnoremap <silent> <space>r :source ~/dotfiles/.config/nvim/init.vim<CR>
 nnoremap <silent> <space>R :vsp ~/dotfiles/.config/nvim/init.vim<CR>
+
+" Open TODO
+nnoremap <silent> <space>T :vsp ~/work/jakubgs-notes/todo.md<CR>
 
 " switch between buffers
 nnoremap <silent> <space>h :bprevious<CR>
