@@ -11,3 +11,5 @@ cache=524288
 # Prefill 50% of the cache before restarting playback after the cache emptied.
 #cache-seek-min = 4.0
 sub-scale = 1.0
+# prioritize audio
+ytdl-format=bestvideo[height<=?720]+bestaudio/best
