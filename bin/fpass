@@ -62,9 +62,13 @@ fi
 echo -e "${YELLOW}${RESULTS}${RST}"
 OUTPUT=$(pass ${PASS_ARGS} "${RESULTS}")
 KEY=$(echo "${OUTPUT}" | head -n 1)
+LOGIN=$(echo "${OUTPUT}" | grep -oP 'login: ?\K(.*)$')
 REST=$(echo "${OUTPUT}" | sed 1d)
 
 echo -n "$KEY" | xclip -selection clipboard
+if [[ -n "$LOGIN" ]]; then
+    echo -n "$LOGIN" | xclip -selection primary
+fi
 
 if [[ $ANOTIFY ]]; then
     echo -e "${RESULTS}\n${REST}" | anotify -p
