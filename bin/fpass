@@ -6,6 +6,7 @@ RED='\x1b[31;01m'
 BLD='\x1b[1m'
 RST='\x1b[0m'
 
+PATH=$PATH:~/bin
 FZF=$(which fzf)
 
 show_help() {
@@ -32,11 +33,14 @@ if [[ -n "$@" ]]; then
 fi
 FZF_OPTS='--prompt=pass> --select-1 --print-query --extended-exact'
 
-PASS_STORAGE="$HOME/.password-store"
+if [[ -z $PASSWORD_STORE_DIR ]]; then
+    PASSWORD_STORE_DIR="$HOME/.password-store"
+fi
+PASSWORD_STORE_KEY=$(cat ${PASSWORD_STORE_DIR}/.gpg-id)
 
-FILES=$(find -L "${PASS_STORAGE}" -type f -name "*.gpg")
+FILES=$(find -L "${PASSWORD_STORE_DIR}" -type f -name "*.gpg")
 ENTRIES=$(echo "${FILES}" | sed \
-                            -e "s#${PASS_STORAGE}/##" \
+                            -e "s#${PASSWORD_STORE_DIR}/##" \
                             -e "s#.gpg##")
 
 OUTPUT=$(echo "$ENTRIES" | ${FZF} ${FZF_OPTS})
