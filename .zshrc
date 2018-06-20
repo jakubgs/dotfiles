@@ -380,7 +380,7 @@ function select-work-dir() {
     zle reset-prompt
 }
 zle     -N   select-work-dir
-bindkey '^W' select-work-dir
+bindkey '^S' select-work-dir
 
 # change color based on vimode
 zle-keymap-select () {
@@ -407,6 +407,22 @@ if [[ $TERM != "linux" ]]; then
     zle -N zle-line-finish
     zle -N zle-line-init
 fi
+
+# auto completion for ssh hosts
+
+function fzf-ssh () {
+    local hosts=$(awk '{print $1}' ~/.ssh/known_hosts)
+  local selected_host=$(echo $hosts | fzf --query "$LBUFFER")
+
+  if [ -n "$selected_host" ]; then
+    BUFFER="ssh ${selected_host}"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+
+zle -N fzf-ssh
+bindkey '^s' fzf-ssh
 
 # }}}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
