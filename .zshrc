@@ -87,6 +87,7 @@ export PATH=$PATH:/opt/terraform/bin
 
 # go
 export PATH=$PATH:~/go/bin
+export GOPATH=/home/sochan/go
 
 # brew
 export PATH=$PATH:~/.linuxbrew/bin
@@ -380,7 +381,7 @@ function select-work-dir() {
     zle reset-prompt
 }
 zle     -N   select-work-dir
-bindkey '^S' select-work-dir
+bindkey '^a' select-work-dir
 
 # change color based on vimode
 zle-keymap-select () {
