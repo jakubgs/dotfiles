@@ -297,6 +297,31 @@ function see() {
     ag --nocolor --nogroup -g "$*"
 }
 
+function do-reboot() {
+    doctl compute d ls $@ --format ID,Name,PublicIPv4,Region,Tags,Status
+    ID=$(doctl compute d ls $@ --format ID --no-header)
+    if [[ -n "${ID}" ]]; then
+        echo
+        read -q REPLY\?"Do you really want to reboot this host? (y/n) "
+        if [[ "${REPLY}" == "y" ]]; then
+            doctl compute droplet-action reboot "${ID}"
+        fi
+    fi
+}
+
+function gc-reboot() {
+    NAME=${@:gs/./-}
+    gcloud compute instances list --filter="${NAME}"
+    ID=$(gcloud compute instances describe "${NAME}" --quiet |  grep -oP "^id: '\K(\d+)")
+    if [[ -n "${ID}" ]]; then
+        echo
+        read -q REPLY\?"Do you really want to reboot this host? (y/n) "
+        if [[ "${REPLY}" == "y" ]]; then
+            gcloud compute instances reset "${NAME}"
+        fi
+    fi
+}
+
 # reload zshrc
 function src() {
     autoload -U zrecompile
