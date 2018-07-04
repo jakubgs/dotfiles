@@ -33,6 +33,7 @@ case $HOST in           # change prompt depending on host
 esac
 
 export PROMPT="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
+export RPROMPT="[%W %D{%K:%M:%S}]"
 export PS1=$PROMPT
 export PROMPT=$PROMPT
 
