@@ -1,35 +1,6 @@
-# DO NOT EDIT! This file will be overwritten by LXAppearance.
-# Any customization should be done in ~/.gtkrc-2.0.mine instead.
+# -- THEME AUTO-WRITTEN BY gtk-theme-switch2 DO NOT EDIT
+include "/usr/share/themes/Blackbird/gtk-2.0/gtkrc"
 
-#gtk-theme-name="Murrina-Night-Owl-Darkest"
-#gtk-theme-name="Murrine-Gray"
-gtk-theme-name="Breeze-Dark"
-gtk-icon-theme-name="Adwaita"
-gtk-font-name="Droid Sans Arabic 8"
-gtk-cursor-theme-name="SmoothGNOME"
-gtk-cursor-theme-size=0
-gtk-can-change-accels=1
-gtk-toolbar-style=GTK_TOOLBAR_ICONS
-gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
-gtk-button-images=1
-gtk-menu-images=1
-gtk-enable-event-sounds=1
-gtk-enable-input-feedback-sounds=1
-gtk-xft-antialias=1
-gtk-xft-hinting=1
-gtk-xft-hintstyle="hintfull"
-#gtk-xft-rgba="none"
-gtk-xft-rgba = rgb #vrgb
+include "/home/sochan/.gtkrc-2.0.mine"
 
-style "user-font" {
-	font_name = "Droid Sans Arabic 8"
-}
-
-widget_class "*" style "user-font"
-
-style "thunar-icon-view-reduced-style"
-{
-	ThunarIconView::column-spacing = 0
-    ThunarIconView::row-spacing = 0
-}
-class "ThunarIconView" style "thunar-icon-view-reduced-style"
+# -- THEME AUTO-WRITTEN BY gtk-theme-switch2 DO NOT EDIT
