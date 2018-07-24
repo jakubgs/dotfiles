@@ -30,6 +30,8 @@ Plug 'takac/vim-hardtime'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tommcdo/vim-exchange'
+Plug 'godlygeek/tabular'
+Plug 'jkramer/vim-checkbox'
 " Text objects
 Plug 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-brace'
@@ -42,10 +44,12 @@ Plug 'kmnk/vim-unite-giti'
 Plug 'chase/vim-ansible-yaml'
 Plug 'hashivim/vim-terraform'
 " Syntax
+Plug 'robbles/logstash.vim'
+Plug 'tpope/vim-markdown'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'LnL7/vim-nix'
 Plug 'lepture/vim-jinja'
-Plug 'pearofducks/ansible-vim'
+"Plug 'pearofducks/ansible-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
 Plug 'mxw/vim-jsx'
@@ -212,6 +216,9 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 " }}}
 " Plugin configuration {{{
 
+" Markdown
+let g:markdown_syntax_conceal = 1
+
 let g:terraform_align = 1
 let g:terraform_fold_sections = 1
 
@@ -357,6 +364,9 @@ endif
 
 " }}}
 " Key mappings - Plugins {{{
+
+" Checkbox
+nnoremap <space>t :ToggleCB<CR>
 
 " Sneak
 nmap f <Plug>Sneak_f
