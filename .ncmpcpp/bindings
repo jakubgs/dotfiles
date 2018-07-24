@@ -1,4 +1,4 @@
-def_key "insert"
+def_key "space"
     select_item
 
 def_key "j"
@@ -25,11 +25,11 @@ def_key "K"
 def_key "J"
     scroll_down_album 
 
-#def_key "ctrl_k"
-#    move_selected_items_up
-#
-#def_key "ctrl_j"
-#    move_selected_items_down 
+def_key "ctrl-k"
+    move_selected_items_up
+
+def_key "ctrl-j"
+    move_selected_items_down 
 
 def_key "y"
     show_lyrics 
