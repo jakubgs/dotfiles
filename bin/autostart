@@ -36,7 +36,6 @@ function run {
 cd /tmp
 
 echo "### Keyboard setup"
-xinput set-prop 'pointer:USB-HID Keyboard' 316 -0.7
 # Caps Lock <-> Esc
 run xmodmap ~/.speedswapper
 run -r xcape -e 'Control_R=Escape'
@@ -46,16 +45,9 @@ run urxvtd -q -f -o
 run -c nvim urxvtc -title -e nvim
 
 run -r nm-applet
-run -r xfce4-power-manager
-run -r blueman-applet
 run -r pasystray
-#run -r synergys
 
-# Small hack for java compatibility
-run wmname LG3D
 run nitrogen --restore
 run autorandr --change
 run synclient TouchpadOff=1
 run xbindkeys
-#run thunar --daemon
-#run skype
