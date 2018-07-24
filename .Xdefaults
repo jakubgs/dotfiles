@@ -1,4 +1,8 @@
-Xft.dpi: 120
+Xft.dpi:        130
+Xft.antialias:  true
+Xft.hinting:    true
+Xft.rgba:       rgb
+Xft.hintstyle:  hintslight
 
 Xcursor.theme: Vanilla-DMZ
 
@@ -6,8 +10,8 @@ Xcursor.theme: Vanilla-DMZ
 !*imLocale:             en_GB.UTF-8
 !*geometry:             120x35
 
-*font:              xft:Terminus:size=12:lang=pl:antialias=true:hinting=true
-*boldFont:          xft:Terminus:size=12:Bold:lang=pl:antialias=true:hinting=true
+*font:              xft:Terminus:size=16:lang=pl:antialias=true:hinting=true
+*boldFont:          xft:Terminus:size=16:Bold:lang=pl:antialias=true:hinting=true
 
 ! Disable printing
 *print-pipe:           "cat > /dev/null"
