@@ -1,6 +1,7 @@
 [user]
-    email = panswiata@gmail.com
+    email = jakub@status.im
     name = Jakub Sokołowski
+    signingkey = 4EF064D0E6D63020
 [core]
     editor = nvim
 [diff]
@@ -25,6 +26,7 @@
     ls = ls-files
     l  = log --decorate
     sl = log --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
+    sla = log --pretty=format:'* %h %s %d' --abbrev-commit
     df = diff
     dt = difftool
 [branch "master"]
@@ -42,3 +44,7 @@
     prompt = false
 [web]
     browser = firefox
+[commit]
+    gpgsign = true
+[gpg]
+    program = gpg
