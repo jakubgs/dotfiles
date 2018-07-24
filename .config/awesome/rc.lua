@@ -76,12 +76,14 @@ terminal = "urxvtc"
 function term(command, name, args)
     args = args or ''
     name = name or command:match("([^%s]+)")
-    return terminal .. args .. " -name '"..name.."' -title '"..name.."' -e '"..command.."'"
+    cmd = terminal .. " " .. args .. " -name '"..name.."' -title '"..name.."' -e '"..command.."'"
+    print(cmd)
+    return cmd
 end
 
 geditor = term('nvim')
 ncmpcpp = term('ncmpcpp')
-fpass   = term(homedir .. '/bin/fpass -a', 'pass')
+fpass   = term(homedir .. '/bin/fpass', 'fpass', '-hold')
 
 naughty.config.padding = 10
 naughty.config.spacing = 6
@@ -174,52 +176,6 @@ mylauncher = awful.widget.launcher({
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("| %Y/%m/%d %H:%M:%S |", 1 )
 
---function get_time_value(text, time_unit)
---    if text ~= nil then
---        if string.match(bat[i]['time to empty'], time_unit) then
---            return string.match(bat[i]['time to empty'], '([0-9\.]+) '..time_unit)
---        end
---    end
---    return 0
---end
-
-
-handle = assert(io.popen("upower --enumerate | grep battery"))
-bat_paths = {}
-for bat_path in handle:lines() do
-    table.insert(bat_paths, bat_path)
-end
-handle:close()
-
-mybattery = wibox.widget.textbox()
-function show_bat_status(cap, time)
-    bat_text = '| Bat: ' .. cap .. '% '
-    mybattery:set_text(bat_text)
-end
-show_bat_status("?", "ww?")
-
-mybattimer = gears.timer.start_new(5,
-    function()
-        bat_sum_perc, bat_sum_minutes = 0, 0, 0
-        bat = {}
-        for i, bat_path in pairs(bat_paths) do
-            bat[i] = {}
-            upower = assert(io.popen("upower --show-info "..bat_path))
-            for line in upower:lines() do
-                param_name, param_value = string.match(line, " +([a-z- ]+): *(.+)")
-                if param_name ~= nil and param_value ~= nil then
-                    bat[i][param_name] = param_value
-                end
-            end
-            bat_sum_perc = bat_sum_perc + tonumber(string.sub(bat[i]['percentage'], 0, -2))
-            upower:close()
-        end
-        combined_capacity = bat_sum_perc / #bat
-        show_bat_status(combined_capacity)
-        return true
-    end)
-mybattimer:start()
-
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -301,7 +257,6 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
-            mybattery,
             mytextclock,
             wibox.widget.systray(),
         },
@@ -336,7 +291,7 @@ awful.key({ modkey,           }, "n",       function () run_or_raise(terminal ..
 awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "nvim" }) end),
 awful.key({ modkey,           }, "w",       function () run_or_raise(browser, { class = "Chromium" }) end),
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
-awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { instance = "pass" }) end),
+awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { instance = "fpass" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("icedove", { class = "Icedove" }) end),
 --- Power & Screen
@@ -507,6 +462,14 @@ awful.rules.rules = {
             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
       }, properties = { floating = true }},
+
+    -- fpass
+    { rule = {
+        name = "fpass",
+        properties = {
+            floating = true,
+        },
+    }},
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = { type = { "dialog" }, name = { "mpv.*" } },
