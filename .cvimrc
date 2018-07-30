@@ -56,7 +56,7 @@ map I ;tabnew!<space>
 """"""""""""""""""
 " Search Engines "
 """"""""""""""""""
-let searchengine searx = ["https://searx.me/", "https://searx.me/?q=%s"]
+let searchengine searx = ["https://searx.org/", "https://searx.org/?q=%s"]
 let searchengine duckduckgo = ["https://duckduckgo.com/", "https://duckduckgo.com/?q=%s&atb=v69-5_z"]
 let searchengine google = ["https://www.google.com/", "https://www.google.com/?q=%s"]
 let searchengine youtube = ["https://www.youtube.com/", "https://www.youtube.com/results?search_query=%s&page=subscriptions"]
@@ -66,6 +66,11 @@ let searchalias d = "duckduckgo"
 let searchalias g = "google"
 let searchalias y = "youtube"
 let searchalias m = "maps"
+
+command s tabnew searx
+
+let completionengines = ["searx", "google"]
+let defaultengine = "searx"
 
 """"""""""""""
 " QuickMarks "
@@ -98,9 +103,14 @@ let qmark y = ["https://www.youtube.com/feed/subscriptions"]
 """""""""""""""
 
 let qmark M = ["https://mail.google.com/mail/u/1/#inbox"]
-let qmark C = ["https://calendar.google.com/calendar/b/1/r?tab=mc"]
 let qmark W = ["https://wiki.status.im/Main_Page"]
-let qmark G = ["https://github.com/status-im"]
+let qmark C = ["https://consul.status.im/"]
+let qmark I = ["https://icinga.status.im/"]
+let qmark J = ["https://jenkins.status.im/"]
+let qmark G = ["https://grafana.status.im/"]
+let qmark A = ["https://alerts.status.im/"]
+let qmark P = ["https://prometheus.status.im/"]
+let qmark D = ["https://discuss.status.im/"]
 let qmark P = ["https://github.com/status-im/status-cluster/projects/1"]
 let qmark O = ["https://docs.google.com/spreadsheets/d/1BhWKyjkpxhavkqtk9VYB3EHNDIzQtUlkwlg7_lQNAws/edit#gid=0"]
 let qmark S = ["https://docs.google.com/spreadsheets/d/1By53othxtxtMOS01Wv13W99cvKlmWuKP35ATHQjtJ4w/edit#gid=0"]
