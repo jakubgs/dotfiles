@@ -129,6 +129,7 @@ hi! link Cursor LightlineLeft_normal_0
 " }}}
 " Formatting settings {{{
 
+set autoindent
 set expandtab                     " use spaces instead of tabs
 set tabstop=4                     " spaces in <tab>
 set softtabstop=4                 " spaces in <tab> when editing
@@ -621,10 +622,10 @@ nnoremap <space>gr :Gread<CR>
 nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gw :Gwrite<CR>
 nnoremap <space>ga :Gwrite<CR>
-nnoremap <space>gc :Gcommit -v -q<CR>
-nnoremap <space>gt :Gcommit -v -q -- "%:p"<CR>
-nnoremap <space>gC :Gcommit -v -q --amend<CR>
-nnoremap <space>gT :Gcommit -v -q --amend -- "%:p"<CR>
+nnoremap <space>gc :Gcommit -v -q -n<CR>
+nnoremap <space>gt :Gcommit -v -q -n -- "%:p"<CR>
+nnoremap <space>gC :Gcommit -v -q -n --amend<CR>
+nnoremap <space>gT :Gcommit -v -q -n --amend -- "%:p"<CR>
 nnoremap <space>gd :Gvdiff<CR>
 nnoremap <space>ge :Gedit<CR>
 nnoremap <space>gu :Git reset "%:p"<CR><CR>
