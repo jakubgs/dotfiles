@@ -65,9 +65,9 @@ KEY=$(echo "${OUTPUT}" | head -n 1)
 LOGIN=$(echo "${OUTPUT}" | grep -oP 'login: ?\K(.*)$')
 REST=$(echo "${OUTPUT}" | sed 1d)
 
-echo -n "$KEY" | xclip -selection clipboard
+echo -n "$KEY" | xsel -i --clipboard
 if [[ -n "$LOGIN" ]]; then
-    echo -n "$LOGIN" | xclip -selection primary
+    echo -n "$LOGIN" | xsel -i --primary
 fi
 
 if [[ $ANOTIFY ]]; then
