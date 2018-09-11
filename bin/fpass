@@ -68,6 +68,8 @@ REST=$(echo "${OUTPUT}" | sed 1d)
 echo -n "$KEY" | xsel -i --clipboard
 if [[ -n "$LOGIN" ]]; then
     echo -n "$LOGIN" | xsel -i --primary
+else
+    echo -n "$KEY" | xsel -i --primary
 fi
 
 if [[ $ANOTIFY ]]; then
