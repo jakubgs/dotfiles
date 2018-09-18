@@ -12,9 +12,6 @@ let barposition = "bottom"
 
 let hintcharacters = "qwertyuiopasdfghjklzxcvbnm"
 
-let completionengines = ['duckduckgo', 'google', 'imdb', 'wikipedia']
-let defaultengine = "duckduckgo"
-
 """"""""""""""""
 " Key Mappings "
 """"""""""""""""
@@ -57,42 +54,37 @@ map I ;tabnew!<space>
 " Search Engines "
 """"""""""""""""""
 let searchengine searx = ["https://searx.org/", "https://searx.org/?q=%s"]
-let searchengine duckduckgo = ["https://duckduckgo.com/", "https://duckduckgo.com/?q=%s&atb=v69-5_z"]
+let searchengine ddgo = ["https://duckduckgo.com/", "https://duckduckgo.com/?q=%s"]
 let searchengine google = ["https://www.google.com/", "https://www.google.com/?q=%s"]
 let searchengine youtube = ["https://www.youtube.com/", "https://www.youtube.com/results?search_query=%s&page=subscriptions"]
-let searchengine maps = ["https://www.google.ie/", "https://www.google.ie/maps/search/%s?hl=en&source=opensearch"]
+let searchengine maps = ["https://www.google.com/", "https://www.google.com/maps/search/%s?hl=en&source=opensearch"]
 let searchalias s = "searx"
-let searchalias d = "duckduckgo"
+let searchalias d = "ddgo"
 let searchalias g = "google"
 let searchalias y = "youtube"
 let searchalias m = "maps"
 
-command s tabnew searx
+command s tabnew ddgo
 
-let completionengines = ["searx", "google"]
-let defaultengine = "searx"
+let completionengines = ["ddgo", "google"]
+let defaultengine = "ddgo"
 
 """"""""""""""
 " QuickMarks "
 """"""""""""""
-let qmark A = ["https://analizy.pl/"]
-let qmark E = ["https://ebank.db-pbc.pl/auth/login.jsp"]
-let qmark H = ["https://robot.your-server.de/"]
-let qmark T = ["https://www.allsides.com/"]
-let qmark U = ["http://cloud-images.ubuntu.com/trusty/current/"]
-let qmark V = ["https://eu-west-1.console.aws.amazon.com/console/home?region=eu-west-1"]
-let qmark a = ["https://allegro.pl/"]
+let qmark a = ["https://analizy.pl/"]
 let qmark c = ["https://www.google.com/calendar/b/1/render?tab=mc&pli=1#main_7"]
 let qmark d = ["http://www.mangahere.co/"]
-let qmark e = ["https://www.etoro.com/portfolio"]
+let qmark e = ["https://ebank.db-pbc.pl/auth/login.jsp"]
 let qmark f = ["https://mangadex.org/follows"]
-let qmark g = ["http://melchior.magi.blue/grafana/"]
+let qmark g = ["https://gab.ai/"]
 let qmark h = ["https://news.ycombinator.com/"]
 let qmark m = ["https://mail.google.com/mail/u/0/?tab=cm#inbox"]
 let qmark n = ["http://mynoise.net/calibration.php"]
 let qmark p = ["https://tls.passthepopcorn.me/top10.php"]
 let qmark q = ["http://www.vimperator.org/blog"]
 let qmark r = ["https://voat.co/"]
+let qmark s = ["https://www.allsides.com/"]
 let qmark t = ["http://melchior.magi.blue/torrent/"]
 let qmark v = ["http://localhost:8080/unread"]
 let qmark w = ["http://store.steampowered.com/search/?filter=weeklongdeals"]
@@ -102,19 +94,22 @@ let qmark y = ["https://www.youtube.com/feed/subscriptions"]
 " Work        "
 """""""""""""""
 
-let qmark M = ["https://mail.google.com/mail/u/1/#inbox"]
-let qmark W = ["https://wiki.status.im/Main_Page"]
-let qmark C = ["https://consul.status.im/"]
-let qmark I = ["https://icinga.status.im/"]
-let qmark J = ["https://jenkins.status.im/"]
-let qmark G = ["https://grafana.status.im/"]
 let qmark A = ["https://alerts.status.im/"]
-let qmark P = ["https://prometheus.status.im/"]
+let qmark B = ["https://canary.status.im/"]
+let qmark C = ["https://consul.status.im/"]
 let qmark D = ["https://discuss.status.im/"]
-let qmark P = ["https://github.com/status-im/status-cluster/projects/1"]
+let qmark E = ["https://discuss.status.im/"]
+let qmark G = ["https://grafana.status.im/"]
+let qmark I = ["https://icinga.status.im/"]
+let qmark J = ["https://ci.status.im/"]
+let qmark M = ["https://mail.google.com/mail/u/0/#inbox"]
+let qmark N = ["https://status-im.github.io/nightly/"]
 let qmark O = ["https://docs.google.com/spreadsheets/d/1BhWKyjkpxhavkqtk9VYB3EHNDIzQtUlkwlg7_lQNAws/edit#gid=0"]
+let qmark P = ["https://github.com/status-im/status-cluster/projects/1"]
+let qmark P = ["https://prometheus.status.im/"]
 let qmark S = ["https://docs.google.com/spreadsheets/d/1By53othxtxtMOS01Wv13W99cvKlmWuKP35ATHQjtJ4w/edit#gid=0"]
 let qmark T = ["https://docs.google.com/document/d/1IXgvS6QnkqwLDXrgIYjO9eHI4fdPjX2EKx4wYHROnNU/edit#"]
+let qmark W = ["https://wiki.status.im/Main_Page"]
 
 """""""""""""""
 " Boilerplate "
