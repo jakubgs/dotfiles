@@ -91,9 +91,9 @@ export PATH=$PATH:~/go/bin
 export GOPATH=/home/sochan/go
 
 # brew
-export PATH=$PATH:~/.linuxbrew/bin
-export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+#export PATH=$PATH:~/.linuxbrew/bin
+#export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+#export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 fpath=(~/tools/zsh-completions/src $fpath)
 
@@ -367,7 +367,7 @@ function fuck {
 # send a notification when command completes
 function alert {
     RVAL=$?                 # get return value of the last command
-    DATE=`date +"%a %b %d/%m/%Y, %H:%M:%S"` # get time of completion
+    DATE=`date +"%Y/%m/%d %H:%M:%S"` # get time of completion
     LAST=$history[$HISTCMD] # get current command
     LAST=${LAST%[;&|]*}     # remove "; alert" from it
     echo -ne "\e]2;$LAST\a" # set window title so we can get back to it
@@ -386,19 +386,19 @@ function alert {
     fi
 
     # compose the notification
-    MESSAGE="naughty.notify({ \
-            title = \"Command completed on: \t\t$DATE\", \
+    MESSAGE="require(\"naughty\").notify({ \
+            title = \"Command completed: \t$DATE\", \
             text = \"$ $LAST\" .. newline .. \"-> $RVAL\", \
             timeout = 0, \
             screen = 1, \
             bg = \"$BG_COLOR\", \
             fg = \"#ffffff\", \
             margin = 8, \
-            width = 380, \
+            width = 500, \
             run = function () run_or_raise(nill, { name = \"$LAST\" }) end
             })"
     # send it to awesome
-    echo $MESSAGE | awesome-client -
+    echo $MESSAGE | awesome-client
 }
 
 function select-work-dir() {
