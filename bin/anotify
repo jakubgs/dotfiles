@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Functions {{{
 
@@ -12,14 +12,15 @@ Supports multiple types of notices, dependent on switch used:
     -w - Notification is a warning.
     -e - Notification is an error
     -s - Notification is a syslog message. It receives input through stdin.
-    -m <SENDER> - Mail message notification."
+    -t <TIMEOUT> - Optional message timeout in seconds.
+    -m <SENDER>  - Mail message notification."
 
     echo "${HELP_MSG}"
 }
 
 awesome_notification() {
     # compose the notification
-    COMMAND="naughty.notify({ \
+    COMMAND="require('naughty').notify({ \
             title = ${TITLE}, \
             text = ${TEXT}, \
             timeout = ${TIMEOUT}, \
@@ -34,14 +35,14 @@ awesome_notification() {
                 ) end
             })"
     # send it to awesome
-    echo $COMMAND | awesome-client -
+    echo $COMMAND | awesome-client
 }
 
 # }}}
 # Variables {{{
 
 # get the damned date as soon as possible
-DATE=`date +"%a %b %d/%m/%Y, %H:%M:%S"` # get time of completion
+TSTAMP=$(date +"%Y/%m/%d %H:%M:%S") # get time of completion
 
 # default notificaiton color
 BG_COLOR="#417c9d"
@@ -60,7 +61,7 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 output_file=""
 verbose=0
 
-while getopts "h?m:wesp" opt; do
+while getopts "h?m:t:wesp" opt; do
     case "$opt" in
         h|\?)
             show_help
@@ -69,6 +70,8 @@ while getopts "h?m:wesp" opt; do
         m)  EMAIL=1
             BG_COLOR="#2f8a2c"
             SENDER=$OPTARG
+            ;;
+        t)  TIMEOUT=$OPTARG
             ;;
         w)  WARNING=1
             BG_COLOR="#a7580b"
@@ -103,15 +106,15 @@ echo "--------------"
 
 # this formatting with tabs is retarded but I have no better idea
 if [[ $EMAIL ]] ; then
-    TITLE="\"E-Mail \t\t\t\t${DATE}\""
+    TITLE="\"E-Mail \t\t\t${TSTAMP}\""
     TEXT="\"Sender: ${SENDER}\" .. newline .. \"Subject: ${MESSAGE}\""
     CLASS="*Thunderbird"
 elif [[ $ERROR ]] ; then
-    TITLE="\"Error  \t\t\t\t${DATE}\""
-    TEXT="\"Message: ${MESSAGE}\""
+    TITLE="\"ERROR  \t\t\t${TSTAMP}\""
+    TEXT="\"${MESSAGE}\""
 elif [[ $WARNING ]] ; then
-    TITLE="\"Warning\t\t\t\t${DATE}\""
-    TEXT="\"Message: ${MESSAGE}\""
+    TITLE="\"WARNING\t\t\t${TSTAMP}\""
+    TEXT="\"${MESSAGE}\""
 elif [[ $PASS ]] ; then
     # replace real newline with lua newline
     MESSAGE=$(echo "$MESSAGE" | sed ':a;N;$!ba;s/\n/\" .. newline .. \"/g')
@@ -125,15 +128,15 @@ elif [[ $SYSLOG ]] ; then
     PID=$(echo "${SYSLOG_INFO}" | cut -d'|' -f4)
     MESSAGE=$(echo "${SYSLOG_INFO}" | cut -d'|' -f5)
 
-    TITLE="\"Syslog [${PRIORITY}]\t\t\t${DATE}\""
+    TITLE="\"Syslog [${PRIORITY}]\t\t\t${TSTAMP}\""
     TEXT="\"Host: ${HOST}\t\tProgram: ${PROGRAM}\t\tPID: ${PID}\" .. newline .. \"${MESSAGE}\""
 
     # raise or run mmtail to check out DEM logs
     EXECUTE="mmtail"
     CLASS="mmtail"
 else
-    TITLE="\"Reminder \t\t\t$DATE\""
-    TEXT="\"Message: ${MESSAGE}\""
+    TITLE="\"NOTE\t\t\t$TSTAMP\""
+    TEXT="\"${MESSAGE}\""
 fi
 
 awesome_notification 
