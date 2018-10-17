@@ -65,7 +65,7 @@ local first_line = require("lain.helpers").first_line
 awful.spawn.with_shell(homedir .. "/bin/autostart")
 
 -- Themes define colours, icons, and wallpapers
-beautiful.init(homedir .. "/.awesome/themes/default/theme.lua")
+beautiful.init(homedir .. "/.config/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 browser = "chromium"
@@ -107,11 +107,11 @@ layouts = {
     awful.layout.suit.tile.left,        -- 4
     awful.layout.suit.tile.bottom,      -- 5
     awful.layout.suit.tile.top,         -- 6
-    awful.layout.suit.fair,             -- 7
-    awful.layout.suit.fair.horizontal,  -- 8
-    awful.layout.suit.corner.sw,        -- 9
-    lain.layout.termfair.center,
-    lain.layout.centerwork,
+    --awful.layout.suit.fair,             -- 7
+    --awful.layout.suit.fair.horizontal,  -- 8
+    --awful.layout.suit.corner.sw,        -- 9
+    --lain.layout.termfair.center,
+    --lain.layout.centerwork,
 }
 -- }}}
 -- {{{ Tags
@@ -196,20 +196,16 @@ local taglist_buttons = awful.util.table.join(
 
 local tasklist_buttons = awful.util.table.join(
                      awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  -- Without this, the following
-                                                  -- :isvisible() makes no sense
-                                                  c.minimized = false
-                                                  if not c:isvisible() and c.first_tag then
-                                                      c.first_tag:view_only()
-                                                  end
-                                                  -- This will also un-minimize
-                                                  -- the client, if needed
-                                                  client.focus = c
-                                                  c:raise()
+                                              -- Without this, the following
+                                              -- :isvisible() makes no sense
+                                              c.minimized = false
+                                              if not c:isvisible() and c.first_tag then
+                                                  c.first_tag:view_only()
                                               end
+                                              -- This will also un-minimize
+                                              -- the client, if needed
+                                              client.focus = c
+                                              c:raise()
                                           end),
                      awful.button({ }, 3, client_menu_toggle_fn()),
                      awful.button({ }, 4, function ()
@@ -222,7 +218,7 @@ local tasklist_buttons = awful.util.table.join(
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
-    awful.tag(tags, s, awful.layout.suit.tile)
+    awful.tag(tags, s, awful.layout.suit.max)
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -293,7 +289,9 @@ awful.key({ modkey,           }, "w",       function () run_or_raise(browser, { 
 awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
 awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { instance = "fpass" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
-awful.key({ modkey,           }, "u",       function () run_or_raise("icedove", { class = "Icedove" }) end),
+awful.key({ modkey,           }, "u",       function () run_or_raise("geary", { class = "Geary" }) end),
+awful.key({ modkey,           }, "i",       function () run_or_raise("~/bin/status", { class = "StatusIm" }) end),
+awful.key({ modkey,           }, "o",       function () run_or_raise("slack", { class = "Slack" }) end),
 --- Power & Screen
 awful.key({ "Mod4", "Control" }, "s",       function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
 awful.key({ "Mod4", "Control" }, "h",       function () awful.spawn("sudo /usr/sbin/pm-hibernate") end),
@@ -488,7 +486,7 @@ awful.rules.rules = {
     --      name = { "htop", "mhtop" },
     --},
     --    properties = { screen = 1, tag = ":music:" } }w,
-    { rule_any = { class = { "Pidgin", "Skype", "Geary" } },
+    { rule_any = { class = { "StatusIm", "Slack", "Skype", "Geary" } },
         properties = { screen = 1, tag = ":comm:" } },
     { rule_any = { name = { "ranger" } },
         properties = { screen = 1, tag = ":fs:" } },
