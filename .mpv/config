@@ -1,7 +1,7 @@
 [default]
 screenshot-format="png"
 loop="inf"
-vo=opengl,drm
+vo=gpu,drm
 hwdec=no
 ao=alsa
 embeddedfonts="yes"
