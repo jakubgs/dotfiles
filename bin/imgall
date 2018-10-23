@@ -29,6 +29,7 @@ feh -A "$ACTION" \
     --scale-down \
     --zoom max \
     --auto-zoom \
+    --auto-rotate \
     --geometry 1920x1200 \
     --magick-timeout 5 \
     -dZxrSfilename \
