@@ -584,7 +584,7 @@ nnoremap <space>cr :Codi ruby<CR>
 nnoremap <space>cj :Codi javascript<CR>
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/neovim file_rec/neovim:'.g:projectroot.' file/new')<CR>
+nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/neovim:'.g:projectroot.' file/new')<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
@@ -606,7 +606,8 @@ nnoremap <space>up :execute('Unite file_rec/neovim:'.g:projectroot)<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 
 " location specific
-nnoremap <space>uW :Unite file_rec/neovim:~/work/<CR>
+"nnoremap <space>uW :Unite file_rec/neovim:~/work/<CR>
+nnoremap <space>uW :Unite file:~/work/<CR>
 nnoremap <space>uP :Unite file_rec/neovim:/mnt/melchior/projects<CR>
 nnoremap <space>uh :Unite file:~/<CR>
 nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
