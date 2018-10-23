@@ -105,10 +105,10 @@ let qmark J = ["https://ci.status.im/"]
 let qmark M = ["https://mail.google.com/mail/u/0/#inbox"]
 let qmark N = ["https://github.com/notifications"]
 let qmark O = ["https://docs.google.com/spreadsheets/d/1BhWKyjkpxhavkqtk9VYB3EHNDIzQtUlkwlg7_lQNAws/edit#gid=0"]
-let qmark P = ["https://github.com/status-im/status-cluster/projects/1"]
 let qmark P = ["https://prometheus.status.im/"]
 let qmark S = ["https://docs.google.com/spreadsheets/d/1By53othxtxtMOS01Wv13W99cvKlmWuKP35ATHQjtJ4w/edit#gid=0"]
-let qmark T = ["https://docs.google.com/document/d/1IXgvS6QnkqwLDXrgIYjO9eHI4fdPjX2EKx4wYHROnNU/edit#"]
+let qmark T = ["https://app.threatstack.com/"]
+let qmark V = ["https://github.com/orgs/status-im/projects/43"]
 let qmark W = ["https://wiki.status.im/Main_Page"]
 
 """""""""""""""
