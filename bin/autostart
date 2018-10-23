@@ -31,23 +31,34 @@ function run {
     fi
 }
 
-####### programs to run ########
-
 cd /tmp
 
-echo "### Keyboard setup"
+####### General Settings
+
+# set screen blank timeout to 1 hour
+which xset && xset s 3600 3600
+# Disable system bell
+xset b off
+# Keyboard layout
+setxkbmap -layout pl
+# Disable touchpad
+xinput --disable "Elan Touchpad"
+
+echo "### Autostarting programs:"
+
+####### Keyboard setup
+
 # Caps Lock <-> Esc
 run xmodmap ~/.speedswapper
 run -r xcape -e 'Control_R=Escape'
 
-echo "### Autostarting programs:"
+####### Programs to run
 run urxvtd -q -f -o
-run -c nvim urxvtc -title -e nvim
-
-run -r nm-applet
-run -r pasystray
-
 run nitrogen --restore
 run autorandr --change
-run synclient TouchpadOff=1
 run xbindkeys
+run xfce4-power-manager
+run blueman-applet
+run -r nm-applet
+run -r pasystray
+run -r xautolock -detectsleep -time 1 -locker slock -notify 20 -notifier anotify -t 10 -w "Locking in 10 seconds..."
