@@ -23,6 +23,7 @@ Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'bruno-/vim-man'
 Plug 'metakirby5/codi.vim'
+Plug 'junegunn/goyo.vim'
 " Movement
 Plug 'justinmk/vim-sneak'
 Plug 'takac/vim-hardtime'
@@ -656,7 +657,7 @@ nnoremap <space>gSa :Git stash list --date=local <bar>
 " }}}
 " Key mappings - Fxx {{{
 
-nnoremap <F11> :Neomake<CR>
+nnoremap <F11> :Goyo<CR>
 nnoremap <F10> :Dispatch! knife dwim %:p<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
 nnoremap <F8>  :setlocal list!<CR>
