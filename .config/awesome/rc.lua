@@ -462,12 +462,10 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
     -- fpass
-    { rule = {
-        name = "fpass",
-        properties = {
-            floating = true,
-        },
-    }},
+    { rule = { name = "fpass" },
+        properties = { floating = true, ontop = true, height = 1000 },
+        callback = function(c) awful.placement.centered(c) end
+    },
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = { type = { "dialog" }, name = { "mpv.*" } },
