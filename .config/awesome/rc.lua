@@ -290,7 +290,7 @@ awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, {
 awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { instance = "fpass" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("geary", { class = "Geary" }) end),
-awful.key({ modkey,           }, "i",       function () run_or_raise("~/bin/status", { class = "StatusIm" }) end),
+awful.key({ modkey,           }, "i",       function () run_or_raise("~/bin/status", { class = "Status" }) end),
 awful.key({ modkey,           }, "o",       function () run_or_raise("slack", { class = "Slack" }) end),
 --- Power & Screen
 awful.key({ "Mod4", "Control" }, "s",       function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
@@ -486,7 +486,7 @@ awful.rules.rules = {
     --      name = { "htop", "mhtop" },
     --},
     --    properties = { screen = 1, tag = ":music:" } }w,
-    { rule_any = { class = { "StatusIm", "Slack", "Skype", "Geary" } },
+    { rule_any = { class = { "Status", "Slack", "Skype", "Geary" } },
         properties = { screen = 1, tag = ":comm:" } },
     { rule_any = { name = { "ranger" } },
         properties = { screen = 1, tag = ":fs:" } },
