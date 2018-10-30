@@ -174,6 +174,7 @@ mytextclock = wibox.widget.textclock(" | %Y/%m/%d %H:%M:%S |", 1 )
 local bat_widget = battery_widget {
     adapter = "BAT0", ac = "AC",
     battery_prefix = " Bat: ", ac_prefix = " AC: ",
+    percent_colors = {{25, "red"}, {50, "orange"}, {999, "#afd700"}},
     tooltip_text = "${state}${time_est}",
     widget_font = "terminus 12",
 }
