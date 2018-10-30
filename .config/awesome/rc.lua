@@ -11,8 +11,9 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Widgets and layouts
-local lain = require("lain")
 local naughty = require('naughty')
+-- Battery
+local battery_widget = require("battery-widget")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -58,9 +59,6 @@ end
 -- {{{ Variable definitions
 homedir = os.getenv("HOME")
 
--- for reading bat capacity
-local first_line = require("lain.helpers").first_line
-
 -- Run the autostart script
 awful.spawn.with_shell(homedir .. "/bin/autostart")
 
@@ -99,8 +97,6 @@ modkey = "Mod1"
 newline = '\n'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
-lain.layout.termfair.center.nmaster = 3
-lain.layout.termfair.center.ncol    = 3
 layouts = {
     awful.layout.suit.max,              -- 1
     awful.layout.suit.tile,             -- 3
@@ -110,8 +106,6 @@ layouts = {
     --awful.layout.suit.fair,             -- 7
     --awful.layout.suit.fair.horizontal,  -- 8
     --awful.layout.suit.corner.sw,        -- 9
-    --lain.layout.termfair.center,
-    --lain.layout.centerwork,
 }
 -- }}}
 -- {{{ Tags
@@ -174,7 +168,15 @@ mylauncher = awful.widget.launcher({
 -- {{{ Wibox
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("| %Y/%m/%d %H:%M:%S |", 1 )
+mytextclock = wibox.widget.textclock(" | %Y/%m/%d %H:%M:%S |", 1 )
+
+-- Create battery widget
+local bat_widget = battery_widget {
+    adapter = "BAT0", ac = "AC",
+    battery_prefix = " Bat: ", ac_prefix = " AC: ",
+    tooltip_text = "${state}${time_est}",
+    widget_font = "terminus 12",
+}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -252,7 +254,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            bat_widget,
             mytextclock,
             wibox.widget.systray(),
         },
