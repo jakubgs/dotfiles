@@ -43,8 +43,10 @@ ENTRIES=$(echo "${FILES}" | sed \
                             -e "s#${PASSWORD_STORE_DIR}/##" \
                             -e "s#.gpg##")
 
+# Finally run FZF
 OUTPUT=$(echo "$ENTRIES" | ${FZF} ${FZF_OPTS})
 
+# save the query used
 QUERY=$(echo "${OUTPUT}" | head -n 1)
 RESULTS=$(echo "${OUTPUT}" | sed 1d)
 
