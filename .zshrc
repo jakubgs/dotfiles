@@ -323,6 +323,18 @@ function gc-reboot() {
     fi
 }
 
+function ac-reboot() {
+    aliyun ecs DescribeInstances --output "cols=InstanceId,HostName,EipAddress.IpAddress,Status" --InstanceName="${@}"
+    ID=$(aliyun ecs DescribeInstances --InstanceName="${@}" | jq -r '.Instances.Instance[0].InstanceId')
+    if [[ -n "${ID}" ]]; then
+        echo
+        read -q REPLY\?"Do you really want to reboot this host? (y/n) "
+        if [[ "${REPLY}" == "y" ]]; then
+            aliyun ecs RebootInstance --InstanceId="${ID}" --ForceStop=true
+        fi
+    fi
+}
+
 # reload zshrc
 function src() {
     autoload -U zrecompile
