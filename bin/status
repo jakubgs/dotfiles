@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
+
+STATUS_LATEST_URL='https://status-im.ams3.digitaloceanspaces.com/latest.json'
+STATUS="${PWD}/soft/StatusIm.AppImage"
+
+if [[ "$@" == "-u" ]]; then
+    LATEST_APP_URL=$(curl -sk "${STATUS_LATEST_URL}" | jq -r '.APP')
+    echo "Downloading: ${LATEST_APP_URL}"
+    curl --progress-bar "${LATEST_APP_URL}" -o "${STATUS}"
+
+fi
+
+# styling
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export QT_SCREEN_SCALE_FACTOR=1.3
 export QT_SCALE_FACTOR=0.8
-~/soft/StatusIm.AppImage
+
+# execute
+${STATUS}
