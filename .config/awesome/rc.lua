@@ -293,7 +293,7 @@ awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, {
 awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { instance = "fpass" }) end),
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("geary", { class = "Geary" }) end),
-awful.key({ modkey,           }, "i",       function () run_or_raise("~/bin/status", { class = "Status" }) end),
+awful.key({ modkey,           }, "i",       function () run_or_raise(homedir .. "/bin/status", { class = "Status" }) end),
 --- Power & Screen
 awful.key({ "Mod4", "Control" }, "s",       function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
 awful.key({ "Mod4", "Control" }, "h",       function () awful.spawn("sudo /usr/sbin/pm-hibernate") end),
