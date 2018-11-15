@@ -294,7 +294,6 @@ awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { in
 awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey,           }, "u",       function () run_or_raise("geary", { class = "Geary" }) end),
 awful.key({ modkey,           }, "i",       function () run_or_raise("~/bin/status", { class = "Status" }) end),
-awful.key({ modkey,           }, "o",       function () run_or_raise("slack", { class = "Slack" }) end),
 --- Power & Screen
 awful.key({ "Mod4", "Control" }, "s",       function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
 awful.key({ "Mod4", "Control" }, "h",       function () awful.spawn("sudo /usr/sbin/pm-hibernate") end),
@@ -463,6 +462,10 @@ awful.rules.rules = {
             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
       }, properties = { floating = true }},
+
+    -- Games
+    { rule_any = { class = {"csgo_linux64"}
+      }, properties = { ontop = true, minimized = false, hidden = false, fullscreen = true }},
 
     -- fpass
     { rule = { name = "fpass" },
