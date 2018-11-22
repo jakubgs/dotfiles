@@ -6,6 +6,9 @@
 #[[ -f ~/.gnupg/gpg-agent-info-lilim ]] && source ~/.gnupg/gpg-agent-info-lilim
 #export GPG_AGENT_INFO
 
+# allow of sourcing from ~/.zfunctions
+fpath=( "$HOME/.zfunctions" $fpath )
+
 # Preamble {{{
 autoload colors         # enable colors
 autoload -U compinit    # enable auto completion
@@ -32,10 +35,12 @@ case $HOST in           # change prompt depending on host
         COLOR="yellow" ;;
 esac
 
-export PROMPT="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
-export RPROMPT="[%W %D{%K:%M:%S}]"
-export PS1=$PROMPT
-export PROMPT=$PROMPT
+#export PROMPT="%B%{%(#.$fg[red].$fg[${COLOR}])%} %n@%m: %1~%#%{$reset_color%}%b "
+#export RPROMPT="[%W %D{%K:%M:%S}]"
+#export PS1=$PROMPT
+#export PROMPT=$PROMPT
+export PURE_PROMPT_SYMBOL="%B%{$fg[green]%} %m >%{$reset_color%}%b"
+prompt pure
 
 # define colors for less to get colored manpages
 # or wget nion.modprobe.de/mostlike.txt && mkdir ~/.terminfo && cp mostlike.txt ~/.terminfo && tic ~/.terminfo/mostlike.txt
