@@ -469,7 +469,7 @@ awful.rules.rules = {
 
     -- fpass
     { rule = { name = "fpass" },
-        properties = { floating = true, ontop = true, height = 1000 },
+        properties = { floating = true, height = 1000 },
         callback = function(c) awful.placement.centered(c) end
     },
 
