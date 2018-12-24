@@ -20,9 +20,27 @@ DEST="/mnt/${LABEL}"
 
 PASS_FILE="/home/${USERNAME}/.usb_backup_pass"
 
+function usage {
+  cat << EOF
+Usage: usb_backup.sh [-f] /dev/sdx"
+
+ -f - Format specified defice for secret backups.
+EOF
+}
+
 if [[ $UID -ne 0 ]]; then
     echo "ERROR: This script requires root piviliges!"
     exit 1
+fi
+
+if [[ $1 == '' ]]; then
+  echo "ERROR: You have to specify a device name as first argument!"
+  echo
+  usage
+  echo
+  echo "Here are some options:"
+  lsblk -S
+  exit 1
 fi
 
 if [[ $1 == '-c' ]]; then
