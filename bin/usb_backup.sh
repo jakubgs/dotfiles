@@ -25,6 +25,8 @@ function usage {
 Usage: usb_backup.sh [-f] /dev/sdx"
 
  -f - Format specified defice for secret backups.
+
+Backups password file: ${PASS_FILE}
 EOF
 }
 
