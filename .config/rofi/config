@@ -1,5 +1,10 @@
-rofi.theme:      custom
-rofi.font:       Terminus 16
-rofi.border:     2
-rofi.combi-modi: window,drun,run,ssh
-rofi.modi:       window,run,ssh,drun,keys,combi
+rofi.theme:         custom
+rofi.auto-select:   true
+rofi.sidebar-mode:  false
+rofi.terminal:      urxvtc
+rofi.width:         30
+rofi.click-to-exit: true
+rofi.font:          Terminus 18
+rofi.border:        2
+rofi.combi-modi:    window,drun,run,ssh
+rofi.modi:          window,run,ssh,drun,keys,combi
