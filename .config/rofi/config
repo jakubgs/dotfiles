@@ -1,0 +1,5 @@
+rofi.theme:      custom
+rofi.font:       Terminus 16
+rofi.border:     2
+rofi.combi-modi: window,drun,run,ssh
+rofi.modi:       window,run,ssh,drun,keys,combi

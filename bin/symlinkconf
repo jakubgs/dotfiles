@@ -8,7 +8,7 @@ fi
 
 CONFIG_FILES='
 bin .vimrc
-.config/nvim
+.config/nvim .config/rofi
 .zshrc .gitconfig
 .speedswapper
 .gnupg/*.conf
