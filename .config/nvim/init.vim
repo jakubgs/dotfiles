@@ -46,7 +46,7 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'hashivim/vim-terraform'
 " Syntax
 Plug 'robbles/logstash.vim'
-Plug 'tpope/vim-markdown'
+"Plug 'tpope/vim-markdown'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'LnL7/vim-nix'
 Plug 'lepture/vim-jinja'
@@ -299,7 +299,7 @@ let g:easytags_always_enabled = 1
 let g:easytags_async = 1
 
 " by default start in home directory
-let b:projectroot = '~/'
+let b:projectroot = '~/dotfiles/'
 
 " Gitv
 let g:Gitv_OpenHorizontal = 1
@@ -624,10 +624,10 @@ nnoremap <space>gr :Gread<CR>
 nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gw :Gwrite<CR>
 nnoremap <space>ga :Gwrite<CR>
-nnoremap <space>gc :Gcommit -v -q -n<CR>
-nnoremap <space>gt :Gcommit -v -q -n -- "%:p"<CR>
-nnoremap <space>gC :Gcommit -v -q -n --amend<CR>
-nnoremap <space>gT :Gcommit -v -q -n --amend -- "%:p"<CR>
+nnoremap <space>gc :Gcommit -s -v -q -n<CR>
+nnoremap <space>gt :Gcommit -s -v -q -n -- "%:p"<CR>
+nnoremap <space>gC :Gcommit -s -v -q -n --amend<CR>
+nnoremap <space>gT :Gcommit -s -v -q -n --amend -- "%:p"<CR>
 nnoremap <space>gd :Gvdiff<CR>
 nnoremap <space>ge :Gedit<CR>
 nnoremap <space>gu :Git reset "%:p"<CR><CR>
@@ -657,7 +657,7 @@ nnoremap <space>gSa :Git stash list --date=local <bar>
 " }}}
 " Key mappings - Fxx {{{
 
-nnoremap <F11> :Goyo<CR>
+nnoremap <F11> :Goyo 120<CR>
 nnoremap <F10> :Dispatch! knife dwim %:p<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
 nnoremap <F8>  :setlocal list!<CR>
