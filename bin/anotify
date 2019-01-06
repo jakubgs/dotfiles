@@ -118,7 +118,7 @@ elif [[ $WARNING ]] ; then
 elif [[ $PASS ]] ; then
     # replace real newline with lua newline
     MESSAGE=$(echo "$MESSAGE" | sed ':a;N;$!ba;s/\n/\" .. newline .. \"/g')
-    TITLE="\"Pass\t\t\t\t\tWill expire in: ${TIMEOUT}s\""
+    TITLE="\"Pass\t\t\tWill expire in: ${TIMEOUT}s\""
     TEXT="\"${MESSAGE}\""
 elif [[ $SYSLOG ]] ; then
     SYSLOG_INFO=$(cat)
