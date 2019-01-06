@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
 
+set -e
+
 # force overriding files
 if [[ $1 == '-f' ]]; then
     FORCE=1
 fi
 
-
 # Find location of repo
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 cd "$SCRIPT_DIR"
 GIT_ROOT=$(git rev-parse --show-toplevel)
+cd - > /dev/null
+
+# Load submodules
+cd "$GIT_ROOT"
+git submodule update --init --recursive
 cd - > /dev/null
 
 # Find files to symlink
