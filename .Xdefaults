@@ -10,8 +10,8 @@ Xcursor.theme: Vanilla-DMZ
 !*imLocale:             en_GB.UTF-8
 !*geometry:             120x35
 
-*font:              xft:Terminus:size=16:lang=pl:antialias=true:hinting=true
-*boldFont:          xft:Terminus:size=16:Bold:lang=pl:antialias=true:hinting=true
+*font:              xft:Terminus:size=14:lang=pl:antialias=true:hinting=true
+*boldFont:          xft:Terminus:size=14:Bold:lang=pl:antialias=true:hinting=true
 
 ! Disable printing
 *print-pipe:           "cat > /dev/null"
