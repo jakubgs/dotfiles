@@ -6,24 +6,16 @@ if [[ $1 == '-f' ]]; then
     echo 'FORCE'
 fi
 
-CONFIG_FILES='
-bin .vimrc
-.config/nvim .config/rofi
-.zshrc .gitconfig
-.speedswapper
-.gnupg/*.conf
-.mpv .ncmpcpp .tmux.conf    .agignore
-.pentadactylrc .pentadactyl
-.xbindkeysrc
-.gtkrc-2.0 .awesome/config/rc.lua
-.Xdefaults .xinitrc .Xresources
-'
 
+# Find location of repo
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 cd "$SCRIPT_DIR"
 GIT_ROOT=$(git rev-parse --show-toplevel)
-cd -
-echo $GIT_ROOT
+cd - > /dev/null
+
+# Find files to symlink
+CONFIG_FILES=$(find $GIT_ROOT -maxdepth 1 -type f -name '.*')
+CONFIG_FILES+=$(find $GIT_ROOT/.config -maxdepth 1 | sed 1d)
 
 for CONFIG_FILE in ${CONFIG_FILES}; do
     SOURCE="${GIT_ROOT}/${CONFIG_FILE}" 

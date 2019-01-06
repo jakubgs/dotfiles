@@ -4,8 +4,7 @@ To deploy in directory `dotfiles` run:
 
 ```
 git clone https://github.com/jakubgs/dotfiles.git
-cd dotfiles
-./bin/symlinkconf
+./dotfiles/bin/symlinkconf
 ```
 
 Then you can link folders and files you want to use.
