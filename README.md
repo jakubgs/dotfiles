@@ -1,6 +1,4 @@
-# These are my dotfiles.
-
-To deploy in directory `dotfiles` run:
+### Deployment
 
 ```
 git clone https://github.com/jakubgs/dotfiles.git
