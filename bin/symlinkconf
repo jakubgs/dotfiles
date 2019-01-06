@@ -3,7 +3,6 @@
 # force overriding files
 if [[ $1 == '-f' ]]; then
     FORCE=1
-    echo 'FORCE'
 fi
 
 
@@ -14,8 +13,10 @@ GIT_ROOT=$(git rev-parse --show-toplevel)
 cd - > /dev/null
 
 # Find files to symlink
-CONFIG_FILES=$(find $GIT_ROOT -maxdepth 1 -type f -name '.*')
-CONFIG_FILES+=$(find $GIT_ROOT/.config -maxdepth 1 | sed 1d)
+CONFIG_FILES="bin "
+CONFIG_FILES+=$(find "$GIT_ROOT" -maxdepth 1 -name '.*' -not -name '.git' -printf "%P\n")
+CONFIG_FILES+=" "
+CONFIG_FILES+=$(find "$GIT_ROOT/.config" -maxdepth 1 -printf "%P\n" | sed -e 1d -e 's/^/.config\//')
 
 for CONFIG_FILE in ${CONFIG_FILES}; do
     SOURCE="${GIT_ROOT}/${CONFIG_FILE}" 
@@ -24,12 +25,17 @@ for CONFIG_FILE in ${CONFIG_FILES}; do
     if [[ ! -d "${DEST_DIR}" ]]; then
         mkdir -p "${DEST_DIR}"
     fi
-    if [[ ! ${FORCE} && -f "${DEST}" ]]; then
-        echo "IS_FILE: ${DEST}"
-    elif [[ ! ${FORCE} && -h "${DEST}" ]]; then
-        echo "SYMLINK: ${DEST}"
-    else
-        echo "LINKING: ${SOURCE} -> ${DEST}"
+    if [[ ${FORCE} ]]; then
+        echo "FORCE LINKING: ${SOURCE} -> ${DEST}"
         ln -sf "${SOURCE}" "${DEST}"
+    elif [[ -f "${DEST}" ]]; then
+        echo "IS_FILE: ${DEST}"
+    elif [[ -d "${DEST}" ]]; then
+        echo "IS_DIR:  ${DEST}"
+    elif [[ -h "${DEST}" ]]; then
+        echo "SYMLINK: ${DEST}"
+    else # symlinking withou forcing
+        echo "LINKING: ${SOURCE} -> ${DEST}"
+        #ln -s "${SOURCE}" "${DEST}"
     fi
 done
