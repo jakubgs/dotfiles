@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+GREEN='\x1b[32;01m'
+YELLOW='\x1b[33;01m'
+RED='\x1b[31;01m'
+BLD='\x1b[1m'
+RST='\x1b[0m'
+
+PATH=$PATH:~/bin
+FZF=$(which fzf)
+
+show_help() {
+    echo "$0 [-r]"
+}
+
+while getopts "h?r" opt; do
+    case "$opt" in
+        h|\?)
+            show_help
+            exit 0
+            ;;
+        r)  ROFI=1
+            shift
+            ;;
+    esac
+done
+
+PASS_LENGTH=16
+
+PASS_ARGS="show"
+if [[ -n "$@" ]]; then
+    PASS_ARGS=$@
+fi
+FZF_OPTS='--prompt=mpd> --select-1 --print-query --extended-exact'
+
+ENTRIES=$(mpc playlist | nl)
+
+if [[ $ROFI ]]; then
+    OUTPUT=$(echo "$ENTRIES" | rofi -dmenu -i)
+else
+    OUTPUT=$(echo "$ENTRIES" | ${FZF} ${FZF_OPTS})
+    # save the query used
+    QUERY=$(echo "${OUTPUT}" | head -n 1)
+    OUTPUT=$(echo "${OUTPUT}" | sed 1d)
+    if [[ -z "$QUERY" ]]; then
+        echo "Cancelled"
+        exit
+    fi
+fi
+
+NUMBER=$(echo "${OUTPUT}" | awk '{print $1}')
+
+echo -e "${YELLOW}${OUTPUT}${RST}"
+mpc play ${NUMBER}
