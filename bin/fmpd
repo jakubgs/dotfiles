@@ -15,13 +15,8 @@ show_help() {
 
 while getopts "h?r" opt; do
     case "$opt" in
-        h|\?)
-            show_help
-            exit 0
-            ;;
-        r)  ROFI=1
-            shift
-            ;;
+        h|\?) show_help; exit 0;;
+        r)    ROFI=1; shift;;
     esac
 done
 
