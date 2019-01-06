@@ -290,7 +290,7 @@ awful.key({ modkey,           }, "n",         function () run_or_raise(terminal 
 awful.key({ modkey,           }, "e",         function () run_or_raise(geditor, { name = "nvim" }) end),
 awful.key({ modkey,           }, "w",         function () run_or_raise(browser, { class = "Chromium" }) end),
 awful.key({ modkey, "Shift"   }, "c",         function () run_or_raise(terminal, { class = "URxvt" }) end),
-awful.key({ modkey,           }, "p",         function () awful.spawn(homedir.."/bin/fpass -ar") end),
+awful.key({ modkey,           }, "p",         function () run_or_raise(fpass, { class = "fpass" }) end),
 awful.key({ modkey,           }, "m",         function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey, "Shift"   }, "m",         function () awful.spawn(homedir.."/bin/fmpd -r") end),
 awful.key({ modkey,           }, "u",         function () run_or_raise("geary", { class = "Geary" }) end),
