@@ -13,8 +13,8 @@ GIT_ROOT=$(git rev-parse --show-toplevel)
 cd - > /dev/null
 
 # Find files to symlink
-CONFIG_FILES="bin "
-CONFIG_FILES+=$(find "$GIT_ROOT" -maxdepth 1 -name '.*' -not -name '.git' -printf "%P\n")
+CONFIG_FILES="bin .gnupg/gpg.conf .gnupg/gpg-agent.conf"
+CONFIG_FILES+=$(find "$GIT_ROOT" -regextype posix-extended -maxdepth 1 -name '.*' -not -regex '.*\.(git|gitignore|gnupg)' -printf "%P\n")
 CONFIG_FILES+=" "
 CONFIG_FILES+=$(find "$GIT_ROOT/.config" -maxdepth 1 -printf "%P\n" | sed -e 1d -e 's/^/.config\//')
 
