@@ -12,8 +12,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Widgets and layouts
 local naughty = require('naughty')
--- Battery
-local battery_widget = require("battery-widget")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -110,7 +108,7 @@ layouts = {
 -- }}}
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = { ":admin:", ":edit:", ":web:", ":comm:", ":misc:", ":fs:", ":net:", ":vm:" }
+tags = { ":admin:", ":edit:", ":web:", ":comm:", ":music:", ":fs:", ":net:", ":game:" }
 
 -- }}}
 -- {{{ Menu
@@ -171,13 +169,15 @@ mylauncher = awful.widget.launcher({
 mytextclock = wibox.widget.textclock(" | %Y/%m/%d %H:%M:%S |", 1 )
 
 -- Create battery widget
-local bat_widget = battery_widget {
-    adapter = "BAT0", ac = "AC",
-    battery_prefix = " Bat: ", ac_prefix = " AC: ",
-    percent_colors = {{25, "red"}, {50, "orange"}, {999, "#afd700"}},
-    tooltip_text = "${state}${time_est}",
-    widget_font = "terminus 12",
-}
+local bat_widget = nil
+--local battery_widget = require("battery-widget")
+--bat_widget = battery_widget {
+--    adapter = "BAT0", ac = "AC",
+--    battery_prefix = " Bat: ", ac_prefix = " AC: ",
+--    percent_colors = {{25, "red"}, {50, "orange"}, {999, "#afd700"}},
+--    tooltip_text = "${state}${time_est}",
+--    widget_font = "terminus 12",
+--}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -265,7 +265,7 @@ end)
 -- }}}
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 2, function () awful.util.spawn(fmanager) end),
+    awful.button({ }, 2, function () awful.spawn(fmanager) end),
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewprev),
     awful.button({ }, 5, awful.tag.viewnext)
@@ -273,64 +273,57 @@ root.buttons(awful.util.table.join(
 -- }}}
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-awful.key({ modkey,           }, "Escape",  awful.tag.history.restore),
-awful.key({ modkey,           }, "`",       awful.tag.history.restore),
-awful.key({ modkey, "Shift"   }, "Tab",     function () focusby(-1)  end),
-awful.key({ modkey,           }, "Tab",     function () focusby( 1)  end),
+awful.key({ modkey,           }, "Escape",    awful.tag.history.restore),
+awful.key({ modkey,           }, "`",         awful.tag.history.restore),
+awful.key({ modkey, "Shift"   }, "Tab",       function () focusby(-1)  end),
+awful.key({ modkey,           }, "Tab",       function () focusby( 1)  end),
 -- Layout manipulation
-awful.key({ modkey,           }, "h",       function () awful.client.focus.global_bydirection("left") end),
-awful.key({ modkey,           }, "l",       function () awful.client.focus.global_bydirection("right") end),
-awful.key({ modkey,           }, "k",       function () awful.client.focus.global_bydirection("up") end),
-awful.key({ modkey,           }, "j",       function () awful.client.focus.global_bydirection("down") end),
-awful.key({ modkey, "Shift"   }, "k",       function () awful.client.swap.byidx( -1) end),
-awful.key({ modkey, "Shift"   }, "j",       function () awful.client.swap.byidx(  1) end),
+awful.key({ modkey,           }, "h",         function () awful.client.focus.global_bydirection("left") end),
+awful.key({ modkey,           }, "l",         function () awful.client.focus.global_bydirection("right") end),
+awful.key({ modkey,           }, "k",         function () awful.client.focus.global_bydirection("up") end),
+awful.key({ modkey,           }, "j",         function () awful.client.focus.global_bydirection("down") end),
+awful.key({ modkey, "Shift"   }, "k",         function () awful.client.swap.byidx( -1) end),
+awful.key({ modkey, "Shift"   }, "j",         function () awful.client.swap.byidx(  1) end),
 -- Run or raise
-awful.key({ modkey,           }, "z",       function () run_or_raise("zeal", { class = "Zeal" }) end),
-awful.key({ modkey,           }, "n",       function () run_or_raise(terminal .. " -name ranger -title ranger -e ranger ", { name = "ranger" }) end),
-awful.key({ modkey,           }, "e",       function () run_or_raise(geditor, { name = "nvim" }) end),
-awful.key({ modkey,           }, "w",       function () run_or_raise(browser, { class = "Chromium" }) end),
-awful.key({ modkey, "Shift"   }, "c",       function () run_or_raise(terminal, { class = "URxvt" }) end),
-awful.key({ modkey,           }, "p",       function () run_or_raise(fpass, { instance = "fpass" }) end),
-awful.key({ modkey,           }, "m",       function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
-awful.key({ modkey,           }, "u",       function () run_or_raise("geary", { class = "Geary" }) end),
-awful.key({ modkey,           }, "i",       function () run_or_raise(homedir .. "/bin/status", { class = "Status" }) end),
+awful.key({ modkey,           }, "z",         function () run_or_raise("zeal", { class = "Zeal" }) end),
+awful.key({ modkey,           }, "n",         function () run_or_raise(terminal .. " -name ranger -title ranger -e ranger ", { name = "ranger" }) end),
+awful.key({ modkey,           }, "e",         function () run_or_raise(geditor, { name = "nvim" }) end),
+awful.key({ modkey,           }, "w",         function () run_or_raise(browser, { class = "Chromium" }) end),
+awful.key({ modkey, "Shift"   }, "c",         function () run_or_raise(terminal, { class = "URxvt" }) end),
+awful.key({ modkey,           }, "p",         function () awful.spawn(homedir.."/bin/fpass -ar") end),
+awful.key({ modkey,           }, "m",         function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
+awful.key({ modkey, "Shift"   }, "m",         function () awful.spawn(homedir.."/bin/fmpd -r") end),
+awful.key({ modkey,           }, "u",         function () run_or_raise("geary", { class = "Geary" }) end),
+awful.key({ modkey,           }, "i",         function () run_or_raise(homedir.."/bin/status", { class = "Status" }) end),
 --- Power & Screen
-awful.key({ "Mod4", "Control" }, "s",       function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
-awful.key({ "Mod4", "Control" }, "h",       function () awful.spawn("sudo /usr/sbin/pm-hibernate") end),
-awful.key({ "Mod4", "Control" }, "Left",    function () awful.spawn("xrandr --orientation left") end),
-awful.key({ "Mod4", "Control" }, "Right",   function () awful.spawn("xrandr --orientation right") end),
-awful.key({ "Mod4", "Control" }, "Up",      function () awful.spawn("xrandr --orientation normal") end),
-awful.key({ "Mod4", "Control" }, "Down",    function () awful.spawn("xrandr --orientation inverted") end),
+awful.key({ "Mod4", "Control" }, "s",         function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
+awful.key({ "Mod4", "Control" }, "h",         function () awful.spawn("sudo /usr/sbin/pm-hibernate") end),
+awful.key({ "Mod4", "Control" }, "Left",      function () awful.spawn("xrandr --orientation left") end),
+awful.key({ "Mod4", "Control" }, "Right",     function () awful.spawn("xrandr --orientation right") end),
+awful.key({ "Mod4", "Control" }, "Up",        function () awful.spawn("xrandr --orientation normal") end),
+awful.key({ "Mod4", "Control" }, "Down",      function () awful.spawn("xrandr --orientation inverted") end),
 --- Standard program
-awful.key({ modkey,           }, "c",       function () awful.util.spawn(terminal) end),
-awful.key({ "Control",        }, "BackSpace", function () awful.util.spawn(terminal) end),
-awful.key({ "Control", "Shift"}, "BackSpace", function () awful.util.spawn(terminal) end),
-awful.key({ modkey, "Control" }, "r",       awesome.restart),
-awful.key({ modkey, "Control" }, "q",       awesome.quit),
-awful.key({ modkey, "Control" }, "h",       function () awful.tag.incncol( 1)         end),
-awful.key({ modkey, "Control" }, "l",       function () awful.tag.incncol(-1)         end),
-awful.key({ modkey,           }, "space",   function () awful.layout.inc(layouts,  1) end),
-awful.key({ modkey, "Shift"   }, "space",   function () awful.layout.inc(layouts, -1) end),
+awful.key({ modkey,           }, "c",         function () awful.spawn(terminal) end),
+awful.key({ "Control",        }, "BackSpace", function () awful.spawn(terminal) end),
+awful.key({ "Control", "Shift"}, "BackSpace", function () awful.spawn(terminal) end),
+awful.key({ modkey, "Control" }, "r",         awesome.restart),
+awful.key({ modkey, "Control" }, "q",         awesome.quit),
+awful.key({ modkey, "Control" }, "h",         function () awful.tag.incncol( 1)         end),
+awful.key({ modkey, "Control" }, "l",         function () awful.tag.incncol(-1)         end),
+awful.key({ modkey,           }, "space",     function () awful.layout.inc(layouts,  1) end),
+awful.key({ modkey, "Shift"   }, "space",     function () awful.layout.inc(layouts, -1) end),
 -- Poker II Fn keys
-awful.key({ "Mod4",           }, "Tab",     function () awful.tag.viewnext(mouse.screen) end),
-awful.key({ "Mod4", "Shift"   }, "Tab",     function () awful.tag.viewprev(mouse.screen) end),
+awful.key({ "Mod4",           }, "Tab",       function () awful.tag.viewnext(mouse.screen) end),
+awful.key({ "Mod4", "Shift"   }, "Tab",       function () awful.tag.viewprev(mouse.screen) end),
 -- Prompt
-awful.key({ modkey,           }, "R",       function () mypromptbox[mouse.screen]:run() end),
-awful.key({ modkey },            "r",       function ()
-    awful.util.spawn("dmenu_run -i " ..
-        " -p 'Run:' " ..
-        " -fn 'Terminus-10'" ..
-        " -nb '" .. beautiful.bg_normal .. "'" ..
-        " -nf '" .. beautiful.fg_normal .. "'" ..
-		" -sb '" .. beautiful.bg_focus .. "'" ..
-		" -sf '" .. beautiful.fg_focus .. "'" ..
-        " -l 14") 
-	end),
-awful.key({ modkey            },  "t", function ()
+awful.key({ modkey,           }, "R",         function () mypromptbox[mouse.screen]:run() end),
+awful.key({ modkey            }, "r",         function () awful.spawn("rofi -show combi") end),
+awful.key({ modkey            }, "Return",    function () awful.spawn("rofi -show combi") end),
+awful.key({ modkey            }, "t", function ()
         awful.prompt.run({ prompt = "killall: " },
         awful.screen.focused().mypromptbox.widget,
         function (s)
-            awful.util.spawn(terminal .. " -e 'killall " .. s .. "'")
+            awful.spawn(terminal .. " -e 'killall " .. s .. "'")
         end,
         homedir .. "/.awesome/killall_history")
     end)
@@ -456,6 +449,7 @@ awful.rules.rules = {
             "Arandr",
             "Screenkey",
             "pinentry",
+            "Thunar",
         },
         role = {
             "AlarmWindow",  -- Thunderbird's calendar.
@@ -466,6 +460,8 @@ awful.rules.rules = {
     -- Games
     { rule_any = { class = {"csgo_linux64"}
       }, properties = { ontop = true, minimized = false, hidden = false, fullscreen = true }},
+    { rule_any = { class = {"VirtualBox*"}
+      }, properties = { minimized = false, hidden = false, fullscreen = true }},
 
     -- fpass
     { rule = { name = "fpass" },
@@ -492,6 +488,8 @@ awful.rules.rules = {
         properties = { screen = 1, tag = ":fs:" } },
     { rule_any = { name = { "Transmission" } },
         properties = { screen = 1, tag = ":net:" } },
+    { rule_any = { class = { "Steam", "csgo_linux64" } },
+        properties = { screen = 1, tag = ":game:" } },
 }
 -- }}}
 -- {{{ Signals
