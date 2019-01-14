@@ -1,6 +1,5 @@
 # Source: https://github.com/PonderingGrower/dotfiles
 
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh 
 [[ -f ~/.secret ]] && source ~/.secret
 #[[ -f ~/.ssh-agent.env ]] && source ~/.ssh-agent.env
 #[[ -f ~/.gnupg/gpg-agent-info-lilim ]] && source ~/.gnupg/gpg-agent-info-lilim
@@ -271,7 +270,7 @@ alias kt='du -h --max-depth=1 | sort -h'
 alias dy='df --sync -hTt ext4'
 alias grep='grep --color -i'
 alias ssh='TERM=xterm-256color ssh'
-alias sshm='ssh melchior'
+alias sshm='ssh melchior.magi.local'
 alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
@@ -470,3 +469,4 @@ bindkey '^s' fzf-ssh
 
 # }}}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+bindkey '^F' fzf-cd-widget
