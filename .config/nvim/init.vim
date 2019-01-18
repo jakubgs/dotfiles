@@ -199,7 +199,6 @@ set foldenable                    " when on all folds are closed
 set foldlevel=1                   " folds with higher level will be closed
 set foldmethod=marker             " by default fold based on markers
 set foldnestmax=1                 " nest fold limit for indent/syntax modes
-"set foldtext=NeatFoldText()       " change how folds are desplayed when closed
 
 " }}}
 " Programming settings {{{
@@ -737,17 +736,6 @@ function! s:AddLines(before)
   call append(line('.')-a:before, repeat([''], cnt))
   silent! call repeat#set((a:before ? '[ ' : '] '), cnt)
 endf
-
-function! NeatFoldText()
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction
 
 " configure completion to complete in command window
 function! s:init_cmdwin()
