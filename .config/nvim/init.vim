@@ -86,11 +86,11 @@ call plug#end()
 " }}}
 " Display configuration {{{
 
-set background=dark
-colorscheme jellybeans
 let g:jellybeans_overrides = {
 \    'background': { 'ctermbg': 'NONE', '256ctermbg': 'NONE', 'guibg': 'NONE' },
 \}
+set background=dark
+colorscheme jellybeans
 
 syntax on                         " File-type highlighting
 filetype on                       " enable file type detection
