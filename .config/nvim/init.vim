@@ -50,14 +50,12 @@ Plug 'robbles/logstash.vim'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'LnL7/vim-nix'
 Plug 'lepture/vim-jinja'
-"Plug 'pearofducks/ansible-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
-Plug 'mxw/vim-jsx'
 Plug 'fatih/vim-go'
 Plug 'tomlion/vim-solidity'
 " JS
-Plug 'jaxbot/browserlink.vim'
+Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
+Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
 Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
 Plug 'styled-components/vim-styled-components'
