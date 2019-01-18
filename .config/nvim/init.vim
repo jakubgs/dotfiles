@@ -58,9 +58,6 @@ Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
 Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
 Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
-Plug 'styled-components/vim-styled-components'
-"Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
-Plug 'jparise/vim-graphql',         { 'for': 'javascript' }
 " Python plugins
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
