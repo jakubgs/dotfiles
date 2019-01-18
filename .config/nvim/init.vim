@@ -652,9 +652,9 @@ nmap     <F1>  <Plug>(Vman)
 augroup saveposition
     autocmd!
     autocmd BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal! g`\"" |
-                \ endif
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
 augroup END
 
 augroup awesomerc
@@ -751,16 +751,5 @@ function! s:unite_settings()
     " go backwards in path
     imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
 endfunction
-
-" use ranger for 
-function! RangerExplorer()
-    exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-    if filereadable('/tmp/vim_ranger_current_file')
-        exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-        call system('rm /tmp/vim_ranger_current_file')
-    endif
-    redraw!
-endfun
-map <space>e :call RangerExplorer()<CR>
 
 " }}}
