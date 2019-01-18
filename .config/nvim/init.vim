@@ -522,10 +522,6 @@ nnoremap <space>x yy:.!echo "scale=2; <c-r>"<c-h>"\|bc<CR>
 " focus the current fold
 nnoremap <space>z zMzv
 
-" add new line above and bellow current line
-nnoremap <silent> <space>[ :<C-U>call <SID>AddLines(1)<CR>
-nnoremap <silent> <space>] :<C-U>call <SID>AddLines(0)<CR>
-
 " performance debugging
 nnoremap <silent> <LocalLeader>dd :exe ":profile start /tmp/profile.log"<cr>
                                 \ :exe ":profile func *"<cr>
@@ -587,7 +583,6 @@ nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 nnoremap <space>uW :Unite file:~/work/<CR>
 nnoremap <space>uP :Unite file_rec/neovim:/mnt/melchior/projects<CR>
 nnoremap <space>uh :Unite file:~/<CR>
-nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
@@ -740,16 +735,13 @@ autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
     imap <buffer> <esc> <c-u><bs>
 
+    " editing
+	imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+
     " move between lines
-    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-
-    " open in new splits
-    imap <silent><buffer><expr> <C-x> unite#do_action('split')
-    imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-
-    " go backwards in path
-    imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
+	imap <buffer> <TAB> <Plug>(unite_select_next_line)
+    imap <buffer> <C-j> <Plug>(unite_select_next_line)
+    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
 endfunction
 
 " }}}
