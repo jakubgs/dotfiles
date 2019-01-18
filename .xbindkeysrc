@@ -2,36 +2,28 @@
 # Hibernation
 
 "sudo pm-suspend"
- m:0x40 + c:39
- Mod4 + s
+  m:0x40 + c:39
+  Mod4 + s
 
-"slimlock"
- m:0x50 + c:46
- Mod2+Mod4 + l
+"slock"
+  m:0x50 + c:46
+  Mod2+Mod4 + l
 
-"slimlock"
- m:0x5 + c:46
- Control+Shift + l
+"slock"
+  m:0x5 + c:46
+  Control+Shift + l
 
 "sudo pm-hibernate"
- m:0x40 + c:43
- Mod4 + h
-
-"TPAD=$(synclient | awk '/TouchpadOff/{print $3}'); synclient TouchpadOff=$((TPAD==0))"
- m:0x0 + c:152
- XF86Explorer
-
-"~/bin/dock"
- m:0x0 + c:128
- XF86LaunchA
+  m:0x40 + c:43
+  Mod4 + h
 
 "arandr"
- m:0x0 + c:179
- XF86Tools
+  m:0x0 + c:179
+  XF86Tools
 
 "autorandr -c"
- m:0x0 + c:225
- XF86Search
+  m:0x0 + c:235
+  XF86Display
 
 # }}}
 # Volume {{{
