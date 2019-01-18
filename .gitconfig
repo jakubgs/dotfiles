@@ -17,7 +17,7 @@
     pl = pull
     sm = submodule
     s  = stash
-    c  = commit --verbose
+    c  = commit --verbose --sign
     a  = add 
     an = annex
     ax = annex
