@@ -561,7 +561,7 @@ nnoremap <space>cr :Codi ruby<CR>
 nnoremap <space>cj :Codi javascript<CR>
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/neovim:'.g:projectroot.' file/new')<CR>
+nnoremap <c-i>     :execute('Unite buffer file_rec/neovim:'.g:projectroot.' file_mru file/new')<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
