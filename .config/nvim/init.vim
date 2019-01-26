@@ -106,6 +106,7 @@ set winwidth=40                   " minimum split width
 set winheight=15                  " minimum split height
 set ttimeoutlen=50                " avoid lag when updating statusline
 "set colorcolumn=81                " highlight this column
+set list                          " show tabs and newlines
 set nuw=4                         " number line width
 set ruler                         " show columns and rows
 set cursorline                    " highlight the current line
