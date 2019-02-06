@@ -64,7 +64,7 @@ awful.spawn.with_shell(homedir .. "/bin/autostart")
 beautiful.init(homedir .. "/.config/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-browser = "chromium"
+browser = "brave-browser"
 hipchat = "hipchat"
 fmanager = "thunar"
 terminal = "urxvtc"
@@ -101,7 +101,7 @@ layouts = {
     awful.layout.suit.tile.left,        -- 4
     awful.layout.suit.tile.bottom,      -- 5
     awful.layout.suit.tile.top,         -- 6
-    --awful.layout.suit.fair,             -- 7
+    awful.layout.suit.fair,             -- 7
     --awful.layout.suit.fair.horizontal,  -- 8
     --awful.layout.suit.corner.sw,        -- 9
 }
@@ -146,7 +146,7 @@ mymainmenu = awful.menu({ items = {
     { "systools",   mystoolsmenu, beautiful.awesome_icon },
     { "office",     myofficemenu, beautiful.awesome_icon },
     { "-------------", nil },
-    { "chromium",    browser },
+    { "browser",    browser },
     { "rutorrent",  "dwb" },
     { "-------------", nil },
     { "file manager",   fmanager },
@@ -288,7 +288,7 @@ awful.key({ modkey, "Shift"   }, "j",         function () awful.client.swap.byid
 awful.key({ modkey,           }, "z",         function () run_or_raise("zeal", { class = "Zeal" }) end),
 awful.key({ modkey,           }, "n",         function () run_or_raise(terminal .. " -name ranger -title ranger -e ranger ", { name = "ranger" }) end),
 awful.key({ modkey,           }, "e",         function () run_or_raise(geditor, { name = "nvim" }) end),
-awful.key({ modkey,           }, "w",         function () run_or_raise(browser, { class = "Chromium" }) end),
+awful.key({ modkey,           }, "w",         function () run_or_raise(browser, { class = "Brave-browser"}) end),
 awful.key({ modkey, "Shift"   }, "c",         function () run_or_raise(terminal, { class = "URxvt" }) end),
 awful.key({ modkey,           }, "p",         function () run_or_raise(fpass, { class = "fpass" }) end),
 awful.key({ modkey,           }, "m",         function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
@@ -478,7 +478,7 @@ awful.rules.rules = {
         properties = { screen = 1, tag = ":admin:" } },
     { rule_any = { name = { "nvim" } },
         properties = { screen = 1, tag = ":edit:" } },
-    { rule_any = { class = { "Iceweasel", "Chromium" } },
+    { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "brave-browser" } },
         properties = { screen = 1, tag = ":web:" } },
     { rule_any = { class = { "ncmpcpp" }, name = { "ncmpcpp*" }, },
         properties = { screen = 1, tag = ":music:" } },
