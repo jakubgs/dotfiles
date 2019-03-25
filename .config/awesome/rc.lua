@@ -166,7 +166,7 @@ mylauncher = awful.widget.launcher({
 -- {{{ Wibox
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock(" | %Y/%m/%d %H:%M:%S |", 1 )
+mytextclock = wibox.widget.textclock(" %Y/%m/%d %H:%M:%S |", 1 )
 
 -- Create battery widget
 local bat_widget = nil
