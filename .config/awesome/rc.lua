@@ -95,7 +95,7 @@ modkey = "Mod1"
 newline = '\n'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
-layouts = {
+awful.layout.layouts = {
     awful.layout.suit.max,              -- 1
     awful.layout.suit.tile,             -- 3
     awful.layout.suit.tile.left,        -- 4
