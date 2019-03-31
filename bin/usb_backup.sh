@@ -10,8 +10,8 @@ ASSETS=(
     "/mnt/melchior/git"
     "/mnt/melchior/secret"
     "/mnt/melchior/data/Docs"
-    "/mnt/melchior/data/Important"
-    "/mnt/melchior/data/Photos"
+    "/mnt/melchior/sync/important"
+    "/mnt/melchior/sync/photos"
 )
 
 DEVICE="$1"
