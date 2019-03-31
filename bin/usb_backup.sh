@@ -63,6 +63,7 @@ umount "${DEST}" 2>/dev/null | echo
 # decrypt
 cryptsetup luksOpen -d "${PASS_FILE}" "${DEVICE}" "${LABEL}"
 DEVICE="/dev/mapper/${LABEL}"
+mkdir -p "${DEST}"
 mount "${DEVICE}" "${DEST}"
 # unmount on exit
 function cleanup {
