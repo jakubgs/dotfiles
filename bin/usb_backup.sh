@@ -45,6 +45,13 @@ if [[ $1 == '' ]]; then
   exit 1
 fi
 
+if [[ ! -e "${PASS_FILE}" ]]; then
+    echo -n "Provide password: "
+    read -s PASSWORD
+    echo
+    echo "${PASSWORD}" > "${PASS_FILE}"
+fi
+
 if [[ $1 == '-c' ]]; then
     DEVICE="$2"
     read -p "Are you sure you want to format ${DEV} ? <y/N> " prompt
