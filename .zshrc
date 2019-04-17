@@ -418,7 +418,8 @@ function alert {
 }
 
 function select-work-dir() {
-    cd /home/sochan/work/$(ls ~/work | fzf)
+    SEL=$(ls ~/work | fzf)
+    [[ -n "${SEL}" ]] && cd "/home/sochan/work/${SEL}"
     echo
     zle reset-prompt
 }
