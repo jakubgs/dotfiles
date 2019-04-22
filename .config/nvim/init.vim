@@ -26,7 +26,6 @@ Plug 'metakirby5/codi.vim'
 Plug 'junegunn/goyo.vim'
 " Movement
 Plug 'justinmk/vim-sneak'
-Plug 'takac/vim-hardtime'
 " Text manipulation
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -264,12 +263,6 @@ let g:surround_42 = "/* \r */"
 
 " Lightline
 let g:lightline = { 'colorscheme': 'powerline', }
-" HardTime
-let g:hardtime_default_on = 1
-let g:hardtime_allow_different_key = 1
-let g:hardtime_maxcount = 1
-let g:hardtime_timeout = 5000
-
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
