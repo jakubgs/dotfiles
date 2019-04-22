@@ -53,7 +53,6 @@ Plug 'lepture/vim-jinja'
 "Plug 'pearofducks/ansible-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
-Plug 'mxw/vim-jsx'
 Plug 'fatih/vim-go'
 Plug 'tomlion/vim-solidity'
 " Haskell
@@ -62,6 +61,7 @@ Plug 'alx741/vim-hindent',          { 'for': 'haskell' }
 " JS
 Plug 'jaxbot/browserlink.vim'
 Plug 'moll/vim-node'
+Plug 'mxw/vim-jsx'
 Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
 Plug 'styled-components/vim-styled-components'
 "Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
