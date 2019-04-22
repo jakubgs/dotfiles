@@ -17,13 +17,15 @@
     pl = pull
     sm = submodule
     s  = stash
-    c  = commit --verbose
+    c  = commit --verbose --no-verify --gpg-sign 
+    am = commit --verbose --no-verify --gpg-sign --amend
     a  = add 
     an = annex
     ax = annex
     rh = reset --hard
     rs = reset
     ls = ls-files
+    cp = cherry-pick
     l  = log --decorate
     sl = log --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
     sla = log --pretty=format:'* %h %s %d' --abbrev-commit
