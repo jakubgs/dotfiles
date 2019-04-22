@@ -696,19 +696,16 @@ function! s:unite_settings()
     " editing
 	imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
 
-<<<<<<< HEAD
     " go backwards in path
     imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
 
     imap <buffer> <CR>    <Plug>(unite_do_default_action))
 
     nmap <buffer> <C-f>     <Plug>(unite_toggle_auto_preview)
-=======
     " move between lines
-	imap <buffer> <TAB> <Plug>(unite_select_next_line)
+    imap <buffer> <TAB> <Plug>(unite_select_next_line)
     imap <buffer> <C-j> <Plug>(unite_select_next_line)
     imap <buffer> <C-k> <Plug>(unite_select_previous_line)
->>>>>>> 2fa53ce69b2b06fb34976ee7c08024b2d15cc385
 endfunction
 
 " }}}
