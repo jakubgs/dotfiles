@@ -50,7 +50,6 @@ Plug 'robbles/logstash.vim'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'LnL7/vim-nix'
 Plug 'lepture/vim-jinja'
-"Plug 'pearofducks/ansible-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
 Plug 'fatih/vim-go'
@@ -59,13 +58,11 @@ Plug 'tomlion/vim-solidity'
 Plug 'neovimhaskell/haskell-vim',   { 'for': 'haskell' }
 Plug 'alx741/vim-hindent',          { 'for': 'haskell' }
 " JS
-Plug 'jaxbot/browserlink.vim'
+Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
+Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
-Plug 'styled-components/vim-styled-components'
-"Plug 'carlitux/deoplete-ternjs',    { 'for': 'javascript' }
-Plug 'jparise/vim-graphql',         { 'for': 'javascript' }
 " Python plugins
 Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
@@ -94,11 +91,11 @@ call plug#end()
 " }}}
 " Display configuration {{{
 
-set background=dark
-colorscheme jellybeans
 let g:jellybeans_overrides = {
 \    'background': { 'ctermbg': 'NONE', '256ctermbg': 'NONE', 'guibg': 'NONE' },
 \}
+set background=dark
+colorscheme jellybeans
 
 syntax on                         " File-type highlighting
 filetype on                       " enable file type detection
@@ -203,7 +200,6 @@ set foldenable                    " when on all folds are closed
 set foldlevel=1                   " folds with higher level will be closed
 set foldmethod=marker             " by default fold based on markers
 set foldnestmax=1                 " nest fold limit for indent/syntax modes
-"set foldtext=NeatFoldText()       " change how folds are desplayed when closed
 
 " }}}
 " Programming settings {{{
@@ -269,9 +265,9 @@ let g:surround_42 = "/* \r */"
 " Lightline
 let g:lightline = { 'colorscheme': 'powerline', }
 " HardTime
-let g:hardtime_default_on = 0
+let g:hardtime_default_on = 1
 let g:hardtime_allow_different_key = 1
-let g:hardtime_maxcount = 2
+let g:hardtime_maxcount = 1
 let g:hardtime_timeout = 5000
 
 
@@ -352,24 +348,6 @@ endif
 let g:unite_source_file_mru_ignore_pattern = 
     \ substitute(g:neomru#file_mru_ignore_pattern, '|\/mnt\/\\', '', '')
 
-" Lightline
-let g:lightline = {
-      \ 'colorscheme': 'powerline',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ }
 " for snippet_complete marker.
 if has('cSonceal')
    set conceallevel=0 concealcursor=i
@@ -554,10 +532,6 @@ nnoremap <space>x yy:.!echo "scale=2; <c-r>"<c-h>"\|bc<CR>
 " focus the current fold
 nnoremap <space>z zMzv
 
-" add new line above and bellow current line
-nnoremap <silent> <space>[ :<C-U>call <SID>AddLines(1)<CR>
-nnoremap <silent> <space>] :<C-U>call <SID>AddLines(0)<CR>
-
 " performance debugging
 nnoremap <silent> <LocalLeader>dd :exe ":profile start /tmp/profile.log"<cr>
                                 \ :exe ":profile func *"<cr>
@@ -595,7 +569,7 @@ nnoremap <space>cj :Codi javascript<CR>
 
 " }}}
 " Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/neovim:'.g:projectroot.' file/new')<CR>
+nnoremap <c-i>     :execute('Unite buffer file_rec/neovim:'.g:projectroot.' file_mru file/new')<CR>
 nnoremap <space>uy :Unite -quick-match history/yank<CR>
 nnoremap <space>ur :Unite -quick-match register<CR>
 nnoremap <space>uR :Unite resume<CR>
@@ -621,7 +595,6 @@ nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 nnoremap <space>uW :Unite file:~/work/<CR>
 nnoremap <space>uP :Unite file_rec/neovim:/mnt/melchior/projects<CR>
 nnoremap <space>uh :Unite file:~/<CR>
-nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
 
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
@@ -686,9 +659,9 @@ nmap     <F1>  <Plug>(Vman)
 augroup saveposition
     autocmd!
     autocmd BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal! g`\"" |
-                \ endif
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
 augroup END
 
 augroup awesomerc
@@ -748,17 +721,6 @@ function! s:AddLines(before)
   silent! call repeat#set((a:before ? '[ ' : '] '), cnt)
 endf
 
-function! NeatFoldText()
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction
-
 " configure completion to complete in command window
 function! s:init_cmdwin()
     " unmap <tab>
@@ -785,31 +747,22 @@ autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
     imap <buffer> <esc> <c-u><bs>
 
-    " move between lines
-    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+    " editing
+	imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
 
-    " open in new splits
-    imap <silent><buffer><expr> <C-x> unite#do_action('split')
-    imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-
+<<<<<<< HEAD
     " go backwards in path
     imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
 
     imap <buffer> <CR>    <Plug>(unite_do_default_action))
 
     nmap <buffer> <C-f>     <Plug>(unite_toggle_auto_preview)
+=======
+    " move between lines
+	imap <buffer> <TAB> <Plug>(unite_select_next_line)
+    imap <buffer> <C-j> <Plug>(unite_select_next_line)
+    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+>>>>>>> 2fa53ce69b2b06fb34976ee7c08024b2d15cc385
 endfunction
-
-" use ranger for 
-function! RangerExplorer()
-    exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-    if filereadable('/tmp/vim_ranger_current_file')
-        exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-        call system('rm /tmp/vim_ranger_current_file')
-    endif
-    redraw!
-endfun
-map <space>e :call RangerExplorer()<CR>
 
 " }}}
