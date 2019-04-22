@@ -401,9 +401,6 @@ if has('conceal')
 endif
 
 " Deoplete
-" Movement within 'ins-completion-menu'
-inoremap <silent><expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <silent><expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 " use tab to cycle
 inoremap <silent><expr> <tab> pumvisible() ? "\<c-y>" : "\<tab>"
 " dont select things with Enter
@@ -415,12 +412,12 @@ nmap <space>U :execute('UpdateTags -R '.g:projectroot)<CR>
 " }}}
 " Key mappings - General {{{
 
+" <TAB> completion
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 " moving selected lines
 xnoremap <silent> <c-k> :move-2<CR>gv=gv
 xnoremap <silent> <c-j> :move'>+<CR>gv=gv
-
-" Toggle pastemode, doesn't indent
-set pastetoggle=<F4>
 
 " easier escaping of :term
 tnoremap <c-a> <c-\><c-n>
@@ -502,9 +499,9 @@ inoremap <c-z> <c-v>
 
 " paste with ctrl+v from clipboard in insert mode
 inoremap <c-v> <c-o>:set paste<cr><c-r>+<c-o>:set nopaste<cr>
+"
 " copy to clipboard with ctrl+c in visual mode
 xnoremap <c-c> "*y:call system('xclip -i -selection clipboard', @*)<CR>
-
 " }}}
 " Key mappings - <Leader> {{{
 
@@ -587,6 +584,7 @@ nnoremap <space>sd :SDelete<CR>
 
 " }}}
 " Key mappings - Codi {{{
+"
 nnoremap <space>cc :Codi<CR>
 nnoremap <space>cd :Codi!<CR>
 nnoremap <space>ct :Codi!!<CR>
@@ -594,6 +592,7 @@ nnoremap <space>cu :CodiUpdate<CR>
 nnoremap <space>cp :Codi python<CR>
 nnoremap <space>cr :Codi ruby<CR>
 nnoremap <space>cj :Codi javascript<CR>
+
 " }}}
 " Key mappings - Unite {{{
 nnoremap <c-i>     :execute('Unite buffer file_mru file_rec/neovim:'.g:projectroot.' file/new')<CR>
@@ -675,7 +674,6 @@ nnoremap <F8>  :setlocal list!<CR>
 nnoremap <F7>  :setlocal wrap!<CR>
 nnoremap <F6>  :setlocal hlsearch!<CR>
 nnoremap <F5>  :setlocal spell!<CR>
-" nnoremap <F4> is already set as pastetoggle
 nnoremap <F3>  :vnew<cr>:setlocal buftype=nofile bufhidden=wipe nobuflisted<cr>
 nnoremap <F2>  :<c-f>vert bot help<space>
 nmap     <F1>  <Plug>(Vman)
