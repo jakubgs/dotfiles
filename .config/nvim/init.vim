@@ -277,9 +277,16 @@ let g:hardtime_timeout = 5000
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_completion_start_length = 2
-let g:deoplete#enable_smart_case = 1
-set completeopt+=noinsert " Enable auto selection
+call deoplete#custom#option({
+\  'auto_complete_delay': 200,
+\  'smart_case': v:true,
+\})
+call deoplete#custom#option('sources', {
+\ '_': ['buffer'],
+\ 'md': ['buffer', 'spell'],
+\ 'cpp': ['buffer', 'tag'],
+\})
+"set completeopt+=noinsert " Enable auto selection
 
 " Sneak
 let g:sneak#label = 1
@@ -789,6 +796,10 @@ function! s:unite_settings()
 
     " go backwards in path
     imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
+
+    imap <buffer> <CR>    <Plug>(unite_do_default_action))
+
+    nmap <buffer> <C-f>     <Plug>(unite_toggle_auto_preview)
 endfunction
 
 " use ranger for 
