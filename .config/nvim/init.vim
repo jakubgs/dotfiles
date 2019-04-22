@@ -648,6 +648,7 @@ nnoremap <space>gB :Gblame<CR>
 nnoremap <space>go :Git checkout<Space>
 nnoremap <space>gf  :Dispatch! git fetch --all<CR>
 nnoremap <space>gps :Dispatch! git push<CR>
+nnoremap <space>gpS :Dispatch! git push --force<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
 
 nnoremap <space>gv :Gitv<CR>
