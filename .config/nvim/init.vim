@@ -56,6 +56,9 @@ Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
 Plug 'mxw/vim-jsx'
 Plug 'fatih/vim-go'
 Plug 'tomlion/vim-solidity'
+" Haskell
+Plug 'neovimhaskell/haskell-vim',   { 'for': 'haskell' }
+Plug 'alx741/vim-hindent',          { 'for': 'haskell' }
 " JS
 Plug 'jaxbot/browserlink.vim'
 Plug 'moll/vim-node'
