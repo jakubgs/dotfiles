@@ -1,0 +1,21 @@
+{
+  "settingsVersion": "1.64.5",
+  "exclusionRules": [],
+  "filterLinkHints": false,
+  "waitForEnterForFilteredHints": true,
+  "hideHud": false,
+  "keyMappings": "map <tab> Vomnibar.activateInNewTab\nmap <c-t> Vomnibar.activateInNewTab\nmap <c-d> scrollFullPageDown\nmap <c-u> scrollFullPageUp\nmap h previousTab\nmap l nextTab\nmap d removeTab\nmap u restoreTab\nmap H moveTabLeft\nmap L moveTabRight\nmap J goBack\nmap K goForward\nmap y copyCurrentUrl\nmap T Vomnibar.activateEditUrlInNewTab\n\nunmap v\nmap vf createTab https://mangadex.org/follows\nmap vy createTab https://www.youtube.com/feed/subscriptions\nmap vv createTab https://portal.victorops.com/client/status-im",
+  "linkHintCharacters": "sadfjklewcmpgh",
+  "linkHintNumbers": "qwertyuiopasdfghjklzxcvbnm",
+  "newTabUrl": "about:newtab",
+  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
+  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<",
+  "regexFindMode": false,
+  "ignoreKeyboardLayout": true,
+  "scrollStepSize": 350,
+  "smoothScroll": false,
+  "grabBackFocus": false,
+  "searchEngines": "w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\nd: https://duckduckgo.com/?q=%s DuckDuckGo\ny: https://www.youtube.com/results?search_query=%s Youtube\n\n# More examples.\n#\n# (Vimium supports search completion Wikipedia, as\n# above, and for these.)\n#\n# g: https://www.google.com/search?q=%s Google\n# l: https://www.google.com/search?q=%s&btnI I'm feeling lucky...\n# gm: https://www.google.com/maps?q=%s Google maps\n# b: https://www.bing.com/search?q=%s Bing\n# az: https://www.amazon.com/s/?field-keywords=%s Amazon\n# qw: https://www.qwant.com/?q=%s Qwant",
+  "searchUrl": "https://www.google.com/search?q=",
+  "userDefinedLinkHintCss": "/* Arc Dark theme */\n\n/* Link hint boxes */\ndiv > .vimiumHintMarker {\n  background: #afd700;\n  font-size: 11px;\n  border: 0.25em solid #829e03;\n  border-radius: 0.4em;\n  box-shadow: 0em 0.1em 0.6em 0.1em rgba(0, 0, 0, 0.4);\n}\n\n/* Link hint text */\ndiv > .vimiumHintMarker span {\n  color: black;\n  font-size: inherit;\n  text-shadow: none;\n}\n\n/* Selected hint */\ndiv > .vimiumActiveHintMarker {\n  color: white;\n  background-color: #af0017;\n  border: 0.25em solid #8c0017;\n}\n\n/* Link hint matching characters */\ndiv > .vimiumHintMarker > .matchingCharacter {\n  color: #5294e2;\n}\n\ninput#vomnibarInput.vimiumReset {\n\tcolor: #FFF !important;\n  background-color: #111 !important;\n}\n\n#vomnibar {\n   border-color: black;\n   background-color: black;\n}\n\n#vomnibar .vomnibarSearchArea {\n   background-color: #222;\n   border-bottom: #3f3f3f;\n}\n\n#vomnibar input {\n   border-color: #393939;\n}\n\n#vomnibar ul {\n    background-color: #222;\n}\n\n#vomnibar li {\n   border-bottom: #3f3f3f;\n}\n\n#vomnibar li .vomnibarUrl {\n   color: #5294e2;\n}\n\n#vomnibar li .vomnibarMatch {\n   color: white;\n}\n\n#vomnibar li.vomnibarSelected {\n    background-color: #181D24;\n}\n\n#vomnibar li em .vomnibarMatch, #vomnibar li .vomnibarTitle .vomnibarMatch {\n   color: white;\n}\n\n#vomnibar li em, #vomnibar li .vomnibarTitle {\n   color: #ddd;\n}"
+}
