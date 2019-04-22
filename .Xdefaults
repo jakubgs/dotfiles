@@ -31,7 +31,8 @@ Xcursor.theme: Vanilla-DMZ
 
 ! Clickable links
 *perl-ext-common: default,font-size,matcher,-option-popup,-selection-popup,-realine
-*url-launcher:    /usr/bin/chromium
+!*url-launcher:    /usr/bin/chromium
+*url-launcher:    /usr/bin/brave-browser
 *matcher.button:  1
 *colorUL:         #a6c9f8
 
