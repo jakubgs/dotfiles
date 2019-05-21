@@ -2,7 +2,7 @@ rofi.theme:         custom
 rofi.auto-select:   true
 rofi.sidebar-mode:  false
 rofi.terminal:      urxvtc
-rofi.width:         30
+rofi.width:         40
 rofi.click-to-exit: true
 rofi.font:          Terminus 18
 rofi.border:        2
