@@ -170,14 +170,14 @@ mytextclock = wibox.widget.textclock(" %Y/%m/%d %H:%M:%S |", 1 )
 
 -- Create battery widget
 local bat_widget = nil
---local battery_widget = require("battery-widget")
---bat_widget = battery_widget {
---    adapter = "BAT0", ac = "AC",
---    battery_prefix = " Bat: ", ac_prefix = " AC: ",
---    percent_colors = {{25, "red"}, {50, "orange"}, {999, "#afd700"}},
---    tooltip_text = "${state}${time_est}",
---    widget_font = "terminus 12",
---}
+local battery_widget = require("battery-widget")
+bat_widget = battery_widget {
+    adapter = "BAT0", ac = "AC",
+    battery_prefix = " Bat: ", ac_prefix = " AC: ",
+    percent_colors = {{25, "red"}, {50, "orange"}, {999, "#afd700"}},
+    tooltip_text = "${state}${time_est}",
+    widget_font = "terminus 12",
+}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
