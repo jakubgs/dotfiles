@@ -25,6 +25,10 @@
   m:0x0 + c:235
   XF86Display
 
+"~/bin/tpadtoggle"
+  m:0x0 + c:164
+  XF86Favorites
+
 # }}}
 # Volume {{{
 # Volume up
