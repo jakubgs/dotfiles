@@ -294,6 +294,9 @@ alias mwake='wakeonlan 00:1b:21:06:f1:cc'
 
 alias tr='truffle'
 
+# CapsLock hell escape
+alias killcaps='xkbset nullify lock'
+
 # }}}
 # Functions {{{
 
