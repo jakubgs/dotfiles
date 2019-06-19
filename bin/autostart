@@ -43,6 +43,8 @@ xset b off
 setxkbmap -layout pl
 # Disable touchpad
 xinput --disable "Elan Touchpad"
+# Turn off Caps Lock
+xkbset nullify lock
 
 echo "### Autostarting programs:"
 
