@@ -466,12 +466,6 @@ tnoremap <c-l> <c-\><c-n><c-w>l
 nnoremap <c-Tab>   :wtabnext<CR>
 nnoremap <c-s-Tab> :tabprevious<CR>
 
-" keep normal functionality of c-v
-inoremap <c-z> <c-v>
-
-" paste with ctrl+v from clipboard in insert mode
-inoremap <c-v> <c-o>:set paste<cr><c-r>+<c-o>:set nopaste<cr>
-"
 " copy to clipboard with ctrl+c in visual mode
 xnoremap <c-c> "*y:call system('xclip -i -selection clipboard', @*)<CR>
 " }}}
@@ -741,22 +735,15 @@ autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
     imap <buffer> <esc> <c-u><bs>
 
-    " editing
-	imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
-
-<<<<<<< HEAD
     " go backwards in path
-    imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
+    imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+    imap <buffer> <CR>  <Plug>(unite_do_default_action))
+    nmap <buffer> <C-f> <Plug>(unite_toggle_auto_preview)
 
-    imap <buffer> <CR>    <Plug>(unite_do_default_action))
-
-    nmap <buffer> <C-f>     <Plug>(unite_toggle_auto_preview)
-=======
     " move between lines
-	imap <buffer> <TAB> <Plug>(unite_select_next_line)
+    imap <buffer> <TAB> <Plug>(unite_select_next_line)
     imap <buffer> <C-j> <Plug>(unite_select_next_line)
     imap <buffer> <C-k> <Plug>(unite_select_previous_line)
->>>>>>> 2fa53ce69b2b06fb34976ee7c08024b2d15cc385
 endfunction
 
 " }}}
