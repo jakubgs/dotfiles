@@ -587,6 +587,23 @@ nnoremap <space>uh :Unite file:~/<CR>
 " search openned buffers
 nnoremap <space><space> :Unite buffer<CR>
 
+" Go Lang mappings {{{
+"
+nnoremap <space>Gr :GoRun<CR>
+nnoremap <space>Gt :GoTest<CR>
+nnoremap <space>Gb :GoBuild<CR>
+nnoremap <space>Gd :GoDebugStart<CR>
+nnoremap <space>Gl :GoLint<CR>
+nnoremap <space>Gv :GoVet<CR>
+nnoremap <space>Ge :GoErrCheck<CR>
+nnoremap <space>Gi :GoImport<space>
+nnoremap <space>GR :GoRename<space>
+nnoremap <space>Gf :GoDef<space>
+nnoremap <space>Gd :GoDoc<space>
+nnoremap <space>Gb :GoDocBrowser<space>
+nnoremap <space>GI :GoInstall<CR>
+
+
 " }}}
 " Key mappings - Git {{{
 
