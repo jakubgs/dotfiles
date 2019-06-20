@@ -6,8 +6,9 @@ STATUS="${PWD}/soft/StatusIm.AppImage"
 
 if [[ "$@" == "-u" ]]; then
     LATEST_APP_URL=$(curl -sk "${STATUS_LATEST_URL}" | jq -r '.APP')
-    echo "Downloading: ${LATEST_APP_URL}"
-    curl --fail --progress-bar "${LATEST_APP_URL}" -o "${STATUS}"
+    APP_URL=$(echo "${LATEST_APP_URL}" | sed 's/\(cdn\)\?\.digitaloceanspaces/.cdn.digitaloceanspaces/')
+    echo "Downloading: ${APP_URL}"
+    curl --fail --progress-bar "${APP_URL}" -o "${STATUS}"
 fi
 
 # styling
