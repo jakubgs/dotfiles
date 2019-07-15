@@ -12,6 +12,8 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Widgets and layouts
 local naughty = require('naughty')
+-- Debugging
+local pprint = require('pprint')
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -293,7 +295,7 @@ awful.key({ modkey, "Shift"   }, "c",         function () run_or_raise(terminal,
 awful.key({ modkey,           }, "p",         function () run_or_raise(fpass, { class = "fpass" }) end),
 awful.key({ modkey,           }, "m",         function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey, "Shift"   }, "m",         function () awful.spawn(homedir.."/bin/fmpd -r") end),
-awful.key({ modkey,           }, "u",         function () run_or_raise("geary", { class = "Geary" }) end),
+awful.key({ modkey,           }, "u",         function () run_or_raise("evolution", { class = "Evolution" }) end),
 awful.key({ modkey,           }, "i",         function () run_or_raise(homedir.."/bin/status", { class = "Status" }) end),
 --- Power & Screen
 awful.key({ "Mod4", "Control" }, "s",         function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
@@ -476,13 +478,13 @@ awful.rules.rules = {
     -- Screen/tag allocation
     { rule_any = { class = { "mmtail", "ytdl" } },
         properties = { screen = 1, tag = ":admin:" } },
-    { rule_any = { name = { "nvim" } },
+    { rule_any = { name = { "nvim" }, class = { "Zeal" } },
         properties = { screen = 1, tag = ":edit:" } },
     { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "brave-browser" } },
         properties = { screen = 1, tag = ":web:" } },
     { rule_any = { class = { "ncmpcpp" }, name = { "ncmpcpp*" }, },
         properties = { screen = 1, tag = ":music:" } },
-    { rule_any = { class = { "Status", "Slack", "Skype", "Geary" } },
+    { rule_any = { class = { "Status", "Slack", "Skype", "Evolution" } },
         properties = { screen = 1, tag = ":comm:" } },
     { rule_any = { name = { "ranger" } },
         properties = { screen = 1, tag = ":fs:" } },
