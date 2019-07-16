@@ -475,17 +475,14 @@ xnoremap <c-c> "*y:call system('xclip -i -selection clipboard', @*)<CR>
 " Key mappings - <Leader> {{{
 
 " copy file path to clipboard
-nnoremap <space>p :let @* = expand("%:p") <bar> let @+ = @*<CR>
+nnoremap <space>p :call CopyPath(0)<CR>
+nnoremap <space>P :call CopyPath(1)<CR>
 
 " execute current line in vim
 nnoremap <space>v :execute getline(".")<cr>;w
 
 " put last searched items into QuickFix window
 nnoremap <space>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-
-" paste and sellect
-nnoremap <space>p p`[v`]
-nnoremap <space>P P`[v`]
 
 " help in new vertical split
 nnoremap <space>H :rightb vert help<space>
@@ -735,7 +732,7 @@ function! s:AddLines(before)
   let cnt = (v:count>0) ? v:count : 1
   call append(line('.')-a:before, repeat([''], cnt))
   silent! call repeat#set((a:before ? '[ ' : '] '), cnt)
-endf
+endfunction
 
 " configure completion to complete in command window
 function! s:init_cmdwin()
@@ -775,6 +772,17 @@ function! s:unite_settings()
     imap <buffer> <TAB> <Plug>(unite_select_next_line)
     imap <buffer> <C-j> <Plug>(unite_select_next_line)
     imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+endfunction
+
+function! CopyPath(relative)
+    let l:path = expand("%:p")
+    if a:relative
+        let l:path = substitute(path, projectroot#guess().'/', '', '')
+    endif
+    echo "Copying: " . l:path
+    " save to both clipboards
+    let @* = l:path
+    let @+ = l:path
 endfunction
 
 " }}}
