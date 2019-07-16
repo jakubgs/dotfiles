@@ -300,7 +300,7 @@ let g:easytags_always_enabled = 1
 let g:easytags_async = 1
 
 " by default start in home directory
-let b:projectroot = '~/dotfiles/'
+let g:projectroot = '~/work/'
 
 " Gitv
 let g:Gitv_OpenHorizontal = 1
@@ -710,7 +710,7 @@ augroup END
 
 augroup projectroot
     autocmd!
-    autocmd BufEnter * silent! let g:projectroot = projectroot#guess()
+    autocmd BufEnter * silent! s:detectProjectRoot()
 augroup END
 
 au BufRead,BufNewFile *nginx* setfiletype nginx
@@ -718,6 +718,15 @@ au BufRead,BufNewFile *.trac setfiletype tracwiki
 
 " }}}
 " Functions {{{
+
+" I want to avoid project root being just home.
+" Too many files to search.
+function s:detectProjectRoot()
+    let g:projectroot = projectroot#guess()
+    if g:projectroot == expand('~/')
+        let g:projectroot = expand('~/') . '/work'
+    endif
+endfunction
 
 " Add []<space> mappings for adding empty lines
 function! s:AddLines(before)
