@@ -622,7 +622,7 @@ nnoremap <space>gT :Gcommit -s -v -q -n --amend -- %:p<CR>
 nnoremap <space>gd :Gvdiff<CR>
 nnoremap <space>ge :Gedit<CR>
 nnoremap <space>gu :Git reset "%:p"<CR><CR>
-nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <space>gl :Gitv --all<CR>
 nnoremap <space>gp :Ggrep<Space>
 nnoremap <space>gm :Gmove<Space>
 nnoremap <space>gB :Gblame<CR>
@@ -632,8 +632,7 @@ nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpS :Dispatch! git push --force<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
 
-nnoremap <space>gv :Gitv<CR>
-nnoremap <space>gV :Gitv!<CR>
+nnoremap <space>gv :execute('Gitv '.expand('%:p'))<CR>
 nnoremap <space>gg :Unite giti<CR>
 nnoremap <space>gb :Unite giti/branch<CR>
 
