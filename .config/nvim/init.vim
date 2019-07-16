@@ -302,9 +302,6 @@ let g:easytags_async = 1
 " by default start in home directory
 let g:projectroot = '~/work/'
 
-" Gitv
-let g:Gitv_OpenHorizontal = 1
-
 " Unite
 let g:unite_source_rec_min_cache_files = 500
 " shorten time format for buffers, obscured filenames
