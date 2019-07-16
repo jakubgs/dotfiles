@@ -721,7 +721,7 @@ au BufRead,BufNewFile *.trac setfiletype tracwiki
 
 " I want to avoid project root being just home.
 " Too many files to search.
-function s:detectProjectRoot()
+function! s:detectProjectRoot()
     let g:projectroot = projectroot#guess()
     if g:projectroot == expand('~/')
         let g:projectroot = expand('~/') . '/work'
