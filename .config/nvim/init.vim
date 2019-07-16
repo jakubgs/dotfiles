@@ -750,6 +750,9 @@ endfunction
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
+    " sometimes its left turned on and messes input
+    set nopaste
+
     imap <buffer> <esc> <c-u><bs>
 
     " go backwards in path
