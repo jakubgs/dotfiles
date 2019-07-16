@@ -7,6 +7,7 @@ export OOO_FORCE_DESKTOP="xfce4"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
 export QT_STYLE_OVERRIDE="gtk2"
+export MPD_HOST="localhost"
 
 # set screen blank timeout to 1 hour
 which xset && xset s 3600 3600
