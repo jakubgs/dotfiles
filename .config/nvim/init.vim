@@ -303,6 +303,7 @@ let g:easytags_async = 1
 let g:projectroot = '~/work/'
 
 " Gitv
+let g:Gitv_CommitStep = &lines
 let g:Gitv_DoNotMapCtrlKey = 1
 let g:Gitv_WipeAllOnClose = 1
 let g:Gitv_TruncateCommitSubjects = 1
