@@ -8,3 +8,4 @@ tags
 .config/nvim/.init.vim-rplugin~
 .config/nvim/autoload/plug.vim.old
 .config/nvim/autoload/plug.vim
+.config/ranger/history
