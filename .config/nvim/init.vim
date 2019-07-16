@@ -629,6 +629,8 @@ nnoremap <space>gl :Gitv --all<CR>
 nnoremap <space>gp :Ggrep<Space>
 nnoremap <space>gm :Gmove<Space>
 nnoremap <space>gB :Gblame<CR>
+nnoremap <space>gw :Gbrowse<CR>
+nnoremap <space>gW :Gbrowse!<CR>
 nnoremap <space>go :Git checkout<Space>
 nnoremap <space>gf  :Dispatch! git fetch --all<CR>
 nnoremap <space>gps :Dispatch! git push<CR>
