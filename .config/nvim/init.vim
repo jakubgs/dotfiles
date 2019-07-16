@@ -613,9 +613,9 @@ nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gw :Gwrite<CR>
 nnoremap <space>ga :Gwrite<CR>
 nnoremap <space>gc :Gcommit -s -v -q -n<CR>
-nnoremap <space>gt :Gcommit -s -v -q -n -- "%:p"<CR>
+nnoremap <space>gt :Gcommit -s -v -q -n -- %:p<CR>
 nnoremap <space>gC :Gcommit -s -v -q -n --amend<CR>
-nnoremap <space>gT :Gcommit -s -v -q -n --amend -- "%:p"<CR>
+nnoremap <space>gT :Gcommit -s -v -q -n --amend -- %:p<CR>
 nnoremap <space>gd :Gvdiff<CR>
 nnoremap <space>ge :Gedit<CR>
 nnoremap <space>gu :Git reset "%:p"<CR><CR>
