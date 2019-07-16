@@ -39,6 +39,7 @@ Plug 'Julian/vim-textobj-brace'
 Plug 'kana/vim-textobj-indent'
 " Git plugins
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'gregsexton/gitv'
 Plug 'kmnk/vim-unite-giti'
 " Provisioning plugins
