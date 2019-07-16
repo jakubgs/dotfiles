@@ -196,10 +196,10 @@ command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent ed
 " }}}
 " Folding settings {{{
 
-set foldenable                    " when on all folds are closed
-set foldlevel=1                   " folds with higher level will be closed
-set foldmethod=marker             " by default fold based on markers
-set foldnestmax=1                 " nest fold limit for indent/syntax modes
+"set foldenable                    " when on all folds are closed
+"set foldlevel=1                   " folds with higher level will be closed
+"set foldmethod=marker             " by default fold based on markers
+"set foldnestmax=1                 " nest fold limit for indent/syntax modes
 
 " }}}
 " Programming settings {{{
@@ -263,7 +263,12 @@ highlight StartifyHeader      ctermfg=196 cterm=bold gui=bold
 let g:surround_42 = "/* \r */"
 
 " Lightline
-let g:lightline = { 'colorscheme': 'powerline', }
+let g:lightline = {
+\  'colorscheme': 'powerline',
+\  'active': {
+\    'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
+\  }
+\}
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
