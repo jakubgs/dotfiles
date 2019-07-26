@@ -1,0 +1,5 @@
+# format, default to 1080p max
+-f 'bestvideo[height<=1080]+bestaudio/best[filesize<2G]'
+
+# save all to ~/YouTube
+-o '~/YouTube/%(uploader)s - %(title)s (%(id)s).%(ext)s'
