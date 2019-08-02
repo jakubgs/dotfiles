@@ -43,7 +43,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'gregsexton/gitv'
 Plug 'kmnk/vim-unite-giti'
 " Provisioning plugins
-Plug 'chase/vim-ansible-yaml'
+Plug 'pearofducks/ansible-vim'
 Plug 'hashivim/vim-terraform'
 " Syntax
 Plug 'robbles/logstash.vim'
@@ -218,6 +218,14 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 
 " }}}
 " Plugin configuration {{{
+
+" Goyo
+let g:goyo_width = 110
+
+" Ansible
+let g:ansible_attribute_highlight = 'ab'
+let g:ansible_name_highlight = 'd'
+let g:ansible_extra_keywords_highlight = 1
 
 " Markdown
 let g:markdown_syntax_conceal = 1
@@ -631,6 +639,8 @@ nnoremap <space>gm :Gmove<Space>
 nnoremap <space>gB :Gblame<CR>
 nnoremap <space>gw :Gbrowse<CR>
 nnoremap <space>gW :Gbrowse!<CR>
+vnoremap <space>gw :Gbrowse<CR>
+vnoremap <space>gW :Gbrowse!<CR>
 nnoremap <space>go :Git checkout<Space>
 nnoremap <space>gf  :Dispatch! git fetch --all<CR>
 nnoremap <space>gps :Dispatch! git push<CR>
@@ -638,6 +648,7 @@ nnoremap <space>gpS :Dispatch! git push --force<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
 
 nnoremap <space>gv :execute('Gitv '.expand('%:p'))<CR>
+nnoremap <space>gV :execute('Gitv! '.expand('%:p'))<CR>
 nnoremap <space>gg :Unite giti<CR>
 nnoremap <space>gb :Unite giti/branch<CR>
 
@@ -653,7 +664,7 @@ nnoremap <space>gSa :Git stash list --date=local <bar>
 " }}}
 " Key mappings - Fxx {{{
 
-nnoremap <F11> :Goyo 120<CR>
+nnoremap <F11> :Goyo<CR>
 nnoremap <F10> :Dispatch! knife dwim %:p<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
 nnoremap <F8>  :setlocal list!<CR>
