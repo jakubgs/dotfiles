@@ -41,7 +41,6 @@ Plug 'kana/vim-textobj-indent'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'gregsexton/gitv'
-Plug 'kmnk/vim-unite-giti'
 " Provisioning plugins
 Plug 'pearofducks/ansible-vim'
 Plug 'hashivim/vim-terraform'
@@ -631,8 +630,6 @@ nnoremap <space>gpl :Dispatch! git pull<CR>
 
 nnoremap <space>gv :execute('Gitv '.expand('%:p'))<CR>
 nnoremap <space>gV :execute('Gitv! '.expand('%:p'))<CR>
-nnoremap <space>gg :Unite giti<CR>
-nnoremap <space>gb :Unite giti/branch<CR>
 
 nnoremap <space>gSs :Git status <bar>
                     \ if confirm('Do you want to stash changes?') <bar>
@@ -772,25 +769,6 @@ function! s:init_cmdwin()
     inoremap <buffer><expr><silent> <cr>  pumvisible() ? "\<c-e>\<cr>" : "\<cr>"
     
     startinsert!
-endfunction
-
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-    " sometimes its left turned on and messes input
-    set nopaste
-
-    imap <buffer> <esc> <c-u><bs>
-
-    " go backwards in path
-    imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
-    imap <buffer> <CR>  <Plug>(unite_do_default_action))
-    nmap <buffer> <C-f> <Plug>(unite_toggle_auto_preview)
-
-    " move between lines
-    imap <buffer> <TAB> <Plug>(unite_select_next_line)
-    imap <buffer> <C-j> <Plug>(unite_select_next_line)
-    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
 endfunction
 
 function! CopyPath(relative)
