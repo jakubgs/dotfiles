@@ -71,12 +71,10 @@ Plug 'bfredl/nvim-ipy',             { 'for': 'python' }
 "Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
 Plug 'bps/vim-textobj-python',      { 'for': 'python' }
 " Searching Plugins
-Plug 'tsukkee/unite-tag'
-Plug 'Shougo/unite.vim'
+Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
-Plug 'Shougo/neossh.vim'
 " Completion
-Plug 'Shougo/deoplete.nvim',
+Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-vim'
 " Style
 Plug 'nanotech/jellybeans.vim'
@@ -322,42 +320,57 @@ let g:Gitv_DoNotMapCtrlKey = 1
 let g:Gitv_WipeAllOnClose = 1
 let g:Gitv_TruncateCommitSubjects = 1
 
-" Unite
-let g:unite_source_rec_min_cache_files = 500
-" shorten time format for buffers, obscured filenames
-let g:unite_source_buffer_time_format = '(%H:%M:%S)'
-" default to fuzzy searching, hide current file
-call unite#filters#sorter_default#use([
-\   'matcher_fuzzy',
-\   'matcher_hide_current_file'
-\])
-" https://github.com/Shougo/unite.vim/issues/1079
-call unite#custom#profile('default', 'context', {
-\   'smartcase': 1,
-\   'no_split': 1,
-\   'start_insert': 1,
-\   'ignore_globs': [],
-\   'short_source_names': 1,
-\})
-"" ignore these hidden directories
-call unite#custom#source('file_rec/neovim', 'max_candidates', 200)
-" Using ag as recursive command.
-if executable('ag')
-    " Use ag in unite file_rec/async source
-    let g:unite_source_rec_async_command =
-        \ ['ag','--follow','--nocolor','--nogroup','--hidden','-g','']
-    " worker-xquery.js is a ridiculously huge js file and breaks ag
-	" Use ag in unite grep source.
-	let g:unite_source_grep_command = 'ag'
-	let g:unite_source_grep_default_opts =
-                \ '-i -U --line-numbers --nocolor --nogroup '
-	let g:unite_source_grep_recursive_opt = ''
-endif
+" Denite
 
-" NeoMRU
-" remember /mnt paths
-let g:unite_source_file_mru_ignore_pattern = 
-    \ substitute(g:neomru#file_mru_ignore_pattern, '|\/mnt\/\\', '', '')
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d       denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p       denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q       denite#do_map('quit')
+  nnoremap <silent><buffer><expr> <Esc>   denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+  nnoremap <silent><buffer><expr> -       denite#do_map('move_up_path')
+endfunction
+
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+  " quit both windows
+  inoremap <silent><buffer><expr>  <Esc>  denite#do_map('quit')
+  inoremap <silent><buffer><expr>  <c-o>  denite#do_map('quit')
+  inoremap <silent><buffer><expr>  <c-c>  denite#do_map('quit')
+  " some more cool stuff
+  inoremap <silent><buffer><expr>  <CR>   denite#do_map('do_action')
+  inoremap <silent><buffer><expr>  <C-l>  denite#do_map('choose_action')
+  inoremap <silent><buffer><expr>  <C-l>  denite#do_map('redraw')
+  inoremap <silent><buffer><expr>  -      denite#do_map('move_up_path')
+  " move cursor in suggestions list
+  inoremap <silent><buffer>        <C-j>  <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+  inoremap <silent><buffer>        <C-k>  <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+  inoremap <silent><buffer>        <C-d>  <Esc><C-w>p:call cursor(line('.')+30,0)<CR><C-w>pA
+  inoremap <silent><buffer>        <C-u>  <Esc><C-w>p:call cursor(line('.')-30,0)<CR><C-w>pA
+endfunction
+
+" Change file/rec command.
+call denite#custom#var('file/rec', 'command',
+\ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+
+" Change matchers.
+call denite#custom#source('_', 'matchers', [
+\ 'matcher/substring',
+\ 'matcher/ignore_current_buffer',
+\])
+
+" Change default action.
+call denite#custom#option('_', {
+\ 'start_filter': 1,
+\ 'cursor_pos': '0',
+\ 'split': 'no',
+\ 'filter_split_direction': 'topleft',
+\ 'statusline': 0,
+\})
 
 " for snippet_complete marker.
 if has('cSonceal')
@@ -560,7 +573,7 @@ nnoremap <space>sd :SDelete<CR>
 
 " }}}
 " Key mappings - Codi {{{
-"
+
 nnoremap <space>cc :Codi<CR>
 nnoremap <space>cd :Codi!<CR>
 nnoremap <space>ct :Codi!!<CR>
@@ -570,58 +583,27 @@ nnoremap <space>cr :Codi ruby<CR>
 nnoremap <space>cj :Codi javascript<CR>
 
 " }}}
-" Key mappings - Unite {{{
-nnoremap <c-i>     :execute('Unite buffer file_rec/neovim:'.g:projectroot.' file_mru file/new')<CR>
-nnoremap <space>uy :Unite -quick-match history/yank<CR>
-nnoremap <space>ur :Unite -quick-match register<CR>
-nnoremap <space>uR :Unite resume<CR>
-nnoremap <space>uu :Unite file<CR>
-nnoremap <space>um :Unite file_mru<CR>
-nnoremap <space>ub :Unite buffer<CR>
-nnoremap <space>uf :Unite file<CR>
-nnoremap <space>uc :Unite command<CR>
-nnoremap <space>ul :Unite line<CR>
-nnoremap <space>uj :Unite jump<CR>
-nnoremap <space>ul :Unite line<CR>
-nnoremap <space>um :Unite file_mru<CR>
-nnoremap <space>us :Unite source<CR>
-nnoremap <space>ut :Unite tag<CR>
-nnoremap <space>uu :Unite file<CR>
-nnoremap <space>up :UniteWithProjectDir file_rec/neovim<CR>
-nnoremap <space>uh :Unite file:~/<CR>
-nnoremap <space>up :execute('Unite file_rec/neovim:'.g:projectroot)<CR>
-nnoremap <space>uw :execute('Unite file:'.g:projectroot)<CR>
+" Key mappings - Denite {{{
 
-" location specific
-"nnoremap <space>uW :Unite file_rec/neovim:~/work/<CR>
-nnoremap <space>uW :Unite file:~/work/<CR>
-nnoremap <space>uP :Unite file_rec/neovim:/mnt/melchior/projects<CR>
-nnoremap <space>uh :Unite file:~/<CR>
-
+nnoremap <c-i>     :execute('Denite buffer file/rec:'.g:projectroot.' file_mru')<CR>
+nnoremap <space>ur :Denite register<CR>
+nnoremap <space>uu :Denite file<CR>
+nnoremap <space>um :Denite file_mru<CR>
+nnoremap <space>ub :Denite buffer<CR>
+nnoremap <space>uc :Denite command<CR>
+nnoremap <space>ul :Denite line<CR>
+nnoremap <space>uj :Denite jump<CR>
+nnoremap <space>us :Denite source<CR>
+nnoremap <space>ut :Denite tag<CR>
+nnoremap <space>uh :Denite file:~/<CR>
+nnoremap <space>uW :Denite file:~/work/<CR>
+nnoremap <space>up :execute('Denite file/rec:'.g:projectroot)<CR>
+nnoremap <space>uw :execute('Denite file:'.g:projectroot)<CR>
 " search openned buffers
-nnoremap <space><space> :Unite buffer<CR>
+nnoremap <space><space> :Denite buffer<CR>
 
-" Go Lang mappings {{{
-"
-nnoremap <space>Gr :GoRun<CR>
-nnoremap <space>Gt :GoTest<CR>
-nnoremap <space>Gb :GoBuild<CR>
-nnoremap <space>Gd :GoDebugStart<CR>
-nnoremap <space>Gl :GoLint<CR>
-nnoremap <space>Gv :GoVet<CR>
-nnoremap <space>Ge :GoErrCheck<CR>
-nnoremap <space>Gi :GoImport<space>
-nnoremap <space>GR :GoRename<space>
-nnoremap <space>Gf :GoDef<space>
-nnoremap <space>Gd :GoDoc<space>
-nnoremap <space>Gb :GoDocBrowser<space>
-nnoremap <space>GI :GoInstall<CR>
-
-
-" }}}
 " Key mappings - Git {{{
 
-" fugitive git bindings
 nnoremap <space>gr :Gread<CR>
 nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gw :Gwrite<CR>
@@ -660,6 +642,24 @@ nnoremap <space>gSa :Git stash list --date=local <bar>
                     \ if confirm('Apply stash@{0}?') <bar>
                         \ Git stash apply <bar>
                     \ endif<CR><CR>
+
+" }}}
+" Go Lang mappings {{{
+"
+nnoremap <space>Gr :GoRun<CR>
+nnoremap <space>Gt :GoTest<CR>
+nnoremap <space>Gb :GoBuild<CR>
+nnoremap <space>Gd :GoDebugStart<CR>
+nnoremap <space>Gl :GoLint<CR>
+nnoremap <space>Gv :GoVet<CR>
+nnoremap <space>Ge :GoErrCheck<CR>
+nnoremap <space>Gi :GoImport<space>
+nnoremap <space>GR :GoRename<space>
+nnoremap <space>Gf :GoDef<space>
+nnoremap <space>Gd :GoDoc<space>
+nnoremap <space>Gb :GoDocBrowser<space>
+nnoremap <space>GI :GoInstall<CR>
+
 
 " }}}
 " Key mappings - Fxx {{{
