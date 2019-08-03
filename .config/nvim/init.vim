@@ -329,6 +329,7 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> p       denite#do_map('do_action', 'preview')
   nnoremap <silent><buffer><expr> q       denite#do_map('quit')
   nnoremap <silent><buffer><expr> <Esc>   denite#do_map('quit')
+  nnoremap <silent><buffer><expr> <C-c>   denite#do_map('quit')
   nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
   nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
   nnoremap <silent><buffer><expr> -       denite#do_map('move_up_path')
@@ -342,7 +343,7 @@ function! s:denite_filter_my_settings() abort
   inoremap <silent><buffer><expr>  <c-c>  denite#do_map('quit')
   " some more cool stuff
   inoremap <silent><buffer><expr>  <CR>   denite#do_map('do_action')
-  inoremap <silent><buffer><expr>  <C-l>  denite#do_map('choose_action')
+  inoremap <silent><buffer><expr>  <C-p>   denite#do_map('do_action', 'preview')
   inoremap <silent><buffer><expr>  <C-l>  denite#do_map('redraw')
   inoremap <silent><buffer><expr>  -      denite#do_map('move_up_path')
   " move cursor in suggestions list
