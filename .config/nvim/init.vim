@@ -367,7 +367,7 @@ call denite#custom#option('_', {
 \ 'start_filter': 1,
 \ 'cursor_pos': '0',
 \ 'split': 'no',
-\ 'filter_split_direction': 'topleft',
+\ 'filter_split_direction': 'aboveleft',
 \ 'statusline': 0,
 \})
 
