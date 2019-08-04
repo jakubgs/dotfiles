@@ -332,7 +332,6 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <C-c>   denite#do_map('quit')
   nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
   nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
-  nnoremap <silent><buffer><expr> -       denite#do_map('move_up_path')
 endfunction
 
 autocmd FileType denite-filter call s:denite_filter_my_settings()
