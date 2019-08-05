@@ -3,9 +3,6 @@
 
 " Plugin management {{{
 
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
-
 " auto-install vim-plug                                                                                                                
 if empty(glob('~/.config/nvim/autoload/plug.vim'))                                                                                    
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -19,13 +16,10 @@ Plug 'dbakker/vim-projectroot'
 Plug 'sotte/presenting.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-eunuch'
-Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'bruno-/vim-man'
 Plug 'metakirby5/codi.vim'
 Plug 'junegunn/goyo.vim'
-" Movement
 Plug 'justinmk/vim-sneak'
 " Text manipulation
 Plug 'tpope/vim-surround'
@@ -33,42 +27,10 @@ Plug 'tpope/vim-repeat'
 Plug 'tommcdo/vim-exchange'
 Plug 'godlygeek/tabular'
 Plug 'jkramer/vim-checkbox'
-" Text objects
-Plug 'kana/vim-textobj-user'
-Plug 'Julian/vim-textobj-brace'
-Plug 'kana/vim-textobj-indent'
 " Git plugins
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'gregsexton/gitv'
-" Provisioning plugins
-Plug 'pearofducks/ansible-vim'
-Plug 'hashivim/vim-terraform'
-" Syntax
-Plug 'robbles/logstash.vim'
-"Plug 'tpope/vim-markdown'
-Plug 'LaTeX-Box-Team/LaTeX-Box'
-Plug 'LnL7/vim-nix'
-Plug 'lepture/vim-jinja'
-Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
-Plug 'fatih/vim-go'
-Plug 'tomlion/vim-solidity'
-" Haskell
-Plug 'neovimhaskell/haskell-vim',   { 'for': 'haskell' }
-Plug 'alx741/vim-hindent',          { 'for': 'haskell' }
-" JS
-Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
-Plug 'mxw/vim-jsx'
-Plug 'moll/vim-node'
-Plug 'mxw/vim-jsx'
-Plug 'tell-k/vim-autopep8',         { 'for': 'javascript' }
-" Python plugins
-Plug 'tell-k/vim-autopep8',         { 'for': 'python' }
-Plug 'hynek/vim-python-pep8-indent',{ 'for': 'python' }
-Plug 'bfredl/nvim-ipy',             { 'for': 'python' }
-"Plug 'zchee/deoplete-jedi',         { 'for': 'python' }
-Plug 'bps/vim-textobj-python',      { 'for': 'python' }
 " Searching Plugins
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
@@ -78,6 +40,22 @@ Plug 'Shougo/neco-vim'
 " Style
 Plug 'nanotech/jellybeans.vim'
 Plug 'itchyny/lightline.vim'
+
+" Syntax
+Plug 'robbles/logstash.vim',            { 'for': 'logstash' }
+Plug 'pearofducks/ansible-vim',         { 'for': 'yaml.ansible' }
+Plug 'martinda/Jenkinsfile-vim-syntax', { 'for': 'Jenkinsfile' }
+Plug 'hashivim/vim-terraform',          { 'for': 'terraform' }
+Plug 'LaTeX-Box-Team/LaTeX-Box',        { 'for': 'latex' }
+Plug 'LnL7/vim-nix',                    { 'for': 'nix' }
+Plug 'lepture/vim-jinja',               { 'for': 'jinja' }
+Plug 'fatih/vim-go',                    { 'for': 'go' }
+Plug 'pangloss/vim-javascript',         { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript',         { 'for': 'javascript' }
+Plug 'moll/vim-node',                   { 'for': 'javascript' }
+Plug 'tell-k/vim-autopep8',             { 'for': 'python' }
+Plug 'hynek/vim-python-pep8-indent',    { 'for': 'python' }
+Plug 'bfredl/nvim-ipy',                 { 'for': 'python' }
 
 call plug#end()
 
@@ -304,12 +282,6 @@ hi SneakScope ctermfg=grey ctermbg=grey
 " IPython response time
 set updatetime=1000
 
-" Easytags
-" split ctags files by language
-let g:easytags_by_filetype = '~/.config/nvim/tags/'
-let g:easytags_always_enabled = 1
-let g:easytags_async = 1
-
 " by default start in home directory
 let g:projectroot = '~/work/'
 
@@ -406,9 +378,6 @@ endif
 inoremap <silent><expr> <tab> pumvisible() ? "\<c-y>" : "\<tab>"
 " dont select things with Enter
 inoremap <silent><expr> <cr>  pumvisible() ? "\<c-e>\<cr>" : "\<cr>"
-
-" easytags
-nmap <space>U :execute('UpdateTags -R '.g:projectroot)<CR>
 
 " }}}
 " Key mappings - General {{{
