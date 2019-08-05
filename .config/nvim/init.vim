@@ -1,5 +1,5 @@
-" Author: Jakub Sokołowski <panswiata@gmail.com>
-" Source: https://github.com/PonderingGrower/dotfiles
+" Author: Jakub Sokołowski <jakub@gsokolowski.pl>
+" Source: https://github.com/jakubgs/dotfiles
 
 " Plugin management {{{
 
