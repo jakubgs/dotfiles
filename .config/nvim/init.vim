@@ -146,7 +146,7 @@ set nomodeline                    " no options from first comment in file
 set lazyredraw                    " faster macros processing
 set visualbell                    " tell vim to shut up
 set virtualedit=block             " allow to go beyond blank space in visual m.
-set scrolloff=5                   " number of lies vim won't scroll below
+set scrolloff=3                   " number of lies vim won't scroll below
 set sidescroll=1                  " scroll sideways like a normal editor
 set showcmd                       " Show (partial) command in status line.
 set noshowmode                    " don't show mode in command line
@@ -368,7 +368,7 @@ call denite#custom#option('_', {
 \ 'cursor_pos': '0',
 \ 'split': 'no',
 \ 'filter_split_direction': 'aboveleft',
-\ 'statusline': 0,
+\ 'statusline': 1,
 \})
 
 " for snippet_complete marker.
@@ -585,17 +585,20 @@ nnoremap <space>cj :Codi javascript<CR>
 " Key mappings - Denite {{{
 
 nnoremap <c-i>     :execute('Denite buffer file/rec:'.g:projectroot.' file_mru')<CR>
-nnoremap <space>ur :Denite register<CR>
-nnoremap <space>uu :Denite file<CR>
-nnoremap <space>um :Denite file_mru<CR>
 nnoremap <space>ub :Denite buffer<CR>
 nnoremap <space>uc :Denite command<CR>
-nnoremap <space>ul :Denite line<CR>
+nnoremap <space>uh :Denite help<CR>
 nnoremap <space>uj :Denite jump<CR>
+nnoremap <space>ul :Denite line<CR>
+nnoremap <space>um :Denite file_mru<CR>
+nnoremap <space>ur :Denite register<CR>
 nnoremap <space>us :Denite source<CR>
 nnoremap <space>ut :Denite tag<CR>
-nnoremap <space>uh :Denite file:~/<CR>
+nnoremap <space>uu :Denite file<CR>
 nnoremap <space>uW :Denite file:~/work/<CR>
+nnoremap <space>uH :Denite file:~/<CR>
+nnoremap <space>uD :Denite file/rec:~/dotfiles/<CR>
+nnoremap <space>uC :Denite menu:configs<CR>
 nnoremap <space>up :execute('Denite file/rec:'.g:projectroot)<CR>
 nnoremap <space>uw :execute('Denite file:'.g:projectroot)<CR>
 " search openned buffers
