@@ -170,14 +170,6 @@ endif
 command! -bar -nargs=0 Sw :silent exe 'write !sudo tee % >/dev/null' | silent edit!
 
 " }}}
-" Folding settings {{{
-
-"set foldenable                    " when on all folds are closed
-"set foldlevel=1                   " folds with higher level will be closed
-"set foldmethod=marker             " by default fold based on markers
-"set foldnestmax=1                 " nest fold limit for indent/syntax modes
-
-" }}}
 " Programming settings {{{
 
 "compiler gcc                      " real men use gcc
