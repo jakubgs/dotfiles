@@ -289,7 +289,7 @@ awful.key({ modkey, "Shift"   }, "j",         function () awful.client.swap.byid
 -- Run or raise
 awful.key({ modkey,           }, "z",         function () run_or_raise("zeal", { class = "Zeal" }) end),
 awful.key({ modkey,           }, "n",         function () run_or_raise(terminal .. " -name ranger -title ranger -e ranger ", { name = "ranger" }) end),
-awful.key({ modkey,           }, "e",         function () run_or_raise(geditor, { name = "nvim" }) end),
+awful.key({ modkey,           }, "e",         function () run_or_raise(geditor, { class = "URxvt", name = "nvim" }) end),
 awful.key({ modkey,           }, "w",         function () run_or_raise(browser, { class = "Brave-browser"}) end),
 awful.key({ modkey, "Shift"   }, "c",         function () run_or_raise(terminal, { class = "URxvt" }) end),
 awful.key({ modkey,           }, "p",         function () run_or_raise(fpass, { class = "fpass" }) end),
@@ -478,7 +478,9 @@ awful.rules.rules = {
     -- Screen/tag allocation
     { rule_any = { class = { "mmtail", "ytdl" } },
         properties = { screen = 1, tag = ":admin:" } },
-    { rule_any = { name = { "nvim" }, class = { "Zeal" } },
+    { rule = { name = "nvim", class = "URxvt" },
+        properties = { screen = 1, tag = ":edit:" } },
+    { rule_any = { class = { "Zeal" } },
         properties = { screen = 1, tag = ":edit:" } },
     { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "brave-browser" } },
         properties = { screen = 1, tag = ":web:" } },
