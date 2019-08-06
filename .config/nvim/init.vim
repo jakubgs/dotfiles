@@ -202,38 +202,6 @@ let g:terraform_fold_sections = 1
 
 let g:jsx_ext_required = 0
 
-" Startify
-let g:startify_session_dir = '~/.config/nvim/session'
-let g:startify_session_persistence = 1
-let g:startify_session_delete_buffers = 1
-let g:startify_list_order = ['sessions', 'files' ]
-let g:startify_files_number = 16
-let g:startify_custom_header = [
-\ '                           .oooooooooooooo.',
-\ '                        .d888888888888888P',
-\ '               db       88888888888888888boo.',
-\ '              `Y8b      888888888888888888888b.',
-\ '                `Yb....d88888888888888888888888b',
-\ '                  `Y8888888888888888888888888888',
-\ '          "8b  "8" "88888888888888888888888888P',
-\ '           8Yb  8   88`Y8888888888888bo. """',
-\ '           8 Yb 8   88-<`Y88888888888888bo.',
-\ '           8  Yb8   88    `Y888888888888888b',
-\ '          .8.  Y8  .88...d `Y88888888888888',
-\ '                              `Y888888888888b',
-\ '                       "88""Yb. YY88888888888b',
-\ '                        88..bP"  YbY8888888888.',
-\ '                        88""Yb    Yb`Y888888888',
-\ '                        88   Yb    YdP`Y888888P',
-\ '                       .88.   Yb    V   `Y8888b',
-\ '                                          `Y888',
-\ '                                            `Y8',
-\]
-let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
-highlight link StartifyPath   LineNr
-highlight link StartifyFile   ModeMsg
-highlight StartifyHeader      ctermfg=196 cterm=bold gui=bold
-
 " Surround
 " /* TEXT */ comments
 let g:surround_42 = "/* \r */"
@@ -516,20 +484,11 @@ nnoremap <silent> <LocalLeader>dq :exe ":profile pause"<cr>
                                 \ :exe ":!urxvtc -e nvim /tmp/profile.log"<cr>
                                 \ :exe ":noautocmd qall!"<cr>
 
-" }}}
-" Key mappings - Startify {{{
-"
 " MASTER STROKE - Repeat last command
 nnoremap <c-space> @:<CR>
 
 " Dispatch a command
 nnoremap <space>d :Dispatch!<space>
-
-nnoremap <space>S :Startify<CR>
-nnoremap <space>ss :SSave<CR>
-nnoremap <space>sl :SLoad<CR>
-nnoremap <space>sc :SClose<CR>
-nnoremap <space>sd :SDelete<CR>
 
 " }}}
 " Key mappings - Codi {{{
