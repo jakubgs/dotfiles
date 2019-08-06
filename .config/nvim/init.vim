@@ -121,6 +121,7 @@ set regexpengine=2                " might affect hanging of vim
 "set encoding=utf-8                " encoding
 set fileencoding=utf-8
 set nomodeline                    " no options from first comment in file
+set nofoldenable                  " disable folding by default
 set lazyredraw                    " faster macros processing
 set visualbell                    " tell vim to shut up
 set virtualedit=block             " allow to go beyond blank space in visual m.
