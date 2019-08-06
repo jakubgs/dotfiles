@@ -638,11 +638,6 @@ augroup fugitive_settings
     autocmd BufRead fugitive://* xnoremap <buffer> du :diffupdate<cr>
 augroup END
 
-augroup quickfix_settings
-    autocmd!
-    autocmd BufReadPost quickfix silent! nnoremap <buffer> <CR> <CR>
-augroup END
-
 augroup autoresize
     autocmd VimResized * silent! exe "normal! \<c-w>="
 augroup END
@@ -651,9 +646,6 @@ augroup projectroot
     autocmd!
     autocmd BufEnter * silent! s:detectProjectRoot()
 augroup END
-
-au BufRead,BufNewFile *nginx* setfiletype nginx
-au BufRead,BufNewFile *.trac setfiletype tracwiki
 
 " }}}
 " Functions {{{
@@ -665,13 +657,6 @@ function! s:detectProjectRoot()
     if g:projectroot == expand('~/')
         let g:projectroot = expand('~/') . '/work'
     endif
-endfunction
-
-" Add []<space> mappings for adding empty lines
-function! s:AddLines(before)
-  let cnt = (v:count>0) ? v:count : 1
-  call append(line('.')-a:before, repeat([''], cnt))
-  silent! call repeat#set((a:before ? '[ ' : '] '), cnt)
 endfunction
 
 " configure completion to complete in command window
