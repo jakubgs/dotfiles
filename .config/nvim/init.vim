@@ -586,7 +586,6 @@ nnoremap <space>GI :GoInstall<CR>
 " Key mappings - Fxx {{{
 
 nnoremap <F11> :Goyo<CR>
-nnoremap <F10> :Dispatch! knife dwim %:p<CR>
 nnoremap <F9>  :Dispatch %:p<CR>
 nnoremap <F8>  :setlocal list!<CR>
 nnoremap <F7>  :setlocal wrap!<CR>
