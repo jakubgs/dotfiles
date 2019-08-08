@@ -278,9 +278,9 @@ alias httpat='python2 -m SimpleHTTPServer'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
-alias ytdl-audio='youtube-dl --add-metadata -x --audio-format vorbis --output "%(autonumber)s-%(title)s.%(ext)s" --autonumber-size 2'
+alias ytdl-audio='youtube-dl --add-metadata -x --audio-format vorbis -o "%(autonumber)02d %(uploader)s - %(title)s (%(id)s).%(ext)s"'
 alias sctl='sudo systemctl'
-alias jctl='sudo journalctl'
+alias jctl='sudo systemctl'
 alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
 alias qupdate='sudo apt update && sudo apt upgrade'
@@ -292,8 +292,6 @@ alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection c
 # wake up caspair
 alias cwake='wakeonlan d8:cb:8a:31:9d:5e'
 alias mwake='wakeonlan 00:1b:21:06:f1:cc'
-
-alias tr='truffle'
 
 # CapsLock hell escape
 alias killcaps='xkbset nullify lock'
