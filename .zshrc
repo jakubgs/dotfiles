@@ -226,13 +226,13 @@ bindkey -v
 KEYTIMEOUT=1
 
 # edit current command in vim
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+#autoload -U edit-command-line
+#zle -N edit-command-line
+#bindkey -M vicmd v edit-command-line
 
 # bash like ctrl-w
-autoload -U select-word-style
-select-word-style bash
+#autoload -U select-word-style
+#select-word-style bash
 
 # fix backspace in append mode
 bindkey "^?" backward-delete-char
@@ -261,7 +261,7 @@ alias -g A='; alert'
 alias -g G='| grep --color -iE'
 
 alias gv='gvim --remote-silent'
-alias S='sudo'
+alias fucking='sudo'
 alias ll='ls -lh --color'
 alias mm="make -j6"
 alias tt="tree -CdL 2"
@@ -278,7 +278,7 @@ alias httpat='python2 -m SimpleHTTPServer'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
-alias ytdl-audio='youtube-dl --add-metadata -x --audio-format vorbis -o "%(autonumber)02d %(uploader)s - %(title)s (%(id)s).%(ext)s"'
+alias ytdl-audio='youtube-dl --add-metadata --extract-audio --format m4a --audio-format vorbis -o "%(autonumber)02d %(uploader)s - %(title)s (%(id)s).%(ext)s"'
 alias sctl='sudo systemctl'
 alias jctl='sudo systemctl'
 alias uctl='systemctl --user'
