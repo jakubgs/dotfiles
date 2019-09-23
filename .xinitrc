@@ -4,7 +4,7 @@ source ~/.secret
 
 export DE="xfce"
 export OOO_FORCE_DESKTOP="xfce4"
-export BROWSER="thunar"
+export BROWSER="brave-browser"
 export TERMINAL="urxvtc"
 export QT_STYLE_OVERRIDE="gtk2"
 export MPD_HOST="localhost"
