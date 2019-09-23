@@ -9,27 +9,28 @@
 [merge]
     tool = vimdiff
 [alias]
-    hist = log --graph
-    co = checkout
-    b  = branch
-    f  = fetch
-    ps = push
-    pl = pull
-    sm = submodule
-    s  = stash
-    c  = commit --verbose --no-verify --gpg-sign --signoff
-    m  = commit --verbose --no-verify --gpg-sign --signoff --amend
-    a  = add 
-    an = annex
-    ax = annex
-    rh = reset --hard
-    rs = reset
-    ls = ls-files
-    cp = cherry-pick
-    l  = log --decorate
-    df = diff
-    dt = difftool
-    sl = log --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
+    hst = log --graph
+    co  = checkout
+    b   = branch
+    f   = fetch
+    ps  = push
+    pl  = pull
+    sm  = submodule
+    s   = stash
+    c   = commit --verbose --no-verify --gpg-sign --signoff
+    m   = commit --verbose --no-verify --gpg-sign --signoff --amend
+    fix = commit --verbose --no-verify --gpg-sign --signoff --fixup
+    a   = add 
+    an  = annex
+    ax  = annex
+    rh  = reset --hard
+    rs  = reset
+    ls  = ls-files
+    cp  = cherry-pick
+    l   = log --decorate
+    df  = diff
+    dt  = difftool
+    sl  = log --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
     sla = log --pretty=format:'* %h %s %d' --abbrev-commit
     rst = rese --hard HEAD
 [branch "master"]
