@@ -51,6 +51,7 @@ Plug 'LaTeX-Box-Team/LaTeX-Box',        { 'for': 'latex' }
 Plug 'LnL7/vim-nix',                    { 'for': 'nix' }
 Plug 'lepture/vim-jinja',               { 'for': 'jinja' }
 Plug 'fatih/vim-go',                    { 'for': 'go' }
+Plug 'sebdah/vim-delve',                { 'for': 'go' }
 Plug 'pangloss/vim-javascript',         { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript',         { 'for': 'javascript' }
 Plug 'moll/vim-node',                   { 'for': 'javascript' }
