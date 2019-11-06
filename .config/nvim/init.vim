@@ -277,9 +277,8 @@ function! s:denite_filter_my_settings() abort
   inoremap <silent><buffer><expr>  <c-c>  denite#do_map('quit')
   " some more cool stuff
   inoremap <silent><buffer><expr>  <CR>   denite#do_map('do_action')
-  inoremap <silent><buffer><expr>  <C-p>   denite#do_map('do_action', 'preview')
+  inoremap <silent><buffer><expr>  <C-p>  denite#do_map('do_action', 'preview')
   inoremap <silent><buffer><expr>  <C-l>  denite#do_map('redraw')
-  inoremap <silent><buffer><expr>  -      denite#do_map('move_up_path')
   " move cursor in suggestions list
   inoremap <silent><buffer>        <C-j>  <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
   inoremap <silent><buffer>        <C-k>  <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
