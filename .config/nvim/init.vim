@@ -286,9 +286,17 @@ function! s:denite_filter_my_settings() abort
   inoremap <silent><buffer>        <C-u>  <Esc><C-w>p:call cursor(line('.')-30,0)<CR><C-w>pA
 endfunction
 
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts', ['--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
 " Change file/rec command.
-call denite#custom#var('file/rec', 'command',
-\ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+call denite#custom#var('file/rec', 'command', [
+\ 'ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''
+\])
 
 " Change matchers.
 call denite#custom#source('_', 'matchers', [
@@ -299,6 +307,7 @@ call denite#custom#source('_', 'matchers', [
 " Change default action.
 call denite#custom#option('_', {
 \ 'start_filter': 1,
+\ 'cache_threshold': 6000,
 \ 'cursor_pos': '0',
 \ 'split': 'no',
 \ 'filter_split_direction': 'aboveleft',
@@ -509,6 +518,8 @@ nnoremap <space>cj :Codi javascript<CR>
 nnoremap <c-i>     :execute('Denite buffer file/rec:'.g:projectroot.' file_mru')<CR>
 nnoremap <space>ub :Denite buffer<CR>
 nnoremap <space>uc :Denite command<CR>
+nnoremap <space>ug :execute('Denite grep:'.g:projectroot)<CR>
+nnoremap <space>uG :execute('Denite grep:'.g:projectroot.'::!')<CR>
 nnoremap <space>uh :Denite help<CR>
 nnoremap <space>uj :Denite jump<CR>
 nnoremap <space>ul :Denite line<CR>
@@ -525,6 +536,8 @@ nnoremap <space>up :execute('Denite file/rec:'.g:projectroot)<CR>
 nnoremap <space>uw :execute('Denite file:'.g:projectroot)<CR>
 " search openned buffers
 nnoremap <space><space> :Denite buffer<CR>
+" grep currently searched word
+nnoremap <space>*  :call GrepSearchedWord()<CR>
 
 " Key mappings - Git {{{
 
@@ -548,6 +561,7 @@ nnoremap <space>gW :Gbrowse!<CR>
 vnoremap <space>gw :Gbrowse<CR>
 vnoremap <space>gW :Gbrowse!<CR>
 nnoremap <space>go :Git checkout<Space>
+nnoremap <space>gg :GitGutterToggle<CR>
 nnoremap <space>gf  :Dispatch! git fetch --all<CR>
 nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpS :Dispatch! git push --force<CR>
@@ -642,9 +656,9 @@ augroup autoresize
     autocmd VimResized * silent! exe "normal! \<c-w>="
 augroup END
 
-augroup projectroot
+augroup detect_projectroot
     autocmd!
-    autocmd BufEnter * silent! s:detectProjectRoot()
+    autocmd BufEnter * silent! call DetectProjectRoot()
 augroup END
 
 " }}}
@@ -652,7 +666,7 @@ augroup END
 
 " I want to avoid project root being just home.
 " Too many files to search.
-function! s:detectProjectRoot()
+function! DetectProjectRoot()
     let g:projectroot = projectroot#guess()
     if g:projectroot == expand('~/')
         let g:projectroot = expand('~/') . '/work'
@@ -689,6 +703,14 @@ function! CopyPath(relative)
     " save to both clipboards
     let @* = l:path
     let @+ = l:path
+endfunction
+
+function! GrepSearchedWord()
+  let search =  getreg('/')
+  " translate vim regular expression to perl regular expression.
+  let search = substitute(search, '\(\\<\|\\>\)', '', 'g')
+  let search = substitute(search, ':', '\\:', 'g')
+  execute('Denite grep:'.g:projectroot.'::'.search)
 endfunction
 
 " }}}
