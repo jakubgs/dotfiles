@@ -31,6 +31,7 @@ Plug 'jkramer/vim-checkbox'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'gregsexton/gitv'
+Plug 'airblade/vim-gitgutter'
 " Searching Plugins
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
