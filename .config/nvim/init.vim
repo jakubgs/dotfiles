@@ -242,7 +242,7 @@ hi Sneak ctermfg=white ctermbg=88
 hi SneakLabel ctermfg=white ctermbg=88
 hi SneakScope ctermfg=grey ctermbg=grey
 
-" IPython response time
+" How long in milliseconds it takes for plugin refresh
 set updatetime=1000
 
 " by default start in home directory
