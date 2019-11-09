@@ -486,7 +486,7 @@ awful.rules.rules = {
         properties = { screen = 1, tag = ":web:" } },
     { rule_any = { class = { "ncmpcpp" }, name = { "ncmpcpp*" }, },
         properties = { screen = 1, tag = ":music:" } },
-    { rule_any = { class = { "Status", "Slack", "Skype", "Evolution" } },
+    { rule_any = { class = { "Status", "Slack", "Skype", "Evolution", "discord" } },
         properties = { screen = 1, tag = ":comm:" } },
     { rule_any = { name = { "ranger" } },
         properties = { screen = 1, tag = ":fs:" } },
