@@ -279,8 +279,6 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
 alias ytdl-audio='youtube-dl --add-metadata --extract-audio --format m4a --audio-format vorbis -o "%(autonumber)02d %(uploader)s - %(title)s (%(id)s).%(ext)s"'
-alias sctl='sudo systemctl'
-alias jctl='sudo systemctl'
 alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
 alias qupdate='sudo apt update && sudo apt upgrade'
@@ -374,6 +372,17 @@ function d {
     fi
 }
 compdef d=docker
+
+function s {
+    if [[ $# == 0 ]]; then
+        sudo systemctl list-units --type=service --state=running
+    elif [[ $# == 1 ]]; then
+        sudo systemctl status "$@"
+    else
+        sudo systemctl "$@"
+    fi
+}
+compdef s=systemctl
 
 # repeat last command with sudo
 function fuck {
