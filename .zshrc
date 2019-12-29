@@ -82,22 +82,9 @@ export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="2.7"
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
-export GOPATH="$HOME/go/"
 
 export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin
 export PATH=$PATH:/opt/java/bin:/opt/logstash-1.4.2/bin:~/bin
-
-# terraform
-export PATH=$PATH:/opt/terraform/bin
-
-# go
-export PATH=$PATH:~/go/bin
-export GOPATH=/home/sochan/go
-
-# brew
-#export PATH=$PATH:~/.linuxbrew/bin
-#export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-#export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 fpath=(~/tools/zsh-completions/src $fpath)
 
@@ -269,7 +256,7 @@ alias wq='du -sh'
 alias kt='du -h --max-depth=1 | sort -h'
 alias dy='df --sync -hTt ext4'
 alias grep='grep --color -i'
-alias ssh='TERM=xterm-256color ssh'
+alias ssh='TERM=xterm ssh'
 alias sshm='ssh melchior.magi.local'
 alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
@@ -288,8 +275,9 @@ compdef qapt=apt
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
 
 # wake up caspair
-alias cwake='wakeonlan d8:cb:8a:31:9d:5e'
-alias mwake='wakeonlan 00:1b:21:06:f1:cc'
+alias wakecaspair='wakeonlan d8:cb:8a:31:9d:5e'
+alias wakemelchior='wakeonlan 00:1b:21:06:f1:cc'
+alias wakelilim='wakeonlan 8c:16:45:3c:7d:15'
 
 # CapsLock hell escape
 alias killcaps='xkbset nullify lock'
@@ -383,6 +371,15 @@ function s {
     fi
 }
 compdef s=systemctl
+
+function z {
+    if [[ $# == 0 ]]; then
+        sudo zerotier-cli status
+    else
+        sudo zerotier-cli "$@"
+    fi
+}
+compdef z=zerotier-cli
 
 # repeat last command with sudo
 function fuck {
