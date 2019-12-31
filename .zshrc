@@ -54,10 +54,6 @@ export GROFF_NO_SGR=1
 # fix for inputting gpg pass in console
 export GPG_TTY=$(tty)
 
-# color stderr red
-exec 2>>(while read line; do
-  print '\e[91m'${(q)line}'\e[0m' > /dev/tty; print -n $'\0'; done &)
-
 # }}}
 # Exports {{{
 
