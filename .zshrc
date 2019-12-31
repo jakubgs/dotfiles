@@ -371,14 +371,16 @@ function s {
 }
 compdef s=systemctl
 
-function z {
-    if [[ $# == 0 ]]; then
-        sudo zerotier-cli status
-    else
-        sudo zerotier-cli "$@"
-    fi
-}
-compdef z=zerotier-cli
+if type zerotier-cli > /dev/null; then
+    function z {
+        if [[ $# == 0 ]]; then
+            sudo zerotier-cli status
+        else
+            sudo zerotier-cli "$@"
+        fi
+    }
+    compdef z=zerotier-cli
+fi
 
 # repeat last command with sudo
 function fuck {
