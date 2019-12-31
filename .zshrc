@@ -375,7 +375,6 @@ if type zerotier-cli > /dev/null; then
             sudo zerotier-cli "$@"
         fi
     }
-    compdef z=zerotier-cli
 fi
 
 # repeat last command with sudo
