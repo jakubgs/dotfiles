@@ -348,18 +348,20 @@ function g {
 }
 compdef g=git
 
-function d {
-    if [[ $1 == 'clean' ]]; then
-        docker rm $(docker ps -a -q)
-    elif [[ $1 == 'cleanimages' ]]; then
-        docker rmi $(docker images -f dangling=true -q)
-    elif [[ $# > 0 ]]; then
-        docker "$@"
-    else
-        docker ps
-    fi
-}
-compdef d=docker
+if type docker > /dev/null; then
+    function d {
+        if [[ $1 == 'clean' ]]; then
+            docker rm $(docker ps -a -q)
+        elif [[ $1 == 'cleanimages' ]]; then
+            docker rmi $(docker images -f dangling=true -q)
+        elif [[ $# > 0 ]]; then
+            docker "$@"
+        else
+            docker ps
+        fi
+    }
+    compdef d=docker
+fi
 
 function s {
     if [[ $# == 0 ]]; then
