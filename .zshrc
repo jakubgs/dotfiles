@@ -1,8 +1,10 @@
 # Source: https://github.com/PonderingGrower/dotfiles
 
 # allow of sourcing from ~/.zfunctions
-fpath=( "$HOME/.zfunctions" $fpath )
-fpath=( "$HOME/tools/zsh-completions/src" $fpath)
+fpath=(
+    ~/.zfunctions
+    "${fpath[@]}"
+)
 
 [[ -f ~/.secret ]] && source ~/.secret
 #[[ -f ~/.ssh-agent.env ]] && source ~/.ssh-agent.env
