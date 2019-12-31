@@ -473,5 +473,16 @@ zle -N fzf-ssh
 bindkey '^s' fzf-ssh
 
 # }}}
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-bindkey '^F' fzf-cd-widget
+# FZF {{{
+
+if type fzf-share > /dev/null; then
+    # This is available on NixOS
+    source $(fzf-share)/completion.zsh
+    source $(fzf-share)/key-bindings.zsh
+    bindkey '^F' fzf-cd-widget
+elif [[ -f ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+    bindkey '^F' fzf-cd-widget
+fi
+
+# }}}
