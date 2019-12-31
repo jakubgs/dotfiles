@@ -42,6 +42,6 @@ for CONFIG_FILE in ${CONFIG_FILES}; do
         echo "SYMLINK: ${DEST}"
     else # symlinking withou forcing
         echo "LINKING: ${SOURCE} -> ${DEST}"
-        #ln -s "${SOURCE}" "${DEST}"
+        ln -s "${SOURCE}" "${DEST}"
     fi
 done
