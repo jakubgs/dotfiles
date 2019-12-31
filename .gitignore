@@ -2,6 +2,7 @@ tags
 .ncmpcpp/error.log
 .nvim/.netrwhist
 .nvim/spell
+.zsh/cache
 .pentadactyl/info
 .config/nvim/temp
 .config/nvim/bundle
