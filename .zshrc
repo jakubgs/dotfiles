@@ -82,11 +82,7 @@ export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="2.7"
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 
-export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin
-export PATH=$PATH:/opt/java/bin:/opt/logstash-1.4.2/bin:~/bin
-
-# Export for java classpath
-export CLASSPATH=./:/opt/java/lib:/opt/java:/opt/java/jre/lib:/usr/share/java/hibernate/hibernate3.jar:/usr/share/java/postgresql-jdbc/postgresql-jdbc4.jar
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/games/bin
 
 # }}}
 # General settings {{{
