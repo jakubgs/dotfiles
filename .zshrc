@@ -475,14 +475,13 @@ bindkey '^s' fzf-ssh
 # }}}
 # FZF {{{
 
-if type fzf-share > /dev/null; then
+if [ -n "${commands[fzf-share]}" ]; then¬
     # This is available on NixOS
     source $(fzf-share)/completion.zsh
     source $(fzf-share)/key-bindings.zsh
-    bindkey '^F' fzf-cd-widget
 elif [[ -f ~/.fzf.zsh ]]; then
     source ~/.fzf.zsh
-    bindkey '^F' fzf-cd-widget
 fi
+bindkey '^F' fzf-cd-widget
 
 # }}}
