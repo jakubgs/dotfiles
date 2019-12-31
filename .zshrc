@@ -471,7 +471,7 @@ bindkey '^s' fzf-ssh
 # }}}
 # FZF {{{
 
-if [ -n "${commands[fzf-share]}" ]; then¬
+if [ -n "${commands[fzf-share]}" ]; then
     # This is available on NixOS
     source $(fzf-share)/completion.zsh
     source $(fzf-share)/key-bindings.zsh
