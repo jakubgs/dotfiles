@@ -1,12 +1,13 @@
 # Source: https://github.com/PonderingGrower/dotfiles
 
+# allow of sourcing from ~/.zfunctions
+fpath=( "$HOME/.zfunctions" $fpath )
+fpath=( "$HOME/tools/zsh-completions/src" $fpath)
+
 [[ -f ~/.secret ]] && source ~/.secret
 #[[ -f ~/.ssh-agent.env ]] && source ~/.ssh-agent.env
 #[[ -f ~/.gnupg/gpg-agent-info-lilim ]] && source ~/.gnupg/gpg-agent-info-lilim
 #export GPG_AGENT_INFO
-
-# allow of sourcing from ~/.zfunctions
-fpath=( "$HOME/.zfunctions" $fpath )
 
 # Preamble {{{
 autoload colors         # enable colors
@@ -85,8 +86,6 @@ export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 
 export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/games/bin:/opt/bin:/usr/lib/distcc/bin
 export PATH=$PATH:/opt/java/bin:/opt/logstash-1.4.2/bin:~/bin
-
-fpath=(~/tools/zsh-completions/src $fpath)
 
 # Export for java classpath
 export CLASSPATH=./:/opt/java/lib:/opt/java:/opt/java/jre/lib:/usr/share/java/hibernate/hibernate3.jar:/usr/share/java/postgresql-jdbc/postgresql-jdbc4.jar
