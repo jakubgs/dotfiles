@@ -65,17 +65,12 @@ else
 fi
 
 export EDITOR
-export TERMINFO=/usr/share/terminfo
-#export VIMRUNTIME="/usr/local/share/vim/vim74"
-export NVIMRUNTIME=/usr/local/share/nvim/runtime
 export VISION="$EDITOR"
+export PAGER="less"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
-export DEITY="fsm"
-export PAGER="less"
-export CUPS_SERVER="localhost"
 export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man nomod nolist' -\""
-export USE_PYTHON="2.7"
+export USE_PYTHON="3.7"
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/games/bin
