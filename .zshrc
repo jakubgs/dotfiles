@@ -74,7 +74,7 @@ export TERMINAL="urxvtc"
 export DEITY="fsm"
 export PAGER="less"
 export CUPS_SERVER="localhost"
-export MANPAGER="/bin/sh -c \"col -b | view -c 'set ft=man nomod nolist' -\""
+export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="2.7"
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 
