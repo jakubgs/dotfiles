@@ -43,30 +43,42 @@
 
 # Volume Mute
 "~/bin/mute"
-    m:0x0 + c:121
-    XF86AudioMute
+  m:0x0 + c:121
+  XF86AudioMute
 
 # }}}
 # MPD management {{{
 "mpc stop && mpc play"
-    m:0x1 + c:111
-    Shift + Up
+  m:0x1 + c:111
+  Shift + Up
 
 "mpc prev"
-    m:0x1 + c:113
-    Shift + Left
+  m:0x1 + c:113
+  Shift + Left
+
+"mpc prev"
+  m:0x0 + c:173
+  XF86AudioPrev
 
 "mpc toggle"
-    m:0x1 + c:116
-    Shift + Down
+  m:0x1 + c:116
+  Shift + Down
+
+"mpc toggle"
+  m:0x0 + c:172
+  XF86AudioPlay
 
 "mpc next"
-    m:0x1 + c:114
-    Shift + Right
+  m:0x1 + c:114
+  Shift + Right
+
+"mpc next"
+  m:0x0 + c:171
+  XF86AudioNext
 
 "mpc stop"
-    m:0x1 + c:135
-    Shift + Menu
+  m:0x1 + c:135
+  Shift + Menu
 
 "mpc seek -5"
   m:0x10 + c:87
@@ -81,10 +93,10 @@
   m:0x10 + c:81
 
 "mpc random on && mpc next && mpc random off"
-    m:0x1 + c:104
-    Shift + KP_Enter
+  m:0x1 + c:104
+  Shift + KP_Enter
 
 "mpc random"
-    m:0x1 + c:68
-    Shift + F2
+  m:0x1 + c:68
+  Shift + F2
 # }}}
