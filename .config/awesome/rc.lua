@@ -482,7 +482,7 @@ awful.rules.rules = {
         properties = { screen = 1, tag = ":edit:" } },
     { rule_any = { class = { "Zeal" } },
         properties = { screen = 1, tag = ":edit:" } },
-    { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "brave-browser" } },
+    { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "Brave-browser" } },
         properties = { screen = 1, tag = ":web:" } },
     { rule_any = { class = { "ncmpcpp" }, name = { "ncmpcpp*" }, },
         properties = { screen = 1, tag = ":music:" } },
