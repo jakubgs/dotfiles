@@ -73,7 +73,7 @@ export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="3.7"
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/games/bin
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/games/bin:~/bin
 
 # }}}
 # General settings {{{
