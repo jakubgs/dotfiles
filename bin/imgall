@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 FILELIST="/tmp/filelist"
 # action for deleting folder containing current file
@@ -7,7 +7,11 @@ CMD="rm -r \"$(dirname %F)\"";
 echo "$CMD";
 eval "$CMD";'
 
-DIRS=$(echo "$@" | sed "s/'/\"/g")
+SEARCH_PATH=$@
+if [[ -z "${SEARCH_PATH}" ]]; then
+    SEARCH_PATH="${PWD}"
+fi
+DIRS=$(echo "${SEARCH_PATH}" | sed "s/'/\"/g")
 
 echo "Scanning: ${DIRS}"
 
