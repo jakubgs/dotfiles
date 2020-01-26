@@ -73,7 +73,7 @@ export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man nomod nolist' -\""
 export USE_PYTHON="3.7"
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/games/bin:~/bin
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/games/bin:~/go/bin:~/bin
 
 # }}}
 # General settings {{{
@@ -241,7 +241,7 @@ alias kt='du -h --max-depth=1 | sort -h'
 alias dy='df --sync -hTt ext4'
 alias grep='grep --color -i'
 alias ssh='TERM=xterm ssh'
-alias sshm='ssh melchior.magi.local'
+alias sshm='ssh melchior.magi.vpn'
 alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
