@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -x
+set -e
 
 PLAYLIST="/tmp/playlist.m3u"
 
@@ -42,7 +45,7 @@ sort \
 COUNT=$(wc -l $PLAYLIST)
 echo "Found $COUNT video files."
 
-mpv $OPTIONS --quiet --fs --playlist $PLAYLIST \
+mpv $OPTIONS --quiet --fs --playlist=$PLAYLIST \
     | awk 'BEGIN{FS="/"}/Playing:/{I++; printf(" *%3d - %s\n", I, $NF)}'
 
 rm $PLAYLIST
