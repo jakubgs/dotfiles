@@ -450,7 +450,7 @@ fi
 # auto completion for ssh hosts
 
 function fzf-ssh () {
-    local hosts=$(awk '{print $1}' ~/.ssh/known_hosts)
+  local hosts=$(awk -F '[, ]' '{print $1}' ~/.ssh/known_hosts)
   local selected_host=$(echo $hosts | fzf --query "$LBUFFER")
 
   if [ -n "$selected_host" ]; then
