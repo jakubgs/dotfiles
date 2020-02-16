@@ -96,8 +96,15 @@ setopt AUTO_RESUME                # Resume jobs after typing it's name
 setopt CHECK_JOBS                 # Dont quit console if processes are running
 setopt completealiases
 
+
 # }}}
 # Completion {{{
+
+# history of changing directories (cd)
+setopt AUTO_PUSHD                 # pushes the old directory onto the stack
+setopt PUSHD_MINUS                # exchange the meanings of '+' and '-'
+setopt CDABLE_VARS                # expand the expression (allows 'cd -2/tmp')
+zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;5;12'
 
 # process autocompletion
 zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
@@ -184,10 +191,10 @@ zstyle ':completion:*' menu select
 # How to handle different filetypes
 zstyle ':mime:.jpg:' handler feh -x %s
 
-#
-# # cd not select parent dir
+
+# cd not select parent dir
 # zstyle ':completion:*:cd:*' ignore-parents parent pwd
-#
+
 # }}}
 # Key Bindings {{{
 typeset -A key
@@ -462,6 +469,21 @@ function fzf-ssh () {
 
 zle -N fzf-ssh
 bindkey '^s' fzf-ssh
+
+# auto completion for cd history
+function fzf-cd-history () {
+  local cd_history=$(dirs -lp | sort | uniq)
+  local paths=$(echo $cd_history | fzf --query "$LBUFFER")
+
+  if [ -n "$paths" ]; then
+    cd $selected_host
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+
+zle -N fzf-cd-history
+bindkey '^k' fzf-cd-history
 
 # }}}
 # FZF {{{
