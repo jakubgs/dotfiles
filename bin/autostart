@@ -59,7 +59,6 @@ run urxvtd -q -f -o
 run nitrogen --restore
 run autorandr --change
 run xbindkeys
-run xfce4-power-manager
 run blueman-applet
 run -r nm-applet
 run -r pasystray
