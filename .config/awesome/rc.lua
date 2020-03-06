@@ -298,8 +298,8 @@ awful.key({ modkey, "Shift"   }, "m",         function () awful.spawn(homedir.."
 awful.key({ modkey,           }, "u",         function () run_or_raise("evolution", { class = "Evolution" }) end),
 awful.key({ modkey,           }, "i",         function () run_or_raise(homedir.."/bin/status", { class = "Status" }) end),
 --- Power & Screen
-awful.key({ "Mod4", "Control" }, "s",         function () awful.spawn("sudo /usr/sbin/pm-suspend") end),
-awful.key({ "Mod4", "Control" }, "h",         function () awful.spawn("sudo /usr/sbin/pm-hibernate") end),
+awful.key({ "Mod4", "Control" }, "s",         function () awful.spawn("sudo systemctl start suspend.target") end),
+awful.key({ "Mod4", "Control" }, "h",         function () awful.spawn("sudo systemctl start hibernate.target") end),
 awful.key({ "Mod4", "Control" }, "Left",      function () awful.spawn("xrandr --orientation left") end),
 awful.key({ "Mod4", "Control" }, "Right",     function () awful.spawn("xrandr --orientation right") end),
 awful.key({ "Mod4", "Control" }, "Up",        function () awful.spawn("xrandr --orientation normal") end),
