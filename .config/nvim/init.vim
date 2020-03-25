@@ -608,8 +608,7 @@ nnoremap <space>GI :GoInstall<CR>
 " Key mappings - Fxx {{{
 
 nnoremap <F11> :Goyo<CR>
-nnoremap <F10> :setlocal relativenumber!<CR>
-nnoremap <F9>  :setlocal number!<CR>
+nnoremap <F9>  :Dispatch %:p<CR>
 nnoremap <F8>  :setlocal list!<CR>
 nnoremap <F7>  :setlocal wrap!<CR>
 nnoremap <F6>  :setlocal hlsearch!<CR>
