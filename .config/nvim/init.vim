@@ -150,7 +150,6 @@ set iskeyword+=$,@,%,#            " not word dividers
 set iskeyword-=.,_                " word dividers
 set hidden                        " buffer change, more undo
 set ttyfast                       " Faster standard output
-set completeopt-=preview          " disable the preview window
 set wildmenu                      " File menu
 set wildmode=list:longest,full    " ignore case when opening files
 set wildignore=.so,.swp,.zip,.mp3,
