@@ -11,6 +11,8 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif  
 call plug#begin('~/.config/nvim/bundle')
 
+let g:ale_completion_enabled = 1
+
 " Misc plugins
 Plug 'dbakker/vim-projectroot'
 Plug 'sotte/presenting.vim'
@@ -38,6 +40,9 @@ Plug 'Shougo/neomru.vim'
 " Completion
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-vim'
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+Plug 'carlitux/deoplete-ternjs', { 'do': 'yarn global add tern' }
+Plug 'deoplete-plugins/deoplete-jedi'
 " Style
 Plug 'nanotech/jellybeans.vim'
 Plug 'itchyny/lightline.vim'
@@ -217,17 +222,24 @@ let g:lightline = {
 \}
 
 " Deoplete
+set completeopt=menu,preview
+let g:deoplete#sources#go#gocode_binary = '/home/sochan/go/bin/gocode'
+let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/tern'
+let g:deoplete#sources#ternjs#timeout = 1
+let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
-\  'auto_complete_delay': 200,
+\  'auto_complete_delay': 0,
 \  'smart_case': v:true,
 \})
-call deoplete#custom#option('sources', {
-\ '_': ['buffer'],
-\ 'md': ['buffer', 'spell'],
-\ 'cpp': ['buffer', 'tag'],
-\})
-"set completeopt+=noinsert " Enable auto selection
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ deoplete#manual_complete()
+function! s:check_back_space() abort "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
 
 " Sneak
 let g:sneak#label = 1
@@ -270,6 +282,8 @@ endfunction
 
 autocmd FileType denite-filter call s:denite_filter_my_settings()
 function! s:denite_filter_my_settings() abort
+  " disable deoplete in denite filter
+  call deoplete#custom#buffer_option('auto_complete', v:false)
   " quit both windows
   inoremap <silent><buffer><expr>  <Esc>  denite#do_map('quit')
   inoremap <silent><buffer><expr>  <c-o>  denite#do_map('quit')
@@ -313,6 +327,9 @@ call denite#custom#option('_', {
 \ 'statusline': 1,
 \})
 
+let g:neomru#file_mru_limit = 500
+let g:neomru#directory_mru_limit = 500
+
 " for snippet_complete marker.
 if has('cSonceal')
    set conceallevel=0 concealcursor=i
@@ -343,17 +360,8 @@ if has('conceal')
    set conceallevel=0 concealcursor=i
 endif
 
-" Deoplete
-" use tab to cycle
-inoremap <silent><expr> <tab> pumvisible() ? "\<c-y>" : "\<tab>"
-" dont select things with Enter
-inoremap <silent><expr> <cr>  pumvisible() ? "\<c-e>\<cr>" : "\<cr>"
-
 " }}}
 " Key mappings - General {{{
-
-" <TAB> completion
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " moving selected lines
 xnoremap <silent> <c-k> :move-2<CR>gv=gv
@@ -514,11 +522,11 @@ nnoremap <space>cj :Codi javascript<CR>
 " }}}
 " Key mappings - Denite {{{
 
-nnoremap <c-i>     :execute('Denite buffer file/rec:'.g:projectroot.' file_mru')<CR>
+nnoremap <c-i>     :execute('Denite buffer file/rec -path='.g:projectroot.' file_mru')<CR>
 nnoremap <space>ub :Denite buffer<CR>
 nnoremap <space>uc :Denite command<CR>
-nnoremap <space>ug :execute('Denite grep:'.g:projectroot)<CR>
-nnoremap <space>uG :execute('Denite grep:'.g:projectroot.'::!')<CR>
+nnoremap <space>ug :execute('Denite grep -path='.g:projectroot)<CR>
+nnoremap <space>uG :execute('Denite grep -path='.g:projectroot.'::!')<CR>
 nnoremap <space>uh :Denite help<CR>
 nnoremap <space>uj :Denite jump<CR>
 nnoremap <space>ul :Denite line<CR>
@@ -527,12 +535,12 @@ nnoremap <space>ur :Denite register<CR>
 nnoremap <space>us :Denite source<CR>
 nnoremap <space>ut :Denite tag<CR>
 nnoremap <space>uu :Denite file<CR>
-nnoremap <space>uW :Denite file:~/work/<CR>
-nnoremap <space>uH :Denite file:~/<CR>
-nnoremap <space>uD :Denite file/rec:~/dotfiles/<CR>
+nnoremap <space>uW :Denite file -path=~/work/<CR>
+nnoremap <space>uH :Denite file -path=~/<CR>
+nnoremap <space>uD :Denite file/rec -path=~/dotfiles/<CR>
 nnoremap <space>uC :Denite menu:configs<CR>
-nnoremap <space>up :execute('Denite file/rec:'.g:projectroot)<CR>
-nnoremap <space>uw :execute('Denite file:'.g:projectroot)<CR>
+nnoremap <space>up :execute('Denite file/rec -path='.g:projectroot)<CR>
+nnoremap <space>uw :execute('Denite file -path='.g:projectroot)<CR>
 " search openned buffers
 nnoremap <space><space> :Denite buffer<CR>
 " grep currently searched word
@@ -600,7 +608,8 @@ nnoremap <space>GI :GoInstall<CR>
 " Key mappings - Fxx {{{
 
 nnoremap <F11> :Goyo<CR>
-nnoremap <F9>  :Dispatch %:p<CR>
+nnoremap <F10> :setlocal relativenumber!<CR>
+nnoremap <F9>  :setlocal number!<CR>
 nnoremap <F8>  :setlocal list!<CR>
 nnoremap <F7>  :setlocal wrap!<CR>
 nnoremap <F6>  :setlocal hlsearch!<CR>
