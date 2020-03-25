@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #mpage -2 -H $@ | lp
 a2ps -E -f 8 --header="" --footer="" --highlight-level=normal --truncate-lines=1 $@ | lp
