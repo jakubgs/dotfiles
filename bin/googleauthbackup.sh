@@ -17,7 +17,7 @@ OLDIFS=$IFS
 IFS=";"
 
 while read _ID EMAIL SECRET COUNTER TYPE PROVIDER ISSUER ORIGINAL_NAME; do
-	URL="otpauth://totp/${EMAIL}?secret=${SECRET}&issuer=${ISSUER}"
+    URL="otpauth://totp/${EMAIL}?secret=${SECRET}&issuer=${ISSUER}"
     URL=$(echo "${URL}" | sed 's/ /%20/')
     IMG="${QRS_PATH}/${_ID}.png"
     printf "* Gen: %50s -->> %s\n" ${EMAIL} ${IMG}
