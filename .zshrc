@@ -16,6 +16,7 @@ autoload colors         # enable colors
 autoload -U compinit    # enable auto completion
 autoload -U promptinit  # advanced prompts support
 
+prompt off              # disable system settings
 colors                  # initialize
 compinit                # longest wait
 promptinit
