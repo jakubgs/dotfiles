@@ -247,6 +247,8 @@ alias tt="tree -CdL 2"
 alias wq='du -sh'
 alias kt='du -h --max-depth=1 | sort -h'
 alias dy='df --sync -hTt ext4'
+alias copy='xsel -i --primary'
+alias ghh='git rev-parse HEAD | xsel -i --primary'
 alias grep='grep --color -i'
 alias ssh='TERM=xterm ssh'
 alias sshm='ssh melchior.magi.vpn'
