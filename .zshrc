@@ -368,6 +368,17 @@ function s {
 }
 compdef s=systemctl
 
+function j {
+    if [[ $# == 0 ]]; then
+        sudo journalctl --lines=30 --follow
+    elif [[ $# == 1 ]]; then
+        sudo journalctl --lines=30 --follow --unit "$@"
+    else
+        sudo journalctl "$@"
+    fi
+}
+compdef j=journalctl
+
 if type zerotier-cli > /dev/null; then
     function z {
         if [[ $# == 0 ]]; then
