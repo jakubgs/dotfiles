@@ -8,10 +8,10 @@ ASSETS=(
     "/home/$USERNAME/.gnupg"
     "/home/$USERNAME/.ssh"
     "/mnt/melchior/git"
-    "/mnt/melchior/secret"
-    "/mnt/melchior/data/Docs"
-    "/mnt/melchior/sync/important"
-    "/mnt/melchior/sync/photos"
+    "/mnt/melchior/data/docs"
+    "/mnt/melchior/data/company"
+    "/mnt/melchior/data/important"
+    "/mnt/melchior/data/photos"
 )
 
 DEVICE="$1"
@@ -72,17 +72,19 @@ cryptsetup luksOpen -d "${PASS_FILE}" "${DEVICE}" "${LABEL}"
 DEVICE="/dev/mapper/${LABEL}"
 mkdir -p "${DEST}"
 mount "${DEVICE}" "${DEST}"
+
 # unmount on exit
 function cleanup {
-    if [[ $1 == '-u' ]]; then
-        exit 0
-    fi
+    set +x
+    du -hsc ${DEST}/*
+    df -h "${DEVICE}"
+    echo
     echo "Removing device..."
     umount -f "${DEST}"
     cryptsetup luksClose "${LABEL}"
 }
 
-trap cleanup EXIT
+trap cleanup EXIT ERR INT QUIT
 
 remove_dot() {
     echo "$1" | sed 's/^\.//'
@@ -96,26 +98,26 @@ check_size() {
     if [[ -d "${TARGET}" ]]; then
         SIZE_OLD=$(du -sb "${TARGET}" | cut -f1 2>/dev/null)
     fi
-    echo $(($SIZE_NOW-$SIZE_OLD))
+    REMAINING_SIZE=$(($SIZE_NOW - $SIZE_OLD))
+    echo "${REMAINING_SIZE}"
 }
 
 for ASSET in ${ASSETS[@]}; do
     NAME=$(basename ${ASSET})
     TARGET="${DEST}/$(remove_dot ${NAME})"
-    FREE=$(df ${DEST} | awk '/dev/{print $4}')
-    SIZE=$(check_size "$ASSET" "$TARGET")
-    if [[ $FREE -lt $SIZE ]]; then
-        echo "* Skipping: ${ASSET} - Not enough space. ($((${SIZE}/1024)) KBytes)"
+    FREE_B=$(df -P ${DEST} | awk '/dev/{print ($4 * 1024)}')
+    SIZE_B=$(check_size "$ASSET" "$TARGET")
+    LEFT_B=$((${SIZE_B} / 1024))
+    if [[ ${SIZE_B} -gt 0 ]] && [[ ${FREE_B} -lt ${SIZE_B} ]]; then
+        echo "* Skipping: ${ASSET} - Not enough space. (${LEFT_B} KBytes)"
         continue
     fi
-    echo "* Copying: ${ASSET} -> ${TARGET} ($((${SIZE}/1024)) KBytes)"
+    echo "* Copying: ${ASSET} -> ${TARGET} (${LEFT_B} KBytes)"
     rsync --delete -aqr "${ASSET}" "${TARGET}"
 done
 
 echo
 echo "Syncing..."
 sync
-
-df -h "${DEVICE}"
 
 echo "SUCCESS!"
