@@ -324,6 +324,18 @@ function ac-reboot() {
     fi
 }
 
+function aws-reboot() {
+    aws --profile nimbus ec2 describe-instances --filters Name=tag:Name,Values=node-08.aws-eu-central-1a.nimbus.test --query 'Reservations[0].Instances[0].{Instance:InstanceId,AZ:Placement.AvailabilityZone,IP:PublicIpAddress,Name:Tags[?Key==`Name`]|[0].Value,State:State.Name}' --output text
+    ID=$(aws --profile nimbus ec2 describe-instances --filters "Name=tag:Name,Values=${@}" --query 'Reservations[0].Instances[0].InstanceId' --output text)
+    if [[ -n "${ID}" ]]; then
+        echo
+        read -q REPLY\?"Do you really want to reboot this host? (y/n) "
+        if [[ "${REPLY}" == "y" ]]; then
+            aws --profile nimbus ec2 reboot-instances --instance-ids ${ID}
+        fi
+    fi
+}
+
 # reload zshrc
 function src() {
     autoload -U zrecompile
