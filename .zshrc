@@ -55,6 +55,9 @@ export GROFF_NO_SGR=1
 # fix for inputting gpg pass in console
 export GPG_TTY=$(tty)
 
+# improve output format of 'time'
+export TIMEFMT=$'\nreal\t%*Es\nuser\t%*Us\nsys\t%*Ss'
+
 # }}}
 # Exports {{{
 
