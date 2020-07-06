@@ -360,6 +360,12 @@ if type docker > /dev/null; then
     compdef d=docker
 fi
 
+function ghpr {
+    PR=${1}
+    git fetch origin "pull/${PR}/head:pr/${PR}" && \
+        git checkout "pr/${PR}"
+}
+
 function s {
     if [[ $# == 0 ]]; then
         sudo systemctl list-units --type=service --state=running
