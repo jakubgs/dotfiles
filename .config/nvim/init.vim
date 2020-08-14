@@ -193,6 +193,9 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 " }}}
 " Plugin configuration {{{
 
+" NetRW file browser style
+let g:netrw_liststyle = 1
+
 " Goyo
 let g:goyo_width = 110
 
