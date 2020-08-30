@@ -7,3 +7,7 @@
 [submodule ".config/awesome/vicious"]
 	path = .config/awesome/vicious
 	url = https://github.com/Mic92/vicious.git
+[submodule ".config/awesome/battery-widget"]
+	path = .config/awesome/battery-widget
+	url = https://github.com/deficient/battery-widget.git
+	branch = master
