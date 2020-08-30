@@ -15,9 +15,6 @@ local naughty = require('naughty')
 -- Debugging
 local pprint = require('pprint')
 
--- Load Debian menu entries
-require("debian.menu")
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -66,7 +63,7 @@ awful.spawn.with_shell(homedir .. "/bin/autostart")
 beautiful.init(homedir .. "/.config/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-browser = "brave-browser"
+browser = "brave"
 hipchat = "hipchat"
 fmanager = "thunar"
 terminal = "urxvtc"
@@ -143,7 +140,6 @@ myofficemenu = {
 }
 
 mymainmenu = awful.menu({ items = {
-    { "debian",     debian.menu.Debian_menu.Debian, beautiful.awesome_icon },
     { "system",     mysystemmenu, beautiful.awesome_icon },
     { "systools",   mystoolsmenu, beautiful.awesome_icon },
     { "office",     myofficemenu, beautiful.awesome_icon },
@@ -169,17 +165,6 @@ mylauncher = awful.widget.launcher({
 
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock(" %Y/%m/%d %H:%M:%S |", 1 )
-
--- Create battery widget
-local bat_widget = nil
-local battery_widget = require("battery-widget")
-bat_widget = battery_widget {
-    adapter = "BAT0", ac = "AC",
-    battery_prefix = " Bat: ", ac_prefix = " AC: ",
-    percent_colors = {{25, "red"}, {50, "orange"}, {999, "#afd700"}},
-    tooltip_text = "${state}${time_est}",
-    widget_font = "terminus 12",
-}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(

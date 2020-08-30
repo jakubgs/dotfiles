@@ -7,7 +7,12 @@ theme_path = homedir .. "/.config/awesome/themes/default"
 
 theme = {}
 
-theme.font          = "terminus 12"
+theme.font          = "xft:Inconsolata:size=14:lang=pl:antialias=true:hinting=true"
+--theme.font          = "terminus 12"
+--theme.font          = "xft:Terminus:size=14:lang=pl:antialias=true:hinting=true"
+--theme.font          = "xos4 terminus 12"
+--theme.font          = "Terminus (TTF) 12"
+--theme.font          = "terminus font 12"
 
 theme.bg_normal     = "#000000" --"#222222"
 --theme.bg_focus      = "#3F3F3F" --"#535d6c"
@@ -99,7 +104,7 @@ theme.layout_tiletop = theme_path .. "/layouts/tiletopw.png"
 theme.layout_spiral  = theme_path .. "/layouts/spiralw.png"
 theme.layout_dwindle = theme_path .. "/layouts/dwindlew.png"
 
-theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
+theme.awesome_icon = theme_path .. "/icons/awesome16.png"
 
 return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:encoding=utf-8:textwidth=80
