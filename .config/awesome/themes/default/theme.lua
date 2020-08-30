@@ -7,7 +7,7 @@ theme_path = homedir .. "/.config/awesome/themes/default"
 
 theme = {}
 
-theme.font          = "xft:Inconsolata:size=14:lang=pl:antialias=true:hinting=true"
+theme.font          = "Inconsolata 14"
 --theme.font          = "terminus 12"
 --theme.font          = "xft:Terminus:size=14:lang=pl:antialias=true:hinting=true"
 --theme.font          = "xos4 terminus 12"
