@@ -1,10 +1,23 @@
 {
-  "settingsVersion": "1.64.5",
-  "exclusionRules": [],
+  "settingsVersion": "1.66",
+  "exclusionRules": [
+    {
+      "pattern": "https?://*.signin.aws.amazon.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https://cloud.digitalocean.com/droplets/*/console?*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.centrum24.pl/*",
+      "passKeys": ".*"
+    }
+  ],
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": true,
   "hideHud": false,
-  "keyMappings": "map <tab> Vomnibar.activateInNewTab\nmap <c-t> Vomnibar.activateInNewTab\nmap <c-d> scrollFullPageDown\nmap <c-u> scrollFullPageUp\nmap h previousTab\nmap l nextTab\nmap d removeTab\nmap u restoreTab\nmap H moveTabLeft\nmap L moveTabRight\nmap J goBack\nmap K goForward\nmap y copyCurrentUrl\nmap T Vomnibar.activateEditUrlInNewTab\n\nunmap v\nmap vf createTab https://mangadex.org/follows\nmap vy createTab https://www.youtube.com/feed/subscriptions\nmap vv createTab https://portal.victorops.com/client/status-im",
+  "keyMappings": "map <tab> Vomnibar.activateInNewTab\nmap <c-t> Vomnibar.activateInNewTab\nmap <c-d> scrollFullPageDown\nmap <c-u> scrollFullPageUp\nmap h previousTab\nmap l nextTab\nmap d removeTab\nmap u restoreTab\nmap H moveTabLeft\nmap L moveTabRight\nmap J goBack\nmap K goForward\nmap y copyCurrentUrl\nmap T Vomnibar.activateEditUrlInNewTab\n\nunmap v\nmap vf createTab https://mangadex.cc/follows\nmap vy createTab https://www.youtube.com/feed/subscriptions\nmap vv createTab https://portal.victorops.com/client/status-im\nmap va createTab http://arael.magi.vpn/\nmap vm createTab http://melchior.magi.vpn/\nmap vg createTab https://gh.status.im/",
   "linkHintCharacters": "sadfjklewcmpgh",
   "linkHintNumbers": "qwertyuiopasdfghjklzxcvbnm",
   "newTabUrl": "about:newtab",
