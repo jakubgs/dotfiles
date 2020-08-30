@@ -346,18 +346,16 @@ endif
 nnoremap <space>t :ToggleCB<CR>
 
 " Sneak
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-nmap t <Plug>Sneak_t
-nmap T <Plug>Sneak_T
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-xmap t <Plug>Sneak_t
-xmap T <Plug>Sneak_T
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 nmap s <Plug>SneakLabel_s
 nmap S <Plug>SneakLabel_S
-nmap <c-j> f{
-nmap <c-k> F]
+nmap <space>j <Plug>SneakLabel_s
+nmap <space>k <Plug>SneakLabel_S
+" cheap 'bi-directional' sneak
+map <space><space> H<Plug>SneakLabel_s
 
 " for snippet_complete marker.
 if has('conceal')
@@ -546,7 +544,7 @@ nnoremap <space>uC :Denite menu:configs<CR>
 nnoremap <space>up :execute('Denite file/rec -path='.g:projectroot)<CR>
 nnoremap <space>uw :execute('Denite file -path='.g:projectroot)<CR>
 " search openned buffers
-nnoremap <space><space> :Denite buffer<CR>
+"nnoremap <space><space> :Denite buffer<CR>
 " grep currently searched word
 nnoremap <space>*  :call GrepSearchedWord()<CR>
 
