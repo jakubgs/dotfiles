@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-set -x
 set -e
 
 PLAYLIST="/tmp/playlist.m3u"
