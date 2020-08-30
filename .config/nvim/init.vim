@@ -323,7 +323,8 @@ call denite#custom#source('_', 'matchers', [
 " Change default action.
 call denite#custom#option('_', {
 \ 'start_filter': 1,
-\ 'cache_threshold': 6000,
+\ 'cache_threshold': 30000,
+\ 'max_candidates': 40000,
 \ 'cursor_pos': '0',
 \ 'split': 'no',
 \ 'filter_split_direction': 'aboveleft',
