@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -x
-
-MASTER_MUTE="Master Playback Switch"
-DEVICE_NAME="pulse"
-CARD_NUMBER=0
-
-/usr/bin/amixer -q -D $DEVICE_NAME set $MASTER_MUTE toggle
