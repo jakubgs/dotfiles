@@ -49,12 +49,13 @@
 # }}}
 # Volume {{{
 
-""
-    m:0x0 + c:233
-    XF86MonBrightnessUp
-""
-    m:0x0 + c:232
-    XF86MonBrightnessDown
+"xbacklight -inc 15"
+  m:0x0 + c:233
+  XF86MonBrightnessUp
+
+"xbacklight -dec 15"
+  m:0x0 + c:232
+  XF86MonBrightnessDown
 
 # }}}
 # MPD management {{{
