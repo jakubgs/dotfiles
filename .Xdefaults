@@ -11,7 +11,11 @@ Xcursor.theme: Vanilla-DMZ
 !*geometry:             120x35
 
 *font:              xft:Inconsolata:size=14:lang=pl:antialias=true:hinting=true
-*boldFont:          xft:Inconsolata:size=14:Bold:lang=pl:antialias=true:hinting=true
+*boldFont:          xft:Inconsolata:size=14:lang=pl:antialias=true:hinting=true:Bold
+ranger*font:        xft:Inconsolata:size=24:lang=pl:antialias=true:hinting=true
+ranger*boldFont:    xft:Inconsolata:size=24:lang=pl:antialias=true:hinting=true:Bold
+ncmpcpp*font:       xft:Inconsolata:size=24:lang=pl:antialias=true:hinting=true
+ncmpcpp*boldFont:   xft:Inconsolata:size=24:lang=pl:antialias=true:hinting=true:Bold
 
 ! Disable printing
 *print-pipe:           "cat > /dev/null"
