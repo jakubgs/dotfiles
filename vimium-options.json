@@ -12,6 +12,14 @@
     {
       "pattern": "https?://www.centrum24.pl/*",
       "passKeys": ".*"
+    },
+    {
+      "pattern": "https?://dash.cloudflare.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://dash.cloudflare.com/*",
+      "passKeys": ""
     }
   ],
   "filterLinkHints": false,
