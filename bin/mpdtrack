@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+TRACK=`ncmpcpp --current-song -q`
+echo "${TRACK}"
+echo -n "${TRACK}" | xsel -i --primary --clipboard
