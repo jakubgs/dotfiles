@@ -20,3 +20,4 @@ COMMIT_URL="https://github.com/${REPO_NAME}/commit/${GIT_COMMIT::8}"
 
 echo -n "${COMMIT_URL}"
 echo -n "${COMMIT_URL}" | xsel -i --primary
+echo -n "${COMMIT_URL}" | xsel -i --clipboard
