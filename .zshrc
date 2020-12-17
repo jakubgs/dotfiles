@@ -38,7 +38,7 @@ case $HOST in           # change prompt depending on host
         COLOR="yellow" ;;
 esac
 
-export PURE_PROMPT_SYMBOL="%B%{$fg[$COLOR]%} %m >%{$reset_color%}%b"
+export PURE_PROMPT_SYMBOL="%B%{$fg[$COLOR]%} >%{$reset_color%}%b"
 prompt pure
 
 # define colors for less to get colored manpages
