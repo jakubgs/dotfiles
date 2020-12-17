@@ -242,6 +242,7 @@ bindkey "\e[2~" quoted-insert
 alias -g A='; alert'
 alias -g G='| grep --color -iE'
 
+alias bc='bc -q'
 alias gv='gvim --remote-silent'
 alias fucking='sudo'
 alias ll='ls -lh --color'
@@ -285,6 +286,10 @@ alias killcaps='xkbset nullify lock'
 # locate in current directory
 function see() {
     ag --nocolor --nogroup -g "$*"
+}
+
+function now() {
+    date --rfc-3339=seconds | sed 's/ /T/'
 }
 
 function do-reboot() {
