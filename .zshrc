@@ -31,7 +31,7 @@ case $HOST in           # change prompt depending on host
     melchior)
         COLOR="cyan" ;;
     arael)
-        COLOR="red" ;;
+        COLOR="magenta" ;;
     zeruel)
         COLOR="red" ;;
     *)
