@@ -86,7 +86,6 @@ export HISTSIZE=4000              # number of lines kept in history
 export SAVEHIST=4000              # number of lines saved in the history after logout
 export HISTFILE="$HOME/.zhistory" # location of history
 setopt INC_APPEND_HISTORY         # append command to history file once executed
-setopt APPEND_HISTORY             # Don't overwrite, append!
 setopt SHARE_HISTORY              # for sharing history between zsh proce'ses
 setopt HIST_IGNORE_ALL_DUPS       # Ignore duplicates in history
 setopt HIST_IGNORE_SPACE          # don't record entry if a space is preceeding it
@@ -268,6 +267,7 @@ alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
 alias qupdate='sudo apt update && sudo apt upgrade'
 alias qapt='sudo apt --quiet'
+alias c='sudo ss -lpntu'
 compdef qapt=apt
 
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
