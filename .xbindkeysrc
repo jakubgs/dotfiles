@@ -17,6 +17,13 @@
   m:0x40 + c:43
   Mod4 + h
 
+# }}}
+# Other {{{
+
+"flameshot gui"
+  m:0x0 + c:107
+  Print
+
 "arandr"
   m:0x0 + c:179
   XF86Tools
