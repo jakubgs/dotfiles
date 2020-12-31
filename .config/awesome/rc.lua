@@ -314,6 +314,7 @@ awful.key({ "Mod4",           }, "Tab",       function () awful.tag.viewnext(mou
 awful.key({ "Mod4", "Shift"   }, "Tab",       function () awful.tag.viewprev(mouse.screen) end),
 -- Prompt
 awful.key({ modkey,           }, "R",         function () mypromptbox[mouse.screen]:run() end),
+awful.key({ modkey            }, "o",         function () awful.spawn("flameshot gui") end),
 awful.key({ modkey            }, "r",         function () awful.spawn("rofi -show combi") end),
 awful.key({ modkey            }, "Return",    function () awful.spawn("rofi -show combi") end),
 awful.key({ modkey            }, "t", function ()
