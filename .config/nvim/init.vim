@@ -23,6 +23,7 @@ Plug 'bruno-/vim-man'
 Plug 'metakirby5/codi.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'justinmk/vim-sneak'
+Plug 'leafOfTree/vim-blink'
 " Text manipulation
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -192,6 +193,19 @@ autocmd FileType cpp set errorformat=%f:%l:%c:\ %m
 
 " }}}
 " Plugin configuration {{{
+
+" Blink
+let g:blink_mapping_prev = '<A-k>'
+let g:blink_mapping_next = '<A-j>'
+let g:blink_enable_normal = 1
+let g:blink_point = {
+    \'markdown':    '[.*|]',
+    \'vim':         ' *|\= ,<|.*>,(|.*),{|.*}',
+    \'nix':         '^ *|let,^ *|in,|{$,|[$,$|{,{|.*},[|.*]',
+    \'go':          ' ?|func, *|if , *|else , *|for ,^|import , *|const ',
+    \'python':      '|def ,|try ,|if ,|for ,|with ,|import ',
+    \'javascript':  '(|),{|},[|],{\n\s*|\n\s*},>|<,"|",''|''',
+\}
 
 " NetRW file browser style
 let g:netrw_liststyle = 1
