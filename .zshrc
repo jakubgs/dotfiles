@@ -238,8 +238,8 @@ bindkey "\e[2~" quoted-insert
 # Aliases {{{
 
 # Global
-alias -g A='; alert'
-alias -g G='| grep --color -iE'
+alias -g A='alert'
+alias -g G='grep'
 
 alias bc='bc -q'
 alias gv='gvim --remote-silent'
@@ -267,7 +267,7 @@ alias uctl='systemctl --user'
 alias restart='sudo rc-config restart '
 alias qupdate='sudo apt update && sudo apt upgrade'
 alias qapt='sudo apt --quiet'
-alias c='sudo ss -lpntu'
+alias c='sudo ss -lpsntu'
 compdef qapt=apt
 
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
