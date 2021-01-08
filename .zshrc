@@ -240,6 +240,7 @@ bindkey "\e[2~" quoted-insert
 # Global
 alias -g A='alert'
 alias -g G='grep'
+alias -g O='xdg-open'
 
 alias bc='bc -q'
 alias gv='gvim --remote-silent'
