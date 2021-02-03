@@ -19,14 +19,8 @@ function! s:WorkSearch()
   \}))
 endfunction
 
-function! s:get_git_root()
-  let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
-  return v:shell_error ? '' : root
-endfunction
-
 function! PanaceaFunc()
-  let root = s:get_git_root()
-  if empty(root)
+  if empty(GetGitRoot())
     call s:WorkSearch()
   else
     call fzf#vim#gitfiles('')

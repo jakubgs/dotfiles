@@ -50,17 +50,6 @@ nnoremap <c-l> <c-w>l
 " copy to clipboard with ctrl+c in visual mode
 xnoremap <c-c> "*y:call system('xclip -i -selection clipboard', @*)<CR>
 
-" copy file path to clipboard
-function! CopyPath(relative)
-    let l:path = expand("%:p")
-    if a:relative
-        let l:path = substitute(path, projectroot#guess().'/', '', '')
-    endif
-    echo "Copying: " . l:path
-    " save to both clipboards
-    let @* = l:path
-    let @+ = l:path
-endfunction
 nnoremap <leader>p :call CopyPath(0)<CR>
 nnoremap <leader>P :call CopyPath(1)<CR>
 
