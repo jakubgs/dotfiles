@@ -18,6 +18,7 @@ set number                        " show current line number
 set relativenumber                " distance from the current line
 set showmatch                     " show matching brackets
 set scrolloff=3                   " number of lies vim won't scroll below
+set nofoldenable                  " disable folding by default
 
 " Formatting settings
 set expandtab                     " use spaces instead of tabs
@@ -46,6 +47,11 @@ augroup saveposition
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal! g`\"" |
         \ endif
+augroup END
+
+" Auto resize splits when vim window size changes.
+augroup autoresize
+    autocmd VimResized * silent! exe "normal! \<c-w>="
 augroup END
 
 " save the file as root (tee must be addedd as NOPASSWD to sudoers)
