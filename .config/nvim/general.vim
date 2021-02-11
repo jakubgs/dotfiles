@@ -10,6 +10,7 @@ filetype indent on                " loading of indent files for all formats
 set autochdir                     " Automatically changing working dir
 set splitright                    " new windows right to the current
 set clipboard=unnamedplus         " paste the clipboard to unnamed register
+set hidden                        " buffer change, more undo
 
 " Visual
 set list                          " show tabs and newlines
@@ -25,6 +26,12 @@ set expandtab                     " use spaces instead of tabs
 set tabstop=4                     " spaces in <tab>
 set softtabstop=4                 " spaces in <tab> when editing
 set shiftwidth=4                  " spaces for each step of (auto)indendt
+
+" Search
+set ignorecase                    " ignore case
+set smartcase                     " unless upper case used
+set iskeyword+=$,@,%,#            " not word dividers
+set iskeyword-=.,_                " word dividers
 
 " Saves lives
 set undofile                      " Save undo's after file closes
