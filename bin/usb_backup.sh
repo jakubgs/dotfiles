@@ -7,11 +7,11 @@ ASSETS=(
     "/home/$USERNAME/.password-store"
     "/home/$USERNAME/.gnupg"
     "/home/$USERNAME/.ssh"
-    "/mnt/melchior/git"
-    "/mnt/melchior/data/docs"
-    "/mnt/melchior/data/company"
-    "/mnt/melchior/data/important"
-    "/mnt/melchior/data/photos"
+    "/mnt/git"
+    "/mnt/photos"
+    "/mnt/data/docs"
+    "/mnt/data/company"
+    "/mnt/data/important"
 )
 
 DEVICE="$1"
