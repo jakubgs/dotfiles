@@ -20,6 +20,7 @@ set relativenumber                " distance from the current line
 set showmatch                     " show matching brackets
 set scrolloff=3                   " number of lies vim won't scroll below
 set nofoldenable                  " disable folding by default
+set nowrap                        " text wrapping
 
 " Formatting settings
 set expandtab                     " use spaces instead of tabs
