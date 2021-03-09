@@ -79,3 +79,7 @@ if [[ $ANOTIFY ]]; then
 else
     echo -e "${KEY}\n${REST}"
 fi
+
+# Hack that allows clipmenud to catch the window name.
+# https://github.com/cdown/clipmenu/issues/158
+sleep 0
