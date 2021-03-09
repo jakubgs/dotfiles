@@ -300,7 +300,6 @@ awful.key({ "Mod4", "Control" }, "Right",     function () awful.spawn("xrandr --
 awful.key({ "Mod4", "Control" }, "Up",        function () awful.spawn("xrandr --orientation normal") end),
 awful.key({ "Mod4", "Control" }, "Down",      function () awful.spawn("xrandr --orientation inverted") end),
 --- Standard program
-awful.key({ modkey,           }, "c",         function () awful.spawn(terminal) end),
 awful.key({ "Control",        }, "BackSpace", function () awful.spawn(terminal) end),
 awful.key({ "Control", "Shift"}, "BackSpace", function () awful.spawn(terminal) end),
 awful.key({ modkey, "Control" }, "r",         awesome.restart),
@@ -314,6 +313,7 @@ awful.key({ "Mod4",           }, "Tab",       function () awful.tag.viewnext(mou
 awful.key({ "Mod4", "Shift"   }, "Tab",       function () awful.tag.viewprev(mouse.screen) end),
 -- Prompt
 awful.key({ modkey,           }, "R",         function () mypromptbox[mouse.screen]:run() end),
+awful.key({ modkey,           }, "c",         function () awful.spawn("clipmenu") end),
 awful.key({ modkey            }, "o",         function () awful.spawn("flameshot gui") end),
 awful.key({ modkey            }, "r",         function () awful.spawn("rofi -show combi") end),
 awful.key({ modkey            }, "Return",    function () awful.spawn("rofi -show combi") end),

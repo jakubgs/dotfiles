@@ -269,6 +269,7 @@ alias restart='sudo rc-config restart '
 alias qupdate='sudo apt update && sudo apt upgrade'
 alias qapt='sudo apt --quiet'
 alias c='sudo ss -lpsntu'
+alias cm='clipmenu'
 compdef qapt=apt
 
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
