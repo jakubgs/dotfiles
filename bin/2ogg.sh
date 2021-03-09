@@ -7,5 +7,5 @@ shift
 cd "${DIR}"
 for FILE in *.flac *.wav *.wave; do
     echo "Converting: ${FILE} -> ${FILE%.*}.ogg"
-    oggenc --discard-comments -Q -q 6 "${@}" "${FILE}"
+    oggenc -Q -q 6 "${@}" "${FILE}"
 done
