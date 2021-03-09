@@ -406,6 +406,15 @@ function j {
 }
 compdef j=journalctl
 
+function t {
+    if [[ $# == 0 ]]; then
+        terraform plan
+    else
+        terraform "$@"
+    fi
+}
+
+compdef j=journalctl
 if type zerotier-cli > /dev/null; then
     function z {
         if [[ $# == 0 ]]; then
