@@ -67,19 +67,18 @@ KEY=$(echo "${OUTPUT}" | head -n 1)
 LOGIN=$(echo "${OUTPUT}" | grep -oP 'login: ?\K(.*)$')
 REST=$(echo "${OUTPUT}" | sed 1d)
 
+# Avoid clipmenud collecting secrets.
+clipctl disable
 echo -n "$KEY" | xsel -i --clipboard
 if [[ -n "$LOGIN" ]]; then
     echo -n "$LOGIN" | xsel -i --primary
 else
     echo -n "$KEY" | xsel -i --primary
 fi
+clipctl enable
 
 if [[ $ANOTIFY ]]; then
     echo -e "${RESULTS}\n${REST}" | anotify -p
 else
     echo -e "${KEY}\n${REST}"
 fi
-
-# Hack that allows clipmenud to catch the window name.
-# https://github.com/cdown/clipmenu/issues/158
-sleep 0
