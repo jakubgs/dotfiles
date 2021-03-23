@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# Simple script for getting URL of current commit
+
+#function join_by { local IFS="$1"; shift; echo "$*"; }
+function join_by { local d=${1-} f=${2-}; if shift 2; then printf %s "$f" "${@/#/$d}"; fi; }
+
+function show_commit() {
+    TARGET=${1}
+    GIT_COMMIT=$(git rev-parse ${TARGET})
+    GIT_MESSAGE=$(git show --pretty=format:%s -s ${TARGET})
+
+    GITHUB_URL="${GIT_REMOTE_URL#git@github.com:}"
+    GITHUB_URL="${GITHUB_URL#https://github.com/}"
+    REPO_NAME="${GITHUB_URL%.git}"
+    # Use only the first 8 characters of Git SHA1
+    COMMIT_URL="https://github.com/${REPO_NAME}/commit/${GIT_COMMIT::8}"
+
+    RVAL="${COMMIT_URL}"
+    if [[ "${SHOW_MESSAGE}" ]]; then
+        RVAL+=" - ${GIT_MESSAGE}"
+    fi
+
+    echo "${RVAL}"
+    echo -n "${RVAL}" | xsel -i --primary
+    echo -n "${RVAL}" | xsel -i --clipboard
+}
+
+# Verify the repo supports this script.
+GIT_REMOTE_URL=$(git config --get remote.origin.url)
+if [[ "${GIT_REMOTE_URL}" != *github.com* ]]; then
+    echo "Not a GitHub Origin!"
+    exit 1
+fi
+
+function usage() {
+    echo "Usage: $0 [-m|-r] <REV> [REV] ..." 1>&2; exit 1;
+}
+
+while getopts "m?r?h?" o; do
+    case "${o}" in
+        m) SHOW_MESSAGE=1;;
+        r) COMMIT_RANGE=1;;
+        h) usage;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [[ "${#}" -eq 0 ]]; then
+    show_commit "HEAD"
+elif [[ "${COMMIT_RANGE}" ]]; then
+    for COMMIT in $(git log --format=%H $(join_by '..' ${@})); do
+        show_commit "${COMMIT}"
+    done
+else
+    while [[ "${#}" -gt 0 ]]; do
+        show_commit "${1}"
+        shift
+    done
+fi
