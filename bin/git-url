@@ -25,6 +25,9 @@ function show_commit() {
     COMMIT_URL="$(git_remote_url)/commit/${GIT_COMMIT::8}"
 
     RVAL="${COMMIT_URL}"
+    if [[ "${MARKDOWN_FORMAT}" -eq 1 ]]; then
+        RVAL="[${GIT_COMMIT::8}](${COMMIT_URL})"
+    fi
     if [[ "${SHOW_MESSAGE}" -eq 1 ]]; then
         RVAL+=" - ${GIT_MESSAGE}"
     fi
@@ -33,10 +36,12 @@ function show_commit() {
 
 SHOW_MESSAGE=0
 COMMIT_RANGE=0
-while getopts "m?r?h?" o; do
+MARKDOWN_FORMAT=0
+while getopts "m?r?f?h?" o; do
     case "${o}" in
         m) SHOW_MESSAGE=1;;
         r) COMMIT_RANGE=1;;
+        f) MARKDOWN_FORMAT=1;;
         h|*) usage;;
     esac
 done
