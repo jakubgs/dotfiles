@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# Simple script for getting URL of current commit
+# Simple script for getting URL of current commit.
+# Should work as `git url` if it's in your $PATH.
 
-#function join_by { local IFS="$1"; shift; echo "$*"; }
-function join_by { local d=${1-} f=${2-}; if shift 2; then printf %s "$f" "${@/#/$d}"; fi; }
+function usage() {
+    echo "Usage: $0 [-m|-r] <REV> [REV] ..." 1>&2
+    echo "  -r - Target is a range till HEAD."
+    echo "  -m - Show messages."
+    exit 1
+}
 
 function show_commit() {
     TARGET=${1}
@@ -17,7 +23,7 @@ function show_commit() {
     COMMIT_URL="https://github.com/${REPO_NAME}/commit/${GIT_COMMIT::8}"
 
     RVAL="${COMMIT_URL}"
-    if [[ "${SHOW_MESSAGE}" ]]; then
+    if [[ "${SHOW_MESSAGE}" -eq 1 ]]; then
         RVAL+=" - ${GIT_MESSAGE}"
     fi
 
@@ -33,13 +39,8 @@ if [[ "${GIT_REMOTE_URL}" != *github.com* ]]; then
     exit 1
 fi
 
-function usage() {
-    echo "Usage: $0 [-m|-r] <REV> [REV] ..." 1>&2
-    echo "  -r - Target is a range till HEAD."
-    echo "  -m - Show messages."
-    exit 1
-}
-
+SHOW_MESSAGE=0
+COMMIT_RANGE=0
 while getopts "m?r?h?" o; do
     case "${o}" in
         m) SHOW_MESSAGE=1;;
@@ -51,7 +52,7 @@ shift $((OPTIND-1))
 
 if [[ "${#}" -eq 0 ]]; then
     show_commit "HEAD"
-elif [[ "${COMMIT_RANGE}" ]]; then
+elif [[ "${COMMIT_RANGE}" -eq 1 ]]; then
     for COMMIT in $(git log --format=%H ${@}..HEAD); do
         show_commit "${COMMIT}"
     done
