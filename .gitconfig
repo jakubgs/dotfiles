@@ -27,7 +27,7 @@
     rs  = reset
     ls  = ls-files
     cp  = cherry-pick
-    l   = log --decorate
+    u   = url
     df  = diff
     dt  = difftool
     l   = log --decorate
