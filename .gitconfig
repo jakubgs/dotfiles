@@ -1,9 +1,13 @@
+[init]
+    defaultBranch = master
 [user]
     email = jakub@status.im
     name = Jakub Sokołowski
     signingkey = 4EF064D0E6D63020
 [core]
     editor = nvim
+    quotePath = false
+    commitGraph = true
 [diff]
     tool = vimdiff
 [merge]
@@ -19,6 +23,7 @@
     s   = stash
     c   = commit --verbose --no-verify --gpg-sign --signoff
     m   = commit --verbose --no-verify --gpg-sign --signoff --amend
+    mm  = commit --verbose --no-verify --gpg-sign --signoff --amend --no-edit
     fix = commit --verbose --no-verify --gpg-sign --signoff --fixup
     a   = add 
     an  = annex
@@ -32,9 +37,9 @@
     dt  = difftool
     l   = log --decorate
     gr  = log --graph --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
-    sl  = log --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
+    sl  = log --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %C(bold yellow)%<(20)%an %C(bold green)>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
     sla = log --pretty=format:'* %h %s %d' --abbrev-commit
-    rst = reset --hard HEAD
+    rst = rese --hard HEAD
 [branch "master"]
     remote = origin
     merge = refs/heads/master
@@ -46,6 +51,8 @@
     default = current
 [pull]
     default = current
+    rebase = false
+    ff = only
 [difftool]
     prompt = false
 [web]
@@ -54,3 +61,7 @@
     gpgsign = true
 [gpg]
     program = gpg
+[receive]
+    advertisePushOptions = true
+[gc]
+    writeCommitGraph = true
