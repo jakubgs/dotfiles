@@ -11,16 +11,18 @@ function usage() {
     exit 1
 }
 
+function git_remote_url() {
+    git config --get remote.origin.url | sed -E \
+        's;^git@([^:]+):(.+)/(.+).git;https://\1/\2/\3;'
+}
+
 function show_commit() {
     TARGET=${1}
     GIT_COMMIT=$(git rev-parse ${TARGET})
     GIT_MESSAGE=$(git show --pretty=format:%s -s ${TARGET})
 
-    GITHUB_URL="${GIT_REMOTE_URL#git@github.com:}"
-    GITHUB_URL="${GITHUB_URL#https://github.com/}"
-    REPO_NAME="${GITHUB_URL%.git}"
     # Use only the first 8 characters of Git SHA1
-    COMMIT_URL="https://github.com/${REPO_NAME}/commit/${GIT_COMMIT::8}"
+    COMMIT_URL="$(git_remote_url)/commit/${GIT_COMMIT::8}"
 
     RVAL="${COMMIT_URL}"
     if [[ "${SHOW_MESSAGE}" -eq 1 ]]; then
@@ -28,13 +30,6 @@ function show_commit() {
     fi
     echo "${RVAL}"
 }
-
-# Verify the repo supports this script.
-GIT_REMOTE_URL=$(git config --get remote.origin.url)
-if [[ "${GIT_REMOTE_URL}" != *github.com* ]]; then
-    echo "Not a GitHub Origin!"
-    exit 1
-fi
 
 SHOW_MESSAGE=0
 COMMIT_RANGE=0
