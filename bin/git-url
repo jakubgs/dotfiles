@@ -13,7 +13,7 @@ function usage() {
 
 function git_remote_url() {
     git config --get remote.origin.url | sed -E \
-        's;^git@([^:]+):(.+)/(.+).git;https://\1/\2/\3;'
+        's;^git@([^:]+):(.+)/(.+)(.git)?;https://\1/\2/\3;'
 }
 
 function show_commit() {
@@ -31,16 +31,14 @@ function show_commit() {
     if [[ "${SHOW_MESSAGE}" -eq 1 ]]; then
         RVAL+=" - ${GIT_MESSAGE}"
     fi
-    echo "${RVAL}"
+    echo -n "${RVAL}"
 }
 
 SHOW_MESSAGE=0
-COMMIT_RANGE=0
 MARKDOWN_FORMAT=0
 while getopts "m?r?f?h?" o; do
     case "${o}" in
         m) SHOW_MESSAGE=1;;
-        r) COMMIT_RANGE=1;;
         f) MARKDOWN_FORMAT=1;;
         h|*) usage;;
     esac
@@ -50,13 +48,15 @@ shift $((OPTIND-1))
 {
 if [[ "${#}" -eq 0 ]]; then
     show_commit "HEAD"
-elif [[ "${COMMIT_RANGE}" -eq 1 ]]; then
-    for SHA1 in $(git log --format=%H ${@}..HEAD); do
-        show_commit "${SHA1}"
-    done
 else
     while [[ "${#}" -gt 0 ]]; do
-        show_commit "${1}"
+        TARGET="${1}"
+        if [[ "${1}" =~ .*~.* ]] && [[ ! "${1}" =~ .*\.\..* ]]; then
+            TARGET="${1}..HEAD"
+        fi
+        for SHA1 in $(git rev-list ${TARGET}); do
+            show_commit "${SHA1}"
+        done
         shift
     done
 fi
