@@ -56,6 +56,7 @@ else
         fi
         for SHA1 in $(git rev-list ${TARGET}); do
             show_commit "${SHA1}"
+            echo
         done
         shift
     done
