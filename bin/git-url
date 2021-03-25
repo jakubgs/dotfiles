@@ -6,8 +6,9 @@ set -euo pipefail
 
 function usage() {
     echo "Usage: $0 [-h|-m|-r] <REV> [REV] ..." 1>&2
-    echo "  -r - Target is a range till HEAD."
     echo "  -m - Show messages."
+    echo "  -f - Format as markdown."
+    echo "  -h - Show help."
     exit 1
 }
 
@@ -34,9 +35,18 @@ function show_commit() {
     echo -n "${RVAL}"
 }
 
+function git_show_revs() {
+    TARGET="${1}"
+    OPTS=''
+    if [[ ! "${TARGET}" =~ \.\. ]]; then
+        OPTS='--max-count=1'
+    fi
+    git log --format=%H ${OPTS} ${TARGET}
+}
+
 SHOW_MESSAGE=0
 MARKDOWN_FORMAT=0
-while getopts "m?r?f?h?" o; do
+while getopts "m?f?h?" o; do
     case "${o}" in
         m) SHOW_MESSAGE=1;;
         f) MARKDOWN_FORMAT=1;;
@@ -50,11 +60,7 @@ if [[ "${#}" -eq 0 ]]; then
     show_commit "HEAD"
 else
     while [[ "${#}" -gt 0 ]]; do
-        TARGET="${1}"
-        if [[ "${1}" =~ .*~.* ]] && [[ ! "${1}" =~ .*\.\..* ]]; then
-            TARGET="${1}..HEAD"
-        fi
-        for SHA1 in $(git rev-list ${TARGET}); do
+        for SHA1 in $(git_show_revs ${1}); do
             show_commit "${SHA1}"
             echo
         done
