@@ -13,8 +13,8 @@ function usage() {
 }
 
 function git_remote_url() {
-    git config --get remote.origin.url | sed -E \
-        's;^git@([^:]+):(.+)/(.+)(.git)?;https://\1/\2/\3;'
+    git config --get remote.origin.url | sed -E -e 's;.git$;;' \
+        -e 's;^git@([^:]+):(.+)/(.+)$;https://\1/\2/\3;'
 }
 
 function show_commit() {
