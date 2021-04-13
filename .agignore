@@ -16,6 +16,7 @@ Games/
 sensitive/
 vendor/
 env/*
+venv
 .*/
 tags
 *.mo
