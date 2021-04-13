@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Simple script for getting URL of current commit.
+# Script for getting URL(s) of current commit.
 # Should work as `git url` if it's in your $PATH.
 
 function usage() {
@@ -18,9 +18,8 @@ function git_remote_url() {
 }
 
 function show_commit() {
-    TARGET=${1}
-    GIT_COMMIT=$(git rev-parse ${TARGET})
-    GIT_MESSAGE=$(git show --pretty=format:%s -s ${TARGET})
+    GIT_COMMIT=$(git rev-parse ${1})
+    GIT_MESSAGE=$(git show --pretty=format:%s -s ${1})
 
     # Use only the first 8 characters of Git SHA1
     COMMIT_URL="$(git_remote_url)/commit/${GIT_COMMIT::8}"
@@ -36,12 +35,11 @@ function show_commit() {
 }
 
 function git_show_revs() {
-    TARGET="${1}"
     OPTS=''
-    if [[ ! "${TARGET}" =~ \.\. ]]; then
+    if [[ ! "${1}" =~ \.\. ]]; then
         OPTS='--max-count=1'
     fi
-    git log --format=%H ${OPTS} ${TARGET}
+    git log --format=%H ${OPTS} ${1}
 }
 
 SHOW_MESSAGE=0
@@ -55,6 +53,7 @@ while getopts "m?f?h?" o; do
 done
 shift $((OPTIND-1))
 
+# Curly brace block combines output of the whole if for tee.
 {
 if [[ "${#}" -eq 0 ]]; then
     show_commit "HEAD"
@@ -62,6 +61,7 @@ else
     while [[ "${#}" -gt 0 ]]; do
         for SHA1 in $(git_show_revs ${1}); do
             show_commit "${SHA1}"
+            # without echo all URLs would be in one line
             echo
         done
         shift
