@@ -1,6 +1,6 @@
 [default]
 screenshot-format="png"
-loop="inf"
+#loop="inf"
 vo=gpu,drm
 hwdec=no
 #ao=alsa
@@ -12,6 +12,7 @@ brightness=0
 # Prefill 50% of the cache before restarting playback after the cache emptied.
 #cache-seek-min = 4.0
 sub-scale = 1.0
+osd-on-seek = no
 # prioritize audio
 ytdl-format=bestvideo[height<=?1440][fps<=?60]+bestaudio/best
 #ytdl-format=best[height<=?720][fps<=?30][vcodec!=?vp9]+bestaudio/best
