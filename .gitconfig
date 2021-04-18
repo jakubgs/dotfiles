@@ -19,6 +19,7 @@
     f   = fetch
     ps  = push
     pl  = pull
+    x   = sync
     sm  = submodule
     s   = stash
     c   = commit --verbose --no-verify --gpg-sign --signoff
