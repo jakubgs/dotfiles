@@ -8,10 +8,10 @@ ASSETS=(
     "/home/$USERNAME/.gnupg"
     "/home/$USERNAME/.ssh"
     "/mnt/git"
-    "/mnt/photos"
     "/mnt/data/docs"
     "/mnt/data/company"
     "/mnt/data/important"
+    "/mnt/photos"
 )
 
 DEVICE="$1"
