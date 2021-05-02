@@ -2,10 +2,10 @@ nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>ga :Gwrite<CR>
-nnoremap <leader>gc :Gcommit -s -v -q -n<CR>
-nnoremap <leader>gt :Gcommit -s -v -q -n -- %:p<CR>
-nnoremap <leader>gC :Gcommit -s -v -q -n --amend<CR>
-nnoremap <leader>gT :Gcommit -s -v -q -n --amend -- %:p<CR>
+nnoremap <leader>gc :Git commit -s -v -q -n<CR>
+nnoremap <leader>gt :Git commit -s -v -q -n -- %:p<CR>
+nnoremap <leader>gC :Git commit -s -v -q -n --amend<CR>
+nnoremap <leader>gT :Git commit -s -v -q -n --amend -- %:p<CR>
 nnoremap <leader>gd :Gvdiff<CR>
 nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gu :Git reset "%:p"<CR><CR>
@@ -13,10 +13,10 @@ nnoremap <leader>gl :Gitv --all<CR>
 nnoremap <leader>gp :Ggrep<Space>
 nnoremap <leader>gm :Gmove<Space>
 nnoremap <leader>gB :Gblame<CR>
-nnoremap <leader>gw :Gbrowse<CR>
-nnoremap <leader>gW :Gbrowse!<CR>
-vnoremap <leader>gw :Gbrowse<CR>
-vnoremap <leader>gW :Gbrowse!<CR>
+nnoremap <leader>gw :GBrowse<CR>
+nnoremap <leader>gW :GBrowse!<CR>
+vnoremap <leader>gw :GBrowse<CR>
+vnoremap <leader>gW :GBrowse!<CR>
 nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gf  :Dispatch! git fetch --all<CR>
 nnoremap <leader>gps :Dispatch! git push<CR>
