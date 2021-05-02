@@ -74,8 +74,9 @@ export PAGER="less"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
 export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man nomod nolist' -\""
-export USE_PYTHON="3.7"
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
+# Hacky way to provide python packages to Ansible for local tasks.
+export PYTHONPATH=$(echo /etc/profiles/per-user/$USER/lib/python*/site-packages | tr ' ' ':')
 
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/games/bin:~/go/bin:~/bin
 
