@@ -24,6 +24,8 @@ CONFIG_FILES+=$(find "$GIT_ROOT" -regextype posix-extended -maxdepth 1 -name '.*
 CONFIG_FILES+=" "
 CONFIG_FILES+=$(find "$GIT_ROOT/.config" -maxdepth 1 -printf "%P\n" | sed -e 1d -e 's/^/.config\//')
 
+NO_CHANGES=1
+
 for CONFIG_FILE in ${CONFIG_FILES}; do
     SOURCE="${GIT_ROOT}/${CONFIG_FILE}" 
     DEST="${HOME}/${CONFIG_FILE}"
@@ -32,16 +34,21 @@ for CONFIG_FILE in ${CONFIG_FILES}; do
         mkdir -p "${DEST_DIR}"
     fi
     if [[ ${FORCE} ]]; then
-        echo "FORCE LINKING: ${SOURCE} -> ${DEST}"
+        echo "FORCE LINKING: ${SOURCE} -> ${DEST}" >&2
         ln -sf "${SOURCE}" "${DEST}"
     elif [[ -f "${DEST}" ]]; then
-        echo "IS_FILE: ${DEST}"
+        echo "IS_FILE: ${DEST}" >&2
     elif [[ -d "${DEST}" ]]; then
-        echo "IS_DIR:  ${DEST}"
+        echo "IS_DIR:  ${DEST}" >&2
     elif [[ -h "${DEST}" ]]; then
-        echo "SYMLINK: ${DEST}"
+        echo "SYMLINK: ${DEST}" >&2
     else # symlinking withou forcing
-        echo "LINKING: ${SOURCE} -> ${DEST}"
+        NO_CHANGES=0
+        echo "LINKING: ${SOURCE} -> ${DEST}" >&2
         ln -s "${SOURCE}" "${DEST}"
     fi
 done
+
+if [[ ${NO_CHANGES} ]]; then
+    echo "No changes necessary."
+fi
