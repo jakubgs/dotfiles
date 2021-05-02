@@ -58,9 +58,9 @@ nnoremap <silent> <leader>q :bprevious<bar>bd! #<CR>
 nnoremap <silent> <leader>Q :<CR>
 
 " Edit .vimrc and refresh configuration
-nnoremap <silent> <leader>r :source ~/dotfiles/.config/nvim/init.vim<CR>
-nnoremap <silent> <leader>R :vsp ~/dotfiles/.config/nvim/init.vim<CR>
-nnoremap <silent> <leader>T :vsp ~/work/jakubgs-notes/todo.md<CR>
+nnoremap <leader>r :source ~/dotfiles/.config/nvim/init.vim<CR>
+nnoremap <leader>R :vsp ~/dotfiles/.config/nvim/init.vim<CR>
+nnoremap <leader>T :vsp ~/work/jakubgs-notes/todo.md<CR>
 
 " Checkbox
 nnoremap <leader>t :ToggleCB<CR>
