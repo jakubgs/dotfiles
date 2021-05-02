@@ -21,6 +21,8 @@ Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'benwainwright/fzf-project'
+" Movement
+Plug 'justinmk/vim-sneak'
 " Completion
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-vim'

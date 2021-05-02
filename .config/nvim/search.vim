@@ -1,3 +1,18 @@
+" Sneak
+let g:sneak#label = 1
+let g:sneak#target_labels = "abcdefghijklmnopqrstuvwxyz"
+let g:sneak#s_next = 1
+let g:sneak#use_ic_scs = 1
+let g:sneak#prompt = 'STREAK>>>'
+
+nmap <space>j <Plug>Sneak_s
+nmap <space>k <Plug>Sneak_S
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+
+" FZF
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_preview_window = []
 let g:fzf_history_dir = '~/.local/share/fzf-history'
