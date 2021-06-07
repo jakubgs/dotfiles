@@ -78,7 +78,8 @@ end
 
 geditor = term('nvim')
 ncmpcpp = term('ncmpcpp')
-fpass   = term(homedir .. '/bin/fpass', 'fpass', '-hold')
+fpass     = term(homedir .. '/bin/fpass', 'fpass')
+fpassHold = term(homedir .. '/bin/fpass', 'fpass', '-hold')
 
 naughty.config.padding = 10
 naughty.config.spacing = 6
@@ -293,6 +294,7 @@ awful.key({ modkey,           }, "e",         function () run_or_raise(geditor, 
 awful.key({ modkey,           }, "w",         function () run_or_raise(browser, { class = "Brave-browser"}) end),
 awful.key({ modkey, "Shift"   }, "c",         function () run_or_raise(terminal, { class = "URxvt" }) end),
 awful.key({ modkey,           }, "p",         function () run_or_raise(fpass, { class = "fpass" }) end),
+awful.key({ modkey, "Shift"   }, "p",         function () run_or_raise(fpassHold, { class = "fpass" }) end),
 awful.key({ modkey,           }, "m",         function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
 awful.key({ modkey, "Shift"   }, "m",         function () awful.spawn(homedir.."/bin/fmpd -r") end),
 awful.key({ modkey,           }, "u",         function () run_or_raise("evolution", { class = "Evolution" }) end),
