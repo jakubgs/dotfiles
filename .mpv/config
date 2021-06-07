@@ -1,4 +1,5 @@
 [default]
+fullscreen=no
 screenshot-format="png"
 #loop="inf"
 vo=gpu,drm
