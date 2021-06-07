@@ -271,6 +271,8 @@ alias qupdate='sudo apt update && sudo apt upgrade'
 alias qapt='sudo apt --quiet'
 alias c='sudo ss -lpsntu'
 alias cm='clipmenu'
+alias a='ansible'
+alias ap='ansible-playbook'
 compdef qapt=apt
 
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
@@ -416,7 +418,17 @@ function t {
     fi
 }
 
-compdef j=journalctl
+function i {
+    if [[ $# == 0 ]]; then
+        sudo ip --brief addr
+    elif [[ $# == 1 ]]; then
+        sudo ip addr show  "$@"
+    else
+        sudo ip "$@"
+    fi
+}
+compdef i=ip
+
 if type zerotier-cli > /dev/null; then
     function z {
         if [[ $# == 0 ]]; then
