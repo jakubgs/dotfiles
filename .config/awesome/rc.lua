@@ -167,9 +167,6 @@ mylauncher = awful.widget.launcher({
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock(" %Y/%m/%d %H:%M:%S |", 1 )
 
--- Create currency tracking widget
-mycurrencytracker = awful.widget.watch(homedir..'/bin/awesome_rate.sh', 3600)
-
 --- Create battery widget
 local bat_widget = nil
 local battery_widget = require("battery-widget")
@@ -257,8 +254,6 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             bat_widget,
-            mycurrencytracker,
-            wibox.widget.textbox(' |'),
             mytextclock,
             wibox.widget.systray(),
         },
