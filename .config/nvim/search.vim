@@ -24,7 +24,6 @@ au TermOpen * setlocal nonumber norelativenumber
 " Helper to avoid path issues and start in input mode.
 function! s:WorkSink(line)
   execute 'Files ~/work/' .. a:line
-  call feedkeys('i', 'n')
 endfunction
 
 function! s:WorkSearch()
@@ -49,6 +48,8 @@ command! Panacea call PanaceaFunc()
 nnoremap <c-i>              :Panacea<CR>
 nnoremap <c-a>              :Work<CR>
 nnoremap <c-space>          :History<CR>
+nnoremap <c-b>              :History<CR>
+nnoremap <space><space>     :History<CR>
 nnoremap <leader><leader>h  :History<CR>
 nnoremap <leader><leader>m  :Marks<CR>
 nnoremap <leader><leader>f  :Files<CR>
