@@ -25,9 +25,14 @@ function show_commit() {
     # Use only the first 8 characters of Git SHA1
     COMMIT_URL="$(git_remote_url)/commit/${GIT_COMMIT::8}"
 
-    RVAL="${COMMIT_URL}"
+    RVAL=''
+    if [[ "${MARKDOWN_LIST}" -eq 1 ]]; then
+        RVAL='- '
+    fi
     if [[ "${MARKDOWN_FORMAT}" -eq 1 ]]; then
-        RVAL="[${GIT_COMMIT::8}](${COMMIT_URL})"
+        RVAL+="[${GIT_COMMIT::8}](${COMMIT_URL})"
+    else
+        RVAL+="${COMMIT_URL}"
     fi
     if [[ "${SHOW_MESSAGE}" -eq 1 ]]; then
         RVAL+=" - ${GIT_MESSAGE}"
@@ -51,10 +56,13 @@ function git_show_revs() {
 
 SHOW_MESSAGE=0
 MARKDOWN_FORMAT=0
+MARKDOWN_LIST=0
 REVERT_ORDER=0
+while getopts "h?m?f?l?r?" o; do
     case "${o}" in
         m) SHOW_MESSAGE=1;;
         f) MARKDOWN_FORMAT=1;;
+        l) MARKDOWN_LIST=1;;
         r) REVERT_ORDER=1;;
         h|*) usage;;
     esac
