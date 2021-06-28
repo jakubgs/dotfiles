@@ -5,10 +5,11 @@ set -euo pipefail
 # Should work as `git url` if it's in your $PATH.
 
 function usage() {
-    echo "Usage: $0 [-h|-m|-r] <REV> [REV] ..." 1>&2
+    echo "Usage: $0 [-h|-m|-f|-r] <REV> [REV] ..." 1>&2
+    echo "  -h - Show help."
     echo "  -m - Show messages."
     echo "  -f - Format as markdown."
-    echo "  -h - Show help."
+    echo "  -r - Revert order."
     exit 1
 }
 
@@ -39,15 +40,22 @@ function git_show_revs() {
     if [[ ! "${1}" =~ \.\. ]]; then
         OPTS='--max-count=1'
     fi
-    git log --format=%H ${OPTS} ${1}
+    OUTPUT=$(git log --format=%H ${OPTS} ${1})
+    # git log format shows commits with oldest first
+    if [[ "${REVERT_ORDER}" -eq 1 ]]; then
+        echo "${OUTPUT}" | tac
+    else
+        echo "${OUTPUT}"
+    fi
 }
 
 SHOW_MESSAGE=0
 MARKDOWN_FORMAT=0
-while getopts "m?f?h?" o; do
+REVERT_ORDER=0
     case "${o}" in
         m) SHOW_MESSAGE=1;;
         f) MARKDOWN_FORMAT=1;;
+        r) REVERT_ORDER=1;;
         h|*) usage;;
     esac
 done
