@@ -114,7 +114,7 @@ zstyle ':completion:*:directory-stack' list-colors '=(#b) #([0-9]#)*( *)==95=38;
 zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 
 # hostname expansion from known_hosts
-zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null|sort -u)"}%%[# ]*}//,/ })'
 
 # :completion:<func>:<completer>:<command>:<argument>:<tag>
 # Expansion options
@@ -521,7 +521,7 @@ fi
 # auto completion for ssh hosts
 
 function fzf-ssh () {
-  local hosts=$(awk -F '[, ]' '{print $1}' ~/.ssh/known_hosts)
+  local hosts=$(awk -F '[, ]' '{print $1}' ~/.ssh/known_hosts | sort -u)
   local selected_host=$(echo $hosts | fzf --query "$LBUFFER")
 
   if [ -n "$selected_host" ]; then
