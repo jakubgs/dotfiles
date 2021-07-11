@@ -10,12 +10,18 @@ Xcursor.theme: Vanilla-DMZ
 !*imLocale:             en_GB.UTF-8
 !*geometry:             120x35
 
-*font:              xft:Inconsolata:size=14:lang=pl:antialias=true:hinting=true
-*boldFont:          xft:Inconsolata:size=14:lang=pl:antialias=true:hinting=true:Bold
-ranger*font:        xft:Inconsolata:size=24:lang=pl:antialias=true:hinting=true
-ranger*boldFont:    xft:Inconsolata:size=24:lang=pl:antialias=true:hinting=true:Bold
-ncmpcpp*font:       xft:Inconsolata:size=24:lang=pl:antialias=true:hinting=true
-ncmpcpp*boldFont:   xft:Inconsolata:size=24:lang=pl:antialias=true:hinting=true:Bold
+#*font:              xft:Terminus:size=16:lang=pl:antialias=true:hinting=true
+#*boldFont:          xft:Terminus:size=16:lang=pl:antialias=true:hinting=true:Bold
+#ranger*font:        xft:Terminus:size=20:lang=pl:antialias=true:hinting=true
+#ranger*boldFont:    xft:Terminus:size=20:lang=pl:antialias=true:hinting=true:Bold
+#ncmpcpp*font:       xft:Terminus:size=20:lang=pl:antialias=true:hinting=true
+#ncmpcpp*boldFont:   xft:Terminus:size=20:lang=pl:antialias=true:hinting=true:Bold
+*font:              xft:Inconsolata Regular:family=mono:size=14:lang=pl:antialias=true:hinting=true
+*boldFont:          xft:Inconsolata Regular:family=mono:size=14:lang=pl:antialias=true:hinting=true:Bold
+ranger*font:        xft:Inconsolata Regular:family=mono:size=24:lang=pl:antialias=true:hinting=true
+ranger*boldFont:    xft:Inconsolata Regular:family=mono:size=24:lang=pl:antialias=true:hinting=true:Bold
+ncmpcpp*font:       xft:Inconsolata Regular:family=mono:size=24:lang=pl:antialias=true:hinting=true
+ncmpcpp*boldFont:   xft:Inconsolata Regular:family=mono:size=24:lang=pl:antialias=true:hinting=true:Bold
 
 ! Disable printing
 *print-pipe:           "cat > /dev/null"
@@ -39,14 +45,6 @@ ncmpcpp*boldFont:   xft:Inconsolata:size=24:lang=pl:antialias=true:hinting=true:
 *url-launcher:    brave
 *matcher.button:  1
 *colorUL:         #a6c9f8
-
-! on the fly font size manipulation
-.font-size.step:  4
-! mappings
-*keysym.C-Up:     perl:font-size:increase
-*keysym.C-Down:   perl:font-size:decrease
-*keysym.C-S-Up:     perl:font-size:incglobal
-*keysym.C-S-Down:   perl:font-size:decglobal
 
 ! disable default ctrl+shift bindings
 *iso14755: false
