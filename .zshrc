@@ -430,7 +430,7 @@ function i {
 compdef i=ip
 
 function b {
-    if [[ $1 == "unlock" ]]; then
+    if [[ $# == 0 || $1 == "unlock" ]]; then
         if [[ -f "${HOME}/.bwsession" ]]; then
             source "${HOME}/.bwsession"
         fi
@@ -439,11 +439,11 @@ function b {
             export BW_SESSION
             echo "export BW_SESSION=${BW_SESSION}" > "${HOME}/.bwsession"
         fi
+        bw sync
     else
         bw "$@"
     fi
 }
-compdef b=bw
 
 if type zerotier-cli > /dev/null; then
     function z {
