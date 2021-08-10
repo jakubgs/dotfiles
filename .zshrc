@@ -429,6 +429,22 @@ function i {
 }
 compdef i=ip
 
+function b {
+    if [[ $1 == "unlock" ]]; then
+        if [[ -f "${HOME}/.bwsession" ]]; then
+            source "${HOME}/.bwsession"
+        fi
+        if ! bw unlock --check; then
+            BW_SESSION=$(bw --response unlock | jq '.data.raw')
+            export BW_SESSION
+            echo "export BW_SESSION=${BW_SESSION}" > "${HOME}/.bwsession"
+        fi
+    else
+        bw "$@"
+    fi
+}
+compdef b=bw
+
 if type zerotier-cli > /dev/null; then
     function z {
         if [[ $# == 0 ]]; then
