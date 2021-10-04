@@ -256,7 +256,6 @@ alias copy='xsel -i --primary'
 alias ghh='git rev-parse HEAD | xsel -i --primary'
 alias grep='grep --color -i'
 alias ssh='TERM=xterm ssh'
-alias sshm='ssh melchior.magi.vpn'
 alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
@@ -535,9 +534,8 @@ if [[ $TERM != "linux" ]]; then
 fi
 
 # auto completion for ssh hosts
-
 function fzf-ssh () {
-  local hosts=$(awk -F '[, ]' '{print $1}' ~/.ssh/known_hosts | sort -u)
+  local hosts=$(awk -F '[, ]' '{if ($1 ~ /[a-z]/) {print $1}}' ~/.ssh/known_hosts | sort -u)
   local selected_host=$(echo $hosts | fzf --query "$LBUFFER")
 
   if [ -n "$selected_host" ]; then
