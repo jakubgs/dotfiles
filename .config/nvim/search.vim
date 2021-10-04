@@ -48,8 +48,8 @@ command! Panacea call PanaceaFunc()
 nnoremap <c-i>              :Panacea<CR>
 nnoremap <c-a>              :Work<CR>
 nnoremap <c-space>          :History<CR>
-nnoremap <c-b>              :History<CR>
-nnoremap <space><space>     :History<CR>
+nnoremap <c-b>              :Buffers<CR>
+nnoremap <leader><leader>b  :Buffers<CR>
 nnoremap <leader><leader>h  :History<CR>
 nnoremap <leader><leader>m  :Marks<CR>
 nnoremap <leader><leader>f  :Files<CR>
