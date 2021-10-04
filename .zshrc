@@ -433,6 +433,10 @@ function b {
         if [[ -f "${HOME}/.bwsession" ]]; then
             source "${HOME}/.bwsession"
         fi
+        if ! bw login --check; then
+            echo "Log in:"
+            bw login
+        fi
         if ! bw unlock --check; then
             BW_SESSION=$(bw --response unlock | jq '.data.raw')
             export BW_SESSION
