@@ -311,7 +311,7 @@ function do-reboot() {
 function gc-reboot() {
     NAME=${@:gs/./-}
     gcloud compute instances list --filter="${NAME}"
-    ID=$(gcloud compute instances describe "${NAME}" --quiet |  grep -oP "^id: '\K(\d+)")
+    ID=$(gcloud compute instances describe "${NAME}" --zone "us-central1-a" --quiet |  grep -oP "^id: '\K(\d+)")
     if [[ -n "${ID}" ]]; then
         echo
         read -q REPLY\?"Do you really want to reboot this host? (y/n) "
@@ -504,7 +504,7 @@ function alert {
 
 function select-work-dir() {
     SEL=$(ls ~/work | fzf)
-    [[ -n "${SEL}" ]] && cd "/home/sochan/work/${SEL}"
+    [[ -n "${SEL}" ]] && cd "/home/jakubgs/work/${SEL}"
     echo
     zle reset-prompt
 }
