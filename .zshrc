@@ -361,7 +361,7 @@ function g {
     if [[ $# > 0 ]]; then
         git "$@"
     else
-        git status
+        git status -sb
     fi
 }
 compdef g=git
