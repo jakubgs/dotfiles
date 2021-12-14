@@ -21,7 +21,7 @@ xnoremap < <gv
 xnoremap > >gv
 
 " search visually selected text
-vnoremap * y/<c-r>"<cr>
+vnoremap * y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " make last typed word uppercase
 inoremap <c-u> <esc>viwUea
