@@ -11,11 +11,11 @@ export XAUTHORITY=/home/${USER}/.Xauthority
 export DISPLAY=:0.0
 
 # allow the root user access to the X server
-#xhost local:sochan
+#xhost local:jakubgs
 
 while read LINE
 do
-   echo "$LINE" | /home/sochan/bin/anotify -s 2>&1 >> $LOG_FILE
+   echo "$LINE" | /home/jakubgs/bin/anotify -s 2>&1 >> $LOG_FILE
 
    # for debugging purposes
    echo "$LINE" >> $LOG_FILE

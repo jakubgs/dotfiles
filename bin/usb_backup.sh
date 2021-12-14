@@ -2,7 +2,7 @@
 
 set -e
 
-USERNAME=sochan
+USERNAME=jakubgs
 ASSETS=(
     "/home/$USERNAME/.password-store"
     "/home/$USERNAME/.gnupg"
