@@ -5,11 +5,11 @@
   m:0x40 + c:39
   Mod4 + s
 
-"physlock"
+"lock"
   m:0x50 + c:46
   Mod2+Mod4 + l
 
-"physlock"
+"lock"
   m:0x5 + c:46
   Control+Shift + l
 
