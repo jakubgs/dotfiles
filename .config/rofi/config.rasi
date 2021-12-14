@@ -1,0 +1,12 @@
+configuration {
+  auto-select:   true;
+  sidebar-mode:  false;
+  terminal:      "urxvtc";
+  width:         40;
+  click-to-exit: true;
+  font:          "Inconsolata 20";
+  border:        2;
+  combi-modi:    "window,drun,run,ssh";
+  modi:          "window,run,ssh,drun,keys,combi";
+}
+@theme "custom"
