@@ -10,6 +10,7 @@ call plug#begin('~/.config/nvim/bundle')
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-vinegar'
 Plug 'xolox/vim-misc'
+Plug 'junegunn/goyo.vim'
 " Text manipulation
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'

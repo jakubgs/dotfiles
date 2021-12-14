@@ -64,3 +64,7 @@ nnoremap <leader>T :vsp ~/work/jakubgs-notes/todo.md<CR>
 
 " Checkbox
 nnoremap <leader>t :ToggleCB<CR>
+
+" Goyo plugin
+nnoremap <F10> :Goyo<CR>
+let g:goyo_width = 120
