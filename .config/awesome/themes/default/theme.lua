@@ -14,26 +14,20 @@ theme.font          = "Inconsolata 14"
 --theme.font          = "Terminus (TTF) 12"
 --theme.font          = "terminus font 12"
 
-theme.bg_normal     = "#000000" --"#222222"
---theme.bg_focus      = "#3F3F3F" --"#535d6c"
-theme.bg_focus      = "#afd700" --"#535d6c"
+theme.bg_normal     = "#000000"
+theme.bg_focus      = "#36393f"
 theme.bg_urgent     = "#800000"
 theme.bg_minimize   = "#444444"
 
 theme.fg_normal     = "#aaaaaa"
---theme.fg_focus      = "#ffffff"
-theme.fg_focus      = "#000000"
+theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
 theme.border_width  = "1"
---theme.border_normal = "#000000"
 theme.border_normal = "#525252"
---theme.border_focus  = "#525252" --"#535d6c"
-theme.border_focus  = "#afd700" --"#535d6c"
---theme.border_focus  = "#3F3F3F" --"#535d6c"
---theme.border_focus  = "#000000" --"#535d6c"
-theme.border_marked = "#000000" --"#91231c"
+theme.border_focus  = "#4d9cf6"
+theme.border_marked = "#000000"
 
 -- There are other variable sets
 -- overriding the default one when
