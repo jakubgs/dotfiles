@@ -1,5 +1,5 @@
+nnoremap <leader>gs :Git status<CR>
 nnoremap <leader>gr :Gread<CR>
-nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>ga :Gwrite<CR>
 nnoremap <leader>gc :Git commit -s -v -q -n<CR>
@@ -12,7 +12,7 @@ nnoremap <leader>gu :Git reset "%:p"<CR><CR>
 nnoremap <leader>gl :Gitv --all<CR>
 nnoremap <leader>gp :Ggrep<Space>
 nnoremap <leader>gm :Gmove<Space>
-nnoremap <leader>gB :Gblame<CR>
+nnoremap <leader>gB :Git blame<CR>
 nnoremap <leader>gw :GBrowse<CR>
 nnoremap <leader>gW :GBrowse!<CR>
 vnoremap <leader>gw :GBrowse<CR>
