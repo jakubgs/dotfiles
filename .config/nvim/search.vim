@@ -56,4 +56,4 @@ nnoremap <leader><leader>f  :Files<CR>
 nnoremap <leader><leader>g  :GFiles<CR>
 nnoremap <leader><leader>c  :Commits<CR>
 nnoremap <leader><leader>l  :Lines<CR>
-nnoremap <leader><leader>a  :Ag<leader>
+nnoremap <leader><leader>a  :Ag<space><c-r>=expand("<cword>")<CR><CR>
