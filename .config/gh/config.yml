@@ -1,0 +1,10 @@
+git_protocol: ssh
+editor: nvim
+prompt: enabled
+pager:
+browser: brave
+aliases:
+  g: gist create
+  i: issue list
+  p: pr list
+  co: pr checkout
