@@ -99,6 +99,7 @@ setopt EXTENDEDGLOB               # Regular expressions in files
 setopt COMPLETE_IN_WORD           # allow tab completion in the middle of a word
 setopt AUTO_RESUME                # Resume jobs after typing it's name
 setopt CHECK_JOBS                 # Dont quit console if processes are running
+setopt INTERACTIVE_COMMENTS       # Allow for comments in interactive command line
 setopt completealiases
 
 
