@@ -3,7 +3,7 @@
 [user]
     email = jakub@status.im
     name = Jakub Sokołowski
-    signingkey = 4EF064D0E6D63020
+    signingkey = 580538227C99E6D3
 [core]
     editor = nvim
     quotePath = false
@@ -29,6 +29,7 @@
     a   = add 
     an  = annex
     ax  = annex
+    r   = rebase
     rh  = reset --hard
     rs  = reset
     ls  = ls-files
