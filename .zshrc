@@ -76,10 +76,12 @@ export TERMINAL="urxvtc"
 export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man nomod nolist' -\""
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 export SOPS_GPG_KEYSERVER="https://keys.openpgp.org"
-# Hacky way to provide python packages to Ansible for local tasks.
-export PYTHONPATH=$(echo /etc/profiles/per-user/$USER/lib/python*/site-packages | tr ' ' ':')
-
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/games/bin:~/go/bin:~/bin
+
+# Hacky way to provide python packages to Ansible for local tasks.
+if [[ -d /etc/profiles/per-user/$USER/lib/python* ]]; then
+    export PYTHONPATH=$(echo /etc/profiles/per-user/$USER/lib/python*/site-packages | tr ' ' ':')
+fi
 
 # }}}
 # General settings {{{
