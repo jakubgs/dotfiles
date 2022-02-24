@@ -3,7 +3,7 @@ configuration {
   sidebar-mode:  false;
   terminal:      "urxvtc";
   click-to-exit: true;
-  hover-select:  true;
+  hover-select:  false;
   font:          "Inconsolata 20";
   combi-modi:    "window,drun,run,ssh";
   modi:          "window,run,ssh,drun,keys,combi";
