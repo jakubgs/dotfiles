@@ -32,6 +32,9 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
+" easier opening of links
+nmap <unique> K <Plug>NetrwBrowseX
+
 " to match the behaviour of D
 nnoremap Y y$
 
