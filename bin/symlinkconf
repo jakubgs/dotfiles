@@ -1,11 +1,31 @@
 #!/usr/bin/env bash
+set -eo pipefail
 
-set -e
-
-# force overriding files
-if [[ $1 == '-f' ]]; then
-    FORCE=1
+VALID_ARGS=$(getopt -o fdh --long force,dry-run,help: -- "$@")
+if [[ $? -ne 0 ]]; then
+    exit 1;
 fi
+
+eval set -- "$VALID_ARGS"
+while [ : ]; do
+  case "$1" in
+    -f | --force)
+        FORCE=1
+        shift
+        ;;
+    -d | --dry-run)
+        DRY_RUN=1
+        shift
+        ;;
+    -h | --help)
+        echo 'Usage: symlinkconf [-f|-d]' >&2
+        exit 
+        ;;
+    --) shift; 
+        break 
+        ;;
+  esac
+done
 
 # Find location of repo
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
@@ -45,7 +65,9 @@ for CONFIG_FILE in ${CONFIG_FILES}; do
     else # symlinking withou forcing
         NO_CHANGES=0
         echo "LINKING: ${SOURCE} -> ${DEST}" >&2
-        ln -s "${SOURCE}" "${DEST}"
+        if [[ "${DRY_RUN}" ]]; then
+            ln -s "${SOURCE}" "${DEST}"
+        fi
     fi
 done
 
