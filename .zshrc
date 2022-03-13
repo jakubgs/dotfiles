@@ -275,7 +275,6 @@ alias qapt='sudo apt --quiet'
 alias n='sudo ss -lpsntu'
 alias c='curl -sSLf'
 alias cm='clipmenu'
-alias a='ansible'
 alias ap='ansible-playbook'
 compdef qapt=apt
 
@@ -462,6 +461,15 @@ if type zerotier-cli > /dev/null; then
         fi
     }
 fi
+
+function a {
+    if [[ $# == 0 ]]; then
+        ansible localhost -m debug -a 'var=groups'
+    else
+        ansible "$@"
+    fi
+}
+compdef a=ansible
 
 # repeat last command with sudo
 function fuck {
