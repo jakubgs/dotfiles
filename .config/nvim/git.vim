@@ -1,4 +1,5 @@
-nnoremap <leader>gs :Git status<CR>
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gg :Git<CR>
 nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>ga :Gwrite<CR>
