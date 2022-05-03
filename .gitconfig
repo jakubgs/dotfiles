@@ -1,48 +1,50 @@
 [init]
     defaultBranch = master
 [user]
-    email = jakub@status.im
-    name = Jakub Sokołowski
-    signingkey = 580538227C99E6D3
+    email       = jakub@status.im
+    name        = Jakub Sokołowski
+    signingkey  = 580538227C99E6D3
 [core]
-    editor = nvim
-    quotePath = false
+    editor      = nvim
+    quotePath   = false
     commitGraph = true
+    autocrlf    = input
 [diff]
     tool = vimdiff
 [merge]
     tool = vimdiff
+    conflictstyle = diff3
 [alias]
-    hst = log --graph
-    co  = checkout
+    a   = add
     b   = branch
+    cf  = cat-file
+    cat = cat-file
+    co  = checkout
+    cp  = cherry-pick
+    df  = diff
     f   = fetch
-    ps  = push
-    pl  = pull
-    x   = sync
-    sm  = submodule
-    s   = stash
+    l   = log --oneline --decorate
+    ls  = ls-files
     c   = commit --verbose --no-verify --gpg-sign --signoff
+    fix = commit --verbose --no-verify --gpg-sign --signoff --fixup
     m   = commit --verbose --no-verify --gpg-sign --signoff --amend
     mm  = commit --verbose --no-verify --gpg-sign --signoff --amend --no-edit
-    fix = commit --verbose --no-verify --gpg-sign --signoff --fixup
-    a   = add 
-    an  = annex
-    ax  = annex
+    pl  = pull
+    ps  = push
     r   = rebase
-    rh  = reset --hard
+    rl  = reflog
     rs  = reset
-    ls  = ls-files
-    cp  = cherry-pick
-    u   = url
-    up  = branch --set-upstream-to
-    df  = diff
-    dt  = difftool
-    l   = log --decorate
-    gr  = log --graph --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
+    rsh = reset --hard
+    rst = reset --hard HEAD
+    s   = stash
+    st  = status
     sl  = log --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %C(bold yellow)%<(20)%an %C(bold green)>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
     sla = log --pretty=format:'* %h %s %d' --abbrev-commit
-    rst = rese --hard HEAD
+    slg = log --graph --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
+    sm  = submodule
+    u   = url
+    up  = branch --set-upstream-to
+    x   = sync
 [branch "master"]
     remote = origin
     merge = refs/heads/master
@@ -68,3 +70,5 @@
     advertisePushOptions = true
 [gc]
     writeCommitGraph = true
+[advice]
+    detachedHead = false
