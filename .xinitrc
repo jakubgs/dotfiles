@@ -17,11 +17,5 @@ xset b off
 # Keyboard layout
 setxkbmap -layout pl
 
-# gnu gpg agent
-export $(gpg-agent --daemon)
-# start the ssh-agent
-#eval $(ssh-agent)
-
 # Start awesome
-#exec ck-launch-session dbus-launch --sh-syntax --exit-with-session awesome >> ~/.awesome_stdout 2>> ~/.awesome_stderr
 exec awesome >> ~/.awesome_stdout 2>> ~/.awesome_stderr
