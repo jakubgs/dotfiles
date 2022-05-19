@@ -17,6 +17,7 @@
 [alias]
     a   = add
     b   = branch
+    bl  = for-each-ref --sort=committerdate refs/heads/ --format='%(color: red)%(objectname:short) %(color: cyan)%(committerdate:iso) %(align:width=25)%(color:bold yellow)%(authorname)%(end) %(color:bold green)>%(color:reset) %(refname:short)'
     cf  = cat-file
     cat = cat-file
     co  = checkout
