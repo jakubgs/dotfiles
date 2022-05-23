@@ -7,6 +7,8 @@ let g:sneak#prompt = 'STREAK>>>'
 
 nmap <space>j <Plug>Sneak_s
 nmap <space>k <Plug>Sneak_S
+nmap s <Plug>Sneak_s
+nmap S <Plug>Sneak_S
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
@@ -14,7 +16,7 @@ map T <Plug>Sneak_T
 
 " FZF
 let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_preview_window = []
+let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let $FZF_DEFAULT_OPTS = '--reverse --bind ctrl-k:up,ctrl-j:down'
 
@@ -44,9 +46,12 @@ endfunction
 
 command! Work    call s:WorkSearch()
 command! Panacea call PanaceaFunc()
+command! -bang -nargs=? -complete=dir Ag
+  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right'), <bang>0)
 
 nnoremap <c-i>              :Panacea<CR>
 nnoremap <c-a>              :Work<CR>
+nnoremap <c-s>              :Files ~/nixos<CR>
 nnoremap <c-space>          :History<CR>
 nnoremap <c-b>              :Buffers<CR>
 nnoremap <leader><leader>b  :Buffers<CR>
@@ -56,4 +61,4 @@ nnoremap <leader><leader>f  :Files<CR>
 nnoremap <leader><leader>g  :GFiles<CR>
 nnoremap <leader><leader>c  :Commits<CR>
 nnoremap <leader><leader>l  :Lines<CR>
-nnoremap <leader><leader>a  :Ag<space><c-r>=expand("<cword>")<CR><CR>
+nnoremap <leader><leader>a  :Ag!<space><c-r>=expand("<cword>")<CR><CR>
