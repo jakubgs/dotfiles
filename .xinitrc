@@ -18,4 +18,4 @@ xset b off
 setxkbmap -layout pl
 
 # Start awesome
-exec awesome >> ~/.awesome_stdout 2>> ~/.awesome_stderr
+exec awesome > ~/.awesome_stdout 2> ~/.awesome_stderr

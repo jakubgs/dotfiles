@@ -1,1 +1,1 @@
-/home/sochan/.xinitrc
+.xinitrc
