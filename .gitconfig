@@ -31,7 +31,9 @@
     m   = commit --verbose --no-verify --gpg-sign --signoff --amend
     mm  = commit --verbose --no-verify --gpg-sign --signoff --amend --no-edit
     pl  = pull
+    plf = pull --force --rebase
     ps  = push
+    psf = push --force
     r   = rebase
     rl  = reflog
     rs  = reset
@@ -62,7 +64,7 @@
 [difftool]
     prompt = false
 [web]
-    browser = firefox
+    browser = brave
 [commit]
     gpgsign = true
 [gpg]
