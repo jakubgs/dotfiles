@@ -1,16 +1,20 @@
+" Better Gllog format
+let g:fugitive_summary_format = "%<(16,trunc)%an || %s"
+
 nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gg :Git<CR>
 nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>ga :Gwrite<CR>
 nnoremap <leader>gc :Git commit -s -v -q -n<CR>
-nnoremap <leader>gt :Git commit -s -v -q -n -- %:p<CR>
+nnoremap <leader>gt :Git commit -s -v -q -n -- %:P<CR>
 nnoremap <leader>gC :Git commit -s -v -q -n --amend<CR>
-nnoremap <leader>gT :Git commit -s -v -q -n --amend -- %:p<CR>
+nnoremap <leader>gT :Git commit -s -v -q -n --amend -- %:P<CR>
 nnoremap <leader>gd :Gvdiff<CR>
 nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gu :Git reset "%:p"<CR><CR>
-nnoremap <leader>gl :Gitv --all<CR>
+nnoremap <leader>gl :GV<CR>
+nnoremap <leader>gL :GV?<CR>
 nnoremap <leader>gp :Ggrep<Space>
 nnoremap <leader>gm :Gmove<Space>
 nnoremap <leader>gB :Git blame<CR>
