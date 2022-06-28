@@ -6,44 +6,47 @@ import backoff
 import itertools
 from time import sleep
 from boto3 import client
-from boto.route53.domains.exceptions import UnsupportedTLD
 from botocore.exceptions import ClientError
 from requests.exceptions import ConnectTimeout
 
-LENGTH=3
-RETRIES=8
-OUTPUT_FILE='/tmp/domains.json'
+class PendingRecord(Exception):
+    pass
 
-@backoff.on_exception(backoff.expo, (ClientError, ConnectTimeout), max_tries=RETRIES)
-def check_fqdn(fqdn):
-    c = client('route53domains')
+@backoff.on_exception(backoff.expo, (ClientError, ConnectTimeout, PendingRecord), max_tries=3)
+def check_fqdn(c, fqdn):
     try:
-        return c.check_domain_availability(DomainName=fqdn)
-    except UnsupportedTLD as ex:
+        rval = c.check_domain_availability(DomainName=fqdn)
+        if rval['Availability'] == 'PENDING':
+            raise PendingRecord
+        return rval
+    except c.exceptions.UnsupportedTLD as ex:
         return None
 
-#combinations = list(itertools.product(list(string.ascii_lowercase), repeat=LENGTH))
-#names = [''.join(w) for w in combinations]
+combinations = list(itertools.product(list(string.ascii_lowercase), repeat=2))
+names = [''.join(w) for w in combinations]
 #names = [c*LENGTH for c in list(string.ascii_lowercase)]
-names = ['falcon', 'magi', 'nerv', 'sokolowski', 'gsokolowski', 'jgs']
+#names = ['falcon', 'magi', 'nerv', 'sokolowski', 'gsokolowski', 'jgs']
 domains = [
     #'name', 'info', 'blue', 'pink',
     'pro', 'org', 'net', 'biz', 'red',
     'eu', 'it', 'nl', 'de', 'ca', 'cc' 'be', 'ch',
 ]
 
+OUTPUT_FILE='/tmp/domains.json'
 if os.path.isfile(OUTPUT_FILE):
     with open(OUTPUT_FILE, 'r') as f:
         results = json.load(f)
 else:
     results = {}
 
+c = client('route53domains')
+
 try:
-    for domain in domains:
-        for name in names:
+    for name in names:
+        for domain in domains:
             fqdn = '{}.{}'.format(name, domain)
             if fqdn not in results:
-                rval = check_fqdn(fqdn)
+                rval = check_fqdn(c, fqdn)
                 status = rval['Availability'] if rval is not None else 'ERROR'
                 results[fqdn] = status
             print(' - {:>18} > {}'.format(fqdn, results[fqdn]))
