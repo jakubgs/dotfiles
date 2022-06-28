@@ -49,7 +49,7 @@ command! Panacea call PanaceaFunc()
 command! -bang -nargs=? -complete=dir Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right'), <bang>0)
 
-nnoremap <c-i>              :Panacea<CR>
+nnoremap <tab>              :Panacea<CR>
 nnoremap <c-a>              :Work<CR>
 nnoremap <c-s>              :Files ~/nixos<CR>
 nnoremap <c-space>          :History<CR>
