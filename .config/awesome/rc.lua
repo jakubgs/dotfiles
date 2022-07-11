@@ -449,6 +449,7 @@ awful.rules.rules = {
             "Arandr",
             "Screenkey",
             "pinentry",
+            "gcr-prompter",
             "Thunar",
         },
         role = {
