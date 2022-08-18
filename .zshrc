@@ -275,7 +275,7 @@ alias qapt='sudo apt --quiet'
 alias n='sudo ss -lpsntu'
 alias c='curl -sSLf'
 alias cm='clipmenu'
-alias ap='ansible-playbook'
+alias ap='ansible-playbook -D'
 compdef qapt=apt
 
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
