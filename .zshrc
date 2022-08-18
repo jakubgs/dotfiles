@@ -516,8 +516,10 @@ function alert {
 }
 
 function select-work-dir() {
-    SEL=$(ls ~/work | fzf)
-    [[ -n "${SEL}" ]] && cd "/home/jakubgs/work/${SEL}"
+    echo "${HOME}"
+    WORK_DIR="${HOME}/work"
+    SELECTED=$(ls "${WORK_DIR}" | fzf)
+    [[ -n "${SELECTED}" ]] && cd "${WORK_DIR}/${SELECTED}"
     echo
     zle reset-prompt
 }
