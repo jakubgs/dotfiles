@@ -554,9 +554,9 @@ fi
 
 # auto completion for ssh hosts
 function fzf-ssh () {
-  local hosts=$(awk -F '[, ]' '{if ($1 ~ /[a-z]/) {print $1}}' ~/.ssh/known_hosts | sort -u)
+  local hosts=$(awk -F '[, ]' '{if ($1 ~ /[a-z]/) {print $1}}' ~/.ssh/known_hosts)
   local domains=$(grep CanonicalDomains ~/.ssh/config | cut -f 2- -d ' ' | tr ' ' '|')
-  local selected_host=$(echo $hosts | sed -E "s/\.(${domains})//" | fzf --query "$LBUFFER")
+  local selected_host=$(echo $hosts | sed -E "s/\.(${domains})//" | sort -u | fzf --query "$LBUFFER")
 
   if [ -n "${selected_host}" ]; then
     BUFFER="ssh ${selected_host}"
