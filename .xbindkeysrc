@@ -1,9 +1,8 @@
-# Power Management {{{
-# Hibernation
+# Hibernation & Locking {{{
 
 "sudo systemctl start suspend.target"
   m:0x40 + c:39
-  Mod4 + s
+  Mod4+Shift + s
 
 "lock"
   m:0x50 + c:46
@@ -12,10 +11,6 @@
 "lock"
   m:0x5 + c:46
   Control+Shift + l
-
-"sudo systemctl start hibernate.target"
-  m:0x40 + c:43
-  Mod4 + h
 
 # }}}
 # Other {{{
