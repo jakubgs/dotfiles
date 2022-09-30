@@ -59,7 +59,6 @@
     default = current
 [pull]
     default = current
-    rebase = true
     ff = only
 [difftool]
     prompt = false
