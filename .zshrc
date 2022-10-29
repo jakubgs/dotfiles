@@ -80,9 +80,9 @@ export ANSIBLE_REMOTE_USER="admin"
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/games/bin:~/go/bin:~/bin
 
 # Hacky way to provide python packages to Ansible for local tasks.
-for SP in /etc/profiles/per-user/$USER/lib/python*/site-packages; do
-    export PYTHONPATH="$PYTHONPATH:${SP}"
-done
+if ls /etc/profiles/per-user/$USER/lib/python* 1> /dev/null 2>&1; then
+    export PYTHONPATH=$(echo /etc/profiles/per-user/$USER/lib/python*/site-packages | tr ' ' ':')
+fi
 
 # }}}
 # General settings {{{
