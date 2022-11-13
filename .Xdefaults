@@ -37,7 +37,7 @@ ncmpcpp*boldFont:   xft:Inconsolata Regular:family=mono:size=24:lang=pl:antialia
 !*shading:35 
 
 ! for colors
-*depth: 32
+*depth: 24
 
 ! Clickable links
 *perl-ext-common: default,font-size,matcher,-option-popup,-selection-popup,-realine
