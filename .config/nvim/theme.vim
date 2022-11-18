@@ -7,3 +7,7 @@ colorscheme jellybeans
 " Make visual selection match lightline
 hi! link Visual LightlineLeft_visual_0
 hi! link Cursor LightlineLeft_normal_0
+
+" Highlight trailing whitespace
+hi! ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
