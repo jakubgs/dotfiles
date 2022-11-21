@@ -11,6 +11,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-vinegar'
 Plug 'xolox/vim-misc'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/vim-peekaboo'
 Plug 'bogado/file-line'
 " Text manipulation
 Plug 'tpope/vim-surround'
