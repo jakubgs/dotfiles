@@ -27,12 +27,12 @@ names = [''.join(w) for w in combinations]
 #names = [c*LENGTH for c in list(string.ascii_lowercase)]
 #names = ['falcon', 'magi', 'nerv', 'sokolowski', 'gsokolowski', 'jgs']
 domains = [
+    'eu', 'it', 'in', 'nl', 'de', 'ca', 'cc', 'cz', 'be', 'es', 'fr', 'im', 'se', 'uk', #'ch',
+    'org', 'net', 'biz', 'red', 'rip', 'lol', #'pro',
     #'name', 'info', 'blue', 'pink',
-    'pro', 'org', 'net', 'biz', 'red',
-    'eu', 'it', 'nl', 'de', 'ca', 'cc' 'be', 'ch',
 ]
 
-OUTPUT_FILE='/tmp/domains.json'
+OUTPUT_FILE = os.path.expanduser('~') + '/domains.json'
 if os.path.isfile(OUTPUT_FILE):
     with open(OUTPUT_FILE, 'r') as f:
         results = json.load(f)
@@ -51,5 +51,5 @@ try:
                 results[fqdn] = status
             print(' - {:>18} > {}'.format(fqdn, results[fqdn]))
 finally:
-    with open('/tmp/domains.json', 'w') as f:
+    with open(OUTPUT_FILE, 'w') as f:
         json.dump(results, f, indent=4)
