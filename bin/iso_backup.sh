@@ -29,7 +29,7 @@ ISO_SIZE="2530M"
 ISO_PATH="${1}"
 ISO_LABEL="${2}"
 MOUNT_POINT="${3}"
-LOOP_DEVICE="/dev/loop${b}"
+LOOP_DEVICE="/dev/loop19"
 MAPPER_DEV_NAME="backup"
 MAPPER_DEV_PATH="/dev/mapper/${MAPPER_DEV_NAME}"
 
