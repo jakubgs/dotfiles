@@ -34,7 +34,7 @@ ncmpcpp*boldFont:   xft:Inconsolata Regular:family=mono:size=24:lang=pl:antialia
 
 ! Fake Transparency
 !*transparent: true
-!*shading:35 
+!*shading:35
 
 ! for colors
 *depth: 24
