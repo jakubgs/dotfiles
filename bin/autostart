@@ -20,12 +20,12 @@ function run {
     shift
     # get the arguments
     args=$@
-    
+
     printf " - %-20s" "$command_name"
     if $restart; then
         killall $command 2> /dev/null
     fi
-    if ! pgrep -f -d ", " $command_name; then
+    if ! pgrep -d ", " $command_name; then
         echo "STARTING"
         nohup $command $args >> ~/.awesome_apps  2>&1 &
     fi
