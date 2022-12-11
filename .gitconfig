@@ -3,7 +3,7 @@
 [user]
     email       = jakub@status.im
     name        = Jakub Sokołowski
-    signingkey  = 580538227C99E6D3
+    signingkey  = FE65CD384D5BF7B4
 [core]
     editor      = nvim
     quotePath   = false
