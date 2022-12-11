@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+appimage-run ~/Downloads/Status/StatusIm-Desktop-221209-100130-f62aca.AppImage
