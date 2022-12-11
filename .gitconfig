@@ -35,6 +35,7 @@
     ps  = push
     psf = push --force
     r   = rebase
+    rc  = git rebase --continue
     rl  = reflog
     rs  = reset
     rsh = reset --hard
