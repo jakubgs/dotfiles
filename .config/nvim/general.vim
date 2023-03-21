@@ -46,7 +46,7 @@ if has("multi_byte")
 endif
 
 " NetRW file browser style
-let g:netrw_liststyle = 1
+let g:netrw_liststyle = 4
 
 " Return to last edit position when opening files (You want this!)
 augroup saveposition
