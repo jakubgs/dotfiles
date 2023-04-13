@@ -17,18 +17,23 @@ EOF
 }
 
 function show_devices() {
-    echo "Here are some options:"
-    lsblk -S
+    echo -e "Here are some options:\n"
+    lsblk -S | grep -e VENDOR -e usb
 }
 
 function error() {
     echo "ERROR: $1" >&2
-    exit 1
+}
+
+function bytes_to_mb() {
+    [[ "${1}" -lt 0 ]] && echo -n '-'
+    numfmt --to iec --format "%.2f" "${1#-}"
 }
 
 function cleanup_umount() {
-    set +x
-    du -hsc "/mnt/${LABEL}/*"
+    echo
+    du -hsc "/mnt/${LABEL}/"*
+    echo
     df -h "${DEVICE}"
     echo
     echo "Removing device..."
@@ -43,10 +48,10 @@ function remove_dot() {
 function check_size() {
     ASSET=$1
     TARGET=$2
-    SIZE_NOW=$(du -sb "${ASSET}" | cut -f1)
+    SIZE_NOW=$(du --apparent-size -sb "${ASSET}" | cut -f1)
     SIZE_OLD=0
     if [[ -d "${TARGET}" ]]; then
-        SIZE_OLD=$(du -sb "${TARGET}" | cut -f1 2>/dev/null)
+        SIZE_OLD=$(du --apparent-size -sb "${TARGET}" | cut -f1)
     fi
     REMAINING_SIZE=$(($SIZE_NOW - $SIZE_OLD))
     echo "${REMAINING_SIZE}"
@@ -65,15 +70,13 @@ function format_device() {
 }
 
 function mount_device() {
-    echo "Mounting device: ${DEVICE} -> /mnt/${LABEL}"
+    echo "Mounting device: ${DEVICE} -> /dev/mapper/${LABEL} -> /mnt/${LABEL}"
     umount "/mnt/${LABEL}" 2>/dev/null | echo
     # decrypt
     cryptsetup luksOpen -d "${PASS_FILE}" "${DEVICE}" "${LABEL}"
     DEVICE="/dev/mapper/${LABEL}"
     mkdir -p "/mnt/${LABEL}"
     mount "${DEVICE}" "/mnt/${LABEL}"
-    # unmount on exit
-    trap cleanup_umount EXIT ERR INT QUIT
 }
 
 function copy_assets() {
@@ -81,13 +84,12 @@ function copy_assets() {
         NAME=$(basename ${ASSET})
         TARGET="/mnt/${LABEL}/$(remove_dot ${NAME})"
         FREE_B=$(df -P /mnt/${LABEL} | awk '/dev/{print ($4 * 1024)}')
-        SIZE_B=$(check_size "$ASSET" "$TARGET")
-        LEFT_B=$((${SIZE_B} / 1024))
-        if [[ ${SIZE_B} -gt 0 ]] && [[ ${FREE_B} -lt ${SIZE_B} ]]; then
-            echo "* Skipping: ${ASSET} - Not enough space. (${LEFT_B} KBytes)"
+        LEFT_B=$(check_size "$ASSET" "$TARGET")
+        if [[ ${LEFT_B} -gt 0 ]] && [[ ${FREE_B} -lt ${LEFT_B} ]]; then
+            echo "* Skipping: ${ASSET} - Not enough space. ($(bytes_to_mb "${LEFT_B}"))"
             continue
         fi
-        echo "* Copying: ${ASSET} -> ${TARGET} (${LEFT_B} KBytes)"
+        echo "* Copying: ${ASSET} -> ${TARGET} ($(bytes_to_mb "${LEFT_B}"))"
         rsync --delete -aqr "${ASSET}/." "${TARGET}"
     done
     echo "Syncing..."
@@ -130,11 +132,13 @@ ASSETS=(
     "/mnt/photos"
 )
 
+[[ $UID -ne 0 ]]          && error "This script requires root piviliges!" && exit 1
+[[ -z "${DEVICE}" ]]      && error "No device specified with -d flag!" && show_devices && exit 1
+[[ -z "${LABEL}" ]]       && error "Label cannot be an empty string!" && exit 1
+[[ ! -f "${PASS_FILE}" ]] && error "No password file found!" exit 1
 
-[[ $UID -ne 0 ]]          && error "This script requires root piviliges!"
-[[ -z "${DEVICE}" ]]      && error "No device specified with -d flag!"
-[[ -z "${LABEL}" ]]       && error "Label cannot be an empty string!"
-[[ ! -f "${PASS_FILE}" ]] && error "No password file found!"
+# unmount on exit
+trap cleanup_umount EXIT ERR INT QUIT
 
 [[ "${FORMAT}" -eq 1 ]] && format_device
 [[ "${MOUNT}" -eq 1 ]]  && mount_device
