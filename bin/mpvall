@@ -29,6 +29,11 @@ find "$DIRS" -type f \
 -iname "*.webm" -o \
 -iname "*.wmv" -o \
 -iname "*.mp4" -o \
+-iname "*.mp3" -o \
+-iname "*.ogg" -o \
+-iname "*.flac" -o \
+-iname "*.wav" -o \
+-iname "*.wave" -o \
 -iname "*.m4v" -o \
 -iname "*.mkv" -o \
 -iname "*.avi" -o \
