@@ -77,7 +77,7 @@ export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man nomod nolist' -\""
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 export SOPS_GPG_KEYSERVER="https://keys.openpgp.org"
 export ANSIBLE_REMOTE_USER="admin"
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/games/bin:~/go/bin:~/bin
+export PATH="${PATH}:${HOME}/go/bin:${HOME}/bin"
 
 # Hacky way to provide python packages to Ansible for local tasks.
 if ls /etc/profiles/per-user/$USER/lib/python* 1> /dev/null 2>&1; then
