@@ -83,7 +83,7 @@ export PATH="${PATH}:${HOME}/go/bin:${HOME}/bin"
 typeset -T PYTHONPATH pythonpath
 # Hacky way to provide python packages to Ansible for local tasks.
 if [[ -d /etc/profiles/per-user ]]; then
-    for SITE_PACKAGES in $(find -L /etc/profiles/per-user/$USER/lib -name site-packages); do
+    for SITE_PACKAGES in /etc/profiles/per-user/$USER/lib/python3.*/site-packages; do
         export PYTHONPATH="${PYTHONPATH}:${SITE_PACKAGES}"
     done
 fi
