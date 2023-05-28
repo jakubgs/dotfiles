@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 import os
 import re
 import sys
@@ -10,10 +10,10 @@ import argparse
 try:
     import sh
 except ImportError as ex:
-    print 'Missing required Python 2.7 module: sh'
-    print 'URL: https://pypi.python.org/pypi/sh'
-    print 'To install run:'
-    print 'sudo pip2 install sh'
+    print('Missing required Python 3 module: sh')
+    print('URL: https://pypi.python.org/pypi/sh')
+    print('To install run:')
+    print('sudo pip3 install sh')
     sys.exit(1)
 
 HELP_MESSAGE='''
@@ -30,7 +30,7 @@ ARCH_CMDS = {
 }
 
 def unpack(filename, overwrite=False):
-    for regex, cmd in ARCH_CMDS.iteritems():
+    for regex, cmd in ARCH_CMDS.items():
         basename, ext = os.path.splitext(filename)
 
         matches = re.findall(regex, filename)
