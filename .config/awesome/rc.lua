@@ -489,7 +489,7 @@ awful.rules.rules = {
         properties = { screen = 1, tag = ":fs:" } },
     { rule_any = { name = { "Transmission" } },
         properties = { screen = 1, tag = ":net:" } },
-    { rule_any = { class = { "Steam", "csgo_linux64" } },
+    { rule_any = { class = { "Steam", "csgo_linux64", "hearthstone.exe" } },
         properties = { screen = 1, tag = ":game:" } },
 }
 -- }}}
