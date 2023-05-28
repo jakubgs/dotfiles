@@ -79,10 +79,17 @@ export SOPS_GPG_KEYSERVER="https://keys.openpgp.org"
 export ANSIBLE_REMOTE_USER="admin"
 export PATH="${PATH}:${HOME}/go/bin:${HOME}/bin"
 
+# Magically link PYTHONPATH to the ZSH array pythonpath
+typeset -T PYTHONPATH pythonpath
 # Hacky way to provide python packages to Ansible for local tasks.
-if ls /etc/profiles/per-user/$USER/lib/python* 1> /dev/null 2>&1; then
-    export PYTHONPATH=$(echo /etc/profiles/per-user/$USER/lib/python*/site-packages | tr ' ' ':')
+if [[ -d /etc/profiles/per-user ]]; then
+    for SITE_PACKAGES in $(find -L /etc/profiles/per-user/$USER/lib -name site-packages); do
+        export PYTHONPATH="${PYTHONPATH}:${SITE_PACKAGES}"
+    done
 fi
+# Remove duplicates
+typeset -U pythonpath
+export PYTHONPATH
 
 # }}}
 # General settings {{{
