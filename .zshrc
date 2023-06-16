@@ -26,13 +26,13 @@ zmodload zsh/parameter  # load to use $history[$HISTCMD] variable
 # }}}
 # Display settings {{{
 case $HOST in           # change prompt depending on host
-    caspair|lilim)
+    caspair*|lilim*)
         COLOR="green" ;;
-    melchior)
+    melchior*)
         COLOR="cyan" ;;
-    leliel)
+    leliel*)
         COLOR="magenta" ;;
-    arael)
+    arael*)
         COLOR="red" ;;
     *)
         COLOR="yellow" ;;
