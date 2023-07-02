@@ -283,7 +283,6 @@ awful.key({ modkey,           }, "j",         function () awful.client.focus.glo
 awful.key({ modkey, "Shift"   }, "k",         function () awful.client.swap.byidx( -1) end),
 awful.key({ modkey, "Shift"   }, "j",         function () awful.client.swap.byidx(  1) end),
 -- Run or raise
-awful.key({ modkey,           }, "z",         function () run_or_raise("zeal", { class = "Zeal" }) end),
 awful.key({ modkey,           }, "n",         function () run_or_raise(terminal .. " -name ranger -title ranger -e ranger ", { name = "ranger" }) end),
 awful.key({ modkey,           }, "e",         function () run_or_raise(geditor, { class = "URxvt", name = "nvim" }) end),
 awful.key({ modkey,           }, "w",         function () run_or_raise(browser, { class = "Brave-browser"}) end),
@@ -346,8 +345,14 @@ clientkeys = gears.table.join(
         end ,
         {description = "(un)maximize", group = "client"}),
     awful.key({ modkey,           }, "s",
-        awful.client.floating.toggle,
+        function (c) c.floating = not c.floating end,
         {description = "toggle floating", group = "client"}),
+    awful.key({ modkey,           }, "d",
+        function (c) c.ontop = not c.ontop end,
+        {description = "toggle ontop", group = "client"}),
+    awful.key({ modkey,           }, "x",
+        function (c) c.sticky = not c.sticky end,
+        {description = "toggle sticky", group = "client"}),
     awful.key({ modkey, "Shift"   }, "h",
         function (c)
             c:move_to_screen(c.screen.index+1)
@@ -439,7 +444,7 @@ awful.rules.rules = {
     -- Floating clients.
     { rule_any = {
         instance = {
-            "DTA",  -- Firefox addon DownThemAll.
+            "DTA",    -- Firefox addon DownThemAll.
             "copyq",  -- Includes session name in class.
         },
         class = {
@@ -448,13 +453,17 @@ awful.rules.rules = {
             "Screenkey",
             "pinentry",
             "gcr-prompter",
+            "Gcr-prompter",
             "Thunar",
         },
         role = {
             "AlarmWindow",  -- Thunderbird's calendar.
             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true }},
+      },
+      properties = { floating = true },
+      callback = awful.placement.centered,
+    },
 
     -- Games
     { rule_any = { class = {"csgo_linux64"}
@@ -476,8 +485,6 @@ awful.rules.rules = {
     { rule_any = { class = { "mmtail", "ytdl" } },
         properties = { screen = 1, tag = ":admin:" } },
     { rule = { name = "nvim", class = "URxvt" },
-        properties = { screen = 1, tag = ":edit:" } },
-    { rule_any = { class = { "Zeal" } },
         properties = { screen = 1, tag = ":edit:" } },
     { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "Brave-browser" } },
         properties = { screen = 1, tag = ":web:" } },
