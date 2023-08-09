@@ -13,9 +13,18 @@ function usage() {
     exit 1
 }
 
+function git_remote_url_raw() {
+    git config --get remote.origin.url
+}
+
 function git_remote_url() {
-    git config --get remote.origin.url | sed -E -e 's;.git$;;' \
+     git_remote_url_raw | sed -E -e 's;.git$;;' \
         -e 's;^git@([^:]+):(.+)/(.+)$;https://\1/\2/\3;'
+}
+
+function git_remote_name() {
+     git_remote_url_raw | sed -E -e 's;.git$;;' \
+        -e 's;^git@([^:]+):(.+)/(.+)$;\3;'
 }
 
 function show_commit() {
@@ -30,7 +39,7 @@ function show_commit() {
         RVAL='- '
     fi
     if [[ "${MARKDOWN_FORMAT}" -eq 1 ]]; then
-        RVAL+="[${GIT_COMMIT::8}](${COMMIT_URL})"
+        RVAL+="[\`$(git_remote_name)#${GIT_COMMIT::8}\`](${COMMIT_URL})"
     else
         RVAL+="${COMMIT_URL}"
     fi
