@@ -333,19 +333,23 @@ function gc-reboot() {
 }
 
 function ac-reboot() {
-    aliyun ecs DescribeInstances --output "cols=InstanceId,HostName,EipAddress.IpAddress,Status" --InstanceName="${@}"
+    aliyun ecs DescribeInstances --InstanceName="${@}" \
+        --output "cols=InstanceId,HostName,EipAddress.IpAddress,Status" "rows=Instances.Instance[]"
     ID=$(aliyun ecs DescribeInstances --InstanceName="${@}" | jq -r '.Instances.Instance[0].InstanceId')
-    if [[ -n "${ID}" ]]; then
-        echo
-        read -q REPLY\?"Do you really want to reboot this host? (y/n) "
-        if [[ "${REPLY}" == "y" ]]; then
-            aliyun ecs RebootInstance --InstanceId="${ID}" --ForceStop=true
+    [[ -z "${ID}" ]] && { echo "Instance not found"; exit 1 }
+    read -q REPLY\?"Do you really want to reboot this host? (y/n) "
+    if [[ "${REPLY}" == "y" ]]; then
+        STATUS=$(aliyun ecs DescribeInstances --InstanceName="${@}" | jq -r '.Instances.Instance[0].Status')
+        if [[ "${STATUS}" == "Stopped" ]]; then
+            aliyun ecs StartInstance  --InstanceId="${ID}" | jq -c
+        else
+            aliyun ecs RebootInstance --InstanceId="${ID}" --ForceStop=true | jq -c
         fi
     fi
 }
 
 function aws-reboot() {
-    aws --profile nimbus ec2 describe-instances --filters Name=tag:Name,Values=node-08.aws-eu-central-1a.nimbus.test --query 'Reservations[0].Instances[0].{Instance:InstanceId,AZ:Placement.AvailabilityZone,IP:PublicIpAddress,Name:Tags[?Key==`Name`]|[0].Value,State:State.Name}' --output text
+    aws --profile nimbus ec2 describe-instances --filters "Name=tag:Name,Values=${@}" --query 'Reservations[0].Instances[0].{Instance:InstanceId,AZ:Placement.AvailabilityZone,IP:PublicIpAddress,Name:Tags[?Key==`Name`]|[0].Value,State:State.Name}' --output text
     ID=$(aws --profile nimbus ec2 describe-instances --filters "Name=tag:Name,Values=${@}" --query 'Reservations[0].Instances[0].InstanceId' --output text)
     if [[ -n "${ID}" ]]; then
         echo
