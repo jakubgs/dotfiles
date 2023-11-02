@@ -60,30 +60,13 @@
   XF86MonBrightnessDown
 
 # }}}
-# MPD management {{{
-"mpc stop && mpc play"
-  m:0x1 + c:111
-  Shift + Up
-
-"mpc prev"
-  m:0x1 + c:113
-  Shift + Left
-
 "mpc prev"
   m:0x0 + c:173
   XF86AudioPrev
 
 "mpc toggle"
-  m:0x1 + c:116
-  Shift + Down
-
-"mpc toggle"
   m:0x0 + c:172
   XF86AudioPlay
-
-"mpc next"
-  m:0x1 + c:114
-  Shift + Right
 
 "mpc next"
   m:0x0 + c:171
