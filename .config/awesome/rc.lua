@@ -461,7 +461,7 @@ awful.rules.rules = {
             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
       },
-      properties = { floating = true },
+      properties = { floating = true, sticky = true, ontop = true },
       callback = awful.placement.centered,
     },
 
