@@ -221,10 +221,10 @@ bindkey -v
 # 10ms for key sequences
 KEYTIMEOUT=1
 
-# edit current command in vim
-#autoload -U edit-command-line
-#zle -N edit-command-line
-#bindkey -M vicmd v edit-command-line
+# Use ESC to edit the current command line:
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey "^E" edit-command-line
 
 # bash like ctrl-w
 #autoload -U select-word-style
@@ -240,7 +240,7 @@ key[Delete]=${terminfo[kdch1]}
 bindkey "^[."   insert-last-word   # Alt + .
 bindkey -s '\e.' insert-last-word  # Alt + .
 bindkey "^L"    clear-screen                                # ctrl + l
-bindkey "^E"    kill-word                                   # ctrl + e
+bindkey "^Q"    kill-word                                   # ctrl + q
 bindkey "^W"    backward-kill-word                          # ctrl + w
 bindkey "^R"    history-incremental-pattern-search-backward # ctrl + r
 bindkey "\e[2~" quoted-insert
