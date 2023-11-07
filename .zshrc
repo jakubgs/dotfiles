@@ -68,6 +68,7 @@ else
     EDITOR="vim"
 fi
 
+export PATH="${PATH}:${HOME}/go/bin:${HOME}/bin"
 export EDITOR
 export VISION="$EDITOR"
 export PAGER="less"
@@ -77,7 +78,8 @@ export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man nomod nolist' -\""
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 export SOPS_GPG_KEYSERVER="https://keys.openpgp.org"
 export ANSIBLE_REMOTE_USER="admin"
-export PATH="${PATH}:${HOME}/go/bin:${HOME}/bin"
+export RESTIC_REPOSITORY="sftp:u288137@u288137.your-storagebox.de:/home/$(hostname)"
+export RESTIC_PASSWORD_FILE='/home/jakubgs/.usb_backup_pass'
 
 # Magically link PYTHONPATH to the ZSH array pythonpath
 typeset -T PYTHONPATH pythonpath
