@@ -608,6 +608,27 @@ function fzf-cd-history () {
 zle -N fzf-cd-history
 bindkey '^k' fzf-cd-history
 
+# systemd service search
+function fzf-systemctl () {
+    local services=$(
+        systemctl list-units --type=service --plain | grep '.service'
+    )
+    local selected=$(
+        echo "${services}" | fzf \
+            --query "$LBUFFER" \
+            --preview='sudo SYSTEMD_COLORS=1 systemctl status ${1}' \
+            --preview-window=bottom,22
+    )
+    if [[ -n "${selected}" ]]; then
+        BUFFER="sudo systemctl --no-pager status ${selected%% *}"
+        zle accept-line
+    fi
+    zle reset-prompt
+}
+
+zle -N fzf-systemctl
+bindkey '^u' fzf-systemctl
+
 # }}}
 # FZF {{{
 
