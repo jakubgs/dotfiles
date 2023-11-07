@@ -465,6 +465,18 @@ function b {
     fi
 }
 
+function r {
+    if [[ $# == 0 ]]; then
+        sudo systemctl -a list-timers '*backup*'
+        restic -q snapshots --latest 3
+    elif [[ $# == 1 ]]; then
+        restic -q "$@"
+    else
+        restic "$@"
+    fi
+}
+compdef r=restic
+
 if type zerotier-cli > /dev/null; then
     function z {
         if [[ $# == 0 ]]; then
