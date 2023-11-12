@@ -151,12 +151,13 @@ ASSETS=(
     "/mnt/photos"
 )
 
-[[ $UID -ne 0 ]]          && error "This script requires root piviliges!" && exit 1
-[[ -z "${DEVICE}" ]]      && error "No device specified with -d flag!" && list_devices && exit 1
-[[ -z "${LABEL}" ]]       && error "Label cannot be an empty string!" && exit 1
-[[ ! -f "${PASS_FILE}" ]] && error "No password file found!" exit 1
+[[ $UID -ne 0 ]]                && error "This script requires root piviliges!" && exit 1
+[[ -z "${DEVICE}" ]]            && error "No device specified with -d flag!" && list_devices && exit 1
+[[ -z "${LABEL}" ]]             && error "Label cannot be an empty string!" && exit 1
+[[ ! -f "${PASS_FILE}" ]]       && error "No password file found!" exit 1
+[[ -b "/dev/mapper/${LABEL}" ]] && error "Label already exists: ${LABEL}" && exit 1
 
-# unmount on exit
+# Unmount on exit.
 trap cleanup_umount EXIT ERR INT QUIT
 
 if [[ "${LIST}" -eq 1 ]]; then
