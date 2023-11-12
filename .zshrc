@@ -258,6 +258,7 @@ alias -g G='grep'
 alias -g O='xdg-open'
 
 alias bc='bc -q'
+alias dd='dd status=progress'
 alias gv='gvim --remote-silent'
 alias fucking='sudo'
 alias ll='ls -lh --color'
