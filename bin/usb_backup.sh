@@ -3,20 +3,21 @@ set -euo pipefail
 
 function show_help() {
   cat << EOF
-Usage: usb_backup.sh [-f|-s|-n|-h] [-l joe] -d /dev/sdx"
+Usage: usb_backup.sh [-f|-s|-m|-L|-h] [-l ${LABEL}] [-u ${USERNAME}] -d /dev/sdx
 
  -h - Show this help message.
- -d - Specify device name.
+ -L - List USB devices.
+ -d - Specify device name. Mandatory.
  -l - Specify label for LUKS device.
  -u - Specify username for home dir.
  -f - Format specified defice for secret backups.
+ -m - Mount the device and let user copy.
  -s - Sync pre-defined assets to device.
- -n - Do not mount the device.
 
 EOF
 }
 
-function show_devices() {
+function list_devices() {
     echo -e "Here are some options:\n"
     lsblk -S | grep -e VENDOR -e usb
 }
@@ -56,7 +57,7 @@ function check_size() {
 }
 
 function format_device() {
-    read -r -p "Are you sure you want to format ${DEV} ? <y/N> " prompt
+    read -r -p "Are you sure you want to format ${DEVICE} ? <y/N> " prompt
     if [[ ! $prompt =~ [yY](es)* ]]; then
         exit 0
     fi
@@ -113,22 +114,25 @@ function prompt_user() {
 
 # Initialize our own variables:
 USERNAME='jakubgs'
-LABEL="keychain"
+LABEL='keychain'
+DEVICE=''
+LIST=0
 MOUNT=0
 FORMAT=0
 SYNC=0
 
 # Parse arguments
-while getopts "msfu:d:l:h" opt; do
+while getopts "Lmsfu:d:l:h" opt; do
   case "$opt" in
+    L) LIST=1 ;;
     m) MOUNT=1 ;;
     s) SYNC=1 ;;
     f) FORMAT=1 ;;
     u) USERNAME="${OPTARG}" ;;
     d) DEVICE="${OPTARG}" ;;
     l) LABEL="${OPTARG}" ;;
-    h) show_help; show_devices; exit 0 ;;
-    *) show_help; show_devices; exit 1 ;;
+    h) show_help; list_devices; exit 0 ;;
+    *) show_help; list_devices; exit 1 ;;
   esac
 done
 [ "${1:-}" = "--" ] && shift
@@ -148,21 +152,23 @@ ASSETS=(
 )
 
 [[ $UID -ne 0 ]]          && error "This script requires root piviliges!" && exit 1
-[[ -z "${DEVICE}" ]]      && error "No device specified with -d flag!" && show_devices && exit 1
+[[ -z "${DEVICE}" ]]      && error "No device specified with -d flag!" && list_devices && exit 1
 [[ -z "${LABEL}" ]]       && error "Label cannot be an empty string!" && exit 1
 [[ ! -f "${PASS_FILE}" ]] && error "No password file found!" exit 1
 
 # unmount on exit
 trap cleanup_umount EXIT ERR INT QUIT
 
-if [[ "${FORMAT}" -eq 1 ]]; then
+if [[ "${LIST}" -eq 1 ]]; then
+    list_devices
+elif [[ "${FORMAT}" -eq 1 ]]; then
     format_device
 elif [[ "${MOUNT}" -eq 1 ]]; then
     mount_device && prompt_user
 elif [[ "${SYNC}" -eq 1 ]]; then
     mount_device && sync_assets
 else
-    show_help; show_devices
+    show_help; list_devices
     exit 1
 fi
 
