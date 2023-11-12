@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 function show_help() {
   cat << EOF
@@ -31,34 +31,32 @@ function bytes_to_mb() {
 }
 
 function cleanup_umount() {
-    echo
-    du -hsc "/mnt/${LABEL}/"*
-    echo
-    df -h "${DEVICE}"
-    echo
-    echo "Removing device..."
-    umount -f "/mnt/${LABEL}"
+    if mountpoint -q "/mnt/${LABEL}/"; then
+        echo
+        du -hsc "/mnt/${LABEL}/"*
+        echo
+        df -h "${DEVICE}"
+        echo
+        echo "Removing device..."
+    fi
+    umount -qf "/mnt/${LABEL}"
     cryptsetup luksClose "${LABEL}"
 }
 
-function remove_dot() {
-    echo "$1" | sed 's/^\.//'
-}
-
 function check_size() {
-    ASSET=$1
-    TARGET=$2
-    SIZE_NOW=$(du --apparent-size -sb "${ASSET}" | cut -f1)
-    SIZE_OLD=0
+    local -r ASSET="${1}"
+    local -r TARGET="${2}"
+    local -r SIZE_NOW=$(du --apparent-size -sb "${ASSET}" | cut -f1)
+    local SIZE_OLD=0
     if [[ -d "${TARGET}" ]]; then
         SIZE_OLD=$(du --apparent-size -sb "${TARGET}" | cut -f1)
     fi
-    REMAINING_SIZE=$(($SIZE_NOW - $SIZE_OLD))
+    local REMAINING_SIZE=$((SIZE_NOW - SIZE_OLD))
     echo "${REMAINING_SIZE}"
 }
 
 function format_device() {
-    read -p "Are you sure you want to format ${DEV} ? <y/N> " prompt
+    read -r -p "Are you sure you want to format ${DEV} ? <y/N> " prompt
     if [[ ! $prompt =~ [yY](es)* ]]; then
         exit 0
     fi
@@ -71,19 +69,20 @@ function format_device() {
 
 function mount_device() {
     echo "Mounting device: ${DEVICE} -> /dev/mapper/${LABEL} -> /mnt/${LABEL}"
-    umount "/mnt/${LABEL}" 2>/dev/null | echo
+    umount "/mnt/${LABEL}" 2>/dev/null
     # decrypt
     cryptsetup luksOpen -d "${PASS_FILE}" "${DEVICE}" "${LABEL}"
-    DEVICE="/dev/mapper/${LABEL}"
+    local DEVICE="/dev/mapper/${LABEL}"
     mkdir -p "/mnt/${LABEL}"
     mount "${DEVICE}" "/mnt/${LABEL}"
 }
 
-function copy_assets() {
-    for ASSET in ${ASSETS[@]}; do
-        NAME=$(basename ${ASSET})
-        TARGET="/mnt/${LABEL}/$(remove_dot ${NAME})"
-        FREE_B=$(df -P /mnt/${LABEL} | awk '/dev/{print ($4 * 1024)}')
+function sync_assets() {
+    local NAME TARGET FREE_B LEFT_B
+    for ASSET in "${ASSETS[@]}"; do
+        NAME=$(basename "${ASSET}")
+        TARGET="/mnt/${LABEL}/${NAME#.}"
+        FREE_B=$(df -P "/mnt/${LABEL}" | awk '/dev/{print ($4 * 1024)}')
         LEFT_B=$(check_size "$ASSET" "$TARGET")
         if [[ ${LEFT_B} -gt 0 ]] && [[ ${FREE_B} -lt ${LEFT_B} ]]; then
             echo "* Skipping: ${ASSET} - Not enough space. ($(bytes_to_mb "${LEFT_B}"))"
@@ -92,28 +91,44 @@ function copy_assets() {
         echo "* Copying: ${ASSET} -> ${TARGET} ($(bytes_to_mb "${LEFT_B}"))"
         rsync --delete -aqr "${ASSET}/." "${TARGET}"
     done
+    echo
     echo "Syncing..."
     sync
+}
+
+function prompt_user() {
+    echo "Have you copied all the necessary files?"
+    select RESP in "yes" "no"; do
+        if [[ -z "${RESP}" ]]; then
+            echo "Unclear input!" >&2;
+            continue
+        fi
+        case "${RESP}" in
+            yes) return;;
+            no)  continue;;
+        esac
+    done
 }
 
 
 # Initialize our own variables:
 USERNAME='jakubgs'
 LABEL="keychain"
-MOUNT=1
+MOUNT=0
 FORMAT=0
 SYNC=0
 
 # Parse arguments
-while getopts "hnsfu:d:l:" opt; do
+while getopts "msfu:d:l:h" opt; do
   case "$opt" in
-    h) show_help; show_devices; exit 0 ;;
-    n) MOUNT=0 ;;
+    m) MOUNT=1 ;;
     s) SYNC=1 ;;
     f) FORMAT=1 ;;
     u) USERNAME="${OPTARG}" ;;
     d) DEVICE="${OPTARG}" ;;
     l) LABEL="${OPTARG}" ;;
+    h) show_help; show_devices; exit 0 ;;
+    *) show_help; show_devices; exit 1 ;;
   esac
 done
 [ "${1:-}" = "--" ] && shift
@@ -126,7 +141,7 @@ ASSETS=(
     "/home/$USERNAME/.gnupg"
     "/home/$USERNAME/.ssh"
     "/mnt/git"
-    "/mnt/data/Documents"
+    "/mnt/data/documents"
     "/mnt/data/company"
     "/mnt/data/important"
     "/mnt/photos"
@@ -140,8 +155,15 @@ ASSETS=(
 # unmount on exit
 trap cleanup_umount EXIT ERR INT QUIT
 
-[[ "${FORMAT}" -eq 1 ]] && format_device
-[[ "${MOUNT}" -eq 1 ]]  && mount_device
-[[ "${SYNC}" -eq 1 ]]   && copy_assets
+if [[ "${FORMAT}" -eq 1 ]]; then
+    format_device
+elif [[ "${MOUNT}" -eq 1 ]]; then
+    mount_device && prompt_user
+elif [[ "${SYNC}" -eq 1 ]]; then
+    mount_device && sync_assets
+else
+    show_help; show_devices
+    exit 1
+fi
 
 echo "SUCCESS!"
