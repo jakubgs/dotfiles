@@ -13,6 +13,17 @@
   Control+Shift + l
 
 # }}}
+# Screen {{{
+"xrandr --output eDP-1 --rotate left"
+    m:0xd + c:113
+    Control+Shift+Alt + Left
+"xrandr --output eDP-1 --rotate right"
+    m:0xd + c:114
+    Control+Shift+Alt + Right
+"xrandr --output eDP-1 --rotate normal"
+    m:0xd + c:111
+    Control+Shift+Alt + Up
+# }}}
 # Other {{{
 
 "flameshot gui"
