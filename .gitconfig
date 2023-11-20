@@ -33,7 +33,7 @@
     pl  = pull
     plf = pull --force --rebase
     plh = !git fetch --verbose origin $(git rev-parse --abbrev-ref HEAD) && git rebase origin/$(git rev-parse --abbrev-ref HEAD)
-    pr  = !git fetch origin pull/$1/head:PR-$1 && git checkout PR-$1
+    pr  = ! git fetch origin pull/$1/head:PR-$1 && git checkout PR-$1 && echo PR
     ps  = push
     psf = push --force
     psh = !git push origin $(git rev-parse --abbrev-ref HEAD)
