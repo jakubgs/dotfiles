@@ -286,7 +286,6 @@ alias n='sudo ss -lpsntu'
 alias c='curl -sSL --fail-with-body'
 alias cm='clipmenu'
 alias ap='ansible-playbook -D'
-compdef qapt=apt
 
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
 
@@ -374,6 +373,11 @@ function src() {
     source ~/.zshrc
 }
 
+# Check if command exists.
+function _exists() {
+    type "${1}" &>/dev/null
+}
+
 # g as simple shortcut for git status or just git if any other arguments are given
 function g {
     if [[ $# > 0 ]]; then
@@ -382,22 +386,20 @@ function g {
         git status -sb
     fi
 }
-compdef g=git
+_exists git && compdef g=git
 
-if type docker > /dev/null; then
-    function d {
-        if [[ $1 == 'clean' ]]; then
-            docker rm $(docker ps -a -q)
-        elif [[ $1 == 'cleanimages' ]]; then
-            docker rmi $(docker images -f dangling=true -q)
-        elif [[ $# > 0 ]]; then
-            docker "$@"
-        else
-            docker ps
-        fi
-    }
-    compdef d=docker
-fi
+function d {
+    if [[ $1 == 'clean' ]]; then
+        docker rm $(docker ps -a -q)
+    elif [[ $1 == 'cleanimages' ]]; then
+        docker rmi $(docker images -f dangling=true -q)
+    elif [[ $# > 0 ]]; then
+        docker "$@"
+    else
+        docker ps
+    fi
+}
+_exists docker && compdef d=docker
 
 function ghpr {
     PR=${1}
@@ -414,7 +416,7 @@ function s {
         sudo systemctl "$@"
     fi
 }
-compdef s=systemctl
+_exists systemctl && compdef s=systemctl
 
 function j {
     if [[ $# == 0 ]]; then
@@ -425,7 +427,7 @@ function j {
         sudo journalctl "$@"
     fi
 }
-compdef j=journalctl
+_exists journalctl && compdef j=journalctl
 
 function t {
     if [[ $# == 0 ]]; then
@@ -444,7 +446,7 @@ function i {
         sudo ip "$@"
     fi
 }
-compdef i=ip
+_exists ip && compdef i=ip
 
 function b {
     if [[ $# == 0 || $1 == "unlock" ]]; then
@@ -476,7 +478,7 @@ function r {
         restic "$@"
     fi
 }
-compdef r=restic
+_exists restic && compdef r=restic
 
 if type zerotier-cli > /dev/null; then
     function z {
@@ -495,7 +497,7 @@ function a {
         ansible "$@"
     fi
 }
-compdef a=ansible
+_exists restic && compdef a=ansible
 
 # repeat last command with sudo
 function fuck {
