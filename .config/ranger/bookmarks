@@ -1,6 +1,11 @@
 c:/home/jakubgs/company
-h:/home/sochan
-p:/mnt/plugged
-m:/nfs/melchior
+h:/home/jakubgs
+d:/mnt/data
+m:/mnt/music
+p:/mnt/photos
 s:/nfs/sachiel
-u:/mnt/usbstick
+a:/nfs/arael
+t:/nfs/arael/torrent
+T:/cifs/arael/torrent
+m:/nfs/arael/music
+M:/cifs/arael/music
