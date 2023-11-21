@@ -6,22 +6,20 @@ Xft.hintstyle:  hintslight
 
 Xcursor.theme: Vanilla-DMZ
 
-!.imLocale:             pl_PL.ISO-8859-2
-!*imLocale:             en_GB.UTF-8
-!*geometry:             120x35
-
-#*font:              xft:Terminus:size=16:lang=pl:antialias=true:hinting=true
-#*boldFont:          xft:Terminus:size=16:lang=pl:antialias=true:hinting=true:Bold
-#ranger*font:        xft:Terminus:size=20:lang=pl:antialias=true:hinting=true
-#ranger*boldFont:    xft:Terminus:size=20:lang=pl:antialias=true:hinting=true:Bold
-#ncmpcpp*font:       xft:Terminus:size=20:lang=pl:antialias=true:hinting=true
-#ncmpcpp*boldFont:   xft:Terminus:size=20:lang=pl:antialias=true:hinting=true:Bold
+#ifdef SRVR_lilim
+*font:              xft:Inconsolata Regular:family=mono:size=15:lang=pl:antialias=true:hinting=true
+*boldFont:          xft:Inconsolata Regular:family=mono:size=15:lang=pl:antialias=true:hinting=true:Bold
+#else
 *font:              xft:Inconsolata Regular:family=mono:size=14:lang=pl:antialias=true:hinting=true
 *boldFont:          xft:Inconsolata Regular:family=mono:size=14:lang=pl:antialias=true:hinting=true:Bold
+#endif
 ranger*font:        xft:Inconsolata Regular:family=mono:size=24:lang=pl:antialias=true:hinting=true
 ranger*boldFont:    xft:Inconsolata Regular:family=mono:size=24:lang=pl:antialias=true:hinting=true:Bold
 ncmpcpp*font:       xft:Inconsolata Regular:family=mono:size=24:lang=pl:antialias=true:hinting=true
 ncmpcpp*boldFont:   xft:Inconsolata Regular:family=mono:size=24:lang=pl:antialias=true:hinting=true:Bold
+
+! font-size
+URxvt.font-size.step: 1
 
 ! Disable printing
 *print-pipe:           "cat > /dev/null"
