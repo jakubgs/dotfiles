@@ -33,7 +33,7 @@ nnoremap gj j
 nnoremap gk k
 
 " easier opening of links
-nnoremap <unique> K <Plug>NetrwBrowseX
+nnoremap K <Plug>NetrwBrowseX
 
 " to match the behaviour of D
 nnoremap Y y$
