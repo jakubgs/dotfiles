@@ -7,6 +7,7 @@ let g:sneak#prompt = 'STREAK>>>'
 
 nmap <space>j <Plug>Sneak_s
 nmap <space>k <Plug>Sneak_S
+nmap <c-f> <Plug>Sneak_s
 nmap s <Plug>Sneak_s
 nmap S <Plug>Sneak_S
 map f <Plug>Sneak_f
@@ -52,6 +53,7 @@ command! -bang -nargs=? -complete=dir Ag
 nnoremap <tab>              :Panacea<CR>
 nnoremap <c-a>              :Work<CR>
 nnoremap <c-s>              :Files ~/nixos<CR>
+nnoremap <c-q>              :Files ~/dotfiles<CR>
 nnoremap <c-space>          :History<CR>
 nnoremap <c-b>              :Buffers<CR>
 nnoremap <leader><leader>b  :Buffers<CR>
