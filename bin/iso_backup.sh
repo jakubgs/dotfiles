@@ -6,9 +6,20 @@ set -e
 # Source: https://www.frederickding.com/posts/2017/08/luks-encrypted-dvd-bd-data-disc-guide-273316/
 #
 # Mounting disc:
-# sudo losetup /dev/loop1 /dev/sr0
-# sudo cryptsetup -r luksOpen /dev/loop1 volume1
+#
+# sudo losetup /dev/loop10 /dev/sr0
+# sudo cryptsetup -r luksOpen /dev/loop10 volume1
 # sudo mount -t udf -o ro /dev/mapper/volume1 /media/datadisc
+#
+# Unmounting disc:
+#
+# sudo umount /dev/mapper/volume1
+# sudo cryptsetup luksClose volume1
+# sudo losetup -d /dev/loop10
+#
+# Known Issues:
+# * 'losetup: /dev/sr0: failed to set up loop device: Device or resource busy'
+#   - Caused by trying to use a `/dev/loop*` device that's already used.
 
 if [[ ${UID} -ne 0 ]]; then
     echo "This script needs to be run as root!" >&2
@@ -25,7 +36,7 @@ if [[ "${#}" -ne 3 ]]; then
     exit 1
 fi
 
-ISO_SIZE="2530M"
+ISO_SIZE="2G"
 ISO_PATH="${1}"
 ISO_LABEL="${2}"
 MOUNT_POINT="${3}"
