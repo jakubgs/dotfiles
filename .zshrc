@@ -632,6 +632,26 @@ function fzf-systemctl () {
 zle -N fzf-systemctl
 bindkey '^u' fzf-systemctl
 
+# git log search
+function git-log-search() {
+  local format='%<(7)%C(red)%h%Creset %C(cyan)%as%Creset %s %C(yellow)%d%Creset'
+  local selected=$(
+    git log --color=always --abbrev-commit --pretty=format:"${format}" "${@:-HEAD}" |
+      fzf --ansi --no-sort --reverse \
+      --tiebreak=index \
+      --preview-window='right:50%' \
+      --preview='git show --color=always ${1}' \
+      --bind='ctrl-i:change-preview(git show --stat --color=always ${1})'
+  )
+  if [ -n "${selected}" ]; then
+      BUFFER="git show ${selected%% *}"
+      zle accept-line
+  fi
+  zle reset-prompt
+}
+zle -N git-log-search
+bindkey '^g' git-log-search
+
 # }}}
 # FZF {{{
 
