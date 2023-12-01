@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Script for searching through Git log using FZF.
+# Should work as `git log-search` if it's in your $PATH.
+
+__fzf_git_log_search__() {
+    git rev-parse --is-inside-work-tree >/dev/null || return
+    local format='%<(7)%C(red)%h%Creset %C(cyan)%as%Creset %s %C(yellow)%d%Creset'
+    local selected=$(
+      git log --color=always --abbrev-commit --pretty=format:"${format}" "${@:-HEAD}" |
+        fzf --ansi --no-sort --reverse \
+        --tiebreak=index \
+        --preview-window='right:50%' \
+        --preview='git show --color=always ${1}' \
+        --bind='ctrl-i:change-preview(git show --stat --color=always ${1})'
+    )
+    echo "${selected}"
+}
+
+# Run only when not being sourced.
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    SELECTED=$(__fzf_git_log_search__ "$@")
+    echo "${SELECTED%% *}"
+    echo "${SELECTED%% *}" | xsel -i --clipboard
+fi
