@@ -8,6 +8,10 @@ colorscheme jellybeans
 hi! link Visual LightlineLeft_visual_0
 hi! link Cursor LightlineLeft_normal_0
 
+" Sneak Highlights
+hi! link Sneak Cursor
+hi! link SneakLabel TabLineSel
+
 " Highlight trailing whitespace in normal mode
 autocmd InsertLeave * hi! ExtraWhitespace ctermbg=red guibg=red
 autocmd InsertEnter * hi! ExtraWhitespace NONE
