@@ -338,7 +338,7 @@ function ac-reboot() {
     aliyun ecs DescribeInstances --InstanceName="${@}" \
         --output "cols=InstanceId,HostName,EipAddress.IpAddress,Status" "rows=Instances.Instance[]"
     ID=$(aliyun ecs DescribeInstances --InstanceName="${@}" | jq -r '.Instances.Instance[0].InstanceId')
-    [[ -z "${ID}" ]] && { echo "Instance not found"; exit 1 }
+    [[ -z "${ID}" ]] && { echo "Instance not found"; return 1 }
     read -q REPLY\?"Do you really want to reboot this host? (y/n) "
     if [[ "${REPLY}" == "y" ]]; then
         STATUS=$(aliyun ecs DescribeInstances --InstanceName="${@}" | jq -r '.Instances.Instance[0].Status')
