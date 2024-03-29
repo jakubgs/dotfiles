@@ -5,7 +5,7 @@
 
 __fzf_git_log_search__() {
     git rev-parse --is-inside-work-tree >/dev/null || return
-    local format='%<(7)%C(red)%h%Creset %C(cyan)%as%Creset %s %C(yellow)%d%Creset'
+    local format='%<(7)%C(red)%h%Creset %<(10,trunc)%C(yellow)%al%Creset %C(cyan)%as%Creset %s %C(yellow)%d%Creset'
     local selected=$(
       git log --color=always --abbrev-commit --pretty=format:"${format}" "${@:-HEAD}" |
         fzf --ansi --no-sort --reverse \
