@@ -7,11 +7,11 @@ __fzf_git_log_search__() {
     git rev-parse --is-inside-work-tree >/dev/null || return
     local format='%<(7)%C(red)%h%Creset %<(10,trunc)%C(yellow)%al%Creset %C(cyan)%as%Creset %s %C(yellow)%d%Creset'
     local selected=$(
-      git log --color=always --abbrev-commit --pretty=format:"${format}" "${@:-HEAD}" |
+      git log --color=always --abbrev-commit --pretty=format:"${format}" "${1:-.}" |
         fzf --ansi --no-sort --reverse \
         --tiebreak=index \
         --preview-window='right:50%' \
-        --preview='git show --color=always ${1}' \
+        --preview='git show --color=always ${1} '"${1:-.}" \
         --bind='ctrl-i:change-preview(git show --stat --color=always ${1})'
     )
     echo "${selected}"
