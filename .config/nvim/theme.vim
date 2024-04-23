@@ -15,4 +15,5 @@ hi! link SneakLabel TabLineSel
 " Highlight trailing whitespace in normal mode
 autocmd InsertLeave * hi! ExtraWhitespace ctermbg=red guibg=red
 autocmd InsertEnter * hi! ExtraWhitespace NONE
+autocmd FileType fzf  hi! ExtraWhitespace NONE
 match ExtraWhitespace /\s\+$/
