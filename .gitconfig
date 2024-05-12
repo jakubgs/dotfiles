@@ -30,6 +30,7 @@
     fix = commit --verbose --no-verify --gpg-sign --signoff --fixup
     m   = commit --verbose --no-verify --gpg-sign --signoff --amend
     mm  = commit --verbose --no-verify --gpg-sign --signoff --amend --no-edit
+    mp  = !git mm && git ps -f
     pl  = pull
     plf = pull --force --rebase
     plh = !git fetch --verbose origin $(git rev-parse --abbrev-ref HEAD) && git rebase origin/$(git rev-parse --abbrev-ref HEAD)
@@ -50,6 +51,7 @@
     sla = log --pretty=format:'* %h %s %d' --abbrev-commit
     slg = log --graph --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
     sm  = submodule
+    smu = submodule update --init --recursive
     u   = url
     up  = branch --set-upstream-to
     x   = sync
