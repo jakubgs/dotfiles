@@ -37,7 +37,7 @@ function! s:WorkSearch()
   \}))
 endfunction
 
-function! PanaceaFunc()
+function! s:PanaceaFunc()
   if empty(GetGitRoot())
     call s:WorkSearch()
   else
@@ -45,8 +45,15 @@ function! PanaceaFunc()
   endif
 endfunction
 
-command! Work    call s:WorkSearch()
-command! Panacea call PanaceaFunc()
+" Search with Ag but from repo root.
+function! GitRootAg(input)
+  exec 'cd' GetGitRoot()
+  exec 'Ag! ' . a:input
+endfunction
+
+command!          Work      call s:WorkSearch()
+command!          Panacea   call s:PanaceaFunc()
+command! -nargs=? GitRootAg call GitRootAg(<q-args>)
 command! -bang -nargs=? -complete=dir Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right'), <bang>0)
 
@@ -63,4 +70,5 @@ nnoremap <leader><leader>f  :Files<CR>
 nnoremap <leader><leader>g  :GFiles<CR>
 nnoremap <leader><leader>c  :Commits<CR>
 nnoremap <leader><leader>l  :Lines<CR>
-nnoremap <leader><leader>a  :Ag!<space><c-r>=expand("<cword>")<CR><CR>
+nnoremap <leader><leader>a  :GitRootAg<CR>
+nnoremap <leader><leader>A  :GitRootAg<space><c-r>=expand("<cword>")<CR><CR>
