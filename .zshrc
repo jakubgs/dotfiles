@@ -99,6 +99,7 @@ export PYTHONPATH
 export HISTSIZE=4000              # number of lines kept in history
 export SAVEHIST=4000              # number of lines saved in the history after logout
 export HISTFILE="$HOME/.zhistory" # location of history
+export HISTCONTROL=ignoreboth     # ignore commands starting with space, dedupe
 setopt INC_APPEND_HISTORY         # append command to history file once executed
 setopt SHARE_HISTORY              # for sharing history between zsh proce'ses
 setopt HIST_IGNORE_ALL_DUPS       # Ignore duplicates in history
@@ -268,7 +269,6 @@ alias wq='du -sh'
 alias kt='du -h --max-depth=1 | sort -h'
 alias dy='df --sync -hTt ext4'
 alias copy='xsel -i --primary'
-alias ghh='git rev-parse HEAD | xsel -i --primary'
 alias grep='grep --color -i'
 alias rsync='rsync --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
