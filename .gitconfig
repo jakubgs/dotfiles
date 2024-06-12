@@ -9,6 +9,9 @@
     quotePath   = false
     commitGraph = true
     autocrlf    = input
+    whitespace  = trailing-space,space-before-tab
+[apply]
+    whitespace  = fix
 [diff]
     tool = vimdiff
 [merge]
