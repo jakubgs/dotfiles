@@ -84,3 +84,7 @@
     writeCommitGraph = true
 [advice]
     detachedHead = false
+[filter "fix-eol-eof"]
+    clean = fixup-eol-eof %f
+    smudge = cat %f
+    required = true
