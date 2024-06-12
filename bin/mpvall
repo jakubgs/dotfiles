@@ -29,7 +29,6 @@ find "$DIRS" -type f \
 -iname "*.webm" -o \
 -iname "*.wmv" -o \
 -iname "*.mp4" -o \
--iname "*.mp3" -o \
 -iname "*.ogg" -o \
 -iname "*.flac" -o \
 -iname "*.wav" -o \
@@ -50,6 +49,6 @@ COUNT=$(wc -l $PLAYLIST)
 echo "Found $COUNT video files."
 
 mpv $OPTIONS --quiet --fs --playlist=$PLAYLIST \
-    | awk 'BEGIN{FS="/"}/Playing:/{I++; printf(" *%3d - %s\n", I, $NF)}'
+    | awk '/Playing:/{I++; $1 = ""; printf(" *%3d - %s\n", I, $0)}'
 
 rm $PLAYLIST
