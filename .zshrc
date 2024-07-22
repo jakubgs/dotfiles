@@ -295,7 +295,8 @@ alias wakemelchior='wakeonlan 00:1b:21:06:f1:cc'
 alias wakelilim='wakeonlan 8c:16:45:3c:7d:15'
 
 # CapsLock hell escape
-alias killcaps='xkbset nullify lock'
+alias CAPSLOCKOFF='xkbset nullify lock'
+alias CAPSOFF='xkbset nullify lock'
 
 # }}}
 # Functions {{{
