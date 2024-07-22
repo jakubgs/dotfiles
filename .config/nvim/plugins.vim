@@ -13,6 +13,7 @@ Plug 'xolox/vim-misc'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'bogado/file-line'
+Plug 'akinsho/toggleterm.nvim'
 " Text manipulation
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
