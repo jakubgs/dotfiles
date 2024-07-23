@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 function cht_list() {
+    # Show into page by default
+    echo ''
     curl --silent 'https://cht.sh/:list'
 }
 
@@ -9,6 +11,7 @@ function cht_fzf(){
     fzf --ansi \
         --multi \
         --reverse \
+        --print-query \
         --prompt 'cht.sh> ' \
         --preview-window 'right:75%,wrap' \
         --preview 'curl --silent https://cht.sh/{}'
@@ -16,4 +19,4 @@ function cht_fzf(){
 
 SELECTED=$(cht_list | cht_fzf)
 
-curl -s https://cht.sh/${SELECTED} | less
+[[ -n "${SELECTED}" ]] && curl -s https://cht.sh/${SELECTED} | less
