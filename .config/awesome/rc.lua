@@ -444,7 +444,6 @@ awful.rules.rules = {
     -- Floating clients.
     { rule_any = {
         instance = {
-            "DTA",    -- Firefox addon DownThemAll.
             "copyq",  -- Includes session name in class.
         },
         class = {
@@ -460,6 +459,11 @@ awful.rules.rules = {
             "AlarmWindow",  -- Thunderbird's calendar.
             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
+      },
+      except_any = {
+        class = {
+            "Brave-browser", -- Developer tools shouldn't be sticky.
+        },
       },
       properties = { floating = true, sticky = true, ontop = true },
       callback = awful.placement.centered,
