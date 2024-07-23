@@ -219,7 +219,7 @@ local tasklist_buttons = awful.util.table.join(
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
-    awful.tag(tags, s, awful.layout.suit.max)
+    awful.tag(tags, s, awful.layout.suit.tile.left)
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
