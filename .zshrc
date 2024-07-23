@@ -252,3 +252,15 @@ bindkey "^R"    history-incremental-pattern-search-backward # ctrl + r
 bindkey "\e[2~" quoted-insert
 
 # }}}
+# FZF {{{
+
+if [ -n "${commands[fzf-share]}" ]; then
+    # This is available on NixOS
+    source $(fzf-share)/completion.zsh
+    source $(fzf-share)/key-bindings.zsh
+elif [[ -f ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+fi
+bindkey '^F' fzf-cd-widget
+
+# }}}
