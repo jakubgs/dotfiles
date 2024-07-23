@@ -1,0 +1,149 @@
+#!/usr/bin/env zsh
+
+# Check if command exists.
+function _exists() {
+    type "${1}" &>/dev/null
+}
+
+# reload zshrc
+function src() {
+    autoload -U zrecompile
+    [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
+    [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
+    [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
+    [[ -f ~/.zshrc.zwc.old ]] && rm -f ~/.zshrc.zwc.old
+    [[ -f ~/.zcompdump.zwc.old ]] && rm -f ~/.zcompdump.zwc.old
+    source ~/.zshrc
+}
+
+function now() {
+    date --rfc-3339=seconds | sed 's/ /T/'
+}
+
+# repeat last command with sudo
+function fuck {
+    LAST_CMD=`fc -nl -1`
+    echo sudo $LAST_CMD
+    sudo zsh -c $LAST_CMD
+}
+
+# g as simple shortcut for git status or just git if any other arguments are given
+function g {
+    if [[ $# > 0 ]]; then
+        git "$@"
+    else
+        git status -sb
+    fi
+}
+_exists git && compdef g=git
+
+function d {
+    if [[ $1 == 'clean' ]]; then
+        docker rm $(docker ps -a -q)
+    elif [[ $1 == 'cleanimages' ]]; then
+        docker rmi $(docker images -f dangling=true -q)
+    elif [[ $# > 0 ]]; then
+        docker "$@"
+    else
+        docker ps
+    fi
+}
+_exists docker && compdef d=docker
+
+function ghpr {
+    PR=${1}
+    git fetch origin "pull/${PR}/head:pr/${PR}" && \
+        git checkout "pr/${PR}"
+}
+
+function s {
+    if [[ $# == 0 ]]; then
+        sudo systemctl list-units --type=service --state=running
+    elif [[ $# == 1 ]]; then
+        sudo systemctl status "$@"
+    else
+        sudo systemctl "$@"
+    fi
+}
+_exists systemctl && compdef s=systemctl
+
+function j {
+    if [[ $# == 0 ]]; then
+        sudo journalctl --lines=30 --follow
+    elif [[ $# == 1 ]]; then
+        sudo journalctl --lines=30 --follow --unit "$@"
+    else
+        sudo journalctl "$@"
+    fi
+}
+_exists journalctl && compdef j=journalctl
+
+function t {
+    if [[ $# == 0 ]]; then
+        terraform plan
+    else
+        terraform "$@"
+    fi
+}
+
+function i {
+    if [[ $# == 0 ]]; then
+        sudo ip --brief addr
+    elif [[ $# == 1 ]]; then
+        sudo ip addr show  "$@"
+    else
+        sudo ip "$@"
+    fi
+}
+_exists ip && compdef i=ip
+
+function b {
+    if [[ $# == 0 || $1 == "unlock" ]]; then
+        if [[ -f "${HOME}/.bwsession" ]]; then
+            source "${HOME}/.bwsession"
+        fi
+        if ! bw login --check; then
+            echo "Log in:"
+            bw login
+        fi
+        if ! bw unlock --check; then
+            BW_SESSION=$(bw --response unlock | jq '.data.raw')
+            export BW_SESSION
+            echo "export BW_SESSION=${BW_SESSION}" > "${HOME}/.bwsession"
+        fi
+        bw sync
+    else
+        bw "$@"
+    fi
+}
+
+function r {
+    if [[ $# == 0 ]]; then
+        sudo systemctl -a list-timers '*backup*'
+        restic -q snapshots --latest 3
+    elif [[ $# == 1 ]]; then
+        restic -q "$@"
+    else
+        restic "$@"
+    fi
+}
+_exists restic && compdef r=restic
+
+if type zerotier-cli > /dev/null; then
+    function z {
+        if [[ $# == 0 ]]; then
+            sudo zerotier-cli status
+        else
+            sudo zerotier-cli "$@"
+        fi
+    }
+fi
+
+function a {
+    if [[ $# == 0 ]]; then
+        ansible localhost -m debug -a 'var=groups'
+    else
+        ansible "$@"
+    fi
+}
+_exists restic && compdef a=ansible

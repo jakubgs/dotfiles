@@ -1,0 +1,45 @@
+#!/usr/bin/env zsh
+
+# Global
+alias -g A='alert'
+alias -g G='grep'
+alias -g O='xdg-open'
+
+alias bc='bc -q'
+alias dd='dd status=progress'
+alias gv='gvim --remote-silent'
+alias fucking='sudo'
+alias ll='ls -lh --color'
+alias mm="make -j6"
+alias tt="tree -CdL 2"
+alias wq='du -sh'
+alias kt='du -h --max-depth=1 | sort -h'
+alias dy='df --sync -hTt ext4'
+alias copy='xsel -i --primary'
+alias grep='grep --color -i'
+alias rsync='rsync --progress'
+alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
+alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
+alias httpat='python2 -m SimpleHTTPServer'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
+alias ytdl-audio='yt-dlp --add-metadata --extract-audio --format m4a --audio-format vorbis -o "%(autonumber)02d %(uploader)s - %(title)s (%(id)s).%(ext)s"'
+alias uctl='systemctl --user'
+alias restart='sudo rc-config restart '
+alias qupdate='sudo apt update && sudo apt upgrade'
+alias qapt='sudo apt --quiet'
+alias n='sudo ss -lpsntu'
+alias c='curl -sSL --fail-with-body'
+alias cm='clipmenu'
+alias ap='ansible-playbook -D'
+alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
+
+# wake up caspair
+alias wakecaspair='wakeonlan d8:cb:8a:31:9d:5e'
+alias wakemelchior='wakeonlan 00:1b:21:06:f1:cc'
+alias wakelilim='wakeonlan 8c:16:45:3c:7d:15'
+
+# CapsLock hell escape
+alias CAPSLOCKOFF='xkbset nullify lock'
+alias CAPSOFF='xkbset nullify lock'

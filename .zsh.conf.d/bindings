@@ -1,0 +1,78 @@
+#!/usr/bin/env zsh
+
+function select-work-dir() {
+    echo "${HOME}"
+    WORK_DIR="${HOME}/work"
+    SELECTED=$(ls "${WORK_DIR}" | fzf)
+    [[ -n "${SELECTED}" ]] && cd "${WORK_DIR}/${SELECTED}"
+    echo
+    zle reset-prompt
+}
+zle     -N   select-work-dir
+bindkey '^a' select-work-dir
+
+
+# auto completion for ssh hosts
+function fzf-ssh () {
+  local hosts=$(awk -F '[, ]' '{if ($1 ~ /[a-z]/) {print $1}}' ~/.ssh/known_hosts)
+  local domains=$(grep CanonicalDomains ~/.ssh/config | cut -f 2- -d ' ' | tr ' ' '|')
+  local selected_host=$(echo $hosts | sed -E "s/\.(${domains})//" | sort -u | fzf --query "$LBUFFER")
+
+  if [ -n "${selected_host}" ]; then
+    BUFFER="ssh ${selected_host}"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+
+zle -N fzf-ssh
+bindkey '^s' fzf-ssh
+
+# auto completion for cd history
+function fzf-cd-history () {
+  local cd_history=$(dirs -lp | sort | uniq)
+  local paths=$(echo $cd_history | fzf --query "$LBUFFER")
+
+  if [ -n "$paths" ]; then
+    cd $selected_host
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+
+zle -N fzf-cd-history
+bindkey '^k' fzf-cd-history
+
+# systemd service search
+function fzf-systemctl () {
+    local services=$(
+        systemctl list-units --type=service --plain | grep '.service'
+    )
+    local selected=$(
+        echo "${services}" | fzf \
+            --query "$LBUFFER" \
+            --preview='sudo SYSTEMD_COLORS=1 systemctl status ${1}' \
+            --preview-window=bottom,22
+    )
+    if [[ -n "${selected}" ]]; then
+        BUFFER="sudo systemctl --no-pager status ${selected%% *}"
+        zle accept-line
+    fi
+    zle reset-prompt
+}
+
+zle -N fzf-systemctl
+bindkey '^u' fzf-systemctl
+
+# git log search
+function git-log-search() {
+  source $HOME/bin/git-log-search
+  local selected=$(__fzf_git_log_search__)
+  if [[ -n "${selected%% *}" ]]; then
+      BUFFER="git show ${selected%% *}"
+      zle accept-line
+  fi
+  zle reset-prompt
+}
+zle -N git-log-search
+bindkey '^g' git-log-search

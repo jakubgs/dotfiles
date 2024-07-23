@@ -1,0 +1,54 @@
+#!/usr/bin/env zsh
+
+do-reboot() {
+    doctl compute d ls $@ --format ID,Name,PublicIPv4,Region,Tags,Status
+    ID=$(doctl compute d ls $@ --format ID --no-header)
+    if [[ -n "${ID}" ]]; then
+        echo
+        read -q REPLY\?"Do you really want to reboot this host? (y/n) "
+        if [[ "${REPLY}" == "y" ]]; then
+            doctl compute droplet-action reboot "${ID}"
+        fi
+    fi
+}
+
+gc-reboot() {
+    NAME=${@:gs/./-}
+    gcloud compute instances list --filter="${NAME}"
+    ID=$(gcloud compute instances describe "${NAME}" --zone "us-central1-a" --quiet |  grep -oP "^id: '\K(\d+)")
+    if [[ -n "${ID}" ]]; then
+        echo
+        read -q REPLY\?"Do you really want to reboot this host? (y/n) "
+        if [[ "${REPLY}" == "y" ]]; then
+            gcloud compute instances reset "${NAME}"
+        fi
+    fi
+}
+
+ac-reboot() {
+    aliyun ecs DescribeInstances --InstanceName="${@}" \
+        --output "cols=InstanceId,HostName,EipAddress.IpAddress,Status" "rows=Instances.Instance[]"
+    ID=$(aliyun ecs DescribeInstances --InstanceName="${@}" | jq -r '.Instances.Instance[0].InstanceId')
+    [[ -z "${ID}" ]] && { echo "Instance not found"; return 1 }
+    read -q REPLY\?"Do you really want to reboot this host? (y/n) "
+    if [[ "${REPLY}" == "y" ]]; then
+        STATUS=$(aliyun ecs DescribeInstances --InstanceName="${@}" | jq -r '.Instances.Instance[0].Status')
+        if [[ "${STATUS}" == "Stopped" ]]; then
+            aliyun ecs StartInstance  --InstanceId="${ID}" | jq -c
+        else
+            aliyun ecs RebootInstance --InstanceId="${ID}" --ForceStop=true | jq -c
+        fi
+    fi
+}
+
+aws-reboot() {
+    aws --profile nimbus ec2 describe-instances --filters "Name=tag:Name,Values=${@}" --query 'Reservations[0].Instances[0].{Instance:InstanceId,AZ:Placement.AvailabilityZone,IP:PublicIpAddress,Name:Tags[?Key==`Name`]|[0].Value,State:State.Name}' --output text
+    ID=$(aws --profile nimbus ec2 describe-instances --filters "Name=tag:Name,Values=${@}" --query 'Reservations[0].Instances[0].InstanceId' --output text)
+    if [[ -n "${ID}" ]]; then
+        echo
+        read -q REPLY\?"Do you really want to reboot this host? (y/n) "
+        if [[ "${REPLY}" == "y" ]]; then
+            aws --profile nimbus ec2 reboot-instances --instance-ids ${ID}
+        fi
+    fi
+}
