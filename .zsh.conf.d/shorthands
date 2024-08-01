@@ -119,8 +119,9 @@ function b {
 
 function r {
     if [[ $# == 0 ]]; then
+        restic -q snapshots --latest 1
+    elif [[ $1 == "timers" ]]; then
         sudo systemctl -a list-timers '*backup*'
-        restic -q snapshots --latest 3
     elif [[ $# == 1 ]]; then
         restic -q "$@"
     else
