@@ -61,8 +61,8 @@ function format_device() {
     if [[ ! $prompt =~ [yY](es)* ]]; then
         exit 0
     fi
-    cryptsetup luksFormat -d "${PASS_FILE}" -y -v "${DEVICE}"
-    cryptsetup luksOpen -d "${PASS_FILE}" "${DEVICE}" "${LABEL}"
+    cryptsetup luksFormat -y "${DEVICE}" "${PASS_FILE}"
+    cryptsetup luksOpen --key-file "${PASS_FILE}" "${DEVICE}" "${LABEL}"
     mkfs.ext4 -m 0 -L "${LABEL}" "/dev/mapper/${LABEL}"
     sync && sleep 2
     cryptsetup luksClose "${LABEL}"
@@ -139,7 +139,7 @@ done
 
 # File with decrypting password
 PASS_FILE="/home/${USERNAME}/.usb_backup_pass"
-# Pre-defined assets to sync
+# Pre-defined assets to sync, order matters, too big are skipped.
 ASSETS=(
     "/home/$USERNAME/.password-store"
     "/home/$USERNAME/.gnupg"
