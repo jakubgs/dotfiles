@@ -114,7 +114,7 @@ function prompt_user() {
 
 # Initialize our own variables:
 USERNAME='jakubgs'
-LABEL='keychain'
+LABEL="keychain_$(date '+%Y%m%d_%H%M%S')"
 DEVICE=''
 LIST=0
 MOUNT=0
