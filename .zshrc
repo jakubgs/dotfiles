@@ -69,7 +69,7 @@ export TIMEFMT=$'\nreal\t%*Es\nuser\t%*Us\nsys\t%*Ss'
 # }}}
 # Exports {{{
 
-if which nvim >/dev/null; then
+if _exists nvim; then
     EDITOR="nvim"
     alias vim='nvim'
 else
