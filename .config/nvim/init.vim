@@ -18,3 +18,5 @@ source ~/.config/nvim/search.vim
 source ~/.config/nvim/completion.vim
 source ~/.config/nvim/cmdwin.vim
 source ~/.config/nvim/git.vim
+
+luafile ~/.config/nvim/nvim-spider.lua

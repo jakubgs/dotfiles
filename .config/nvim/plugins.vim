@@ -28,6 +28,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'benwainwright/fzf-project'
 " Movement
 Plug 'justinmk/vim-sneak'
+Plug 'chrisgrieser/nvim-spider'
 " Completion
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-vim'
