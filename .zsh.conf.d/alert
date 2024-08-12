@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 
 # send a notification when command completes
 function alert {
