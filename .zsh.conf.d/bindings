@@ -31,10 +31,10 @@ bindkey '^s' fzf-ssh
 # auto completion for cd history
 function fzf-cd-history () {
   local cd_history=$(dirs -lp | sort | uniq)
-  local paths=$(echo $cd_history | fzf --query "$LBUFFER")
+  local selected_dir=$(echo $cd_history | fzf --query "$LBUFFER")
 
-  if [ -n "$paths" ]; then
-    cd $selected_host
+  if [ -n "$selected_dir" ]; then
+    cd $selected_dir
     zle accept-line
   fi
   zle reset-prompt
