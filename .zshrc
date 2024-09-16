@@ -88,6 +88,8 @@ export SOPS_GPG_KEYSERVER="https://keys.openpgp.org"
 export ANSIBLE_REMOTE_USER="admin"
 export RESTIC_REPOSITORY="sftp:u288137@u288137.your-storagebox.de:/home/$(hostname)"
 export RESTIC_PASSWORD_FILE='/home/jakubgs/.usb_backup_pass'
+export PASSWORD_STORE_DIR="$HOME/work/infra-pass"
+export DIRENV_LOG_FORMAT=''
 
 # Magically link PYTHONPATH to the ZSH array pythonpath
 typeset -T PYTHONPATH pythonpath
@@ -262,5 +264,11 @@ elif [[ -f ~/.fzf.zsh ]]; then
     source ~/.fzf.zsh
 fi
 bindkey '^F' fzf-cd-widget
+
+# }}}
+# Direnv {{{
+
+# Sources configs in infra repos.
+eval "$(direnv hook zsh)"
 
 # }}}
