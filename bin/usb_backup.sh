@@ -41,6 +41,7 @@ function cleanup_umount() {
         echo "Removing device..."
     fi
     umount -qf "/mnt/${LABEL}"
+    rm -r "/mnt/${LABEL}"
     cryptsetup luksClose "${LABEL}"
 }
 
