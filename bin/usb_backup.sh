@@ -160,16 +160,15 @@ ASSETS=(
 [[ ! "${DEVICE}" =~ /dev/.* ]]  && DEVICE="/dev/${DEVICE}"
 [[ ! -b "${DEVICE}" ]]          && error "No such device exists: ${DEVICE}"     && exit 1
 
-# Unmount on exit.
-trap cleanup_umount EXIT ERR INT QUIT
-
 if [[ "${LIST}" -eq 1 ]]; then
     list_devices
 elif [[ "${FORMAT}" -eq 1 ]]; then
     format_device
 elif [[ "${MOUNT}" -eq 1 ]]; then
+    trap cleanup_umount EXIT ERR INT QUIT
     mount_device && prompt_user
 elif [[ "${SYNC}" -eq 1 ]]; then
+    trap cleanup_umount EXIT ERR INT QUIT
     mount_device && sync_assets
 else
     show_help; list_devices
