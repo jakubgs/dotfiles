@@ -2,16 +2,20 @@
 
 set -e
 
-PLAYLIST="/tmp/playlist.m3u"
+PLAYLIST='/tmp/playlist.m3u'
+FILTER='.*'
 
 # parse options
-while getopts ":s" o; do
+while getopts ":sf:" o; do
     case "${o}" in
         s)
             OPTIONS="--shuffle"
             ;;
+        f)
+            FILTER="${OPTARG}"
+            ;;
         *)
-            echo "Usage: $0 [-s] [DIRS|FILES] .."
+            echo "Usage: $0 [-s] [DIRS|FILES] .."; exit 1
             ;;
     esac
 done
@@ -23,10 +27,10 @@ else
     DIRS=$(realpath "$@")
 fi
 
-echo "Scanning ${DIRS}"
+echo "Scanning: ${DIRS}"
+echo "Filter: ${FILTER}"
 
 find "$DIRS" -type f \
--iname "*.webm" -o \
 -iname "*.wmv" -o \
 -iname "*.mp4" -o \
 -iname "*.ogg" -o \
@@ -42,7 +46,7 @@ find "$DIRS" -type f \
 -iname "*.asf" -o \
 -iname "*.divx" -o \
 -iname "*.mp4" | \
-sort \
+sort | grep -i "${FILTER}" \
 > "$PLAYLIST"
 
 COUNT=$(wc -l $PLAYLIST)
