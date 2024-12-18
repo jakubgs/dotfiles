@@ -16,7 +16,8 @@ Games/
 sensitive/
 vendor/
 env/*
-venv
+venv/
+.direnv/
 .*/
 tags
 *.mo
@@ -43,7 +44,7 @@ tags
 *.pdf
 *.dvi
 *.aux
-*.log 
+*.log
 *.toc
 *.cc
 *.po
