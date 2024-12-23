@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+# std color codes
+export RST=$(tput sgr0)
+export BLD=`tput bold`
+export UNBOLD=`tput sgr0`
+export RED=$(tput setaf 1)
+export GRN=$(tput setaf 2)
+export YLW=$(tput setaf 3)
+export BLU=$(tput setaf 4)
+export PRP=$(tput setaf 5)
+export CYA=$(tput setaf 6)
+export WHI=$(tput setaf 7)
+export GRY=$(tput setaf 008)
+export MAG=$(tput setaf 13)
+
 DRY_RUN=0
 
 VALID_ARGS=$(getopt -o fdh --long force,dry-run,help: -- "$@")
@@ -21,10 +35,10 @@ while [ : ]; do
         ;;
     -h | --help)
         echo 'Usage: symlinkconf [-f|-d]' >&2
-        exit 
+        exit
         ;;
-    --) shift; 
-        break 
+    --) shift;
+        break
         ;;
   esac
 done
@@ -41,38 +55,53 @@ git submodule update --init --recursive
 cd - > /dev/null
 
 # Find files to symlink
-CONFIG_FILES="bin .gnupg/gpg.conf .gnupg/gpg-agent.conf"
-CONFIG_FILES+=$(find "$GIT_ROOT" -regextype posix-extended -maxdepth 1 -name '.*' -not -regex '.*\.(git|gitignore|gnupg)' -printf "%P\n")
+CONFIG_FILES="bin .zsh.conf.d "
+CONFIG_FILES+=$(
+    find "$GIT_ROOT" \
+        -regextype posix-extended \
+        -maxdepth 1 \
+        -type f \
+        -name '.*' \
+        -not -regex '.*\.(git|gitignore|gnupg)' \
+        -printf "%P\n"
+)
 CONFIG_FILES+=" "
-CONFIG_FILES+=$(find "$GIT_ROOT/.config" -maxdepth 1 -printf "%P\n" | sed -e 1d -e 's/^/.config\//')
+CONFIG_FILES+=$(
+    find "$GIT_ROOT/" \
+        -regextype posix-extended \
+        -mindepth 2 \
+        -maxdepth 2 \
+        -not -regex '.*/\.git/.*' \
+        -not -regex '.*/bin/.*' \
+        -not -regex '.*/.zsh.conf.d/.*' \
+        -printf "%P\n"
+)
 
 NO_CHANGES=1
 
-for CONFIG_FILE in ${CONFIG_FILES}; do
-    SOURCE="${GIT_ROOT}/${CONFIG_FILE}" 
+function log() {
+    printf " ${1}%9s${RST}   %s\n" "${2}" "${3/#$HOME/\~}"
+}
+
+for CONFIG_FILE in $(echo ${CONFIG_FILES} | sort); do
+    SOURCE="${GIT_ROOT}/${CONFIG_FILE}"
     DEST="${HOME}/${CONFIG_FILE}"
     DEST_DIR=$(dirname "${DEST}")
     if [[ ! -d "${DEST_DIR}" ]]; then
         mkdir -p "${DEST_DIR}"
     fi
     if [[ ${FORCE} ]]; then
-        echo "FORCE LINKING: ${SOURCE} -> ${DEST}" >&2
-        ln -sf "${SOURCE}" "${DEST}"
-    elif [[ -f "${DEST}" ]]; then
-        echo "IS_FILE: ${DEST}" >&2
-    elif [[ -d "${DEST}" ]]; then
-        echo "IS_DIR:  ${DEST}" >&2
-    elif [[ -h "${DEST}" ]]; then
-        echo "SYMLINK: ${DEST}" >&2
+        log "${red}${BLD}" "FORCED"  "${DEST}"
+        echo ln -snf "${SOURCE}" "${DEST}"
+    elif [[ -L "${DEST}" ]]; then
+        log "${GRN}"       "LINKED"  "${DEST}"
+    elif [[ -f "${DEST}" ]] || [[ -d "${DEST}" ]]; then
+        log "${CYA}"       "EXISTS"  "${DEST}"
     else # symlinking withou forcing
         NO_CHANGES=0
-        echo "LINKING: ${SOURCE} -> ${DEST}" >&2
+        log "${YLW}${BLD}" "CREATED" "${DEST}"
         if [[ "${DRY_RUN}" -ne 1 ]]; then
-            ln -s "${SOURCE}" "${DEST}"
+            ln -sn "${SOURCE}" "${DEST}"
         fi
     fi
 done
-
-if [[ ${NO_CHANGES} ]]; then
-    echo "No changes necessary."
-fi
