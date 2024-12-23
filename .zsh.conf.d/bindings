@@ -76,3 +76,25 @@ function git-log-search() {
 }
 zle -N git-log-search
 bindkey '^g' git-log-search
+
+# vault secrets search
+function fzf-vault () {
+  local secrets_path=$(
+    vault kv get -mount=metadata -format=json list-secrets \
+        | jq -r '.data.data.key' | jq -r '.[]'
+  )
+  local selected=$(
+    echo "${secrets_path}" | fzf \
+        --query "$LBUFFER" \
+        --preview='vault kv get -mount=secret -format=json ${1} | jq ".data.data" | jq "keys[]"' \
+        --sync \
+        --preview-window=bottom,10
+  )
+  if [ -n "${selected}" ]; then
+    BUFFER="vault kv get -mount=secret ${selected}"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+zle -N fzf-vault
+bindkey '^v' fzf-vault
