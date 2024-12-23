@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+DRY_RUN=0
+
 VALID_ARGS=$(getopt -o fdh --long force,dry-run,help: -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
@@ -65,7 +67,7 @@ for CONFIG_FILE in ${CONFIG_FILES}; do
     else # symlinking withou forcing
         NO_CHANGES=0
         echo "LINKING: ${SOURCE} -> ${DEST}" >&2
-        if [[ "${DRY_RUN}" ]]; then
+        if [[ "${DRY_RUN}" -ne 1 ]]; then
             ln -s "${SOURCE}" "${DEST}"
         fi
     fi
