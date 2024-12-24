@@ -12,8 +12,9 @@ hi! link Cursor LightlineLeft_normal_0
 hi! link Sneak Cursor
 hi! link SneakLabel TabLineSel
 
-" Highlight trailing whitespace in normal mode
-autocmd InsertLeave * hi! ExtraWhitespace ctermbg=red guibg=red
-autocmd InsertEnter * hi! ExtraWhitespace NONE
-autocmd FileType fzf  hi! ExtraWhitespace NONE
-match ExtraWhitespace /\s\+$/
+" Highlight trailing whitespace and fix it
+hi ExtraWhitespace ctermbg=darkred guibg=darkred
+let g:better_whitespace_enabled=1
+let g:strip_whitelines_at_eof=1
+let g:strip_whitespace_on_save=1
+let g:strip_whitespace_confirm=0

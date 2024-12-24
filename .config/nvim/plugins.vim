@@ -18,6 +18,7 @@ Plug 'akinsho/toggleterm.nvim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'jkramer/vim-checkbox'
+Plug 'ntpeters/vim-better-whitespace'
 " Git plugins
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
