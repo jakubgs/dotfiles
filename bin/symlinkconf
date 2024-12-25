@@ -2,6 +2,7 @@
 set -eo pipefail
 
 # std color codes
+export TERM="${TERM:-dumb}"
 export RST=$(tput sgr0)
 export BLD=`tput bold`
 export UNBOLD=`tput sgr0`
