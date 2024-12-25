@@ -69,7 +69,10 @@
     default = current
 [pull]
     default = current
+    rebase = true
     ff = only
+[rebase]
+    autostash = true
 [difftool]
     prompt = false
 [web]
