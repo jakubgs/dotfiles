@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Script for searching through Git log using FZF.
-# Should work as `git log-search` if it's in your $PATH.
+# Script for searching through Git stash using FZF.
+# Should work as `git stash-search` if it's in your $PATH.
 
-__fzf_git_log_search__() {
+__fzf_git_stash_search__() {
     git rev-parse --is-inside-work-tree >/dev/null || return
     local format='%<(7)%C(red)%h%Creset %C(cyan)%as%Creset %s %C(yellow)%d%Creset'
     local selected=$(
@@ -19,7 +19,7 @@ __fzf_git_log_search__() {
 
 # Run only when not being sourced.
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    SELECTED=$(__fzf_git_log_search__ "$@")
+    SELECTED=$(__fzf_git_stash_search__ "$@")
     echo "${SELECTED%% *}"
     echo "${SELECTED%% *}" | xsel -i --clipboard
 fi
