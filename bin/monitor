@@ -1,8 +1,0 @@
-#!/bin/bash
-
-watch 'aticonfig --adapter=0 --od-gettemperature &&
-aticonfig --adapter=1 --od-gettemperature &&
-sensors &&
-df -h'
-
-#cat /proc/cpuinfo | grep -i "cpu Mhz" &&

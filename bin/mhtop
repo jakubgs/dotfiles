@@ -1,9 +1,0 @@
-#!/bin/bash
-
-RVALUE=0
-
-while [ RVALUE ]; do
-	ssh melchior -t '. /etc/profile; . ~/.profile; htop'
-	RVALUE=$?
-	sleep 5
-done

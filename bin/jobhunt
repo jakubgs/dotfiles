@@ -1,8 +1,0 @@
-#!/bin/bash
-
-cd /mnt/melchior/projects/
-
-cp cl/cl_pl_linuxadm.pdf "jobhunt/Sokołowski Jakub - list motywacyjny.pdf"
-cp cl/cl_en_linuxadm.pdf "jobhunt/Sokołowski Jakub - cover letter.pdf"
-cp cv/cv_pl.pdf "jobhunt/Sokołowski Jakub - curriculum vitae - pl.pdf"
-cp cv/cv_en.pdf "jobhunt/Sokołowski Jakub - curriculum vitae - en.pdf"

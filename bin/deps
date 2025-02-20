@@ -1,3 +1,0 @@
-#!/bin/bash
-
-ldd $@ | cut -d' ' -f 3 | xargs equery b | cut -d' ' -f 1 | uniq | unversion 
