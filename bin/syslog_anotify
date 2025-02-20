@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # this script is for reading from stdin and starting anotify
 # for every line received, since that's how syslog-ng sends

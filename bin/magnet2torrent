@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 [[ "$1" =~ xt=urn:btih:([^&/]+) ]] || {
     echo "Not a magnet link!" >&2

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 export SCAN_TEMP=$(mktemp -d)
 ls /dev/sd? > ${SCAN_TEMP}/before.txt
 sudo partprobe

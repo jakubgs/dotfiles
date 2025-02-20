@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 VM_STAT=$(VBoxManage showvminfo "Windows 7 on SSD" | grep State | cut -d" " -f13)
 
