@@ -77,6 +77,19 @@ function git-log-search() {
 zle -N git-log-search
 bindkey '^g' git-log-search
 
+# git stash search
+function git-stash-search() {
+  source $HOME/bin/git-stash-search
+  local selected=$(__fzf_git_stash_search__)
+  if [[ -n "${selected%% *}" ]]; then
+      BUFFER="git show ${selected%% *}"
+      zle accept-line
+  fi
+  zle reset-prompt
+}
+zle -N git-stash-search
+bindkey '^b' git-stash-search
+
 # vault secrets search
 function fzf-vault () {
   local secrets_path=$(
