@@ -17,6 +17,8 @@ sensitive/
 vendor/
 env/*
 venv/
+result
+.result/
 .direnv/
 .*/
 tags
