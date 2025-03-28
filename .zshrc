@@ -85,9 +85,9 @@ export TERMINAL="urxvtc"
 export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man nomod nolist' -\""
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 export SOPS_GPG_KEYSERVER="https://keys.openpgp.org"
-export ANSIBLE_REMOTE_USER="admin"
 export RESTIC_REPOSITORY="sftp:u288137@u288137.your-storagebox.de:/home/$(hostname)"
 export RESTIC_PASSWORD_FILE='/home/jakubgs/.usb_backup_pass'
+export AGE_IDENTITIES=$(ls ${HOME}/.ssh/age-yubikey-*)
 export PASSWORD_STORE_DIR="$HOME/work/infra-pass"
 export DIRENV_LOG_FORMAT=''
 export QEMU_OPTS='-m 4096 -smp 4 -display gtk,zoom-to-fit=on'
