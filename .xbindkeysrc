@@ -30,7 +30,7 @@
   m:0x0 + c:107
   Print
 
-"autorandr --cycle"
+"xset dpms force off"
   m:0x0 + c:246
   XF86WLAN
 
@@ -42,7 +42,7 @@
   m:0x0 + c:235
   XF86Display
 
-"xset dpms force off"
+"physlock"
   m:0x0 + c:164
   XF86Favorites
 
