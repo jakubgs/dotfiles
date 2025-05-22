@@ -30,15 +30,19 @@
   m:0x0 + c:107
   Print
 
-"autorandr -c"
+"autorandr --cycle"
+  m:0x0 + c:246
+  XF86WLAN
+
+"autorandr --cycle"
   m:0x0 + c:179
   XF86Tools
 
-"xset dpms force off"
+"autorandr --cycle"
   m:0x0 + c:235
   XF86Display
 
-"~/bin/tpadtoggle"
+"xset dpms force off"
   m:0x0 + c:164
   XF86Favorites
 
