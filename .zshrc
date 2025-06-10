@@ -82,7 +82,9 @@ export VISION="$EDITOR"
 export PAGER="less"
 export BROWSER="thunar"
 export TERMINAL="urxvtc"
-export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man nomod nolist' -\""
+export MANPAGER='nvim +Man!'
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 export FZF_DEFAULT_OPTS="--extended-exact --height=100% --layout=default"
 export SOPS_GPG_KEYSERVER="https://keys.openpgp.org"
 export RESTIC_REPOSITORY="sftp:u288137@u288137.your-storagebox.de:/home/$(hostname)"
