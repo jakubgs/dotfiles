@@ -19,6 +19,7 @@ map T <Plug>Sneak_T
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let $FZF_DEFAULT_OPTS = '--reverse --bind ctrl-k:up,ctrl-j:down'
 
 " fix for line numbers in FZF window
