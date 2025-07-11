@@ -269,7 +269,7 @@ bindkey '^F' fzf-cd-widget
 # Direnv {{{
 
 # Sources configs in infra repos.
-if [ -n "${commands[direnv]}" ]; then
+if [ -z "${NO_DIRENV}" ] && [ -n "${commands[direnv]}" ]; then
     eval "$(direnv hook zsh)"
 fi
 
