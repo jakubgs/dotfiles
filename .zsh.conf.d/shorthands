@@ -59,6 +59,11 @@ function ghpr {
 function s {
     if [[ $# == 0 ]]; then
         sudo systemctl list-units --type=service --state=running
+    elif [[ $# == 1 ]] && [[ $1 == "reload" ]]; then
+        sudo systemctl daemon-reload
+    elif [[ $# == 2 ]] && [[ $1 == "bump" ]]; then
+        sudo systemctl --no-block restart "$2"
+        sudo journalctl -o cat --no-hostname --follow --unit "$2"
     elif [[ $# == 1 ]]; then
         sudo systemctl status "$@"
     else
@@ -69,11 +74,11 @@ _exists systemctl && compdef s=systemctl
 
 function j {
     if [[ $# == 0 ]]; then
-        sudo journalctl --lines=30 --follow
+        sudo journalctl --no-hostname --lines=30 --follow
     elif [[ $# == 1 ]]; then
-        sudo journalctl --lines=30 --follow --unit "$@"
+        sudo journalctl --no-hostname --lines=30 --follow --unit "$@"
     else
-        sudo journalctl "$@"
+        sudo journalctl --no-hostname "$@"
     fi
 }
 _exists journalctl && compdef j=journalctl
