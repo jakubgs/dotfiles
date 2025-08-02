@@ -42,15 +42,16 @@
     psf = push --force
     psh = !git push origin $(git rev-parse --abbrev-ref HEAD)
     r   = rebase
-    re  = rebase
+    rb  = rebase
     rc  = rebase --continue
+    rbm = !git fetch --verbose origin ${1:-master} && git rebase origin/${1:-master}
     rl  = reflog
     rs  = reset
     rsh = reset --hard
     rst = reset --hard HEAD
     s   = stash
     st  = status
-    sl  = log --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %C(bold yellow)%<(20)%an %C(bold green)>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
+    sl  = log --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%cs%Creset %C(bold yellow)%<(20)%an %C(bold green)>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
     sla = log --pretty=format:'* %h %s %d' --abbrev-commit
     slg = log --graph --pretty=format:'%<(8)%Cred%h%Creset %C(cyan)%ai%Creset %Cgreen(%<(12)%cr) %C(bold blue)%<(21)<%an>%Creset %s %C(yellow)%d%Creset' --abbrev-commit
     sm  = submodule
