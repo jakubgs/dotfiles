@@ -55,6 +55,7 @@ endfunction
 command!          Work      call s:WorkSearch()
 command!          Panacea   call s:PanaceaFunc()
 command! -nargs=? GitRootAg call GitRootAg(<q-args>)
+command! -nargs=? AG        call GitRootAg(<q-args>)
 command! -bang -nargs=? -complete=dir Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right'), <bang>0)
 
@@ -71,5 +72,5 @@ nnoremap <leader><leader>f  :Files<CR>
 nnoremap <leader><leader>g  :GFiles<CR>
 nnoremap <leader><leader>c  :Commits<CR>
 nnoremap <leader><leader>l  :Lines<CR>
-nnoremap <leader><leader>a  :GitRootAg<CR>
+nnoremap <leader><leader>a  :GitRootAg<space>
 nnoremap <leader><leader>A  :GitRootAg<space><c-r>=expand("<cword>")<CR><CR>

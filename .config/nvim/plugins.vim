@@ -30,11 +30,13 @@ Plug 'benwainwright/fzf-project'
 " Movement
 Plug 'justinmk/vim-sneak'
 " Completion
-Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/neco-vim'
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-Plug 'carlitux/deoplete-ternjs', { 'do': 'yarn global add tern' }
-Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'TabbyML/vim-tabby'
+Plug 'neovim/nvim-lspconfig'
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'Shougo/neco-vim'
+"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+"Plug 'carlitux/deoplete-ternjs', { 'do': 'yarn global add tern' }
+"Plug 'deoplete-plugins/deoplete-jedi'
 " Style
 Plug 'nanotech/jellybeans.vim'
 Plug 'itchyny/lightline.vim'
