@@ -33,13 +33,16 @@ nnoremap gj j
 nnoremap gk k
 
 " easier opening of links
-nnoremap K <Plug>NetrwBrowseX
+"nnoremap K <Plug>NetrwBrowseX
 
 " to match the behaviour of D
 nnoremap Y y$
 
 " run last used macro with one key
 nnoremap Q @@
+
+" remap incrementing numbers
+nnoremap <c-c> <c-a>
 
 " for jumping forward
 nnoremap <c-p> <c-i>
