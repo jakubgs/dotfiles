@@ -64,7 +64,7 @@ URxvt.font-size.step: 1
 *cursorColor2:         #000000
 *cursorBlink:          false
 *saveLines:            10000
-*cutchars:             "`'\",;@&*=|?()<>[]{}"
+*cutchars:             "`'\",:;@&*=|?()<>[]{}"
 
 !! Colors !!
 ! Black
