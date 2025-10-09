@@ -31,7 +31,7 @@ set shiftwidth=4                  " spaces for each step of (auto)indendt
 " Search
 set ignorecase                    " ignore case
 set smartcase                     " unless upper case used
-set iskeyword+=$,@,%,#            " not word dividers
+set iskeyword+=$,@,%              " not word dividers
 set iskeyword-=_,.                " word dividers
 
 " Saves lives
