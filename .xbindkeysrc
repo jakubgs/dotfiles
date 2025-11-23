@@ -30,9 +30,10 @@
   m:0x0 + c:107
   Print
 
-"xset dpms force off"
-  m:0x0 + c:246
-  XF86WLAN
+# This always disables WiFi regardless.
+#"xset dpms force off"
+#  m:0x0 + c:246
+#  XF86WLAN
 
 "autorandr --cycle"
   m:0x0 + c:179
@@ -42,7 +43,19 @@
   m:0x0 + c:235
   XF86Display
 
-"physlock"
+"xset dpms force off"
+  m:0x0 + c:224
+  XF86Messenger
+
+"xset dpms force off"
+  m:0x0 + c:177
+  XF86Phone
+
+"xset dpms force off"
+  m:0x0 + c:136
+  Cancel
+
+"lock"
   m:0x0 + c:164
   XF86Favorites
 
