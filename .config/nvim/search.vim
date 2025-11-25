@@ -52,9 +52,16 @@ function! GitRootAg(input)
   exec 'Ag! ' . a:input
 endfunction
 
-command!          Work      call s:WorkSearch()
-command!          Panacea   call s:PanaceaFunc()
-command! -nargs=? GitRootAg call GitRootAg(<q-args>)
+function! s:GitUnstaged()
+  call fzf#run(fzf#wrap({
+  \  'source': 'git ls-files --others --modified --exclude-standard'
+  \}))
+endfunction
+
+command!          Work        call s:WorkSearch()
+command!          Panacea     call s:PanaceaFunc()
+command!          GitUnstaged call s:GitUnstaged()
+command! -nargs=? GitRootAg   call GitRootAg(<q-args>)
 command! -bang -nargs=? -complete=dir Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right'), <bang>0)
 
@@ -69,6 +76,7 @@ nnoremap <leader><leader>h  :History<CR>
 nnoremap <leader><leader>m  :Marks<CR>
 nnoremap <leader><leader>f  :Files<CR>
 nnoremap <leader><leader>g  :GFiles<CR>
+nnoremap <leader><leader>u  :GitUnstaged<CR>
 nnoremap <leader><leader>c  :Commits<CR>
 nnoremap <leader><leader>l  :Lines<CR>
 nnoremap <leader><leader>a  :GitRootAg<CR>
