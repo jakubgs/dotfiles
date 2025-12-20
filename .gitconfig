@@ -20,6 +20,7 @@
 [alias]
     a   = add
     b   = branch
+    br  = rev-parse --abbrev-ref HEAD
     bl  = for-each-ref --sort=committerdate refs/heads/ --format='%(color: red)%(objectname:short) %(color: cyan)%(committerdate:iso) %(align:width=25)%(color:bold yellow)%(authorname)%(end) %(color:bold green)>%(color:reset) %(refname:short)'
     cf  = cat-file
     cat = cat-file
@@ -27,6 +28,7 @@
     cp  = cherry-pick
     df  = diff
     f   = fetch
+    fo  = !git fetch --verbose origin $(git br)
     l   = log --oneline --decorate
     ls  = ls-files
     c   = commit --verbose --no-verify --gpg-sign --signoff
@@ -36,11 +38,12 @@
     mp  = !git mm && git ps -f
     pl  = pull
     plf = pull --force --rebase
-    plh = !git fetch --verbose origin $(git rev-parse --abbrev-ref HEAD) && git rebase origin/$(git rev-parse --abbrev-ref HEAD)
-    pr  = ! git fetch origin pull/$1/head:PR-$1 && git checkout PR-$1 && echo PR
+    plh = !git fo && git rebase origin/$(git br)
+    prh = !git fo && git reset --hard origin/$(git br)
+    pr  = !git fetch origin pull/$1/head:PR-$1 && git checkout PR-$1 && echo PR
     ps  = push
     psf = push --force
-    psh = !git push origin $(git rev-parse --abbrev-ref HEAD)
+    psh = !git push origin $(git br)
     r   = rebase
     rb  = rebase
     rc  = rebase --continue
