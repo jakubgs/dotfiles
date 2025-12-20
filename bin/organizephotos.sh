@@ -31,7 +31,7 @@ done
 [ "${1:-}" = "--" ] && shift
 
 # If src is not a directory expand it. Might be a glob.
-if [[ -d "${@}" ]]; then
+if [[ ! -d "${@}" ]]; then
     SRC=$(echo ${@})
 fi
 
