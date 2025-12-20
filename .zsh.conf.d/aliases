@@ -12,6 +12,7 @@ alias fucking='sudo'
 alias ll='ls -lh --color'
 alias mm="make -j6"
 alias tt="tree -CdL 2"
+alias dt='date +"%Y%m%dT%H%M%S"'
 alias wq='du -sh'
 alias kt='du -h --max-depth=1 | sort -h'
 alias dy='df --sync -hTt ext4'
