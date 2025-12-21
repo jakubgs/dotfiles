@@ -14,6 +14,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'bogado/file-line'
 Plug 'akinsho/toggleterm.nvim'
+Plug 'tyjak/vim-redact-pass', { 'commit': '403a44dc' }
 " Text manipulation
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
