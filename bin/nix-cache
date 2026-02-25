@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CACHE_URL="${1:-ssh://bardiel.magi.vpn}"
-TARGET="${2:-$(readlink -f /run/current-system)}"
+TARGET="$(readlink -f ${1:-/run/current-system)})"
+CACHE_URL="${2:-ssh://bardiel.magi.vpn}"
 
-nix copy --to "${CACHE_URL}" "${TARGET}"
+nix copy --to "${CACHE_URL}" "${TARGET}" $(nix-store -qR "${TARGET}")
