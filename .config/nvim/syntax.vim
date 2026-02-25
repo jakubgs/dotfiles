@@ -16,3 +16,4 @@ Plug 'robbles/logstash.vim',            { 'for': 'logstash' }
 Plug 'sebdah/vim-delve',                { 'for': 'go' }
 Plug 'tell-k/vim-autopep8',             { 'for': 'python' }
 Plug 'zah/nim.vim',                     { 'for': 'nim' }
+Plug 'hjson/vim-hjson',                 { 'for': 'hujson' }
