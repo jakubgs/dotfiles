@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+docker run --rm -it \
+  --user "$(id -u):$(id -g)" \
+  --security-opt no-new-privileges:true \
+  --cap-drop ALL \
+  --pids-limit 256 \
+  --read-only \
+  --tmpfs /tmp:rw,noexec,nosuid,nodev,size=512m \
+  --tmpfs /home/opencode:rw,nosuid,nodev,size=512m \
+  --tmpfs /home/opencode/.local/share/opencode:rw,nosuid,nodev,size=512m \
+  --tmpfs /home/opencode/.cache:rw,nosuid,nodev,size=512m \
+  -e HOME=/home/opencode \
+  -e OPENCODE_CONFIG_DIR=/mnt/opencode-config \
+  -w /workspace \
+  -v "$(pwd):/workspace:rw" \
+  -v "$HOME/.config/opencode:/mnt/opencode-config:ro" \
+  ghcr.io/anomalyco/opencode: \
+  opencode "$@"
