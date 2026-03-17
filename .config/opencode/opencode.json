@@ -20,7 +20,7 @@
     }
   },
   "permission": {
-    "edit": "deny",
+    "edit": "ask",
     "bash": "deny",
     "todowrite": "deny",
     "task": "deny"
