@@ -1,0 +1,28 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "plan": {
+      "mode": "primary",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "todowrite": "deny",
+        "task": "deny"
+      }
+    }
+  },
+  "agent": {
+    "build": {
+      "enabled": false
+    },
+    "plan": {
+      "mode": "primary"
+    }
+  },
+  "permission": {
+    "edit": "deny",
+    "bash": "deny",
+    "todowrite": "deny",
+    "task": "deny"
+  }
+}
