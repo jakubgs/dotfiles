@@ -13,8 +13,8 @@ nnoremap <leader>gT :Git commit -s -v -q -n --amend -- %:P<CR>
 nnoremap <leader>gd :Gvdiff<CR>
 nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gu :Git reset "%:p"<CR><CR>
-nnoremap <leader>gl :GV<CR>
-nnoremap <leader>gL :GV?<CR>
+nnoremap <leader>gl :Commits<CR>
+nnoremap <leader>gL :BCommits<CR>
 nnoremap <leader>gp :Ggrep<Space>
 nnoremap <leader>gm :Gmove<Space>
 nnoremap <leader>gB :Git blame<CR>
@@ -27,9 +27,6 @@ nnoremap <leader>gf  :Dispatch! git fetch --all<CR>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpS :Dispatch! git push --force<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
-
-nnoremap <leader>gv :execute('Gitv '.expand('%:p'))<CR>
-nnoremap <leader>gV :execute('Gitv! '.expand('%:p'))<CR>
 
 nnoremap <leader>gSs :Git status <bar>
                     \ if confirm('Do you want to stash changes?') <bar>
