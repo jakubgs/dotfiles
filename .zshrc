@@ -92,6 +92,7 @@ export RESTIC_PASSWORD_FILE='/home/jakubgs/.usb_backup_pass'
 export AGE_IDENTITIES="${HOME}/.ssh/age-yubikey.txt"
 export PASSWORD_STORE_DIR="$HOME/work/infra-pass"
 export DIRENV_LOG_FORMAT=''
+export DIRENV_WARN_TIMEOUT='10s'
 export QEMU_OPTS='-m 4096 -smp 4 -display gtk,zoom-to-fit=on'
 
 # Magically link PYTHONPATH to the ZSH array pythonpath
