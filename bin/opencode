@@ -15,5 +15,5 @@ docker run --rm -it \
   -w /workspace \
   -v "$(pwd):/workspace:rw" \
   -v "$HOME/.config/opencode:/mnt/opencode-config:ro" \
-  ghcr.io/anomalyco/opencode: \
+  ghcr.io/anomalyco/opencode:1.14.41: \
   opencode "$@"
