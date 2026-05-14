@@ -1,0 +1,70 @@
+#!/usr/bin/env zsh
+
+function rootly-alerts-table {
+    local page_size="${ROOTLY_ALERTS_PAGE_SIZE:-100}"
+
+    local headers=$(
+        echo -e "\033[1mID\tStatus\tUrgency\tStarted\tSummary\tResponders\033[0m"
+    )
+
+    local alerts=$(
+        rootly alerts list \
+            --page-size="${page_size}" \
+            ${=ROOTLY_ALERTS_LIST_ARGS} \
+            --format=json \
+        | jq -r '
+            .data[]
+            | .attributes as $a
+            | $a.data as $d
+            | [
+                ( $a.short_id // ""),
+                ( $a.status // "" ),
+                ( $a.alert_urgency.name // "" ),
+                ( $a.started_at // "" ),
+                ( $a.summary // "" ),
+                ( [$a.responders[]?.first_name] | join(",") )
+              ]
+            | @tsv
+        '
+    )
+
+    echo -e "${headers}\n${alerts}" \
+        | column -t -s $'\t' \
+        | sed \
+            -e 's,Critical,\x1b[31m&\x1b[0m,' \
+            -e 's,Warning,\x1b[33m&\x1b[0m,' \
+            -e 's,acknowledged,\x1b[34m&\x1b[0m,' \
+            -e 's,firing,\x1b[31m&\x1b[0m,' \
+            -e 's,open,\x1b[33m&\x1b[0m,' \
+            -e 's,resolved,\x1b[32m&\x1b[0m,' \
+            -e 's,triggered,\x1b[31m&\x1b[0m,'
+}
+
+function fzf-rootly-alerts {
+    local selected=$(
+        rootly-alerts-table \
+            | fzf \
+                --ansi \
+                --query "${LBUFFER:-}" \
+                --header-lines=1 \
+                --preview-window='bottom:60%:wrap' \
+                --preview='rootly alerts get --format=table {1} 2>/dev/null'
+    )
+
+    [ -z "${selected}" ] && return
+
+    local alert_id="${selected%% *}"
+
+    BUFFER="rootly alerts get ${alert_id}"
+
+    if [ -z "${ZLE_STATE}" ]; then
+        echo "${selected}"
+        echo
+        eval "${BUFFER}"
+    else
+        zle accept-line
+        zle reset-prompt
+    fi
+}
+
+zle -N fzf-rootly-alerts
