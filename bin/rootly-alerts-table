@@ -7,11 +7,11 @@ function rootly-json-to-table {
         | $a.data as $d
         | [
             ( $a.short_id // ""),
+            ( $a.created_at // "" ),
             ( [$a.groups[]?.name] | join(",") ),
             ( [$a.responders[]?.first_name] | join(",") ),
             ( $a.status // "" ),
             ( $a.alert_urgency.name // "" ),
-            ( $a.started_at // "" ),
             ( $a.summary // "" )
           ]
         | @tsv
@@ -41,17 +41,21 @@ function rootly-table-colors {
 }
 
 function rootly-alerts-json {
-    rootly alerts list --page="${page}" --page-size="${page_size}" --format=json \
+    rootly alerts list \
+        --sort=created_at \
+        --page="${page}" \
+        --page-size="${page_size}" \
+        --format=json
 }
 
 function rootly-format-table {
-    awk -F '\t' '{ printf "%-7s %-8s %-12s %-13s %-8s %-29s %s\n", $1, $2, $3, $4, $5, $6, $7; fflush() }'
+    awk -F '\t' '{ printf "%-7s %-29s %-8s %-12s %-13s %-8s %s\n", $1, $2, $3, $4, $5, $6, $7; fflush() }'
 }
 
 local count=${1:-100}
 local page_size=100
 local pages=$(( (count + page_size - 1) / page_size ))
-local headers=$(echo -e "${bold}ID\tStatus\tGroups\tResponders\tUrgency\tStarted\tSummary${reset}")
+local headers=$(echo -e "${bold}ID\tCreated\tGroups\tResponders\tStatus\tUrgency\tSummary${reset}")
 
 {
     echo "${headers}"
