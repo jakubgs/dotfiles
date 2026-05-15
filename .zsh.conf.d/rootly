@@ -2,10 +2,8 @@
 
 function rootly-alerts-table {
     local page_size="${ROOTLY_ALERTS_PAGE_SIZE:-100}"
-
-    local headers=$(
-        echo -e "\033[1mID\tStatus\tUrgency\tStarted\tSummary\tResponders\033[0m"
-    )
+    local headers=$(echo -e "\033[1mID\tStatus\tUrgency\tStarted\tSummary\tResponders\033[0m")
+    local help=$(echo -e "\033[2;37menter: Show alert | ctrl+o : Open in browser\033[0m")
 
     local alerts=$(
         rootly alerts list \
@@ -28,7 +26,7 @@ function rootly-alerts-table {
         '
     )
 
-    echo -e "${headers}\n${alerts}" \
+    echo -e "${help}\n${headers}\n${alerts}" \
         | column -t -s $'\t' \
         | sed \
             -e 's,Critical,\x1b[31m&\x1b[0m,' \
@@ -46,9 +44,10 @@ function fzf-rootly-alerts {
             | fzf \
                 --ansi \
                 --query "${LBUFFER:-}" \
-                --header-lines=1 \
+                --header-lines=2 \
                 --preview-window='bottom:26:wrap' \
-                --preview='script -q /dev/null -c "rootly alerts get --format=table {1}" 2>/dev/null'
+                --preview='script -q /dev/null -c "rootly alerts get --format=table {1}" 2>/dev/null' \
+                --bind='ctrl-o:execute-silent(xdg-open https://rootly.com/account/alerts/{1})'
     )
 
     [ -z "${selected}" ] && return
