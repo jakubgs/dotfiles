@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+
+local page_size="${ROOTLY_ALERTS_PAGE_SIZE:-100}"
+local headers=$(echo -e "\033[1mID\tStatus\tUrgency\tStarted\tSummary\tResponders\033[0m")
+local alerts=$(
+    rootly alerts list --page-size="${page_size}" --format=json \
+        | jq -r '
+            .data[]
+            | .attributes as $a
+            | $a.data as $d
+            | [
+                ( $a.short_id // ""),
+                ( $a.status // "" ),
+                ( $a.alert_urgency.name // "" ),
+                ( $a.started_at // "" ),
+                ( $a.summary // "" ),
+                ( [$a.responders[]?.first_name] | join(",") )
+              ]
+            | @tsv
+        '
+)
+echo -e "${headers}\n${alerts}" | column -t -s $'\t' | sed \
+   -e 's,Critical,\x1b[31m&\x1b[0m,' \
+   -e 's,Warning,\x1b[33m&\x1b[0m,' \
+   -e 's,acknowledged,\x1b[34m&\x1b[0m,' \
+   -e 's,firing,\x1b[31m&\x1b[0m,' \
+   -e 's,open,\x1b[33m&\x1b[0m,' \
+   -e 's,resolved,\x1b[32m&\x1b[0m,' \
+   -e 's,triggered,\x1b[31m&\x1b[0m,'

@@ -1,53 +1,22 @@
 #!/usr/bin/env zsh
 
-function rootly-alerts-table {
-    local page_size="${ROOTLY_ALERTS_PAGE_SIZE:-100}"
-    local headers=$(echo -e "\033[1mID\tStatus\tUrgency\tStarted\tSummary\tResponders\033[0m")
-    local help=$(echo -e "\033[2;37menter: Show alert | ctrl+o : Open in browser\033[0m")
-
-    local alerts=$(
-        rootly alerts list \
-            --page-size="${page_size}" \
-            ${=ROOTLY_ALERTS_LIST_ARGS} \
-            --format=json \
-        | jq -r '
-            .data[]
-            | .attributes as $a
-            | $a.data as $d
-            | [
-                ( $a.short_id // ""),
-                ( $a.status // "" ),
-                ( $a.alert_urgency.name // "" ),
-                ( $a.started_at // "" ),
-                ( $a.summary // "" ),
-                ( [$a.responders[]?.first_name] | join(",") )
-              ]
-            | @tsv
-        '
-    )
-
-    echo -e "${help}\n${headers}\n${alerts}" \
-        | column -t -s $'\t' \
-        | sed \
-            -e 's,Critical,\x1b[31m&\x1b[0m,' \
-            -e 's,Warning,\x1b[33m&\x1b[0m,' \
-            -e 's,acknowledged,\x1b[34m&\x1b[0m,' \
-            -e 's,firing,\x1b[31m&\x1b[0m,' \
-            -e 's,open,\x1b[33m&\x1b[0m,' \
-            -e 's,resolved,\x1b[32m&\x1b[0m,' \
-            -e 's,triggered,\x1b[31m&\x1b[0m,'
-}
-
 function fzf-rootly-alerts {
+    local help=$(echo -e "\033[2;37menter: Show alert | ctrl+r : Refresh | ctrl+o : Open in browser | ctrl+a : Acknowledge | ctrl+f : Resolve | ctrl+t : Triggered\033[0m")
+    local refresh='reload-sync(rootly-alerts-table)+refresh-preview'
     local selected=$(
-        rootly-alerts-table \
-            | fzf \
-                --ansi \
-                --query "${LBUFFER:-}" \
-                --header-lines=2 \
-                --preview-window='bottom:26:wrap' \
-                --preview='script -q /dev/null -c "rootly alerts get --format=table {1}" 2>/dev/null' \
-                --bind='ctrl-o:execute-silent(xdg-open https://rootly.com/account/alerts/{1})'
+        rootly-alerts-table | fzf \
+            --ansi \
+            --with-shell 'zsh -fc' \
+            --query="${LBUFFER:-}" \
+            --header="${help}" \
+            --header-lines=1 \
+            --preview-window='bottom:26:wrap' \
+            --preview='script -q /dev/null -c "rootly alerts get --format=table {1}"' \
+            --bind="ctrl-r:${refresh}" \
+            --bind="ctrl-o:execute-silent(xdg-open https://rootly.com/account/alerts/{1})" \
+            --bind="ctrl-a:execute(rootly alerts ack {1})+${refresh}" \
+            --bind="ctrl-f:execute(rootly alerts resolve {1})+${refresh}" \
+            --bind="ctrl-t:execute(rootly alerts update --status=triggered {1})+${refresh}"
     )
 
     [ -z "${selected}" ] && return
@@ -67,3 +36,4 @@ function fzf-rootly-alerts {
 }
 
 zle -N fzf-rootly-alerts
+bindkey '^x' fzf-vault
