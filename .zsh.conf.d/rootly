@@ -36,4 +36,4 @@ function fzf-rootly-alerts {
 }
 
 zle -N fzf-rootly-alerts
-bindkey '^x' fzf-vault
+bindkey '^y' fzf-rootly-alerts
