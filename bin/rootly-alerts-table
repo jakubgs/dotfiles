@@ -1,43 +1,61 @@
 #!/usr/bin/env zsh
 
-local page_size="${ROOTLY_ALERTS_PAGE_SIZE:-100}"
-local headers=$(echo -e "\033[1mID\tStatus\tGroups\tResponders\tUrgency\tStarted\tSummary\033[0m")
-local alerts=$(
-    rootly alerts list --page-size="${page_size}" --format=json \
-        | jq -r '
-            .data[]
-            | .attributes as $a
-            | $a.data as $d
-            | [
-                ( $a.short_id // ""),
-                ( [$a.groups[]?.name] | join(",") ),
-                ( [$a.responders[]?.first_name] | join(",") ),
-                ( $a.status // "" ),
-                ( $a.alert_urgency.name // "" ),
-                ( $a.started_at // "" ),
-                ( $a.summary // "" )
-              ]
-            | @tsv
-        '
-)
+function rootly-json-to-table {
+    jq -r '
+        .data[]
+        | .attributes as $a
+        | $a.data as $d
+        | [
+            ( $a.short_id // ""),
+            ( [$a.groups[]?.name] | join(",") ),
+            ( [$a.responders[]?.first_name] | join(",") ),
+            ( $a.status // "" ),
+            ( $a.alert_urgency.name // "" ),
+            ( $a.started_at // "" ),
+            ( $a.summary // "" )
+          ]
+        | @tsv
+    '
+}
 
-local reset='\x1b[0m'
-local bold=$'\033[1m'
-local bright_blue='\x1b[94m'
-local bright_white='\x1b[97m'
-local blue='\x1b[34m'
-local cyan='\x1b[36m'
-local green='\x1b[32m'
-local red='\x1b[31m'
-local yellow='\x1b[33m'
+function rootly-table-colors {
+    local reset='\x1b[0m'
+    local bold=$'\033[1m'
+    local bright_blue='\x1b[94m'
+    local bright_white='\x1b[97m'
+    local blue='\x1b[34m'
+    local cyan='\x1b[36m'
+    local green='\x1b[32m'
+    local red='\x1b[31m'
+    local yellow='\x1b[33m'
+    sed \
+       -e "s,Critical,${red}&${reset}," \
+       -e "s,Ethereum,${bold}${bright_blue}&${reset}," \
+       -e "s,Infra,${bold}${bright_white}&${reset}," \
+       -e "s,Warning,${yellow}&${reset}," \
+       -e "s,acknowledged,${blue}&${reset}," \
+       -e "s,firing,${red}&${reset}," \
+       -e "s,open,${yellow}&${reset}," \
+       -e "s,resolved,${green}&${reset}," \
+       -e "s,triggered,${red}&${reset},"
+}
 
-echo -e "${headers}\n${alerts}" | column -t -s $'\t' | sed \
-   -e "s,Critical,${red}&${reset}," \
-   -e "s,Ethereum,${bold}${bright_blue}&${reset}," \
-   -e "s,Infra,${bold}${bright_white}&${reset}," \
-   -e "s,Warning,${yellow}&${reset}," \
-   -e "s,acknowledged,${blue}&${reset}," \
-   -e "s,firing,${red}&${reset}," \
-   -e "s,open,${yellow}&${reset}," \
-   -e "s,resolved,${green}&${reset}," \
-   -e "s,triggered,${red}&${reset},"
+function rootly-alerts-json {
+    rootly alerts list --page="${page}" --page-size="${page_size}" --format=json \
+}
+
+function rootly-format-table {
+    awk -F '\t' '{ printf "%-7s %-8s %-12s %-13s %-8s %-29s %s\n", $1, $2, $3, $4, $5, $6, $7; fflush() }'
+}
+
+local count=${1:-100}
+local page_size=100
+local pages=$(( (count + page_size - 1) / page_size ))
+local headers=$(echo -e "${bold}ID\tStatus\tGroups\tResponders\tUrgency\tStarted\tSummary${reset}")
+
+{
+    echo "${headers}"
+    for ((page = 1; page <= pages; page++)); do
+        rootly-alerts-json | rootly-json-to-table
+    done
+} | head -n "$((count+1))" | rootly-format-table | rootly-table-colors
