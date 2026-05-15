@@ -47,8 +47,8 @@ function fzf-rootly-alerts {
                 --ansi \
                 --query "${LBUFFER:-}" \
                 --header-lines=1 \
-                --preview-window='bottom:60%:wrap' \
-                --preview='rootly alerts get --format=table {1} 2>/dev/null'
+                --preview-window='bottom:26:wrap' \
+                --preview='script -q /dev/null -c "rootly alerts get --format=table {1}" 2>/dev/null'
     )
 
     [ -z "${selected}" ] && return
