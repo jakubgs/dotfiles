@@ -10,7 +10,7 @@ function fzf-rootly-alerts {
             --query="${LBUFFER:-}" \
             --header="${help}" \
             --header-lines=1 \
-            --preview-window='bottom:26:wrap' \
+            --preview-window='bottom:50%:wrap' \
             --preview='script -q /dev/null -c "rootly alerts get --format=table {1}"' \
             --bind="ctrl-r:${refresh}" \
             --bind="ctrl-o:execute-silent(xdg-open https://rootly.com/account/alerts/{1})" \

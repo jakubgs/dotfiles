@@ -41,6 +41,7 @@ function rootly-table-colors {
 }
 
 function rootly-alerts-json {
+    # Needs ROOTLY_API_TOKEN supplied.
     rootly alerts list \
         --sort=created_at \
         --page="${page}" \
