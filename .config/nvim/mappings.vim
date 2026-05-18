@@ -68,6 +68,9 @@ nnoremap <leader>T :vsp ~/work/jakubgs-notes/todo.md<CR>
 " Checkbox
 nnoremap <leader>t :ToggleCB<CR>
 
+" Terminal
+nnoremap <leader>\ :Dispatch! urxvtc -cd %:p:h<CR>
+
 " Goyo plugin
 nnoremap <F10> :Goyo<CR>
 let g:goyo_width = 120
