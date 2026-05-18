@@ -62,6 +62,7 @@ command!          Work        call s:WorkSearch()
 command!          Panacea     call s:PanaceaFunc()
 command!          GitUnstaged call s:GitUnstaged()
 command! -nargs=? GitRootAg   call GitRootAg(<q-args>)
+command! -nargs=? AG          call GitRootAg(<q-args>)
 command! -bang -nargs=? -complete=dir Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right'), <bang>0)
 
@@ -80,4 +81,5 @@ nnoremap <leader><leader>u  :GitUnstaged<CR>
 nnoremap <leader><leader>c  :Commits<CR>
 nnoremap <leader><leader>l  :Lines<CR>
 nnoremap <leader><leader>a  :GitRootAg<CR>
-nnoremap <leader><leader>A  :GitRootAg<space><c-r>=expand("<cword>")<CR><CR>
+nnoremap <leader><leader>A  :GitRootAg<space>
+nnoremap <leader><leader>s  :GitRootAg<space><c-r>=expand("<cword>")<CR><CR>
