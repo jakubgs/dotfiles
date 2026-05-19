@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 TARGET="$(readlink -f ${1:-/run/current-system)})"
+# Sometimes might require ?remote-program=/nix/var/nix/profiles/default/bin/nix-store
 CACHE_URL="${2:-ssh://bardiel.magi.vpn}"
 
 nix copy --to "${CACHE_URL}" "${TARGET}" $(nix-store -qR "${TARGET}")
