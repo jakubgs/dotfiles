@@ -42,6 +42,10 @@ function d {
         docker rm $(docker ps -a -q)
     elif [[ $1 == 'cleanimages' ]]; then
         docker rmi $(docker images -f dangling=true -q)
+    elif [[ $1 == 'debug' ]] && [[ $# == 2 ]]; then
+        docker run --rm -it --net container:$2 nicolaka/netshoot:v0.15 zsh
+    elif [[ $# == 1 ]]; then
+        docker inspect "$@"
     elif [[ $# > 0 ]]; then
         docker "$@"
     else
