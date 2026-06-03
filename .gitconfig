@@ -31,6 +31,7 @@
     fo  = !git fetch --verbose origin $(git br)
     l   = log --oneline --decorate
     ls  = ls-files
+    C   = commit --verbose --no-verify --no-gpg-sign --no-signoff
     c   = commit --verbose --no-verify --gpg-sign --signoff
     fix = commit --verbose --no-verify --gpg-sign --signoff --fixup
     m   = commit --verbose --no-verify --gpg-sign --signoff --amend
