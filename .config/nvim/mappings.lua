@@ -5,9 +5,6 @@ map("n", "<Down>", ":resize +5<CR>")
 map("n", "<Left>", ":vert resize -5<CR>")
 map("n", "<Right>", ":vert resize +5<CR>")
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 map("n", ";", ":<C-F>")
 map("n", ":", ";")
 map("n", "q;", ":")

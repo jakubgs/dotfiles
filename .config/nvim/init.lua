@@ -1,11 +1,11 @@
 -- Author: Jakub Sokołowski <jakub@gsokolowski.pl>
 -- Source: https://github.com/jakubgs/dotfiles
 
-if vim.fn.getfsize(vim.fn.expand("%")) > 50000 then
-  vim.cmd("syntax off")
-else
-  vim.cmd("syntax on")
-end
+local fsize = vim.fn.getfsize(vim.fn.expand("%"))
+vim.cmd("syntax " .. (fsize > 50000 and "off" or "on"))
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 local config = vim.fn.stdpath("config")
 for _, file in ipairs({

@@ -1,5 +1,6 @@
 tags
 .ssh/*
+.gp.md
 .ncmpcpp/error.log
 .nvim/.netrwhist
 .nvim/spell

@@ -22,6 +22,12 @@ local plugins = {
     },
     opts = {},
   },
+  {
+    "robitx/gp.nvim",
+    config = function()
+      dofile(vim.fn.stdpath("config") .. "/gp.lua")
+    end,
+  },
   "xolox/vim-misc",
   "junegunn/goyo.vim",
   "junegunn/vim-peekaboo",
