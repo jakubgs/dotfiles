@@ -1,0 +1,41 @@
+vim.g.fugitive_summary_format = "%<(16,trunc)%an || %s"
+
+local map = vim.keymap.set
+
+map("n", "<leader>gs", ":Git<CR>")
+map("n", "<leader>gg", ":Git<CR>")
+map("n", "<leader>gr", ":Gread<CR>")
+map("n", "<leader>gw", ":Gwrite<CR>")
+map("n", "<leader>ga", ":Gwrite<CR>")
+map("n", "<leader>gc", ":Git commit -s -v -q -n<CR>")
+map("n", "<leader>gt", ":Git commit -s -v -q -n -- %:P<CR>")
+map("n", "<leader>gC", ":Git commit -s -v -q -n --amend<CR>")
+map("n", "<leader>gT", ":Git commit -s -v -q -n --amend -- %:P<CR>")
+map("n", "<leader>gd", ":Gvdiff<CR>")
+map("n", "<leader>ge", ":Gedit<CR>")
+map("n", "<leader>gu", ":Git reset \"%:p\"<CR><CR>")
+map("n", "<leader>gl", ":Commits<CR>")
+map("n", "<leader>gL", ":BCommits<CR>")
+map("n", "<leader>gp", ":Ggrep<Space>")
+map("n", "<leader>gm", ":Gmove<Space>")
+map("n", "<leader>gB", ":Git blame<CR>")
+map("n", "<leader>gw", ":GBrowse<CR>")
+map("n", "<leader>gW", ":GBrowse!<CR>")
+map("v", "<leader>gw", ":GBrowse<CR>")
+map("v", "<leader>gW", ":GBrowse!<CR>")
+map("n", "<leader>go", ":Git checkout<Space>")
+map("n", "<leader>gf", ":Dispatch! git fetch --all<CR>")
+map("n", "<leader>gps", ":Dispatch! git push<CR>")
+map("n", "<leader>gpS", ":Dispatch! git push --force<CR>")
+map("n", "<leader>gpl", ":Dispatch! git pull<CR>")
+
+vim.cmd([[
+nnoremap <leader>gSs :Git status <bar>
+                    \ if confirm('Do you want to stash changes?') <bar>
+                        \ Git stash --include-untracked <bar>
+                    \ endif<CR><CR>
+nnoremap <leader>gSa :Git stash list --date=local <bar>
+                    \ if confirm('Apply stash@{0}?') <bar>
+                        \ Git stash apply <bar>
+                    \ endif<CR><CR>
+]])
