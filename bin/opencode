@@ -1,19 +1,46 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-docker run --rm -it \
-  --user "$(id -u):$(id -g)" \
-  --security-opt no-new-privileges:true \
-  --cap-drop ALL \
-  --pids-limit 256 \
-  --read-only \
-  --tmpfs /tmp:rw,noexec,nosuid,nodev,size=512m \
-  --tmpfs /home/opencode:rw,nosuid,nodev,size=512m \
-  --tmpfs /home/opencode/.local/share/opencode:rw,nosuid,nodev,size=512m \
-  --tmpfs /home/opencode/.cache:rw,nosuid,nodev,size=512m \
-  -e HOME=/home/opencode \
-  -e OPENCODE_CONFIG_DIR=/mnt/opencode-config \
-  -w /workspace \
-  -v "$(pwd):/workspace:rw" \
-  -v "$HOME/.config/opencode:/mnt/opencode-config:ro" \
-  ghcr.io/anomalyco/opencode:1.17.9 \
-  opencode "$@"
+container_image='ghcr.io/anomalyco/opencode:1.17.9'
+container_name='opencode-tui'
+port='4096'
+workspace=$(pwd -P)
+config="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
+share="${HOME}/.local/share/opencode"
+oc_home="/home/opencode"
+clipbin="$HOME/.local/share/opencode-docker/bin"
+
+mkdir -p "$config" "$clipbin"
+
+for name in wl-copy xclip xsel; do
+  cat > "$clipbin/$name" <<'EOF'
+#!/bin/sh
+echo WTF > $home/.config/opencode/test
+data="$(cat | base64 | tr -d '\n')"
+printf '\033]52;c;%s\a' "$data" > /dev/tty
+EOF
+  chmod +x "$clipbin/$name"
+done
+
+exec docker run --rm -it \
+  --name "$container_name" \
+  --workdir /workspace \
+  --publish "$port:$port/tcp" \
+  --mount "type=bind,src=$workspace,dst=/workspace" \
+  --mount "type=bind,src=$config,dst=$oc_home/.config/opencode" \
+  --mount "type=bind,src=$share,dst=$oc_home/.local/share/opencode" \
+  --mount "type=bind,src=$clipbin,dst=/opencode-bin,readonly" \
+  --tmpfs /tmp:rw,exec,nosuid,nodev,mode=1777,size=512m \
+  --tmpfs /run:rw,nosuid,nodev,size=64m \
+  --tmpfs "$oc_home/.cache:rw,nosuid,nodev,size=1g" \
+  --tmpfs "$oc_home/.local/state:rw,nosuid,nodev,size=256m" \
+  --env "HOME=$oc_home" \
+  --env "PATH=/opencode-bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+  --env "XDG_CONFIG_HOME=$oc_home/.config" \
+  --env "XDG_CACHE_HOME=$oc_home/.cache" \
+  --env "XDG_STATE_HOME=$oc_home/.local/state" \
+  --env "TMPDIR=/tmp" \
+  --env "OPENCODE_CONFIG_DIR=$oc_home/.config/opencode" \
+  --env "OPENCODE_DISABLE_AUTOUPDATE=1" \
+  --env "OPENCODE_SERVER_PASSWORD=${OPENCODE_SERVER_PASSWORD:-}" \
+  "$container_image" "$@"
