@@ -1,3 +1,4 @@
+-- Deoplete
 vim.opt.completeopt = { "menu", "preview" }
 
 vim.g["deoplete#sources#go#gocode_binary"] = "/home/sochan/.nix-profile/bin/gocode"

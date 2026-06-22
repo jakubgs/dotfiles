@@ -1,3 +1,4 @@
+-- Better Gllog format
 vim.g.fugitive_summary_format = "%<(16,trunc)%an || %s"
 
 local map = vim.keymap.set
@@ -28,14 +29,3 @@ map("n", "<leader>gf", ":Dispatch! git fetch --all<CR>")
 map("n", "<leader>gps", ":Dispatch! git push<CR>")
 map("n", "<leader>gpS", ":Dispatch! git push --force<CR>")
 map("n", "<leader>gpl", ":Dispatch! git pull<CR>")
-
-vim.cmd([[
-nnoremap <leader>gSs :Git status <bar>
-                    \ if confirm('Do you want to stash changes?') <bar>
-                        \ Git stash --include-untracked <bar>
-                    \ endif<CR><CR>
-nnoremap <leader>gSa :Git stash list --date=local <bar>
-                    \ if confirm('Apply stash@{0}?') <bar>
-                        \ Git stash apply <bar>
-                    \ endif<CR><CR>
-]])

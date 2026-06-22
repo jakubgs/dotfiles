@@ -5,12 +5,15 @@ vim.g.jellybeans_overrides = {
 vim.opt.background = "dark"
 vim.cmd.colorscheme("jellybeans")
 
+-- Make visual selection match lightline
 vim.cmd("hi! link Visual LightlineLeft_visual_0")
 vim.cmd("hi! link Cursor LightlineLeft_normal_0")
 
+-- Sneak Highlights
 vim.cmd("hi! link Sneak Cursor")
 vim.cmd("hi! link SneakLabel TabLineSel")
 
+-- Highlight trailing whitespace and fix it
 vim.cmd("hi ExtraWhitespace ctermbg=darkred guibg=darkred")
 vim.g.better_whitespace_enabled = 1
 vim.g.strip_whitelines_at_eof = 1

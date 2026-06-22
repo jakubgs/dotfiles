@@ -13,53 +13,37 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+  -- misc
   "tpope/vim-dispatch",
-  {
-    "stevearc/oil.nvim",
-    cmd = "Oil",
-    keys = {
-      { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
-    },
-    opts = {},
-  },
-  {
-    "robitx/gp.nvim",
-    config = function()
-      dofile(vim.fn.stdpath("config") .. "/gp.lua")
-    end,
-  },
+  { "stevearc/oil.nvim", cmd = "Oil", keys = { { "-", "<cmd>Oil<cr>", desc = "Open parent directory" }, }, opts = {}, },
   "xolox/vim-misc",
-  "junegunn/goyo.vim",
+  { "junegunn/goyo.vim", keys = { { "<F10>", "<Cmd>Goyo<CR>", mode = "n", desc = "Open Goyo" }, }, init = function() vim.g.goyo_width = 120 end, },
   "junegunn/vim-peekaboo",
   "bogado/file-line",
   "akinsho/toggleterm.nvim",
   { "tyjak/vim-redact-pass", commit = "403a44dc" },
-
+  -- text manipulation
   "tpope/vim-surround",
   "tpope/vim-repeat",
   "jkramer/vim-checkbox",
   "ntpeters/vim-better-whitespace",
-
+  -- git
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
-
-  {
-    "junegunn/fzf",
-    build = function()
-      vim.fn["fzf#install"]()
-    end,
-  },
+  -- search
+  { "junegunn/fzf", build = function() vim.fn["fzf#install"]() end, },
   "junegunn/fzf.vim",
   "benwainwright/fzf-project",
-
+  -- movement
   "justinmk/vim-sneak",
-
+  -- completion
   "Shougo/deoplete.nvim",
   "Shougo/neco-vim",
   { "deoplete-plugins/deoplete-go", build = "make" },
   { "carlitux/deoplete-ternjs", build = "yarn global add tern" },
   "deoplete-plugins/deoplete-jedi",
-
+  { "robitx/gp.nvim", config = function() dofile(vim.fn.stdpath("config") .. "/gp.lua") end, },
+  -- style
   "nanotech/jellybeans.vim",
   "itchyny/lightline.vim",
 }

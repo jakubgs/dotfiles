@@ -1,10 +1,11 @@
+local map = vim.keymap.set
+
+-- Sneak
 vim.g["sneak#label"] = 1
 vim.g["sneak#target_labels"] = "abcdefghijklmnopqrstuvwxyz"
 vim.g["sneak#s_next"] = 1
 vim.g["sneak#use_ic_scs"] = 1
 vim.g["sneak#prompt"] = "STREAK>>>"
-
-local map = vim.keymap.set
 
 map("n", "<Space>j", "<Plug>Sneak_s")
 map("n", "<Space>k", "<Plug>Sneak_S")
@@ -16,17 +17,20 @@ map({ "n", "v", "o" }, "F", "<Plug>Sneak_F")
 map({ "n", "v", "o" }, "t", "<Plug>Sneak_t")
 map({ "n", "v", "o" }, "T", "<Plug>Sneak_T")
 
+-- FZF
 vim.g.fzf_layout = { window = "enew" }
 vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-p" }
 vim.g.fzf_history_dir = "~/.local/share/fzf-history"
 vim.env.FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
 vim.env.FZF_DEFAULT_OPTS = "--reverse --bind ctrl-k:up,ctrl-j:down"
 
+-- fix for line numbers in FZF window
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "*",
   command = "setlocal nonumber norelativenumber",
 })
 
+-- Helper to avoid path issues and start in input mode.
 local function work_sink(line)
   vim.cmd("Files ~/work/" .. line)
 end
@@ -47,6 +51,7 @@ local function panacea_func()
   end
 end
 
+-- Search with Ag but from repo root.
 function _G.GitRootAg(input)
   vim.cmd("cd " .. _G.GetGitRoot())
   vim.cmd("Ag! " .. input)
