@@ -35,6 +35,7 @@ alias c='curl -sSL --fail-with-body'
 alias cm='clipmenu'
 alias ap='ansible-playbook -D'
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
+alias invert='xcalib --invert --alter'
 
 # wake up caspair
 alias wakecaspair='wakeonlan d8:cb:8a:31:9d:5e'

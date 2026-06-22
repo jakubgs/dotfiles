@@ -47,7 +47,7 @@
   m:0x0 + c:224
   XF86Messenger
 
-"xset dpms force off"
+"xcalib --invert --alter"
   m:0x0 + c:177
   XF86Phone
 
