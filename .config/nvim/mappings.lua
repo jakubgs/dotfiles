@@ -34,7 +34,7 @@ map("n", "k", "gk")
 map("n", "gj", "j")
 map("n", "gk", "k")
 
-map("n", "K", "<Plug>NetrwBrowseX")
+map("n", "K", "gx", { remap = true })
 -- to match the behaviour of D
 map("n", "Y", "y$")
 -- run last used macro with one key
