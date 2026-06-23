@@ -13,7 +13,7 @@
   "goyo.vim": { "branch": "master", "commit": "9c72fdf2d202914318581f9f0dd09fd102f8504d" },
   "gp.nvim": { "branch": "main", "commit": "c37f154b97690c4925fef4e35ffdbf2c844b5f4e" },
   "jellybeans.vim": { "branch": "master", "commit": "ef83bf4dc8b3eacffc97bf5c96ab2581b415c9fa" },
-  "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
+  "lazy.nvim": { "branch": "main", "commit": "85c7ff3711b730b4030d03144f6db6375044ae82" },
   "lightline.vim": { "branch": "master", "commit": "6c283f8df85aa7219fa4096a6ed4ff45d48aa9e1" },
   "logstash.vim": { "branch": "master", "commit": "531fe079e8c964d2b5786bcb5871c72f966adc2a" },
   "neco-vim": { "branch": "master", "commit": "7b722cd13a44645e4ed9b1e4fe6ff8ad64f947f6" },

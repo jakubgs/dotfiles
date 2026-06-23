@@ -31,7 +31,7 @@ local plugins = {
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
   -- search
-  { "junegunn/fzf", build = function() vim.fn["fzf#install"]() end, },
+  "junegunn/fzf",
   "junegunn/fzf.vim",
   "benwainwright/fzf-project",
   -- movement
