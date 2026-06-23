@@ -5,18 +5,15 @@
 local fsize = vim.fn.getfsize(vim.fn.expand("%"))
 vim.cmd("syntax " .. (fsize > 50000 and "off" or "on"))
 
--- Define leader early to affect loaded plugins.
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 local config = vim.fn.stdpath("config")
 for _, file in ipairs({
-  "plugins.lua",
-  "theme.lua",
   "general.lua",
-  "terminal.lua",
+  "commands.lua",
   "functions.lua",
   "mappings.lua",
+  "plugins.lua",
+  "theme.lua",
+  "terminal.lua",
   "search.lua",
   "completion.lua",
   "cmdwin.lua",

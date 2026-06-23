@@ -1,5 +1,9 @@
 local map = vim.keymap.set
 
+-- Leader
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 -- easier resizing
 map("n", "<Up>", ":resize -5<CR>")
 map("n", "<Down>", ":resize +5<CR>")
