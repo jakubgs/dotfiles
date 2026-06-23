@@ -11,7 +11,7 @@ return {
   { "moll/vim-node", ft = "javascript" },
   { "nfnty/vim-nftables", ft = "nft" },
   { "pangloss/vim-javascript", ft = "javascript" },
-  { "pearofducks/ansible-vim", ft = "yaml.ansible" },
+  { "pearofducks/ansible-vim", ft = "ansible" },
   { "robbles/logstash.vim", ft = "logstash" },
   { "sebdah/vim-delve", ft = "go" },
   { "tell-k/vim-autopep8", ft = "python" },
