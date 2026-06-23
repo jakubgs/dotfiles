@@ -37,11 +37,10 @@ local plugins = {
   -- movement
   "justinmk/vim-sneak",
   -- completion
-  "Shougo/deoplete.nvim",
-  "Shougo/neco-vim",
-  { "deoplete-plugins/deoplete-go", build = "make" },
-  { "carlitux/deoplete-ternjs", build = "yarn global add tern" },
-  "deoplete-plugins/deoplete-jedi",
+  "hrsh7th/nvim-cmp",
+  "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-path",
+  "hrsh7th/cmp-cmdline",
   { "robitx/gp.nvim", config = function() dofile(vim.fn.stdpath("config") .. "/gp.lua") end, },
   -- style
   "nanotech/jellybeans.vim",
