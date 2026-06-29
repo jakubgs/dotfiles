@@ -11,7 +11,7 @@
       "permission": {
         "edit": "deny",
         "bash": "deny",
-        "todowrite": "deny",
+        "todowrite": "allow",
         "task": "deny",
         "skill": "deny",
         "external_directory": "deny"
@@ -22,7 +22,7 @@
       "permission": {
         "edit": "ask",
         "bash": "deny",
-        "todowrite": "ask",
+        "todowrite": "allow",
         "task": "deny",
         "skill": "deny",
         "external_directory": "deny"
