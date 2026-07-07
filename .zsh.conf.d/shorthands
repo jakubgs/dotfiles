@@ -65,6 +65,13 @@ function s {
         sudo systemctl list-units --type=service --state=running
     elif [[ $# == 1 ]] && [[ $1 == "reload" ]]; then
         sudo systemctl daemon-reload
+    elif [[ $# == 2 ]] && [[ $1 =~ '^(disable|mask)$' ]]; then
+        sudo mkdir -p /run/systemd/system.control
+        sudo ln -vs /dev/null /run/systemd/system.control/${2%.service}.service
+        sudo systemctl daemon-reload
+    elif [[ $# == 2 ]] && [[ $1 =~ '^(enable|unmask)$' ]]; then
+        sudo rm -vf /run/systemd/system.control/${2%.service}.service
+        sudo systemctl daemon-reload
     elif [[ $# == 2 ]] && [[ $1 == "bump" ]]; then
         sudo systemctl --no-block restart "$2"
         sudo journalctl -o cat --no-hostname --follow --unit "$2"
