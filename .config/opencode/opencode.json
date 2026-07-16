@@ -37,7 +37,7 @@
     "list": "allow",
     "edit": "ask",
     "bash": "deny",
-    "todowrite": "deny",
+    "todowrite": "allow",
     "task": "deny",
     "skill": "deny",
     "external_directory": "deny",
