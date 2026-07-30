@@ -16,14 +16,11 @@ alias dt='date +"%Y%m%dT%H%M%S"'
 alias wq='du -sh'
 alias kt='du -h --max-depth=1 | sort -h'
 alias dy='df --sync -hTt ext4'
-alias copy='xsel -i --primary'
 alias grep='grep --color -i'
 alias rsync='rsync --partial --progress'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
 alias flush='sync; sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"'
 alias httpat='python2 -m SimpleHTTPServer'
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
 alias livestreamer='livestreamer -p "mpv --cache=524288 --fs -"'
 alias ytdl-audio='yt-dlp --add-metadata --extract-audio --format m4a --audio-format vorbis -o "%(autonumber)02d %(uploader)s - %(title)s (%(id)s).%(ext)s"'
 alias uctl='systemctl --user'
@@ -36,6 +33,11 @@ alias cm='clipmenu'
 alias ap='ansible-playbook -D'
 alias spot="fzf | tr '\n' '\0' | xargs -0 realpath | tee >(xclip -i -selection clipboard) >(xclip -i)"
 alias invert='xcalib --invert --alter'
+
+# Copying
+alias copy='xclip -selection primary'
+alias clip='xclip -selection clipboard'
+alias paste='xclip -selection clipboard -o'
 
 # wake up caspair
 alias wakecaspair='wakeonlan d8:cb:8a:31:9d:5e'
