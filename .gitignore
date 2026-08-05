@@ -12,3 +12,4 @@ tags
 .config/nvim/autoload/plug.vim.old
 .config/nvim/autoload/plug.vim
 .config/ranger/history
+.config/opencode/package-lock.json
