@@ -92,5 +92,5 @@ else
         shift
     done
 fi
-} | tee >(xsel -i --primary) \
-  | tee >(xsel -i --clipboard)
+} | tee >(wl-copy --primary) \
+  | tee >(wl-copy)

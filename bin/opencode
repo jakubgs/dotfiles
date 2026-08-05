@@ -15,7 +15,6 @@ mkdir -p "$config" "$clipbin"
 for name in wl-copy xclip xsel; do
   cat > "$clipbin/$name" <<'EOF'
 #!/bin/sh
-echo WTF > $home/.config/opencode/test
 data="$(cat | base64 | tr -d '\n')"
 printf '\033]52;c;%s\a' "$data" > /dev/tty
 EOF

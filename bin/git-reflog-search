@@ -27,5 +27,5 @@ __fzf_git_stash_search__() {
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     SELECTED=$(__fzf_git_stash_search__ "$@")
     echo "${SELECTED%% *}"
-    echo "${SELECTED%% *}" | xsel -i --clipboard
+    echo "${SELECTED%% *}" | wl-copy -on
 fi

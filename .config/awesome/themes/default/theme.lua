@@ -1,9 +1,9 @@
 ---------------------------
--- Default awesome theme --
+-- Default SomeWM theme --
 ---------------------------
 
 homedir = os.getenv("HOME")
-theme_path = homedir .. "/.config/awesome/themes/default"
+theme_path = homedir .. "/.config/somewm/themes/default"
 
 theme = {}
 

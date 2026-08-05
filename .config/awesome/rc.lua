@@ -57,29 +57,26 @@ end
 homedir = os.getenv("HOME")
 
 -- Run the autostart script
-awful.spawn.with_shell(homedir .. "/bin/autostart")
+--awful.spawn.with_shell(homedir .. "/bin/autostart")
 
 -- Themes define colours, icons, and wallpapers
-beautiful.init(homedir .. "/.config/awesome/themes/default/theme.lua")
+beautiful.init(homedir .. "/.config/somewm/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 browser = "brave"
-hipchat = "hipchat"
 fmanager = "thunar"
-terminal = "urxvtc"
+terminal = "footclient"
 
 function term(command, name, args)
     args = args or ''
     name = name or command:match("([^%s]+)")
-    cmd = terminal .. " " .. args .. " -name '"..name.."' -title '"..name.."' -e '"..command.."'"
+    cmd = terminal .. " " .. args .. " --app-id '"..name.."' --title '"..name.."' '"..command.."'"
     print(cmd)
     return cmd
 end
 
-geditor = term('nvim')
-ncmpcpp = term('ncmpcpp')
 fpass     = term(homedir .. '/bin/fpass', 'fpass')
-fpassHold = term(homedir .. '/bin/fpass', 'fpass', '-hold')
+fpassHold = term(homedir .. '/bin/fpass', 'fpass', '--hold')
 
 naughty.config.padding = 10
 naughty.config.spacing = 6
@@ -91,7 +88,7 @@ naughty.config.spacing = 6
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod1"
 
--- for usage with awesome-client
+-- for usage with somewm-client eval
 newline = '\n'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
@@ -114,17 +111,12 @@ tags = { ":admin:", ":edit:", ":web:", ":comm:", ":music:", ":fs:", ":net:", ":g
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 mysystemmenu = {
-    { "edit rc.lua",    geditor .. awful.util.getdir("config") .. "/rc.lua" },
-    { "e: xorg.conf",   "gksudo " .. geditor .. " /etc/X11/xorg.conf" },
-    { "---------------",     nil },
-    { "sysmon",         "gnome-system-monitor" },
-    { "palimpsest",     "gksudo palimpsest" },
-    { "disk usage",     "baobab" },
+    { "edit rc.lua",    term('nvim') .. awful.util.getdir("config") .. "/rc.lua" },
     { "---------------",     nil },
     { "autostart",  term(homedir .. "/bin/autostart", 'autostart', ' -g 40x11 -hold') },
     { "restart",    awesome.restart },
     { "quit",       awesome.quit },
-    { "lock",       "xlock" },
+    { "lock",       "somewm-client lock" },
     { "shutdown",   "bin/zenity-wrapper Shutdown    \"sudo poweroff\"" },
     { "reboot",     "bin/zenity-wrapper Reboot      \"sudo reboot\"" },
     { "boot to win","bin/zenity-wrapper \"Boot into Windows\" \"~/bin/windows\"" }
@@ -141,19 +133,18 @@ myofficemenu = {
 }
 
 mymainmenu = awful.menu({ items = {
-    { "system",     mysystemmenu, beautiful.awesome_icon },
-    { "systools",   mystoolsmenu, beautiful.awesome_icon },
-    { "office",     myofficemenu, beautiful.awesome_icon },
+    { "system",        mysystemmenu, beautiful.awesome_icon },
+    { "systools",      mystoolsmenu, beautiful.awesome_icon },
+    { "office",        myofficemenu, beautiful.awesome_icon },
     { "-------------", nil },
-    { "browser",    browser },
-    { "rutorrent",  "dwb" },
+    { "browser",       browser },
+    { "rutorrent",     "dwb" },
     { "-------------", nil },
-    { "file manager",   fmanager },
-    { "urxvt",      terminal },
-    { "htop",       term('htop') },
-    { "ncmpcpp",    ncmpcpp },
-    { "remmina",    "remmina" },
-    { "pidgin",     "pidgin" },
+    { "file manager",  fmanager },
+    { "terminal",      terminal },
+    { "htop",          term('htop') },
+    { "remmina",       "remmina" },
+    { "pidgin",        "pidgin" },
 }
 })
 
@@ -283,21 +274,16 @@ awful.key({ modkey,           }, "j",         function () awful.client.focus.glo
 awful.key({ modkey, "Shift"   }, "k",         function () awful.client.swap.byidx( -1) end),
 awful.key({ modkey, "Shift"   }, "j",         function () awful.client.swap.byidx(  1) end),
 -- Run or raise
-awful.key({ modkey,           }, "n",         function () run_or_raise(terminal .. " -name ranger -title ranger -e ranger ", { name = "ranger" }) end),
-awful.key({ modkey,           }, "e",         function () run_or_raise(geditor, { class = "URxvt", name = "nvim" }) end),
-awful.key({ modkey,           }, "w",         function () run_or_raise(browser, { class = "Brave-browser"}) end),
-awful.key({ modkey, "Shift"   }, "c",         function () run_or_raise(terminal, { class = "URxvt" }) end),
+awful.key({ modkey,           }, "n",         function () run_or_raise(terminal .. " -a ranger -T ranger ranger", { name = "ranger", name = "ranger" }) end),
+awful.key({ modkey,           }, "e",         function () run_or_raise(term("nvim", "main_nvim"), { class = "nvim", name = "main_nvim" }) end),
+awful.key({ modkey,           }, "w",         function () run_or_raise(browser, { class = "brave-browser" }) end),
+awful.key({ modkey, "Shift"   }, "c",         function () run_or_raise(terminal, { class = "foot", name = "foot" }) end),
 awful.key({ modkey,           }, "p",         function () run_or_raise(fpass, { class = "fpass" }) end),
 awful.key({ modkey, "Shift"   }, "p",         function () run_or_raise(fpassHold, { class = "fpass" }) end),
-awful.key({ modkey,           }, "m",         function () run_or_raise(ncmpcpp, { instance = "ncmpcpp" }) end),
+awful.key({ modkey,           }, "m",         function () run_or_raise(term("ncmpcpp"), { instance = "ncmpcpp" }) end),
 awful.key({ modkey, "Shift"   }, "m",         function () awful.spawn(homedir.."/bin/fmpd -r") end),
 awful.key({ modkey,           }, "u",         function () run_or_raise("evolution", { class = "Evolution" }) end),
-awful.key({ modkey,           }, "i",         function () run_or_raise(homedir.."/bin/status", { class = "Status" }) end),
---- Power & Screen
-awful.key({ "Mod4", "Control" }, "Left",      function () awful.spawn("xrandr --orientation left") end),
-awful.key({ "Mod4", "Control" }, "Right",     function () awful.spawn("xrandr --orientation right") end),
-awful.key({ "Mod4", "Control" }, "Up",        function () awful.spawn("xrandr --orientation normal") end),
-awful.key({ "Mod4", "Control" }, "Down",      function () awful.spawn("xrandr --orientation inverted") end),
+awful.key({ modkey,           }, "i",         function () run_or_raise("discord", { class = "Discord" }) end),
 --- Standard program
 awful.key({ "Control",        }, "BackSpace", function () awful.spawn(terminal) end),
 awful.key({ "Control", "Shift"}, "BackSpace", function () awful.spawn(terminal) end),
@@ -312,17 +298,19 @@ awful.key({ "Mod4",           }, "Tab",       function () awful.tag.viewnext(mou
 awful.key({ "Mod4", "Shift"   }, "Tab",       function () awful.tag.viewprev(mouse.screen) end),
 -- Prompt
 awful.key({ modkey,           }, "R",         function () mypromptbox[mouse.screen]:run() end),
+-- clipmenu depends on X11 clipboard plumbing; use a Wayland-native clipboard menu.
 awful.key({ modkey,           }, "c",         function () awful.spawn("clipmenu") end),
-awful.key({ modkey            }, "o",         function () awful.spawn("flameshot gui") end),
+awful.key({ modkey            }, "o",         function () local s = awful.screenshot({ interactive = true }); s:refresh() end),
+-- rofi is X11 unless using rofi-wayland or another Wayland launcher.
 awful.key({ modkey            }, "r",         function () awful.spawn("rofi -show combi") end),
 awful.key({ modkey            }, "Return",    function () awful.spawn("rofi -show combi") end),
 awful.key({ modkey            }, "t", function ()
         awful.prompt.run({ prompt = "killall: " },
         awful.screen.focused().mypromptbox.widget,
         function (s)
-            awful.spawn(terminal .. " -e 'killall " .. s .. "'")
+            awful.spawn(terminal .. " 'killall " .. s .. "'")
         end,
-        homedir .. "/.awesome/killall_history")
+        homedir .. "/.config/somewm/killall_history")
     end)
 )
 
@@ -486,15 +474,13 @@ awful.rules.rules = {
          properties = { titlebars_enabled = true } },
 
     -- Screen/tag allocation
-    { rule_any = { class = { "mmtail", "ytdl" } },
-        properties = { screen = 1, tag = ":admin:" } },
-    { rule = { name = "nvim", class = "URxvt" },
+    { rule = { name = "nvim", class = "nvim" },
         properties = { screen = 1, tag = ":edit:" } },
-    { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "Brave-browser" } },
+    { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "brave-browser" } },
         properties = { screen = 1, tag = ":web:" } },
     { rule_any = { class = { "ncmpcpp" }, name = { "ncmpcpp*" }, },
         properties = { screen = 1, tag = ":music:" } },
-    { rule_any = { class = { "Status", "Slack", "Skype", "Evolution", "discord" } },
+    { rule_any = { class = { "Status", "Evolution", "discord" } },
         properties = { screen = 1, tag = ":comm:" } },
     { rule_any = { name = { "ranger" } },
         properties = { screen = 1, tag = ":fs:" } },
@@ -580,10 +566,36 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Find a client based on properties
 function run_or_raise(cmd, rule)
-    local matcher = function (c)
-        return awful.rules.match(c, rule)
+    local clients = client.get()
+    local start = 1
+
+    if #clients > 0 then
+        for i, c in ipairs(clients) do
+            if c == client.focus then
+                start = i % #clients + 1
+                break
+            end
+        end
     end
-    awful.client.run_or_raise(cmd, matcher)
+
+    for i = 0, #clients - 1 do
+        local c = clients[(start + i - 1) % #clients + 1]
+        if awful.rules.match(c, rule) then
+            if c.jump_to then
+                c:jump_to()
+            elseif awful.client.jumpto then
+                awful.client.jumpto(c)
+            else
+                client.focus = c
+                c:raise()
+            end
+            return
+        end
+    end
+
+    if cmd then
+        awful.spawn(cmd)
+    end
 end
 
 -- Function for focusing

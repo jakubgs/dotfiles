@@ -19,23 +19,27 @@ Supports multiple types of notices, dependent on switch used:
 }
 
 awesome_notification() {
+    RUN_ACTION=""
+    if [[ -n "${CLASS}" ]]; then
+        LUA_EXECUTE="nil"
+        [[ -n "${EXECUTE}" ]] && LUA_EXECUTE="\"${EXECUTE}\""
+        RUN_ACTION=", run = function () run_or_raise(${LUA_EXECUTE}, { name = \"${CLASS}\" }) end"
+    fi
     # compose the notification
-    COMMAND="require('naughty').notify({ \
-            title = ${TITLE}, \
-            text = ${TEXT}, \
-            timeout = ${TIMEOUT}, \
-            screen = 1, \
-            bg = \"${BG_COLOR}\", \
-            fg = \"${FG_COLOR}\", \
-            margin = 8, \
-            width = 500, \
-            run = function () run_or_raise(
-                                \"${EXECUTE}\",
-                                { name = \"${CLASS}\" }
-                ) end
-            })"
-    # send it to awesome
-    echo $COMMAND | awesome-client
+    COMMAND=$(tr -d '\n' <<EOF
+require("naughty").notify({
+title = ${TITLE},
+text = ${TEXT},
+timeout = ${TIMEOUT},
+screen = 1,
+bg = "${BG_COLOR}",
+fg = "${FG_COLOR}",
+margin = 8,
+width = 500${RUN_ACTION}
+})
+EOF
+)
+    somewm-client eval "${COMMAND}"
 }
 
 # }}}
@@ -139,5 +143,5 @@ else
     TEXT="\"${MESSAGE}\""
 fi
 
-awesome_notification 
+awesome_notification
 # }}}

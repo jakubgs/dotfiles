@@ -67,13 +67,11 @@ KEY=$(echo "${OUTPUT}" | head -n 1)
 LOGIN=$(echo "${OUTPUT}" | grep -oP 'login: ?\K(.*)$')
 REST=$(echo "${OUTPUT}" | sed 1d)
 
-# Avoid clipmenud collecting secrets.
-clipctl disable
-echo -n "$KEY" | xsel -i --clipboard
+echo -n "$KEY" | wl-copy --sensitive
 if [[ -n "$LOGIN" ]]; then
-    echo -n "$LOGIN" | xsel -i --primary
+    echo -n "$LOGIN" | wl-copy --paste-once --primary
 else
-    echo -n "$KEY" | xsel -i --primary
+    echo -n "$KEY" | wl-copy --paste-once --primary
 fi
 clipctl enable
 
