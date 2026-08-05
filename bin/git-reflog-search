@@ -15,9 +15,9 @@ __fzf_git_stash_search__() {
         --preview-label ' git show ' \
         --bind 'ctrl-i:transform:
             if [[ $FZF_PREVIEW_LABEL == " git show " ]]; then
-              echo "change-preview(git show --stat --color=always ${1})+change-preview-label( git show --stat )"
+              echo "change-preview(git show --stat --color=always \{1})+change-preview-label( git show --stat )"
             else
-              echo "change-preview(git show --color=always ${1})+change-preview-label( git show )"
+              echo "change-preview(git show --color=always \{1})+change-preview-label( git show )"
             fi'
     )
     echo "${selected}"

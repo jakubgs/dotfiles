@@ -12,7 +12,13 @@ __fzf_git_log_search__() {
         --tiebreak=index \
         --preview-window='right:50%' \
         --preview='git show --color=always ${1} '"${1:-.}" \
-        --bind='ctrl-i:change-preview(git show --stat --color=always ${1})'
+        --preview-label ' git show ' \
+        --bind 'ctrl-i:transform:
+            if [[ $FZF_PREVIEW_LABEL == " git show " ]]; then
+              echo "change-preview(git show --stat --color=always \{1})+change-preview-label( git show --stat )"
+            else
+              echo "change-preview(git show --color=always \{1})+change-preview-label( git show )"
+            fi'
     )
     echo "${selected}"
 }
