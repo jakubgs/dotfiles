@@ -4,7 +4,7 @@ function fzf-rootly-alerts {
     local help=$(echo -e "\033[2;37menter: Show alert | ctrl+r : Refresh | ctrl+o : Open in browser | ctrl+a : Acknowledge | ctrl+f : Resolve | ctrl+t : Triggered\033[0m")
     local refresh='reload-sync(rootly-alerts-table)+refresh-preview'
     local selected=$(
-        rootly-alerts-table | fzf \
+        rootly-alerts-table $@ | fzf \
             --ansi \
             --with-shell 'zsh -fc' \
             --query="${LBUFFER:-}" \
