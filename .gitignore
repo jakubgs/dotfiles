@@ -6,6 +6,7 @@ tags
 .nvim/spell
 .zsh/cache
 .pentadactyl/info
+.config/gh/hosts.yml
 .config/nvim/temp
 .config/nvim/bundle
 .config/nvim/.init.vim-rplugin~
