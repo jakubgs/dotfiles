@@ -13,3 +13,5 @@ tags
 .config/nvim/autoload/plug.vim
 .config/ranger/history
 .config/opencode/package-lock.json
+.config/nono/packages/
+.config/nono/profile-drafts/

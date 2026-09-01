@@ -1,0 +1,1 @@
+/home/jakubgs/.config/nono/packages/nolabs-ai/opencode/plugin/nono-sandbox.ts

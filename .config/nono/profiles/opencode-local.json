@@ -1,0 +1,26 @@
+{
+  "extends": "nolabs-ai/opencode",
+  "meta": {
+    "name": "opencode-local"
+  },
+  "groups": {
+    "include": []
+  },
+  "workdir": {
+    "access": "none"
+  },
+  "filesystem": {
+    "allow": [],
+    "read": [],
+    "deny": [
+      "/home/jakubgs/Downloads",
+      "/home/jakubgs/Pictures",
+      "/home/jakubgs/company",
+      "/home/jakubgs/documents",
+      "/home/jakubgs/dotfiles",
+      "/home/jakubgs",
+      "/mnt",
+      "/tmp"
+    ]
+  }
+}

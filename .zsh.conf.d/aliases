@@ -34,6 +34,9 @@ alias tt="tree -CdL 2"
 alias uctl='systemctl --user'
 alias wq='du -sh'
 alias ytdl-audio='yt-dlp --add-metadata --extract-audio --format m4a --audio-format vorbis -o "%(autonumber)02d %(uploader)s - %(title)s (%(id)s).%(ext)s"'
+alias chat='mkdir -p /tmp/opencode && nono run --workdir /tmp/opencode --profile opencode-local -- opencode'
+alias opencode='nono run --allow-cwd --profile opencode-local -- opencode'
+alias oc='opencode'
 
 # Copying
 alias copy='xclip -selection primary'
