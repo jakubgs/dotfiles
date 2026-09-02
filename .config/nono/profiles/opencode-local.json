@@ -10,16 +10,21 @@
     "access": "none"
   },
   "filesystem": {
-    "allow": [],
+    "allow": [
+      "/home/jakubgs/go",
+      "/home/jakubgs/work",
+      "/home/jakubgs/soft",
+      "/home/jakubgs/temp",
+      "/tmp/opencode"
+    ],
     "read": [],
     "deny": [
-      "/home/jakubgs/Downloads",
-      "/home/jakubgs/Pictures",
-      "/home/jakubgs/company",
-      "/home/jakubgs/documents",
-      "/home/jakubgs/dotfiles",
       "/home/jakubgs",
+      "/cifs",
       "/mnt",
+      "/nfs",
+      "/var",
+      "/run",
       "/tmp"
     ]
   }
