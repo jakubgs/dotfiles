@@ -2,6 +2,7 @@
 vim.g.fugitive_summary_format = "%<(16,trunc)%an || %s"
 
 local map = vim.keymap.set
+local fzf = require("fzf-lua")
 
 map("n", "<leader>gs", ":Git<CR>")
 map("n", "<leader>gg", ":Git<CR>")
@@ -15,8 +16,8 @@ map("n", "<leader>gT", ":Git commit -s -v -q -n --amend -- %:P<CR>")
 map("n", "<leader>gd", ":Gvdiff<CR>")
 map("n", "<leader>ge", ":Gedit<CR>")
 map("n", "<leader>gu", ":Git reset \"%:p\"<CR><CR>")
-map("n", "<leader>gl", ":Commits<CR>")
-map("n", "<leader>gL", ":BCommits<CR>")
+map("n", "<leader>gl", fzf.git_commits)
+map("n", "<leader>gL", fzf.git_bcommits)
 map("n", "<leader>gp", ":Ggrep<Space>")
 map("n", "<leader>gm", ":Gmove<Space>")
 map("n", "<leader>gB", ":Git blame<CR>")

@@ -1,28 +1,26 @@
 local map = vim.keymap.set
-
--- Sneak
-vim.g["sneak#label"] = 1
-vim.g["sneak#target_labels"] = "abcdefghijklmnopqrstuvwxyz"
-vim.g["sneak#s_next"] = 1
-vim.g["sneak#use_ic_scs"] = 1
-vim.g["sneak#prompt"] = "STREAK>>>"
-
-map("n", "<Space>j", "<Plug>Sneak_s")
-map("n", "<Space>k", "<Plug>Sneak_S")
-map("n", "<C-f>", "<Plug>Sneak_s")
-map("n", "s", "<Plug>Sneak_s")
-map("n", "S", "<Plug>Sneak_S")
-map({ "n", "v", "o" }, "f", "<Plug>Sneak_f")
-map({ "n", "v", "o" }, "F", "<Plug>Sneak_F")
-map({ "n", "v", "o" }, "t", "<Plug>Sneak_t")
-map({ "n", "v", "o" }, "T", "<Plug>Sneak_T")
+local fzf = require("fzf-lua")
+local actions = require("fzf-lua.actions")
 
 -- FZF
-vim.g.fzf_layout = { window = "enew" }
-vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-p" }
 vim.g.fzf_history_dir = "~/.local/share/fzf-history"
-vim.env.FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
-vim.env.FZF_DEFAULT_OPTS = "--reverse --bind ctrl-k:up,ctrl-j:down"
+fzf.setup({
+  winopts = {
+    split = "enew",
+    preview = {
+      hidden = true,
+      horizontal = "right:50%",
+      layout = "horizontal",
+    },
+  },
+  fzf_opts = {
+    ["--layout"] = "reverse",
+    ["--bind"] = "ctrl-k:up,ctrl-j:down",
+  },
+  files = {
+    cmd = 'ag --hidden -g ""',
+  },
+})
 
 -- fix for line numbers in FZF window
 vim.api.nvim_create_autocmd("TermOpen", {
@@ -32,40 +30,65 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 -- Helper to avoid path issues and start in input mode.
 local function work_sink(line)
-  vim.cmd("Files ~/work/" .. line)
+  fzf.files({ cwd = vim.fn.expand("~/work/" .. line) })
 end
 
+-- Search ~/work directory
 local function work_search()
-  vim.fn["fzf#run"](vim.fn["fzf#wrap"]({
-    source = "ls ~/work",
-    dir = "~/work",
-    sink = work_sink,
-  }))
+  fzf.fzf_exec("ls -1", {
+    cwd = vim.fn.expand("~/work"),
+    actions = {
+      ["enter"] = function(selected)
+        if selected[1] then work_sink(selected[1]) end
+      end,
+    },
+  })
 end
 
+-- Search work dir or current git files.
 local function panacea_func()
   if vim.fn.empty(_G.GetGitRoot()) == 1 then
     work_search()
   else
-    vim.fn["fzf#vim#gitfiles"]("")
+    fzf.git_files()
   end
 end
 
 -- Search with Ag but from repo root.
 function _G.GitRootAg(input)
-  vim.cmd("cd " .. _G.GetGitRoot())
-  vim.cmd("Ag! " .. input)
+  local root = _G.GetGitRoot()
+  if root == "" then return end
+  fzf.grep({
+    cwd = root,
+    search = input or "",
+    winopts = { fullscreen = true },
+  })
 end
 
 local function git_unstaged()
-  vim.fn["fzf#run"](vim.fn["fzf#wrap"]({
-    source = "git ls-files --others --modified --exclude-standard",
-  }))
+  fzf.fzf_exec("git ls-files --others --modified --exclude-standard", {
+    actions = { ["enter"] = actions.file_edit },
+  })
+end
+
+local function undo_tree()
+  fzf.undotree({
+    previewer = "undotree",
+    winopts = {
+      split = false,
+      preview = {
+        hidden = false,
+        layout = "horizontal",
+        horizontal = "right:50%",
+      },
+    },
+  })
 end
 
 vim.api.nvim_create_user_command("Work", work_search, {})
 vim.api.nvim_create_user_command("Panacea", panacea_func, {})
 vim.api.nvim_create_user_command("GitUnstaged", git_unstaged, {})
+vim.api.nvim_create_user_command("UndoTree", undo_tree, {})
 vim.api.nvim_create_user_command("GitRootAg", function(opts)
   _G.GitRootAg(opts.args)
 end, { nargs = "?" })
@@ -73,25 +96,29 @@ vim.api.nvim_create_user_command("AG", function(opts)
   _G.GitRootAg(opts.args)
 end, { nargs = "?" })
 
-vim.cmd([[
-command! -bang -nargs=? -complete=dir Ag
-  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right'), <bang>0)
-]])
+vim.api.nvim_create_user_command("Ag", function(opts)
+  fzf.grep({
+    search = opts.args,
+    winopts = { fullscreen = opts.bang },
+  })
+end, { nargs = "*", bang = true })
 
-map("n", "<Tab>", ":Panacea<CR>")
-map("n", "<C-a>", ":Work<CR>")
-map("n", "<C-s>", ":Files ~/nixos<CR>")
-map("n", "<C-q>", ":Files ~/dotfiles<CR>")
-map("n", "<C-Space>", ":History<CR>")
-map("n", "<C-b>", ":Buffers<CR>")
-map("n", "<leader><leader>b", ":Buffers<CR>")
-map("n", "<leader><leader>h", ":History<CR>")
-map("n", "<leader><leader>m", ":Marks<CR>")
-map("n", "<leader><leader>f", ":Files<CR>")
-map("n", "<leader><leader>g", ":GFiles<CR>")
-map("n", "<leader><leader>u", ":GitUnstaged<CR>")
-map("n", "<leader><leader>c", ":Commits<CR>")
-map("n", "<leader><leader>l", ":Lines<CR>")
-map("n", "<leader><leader>a", ":GitRootAg<CR>")
+map("n", "<Tab>", panacea_func)
+map("n", "<C-a>", work_search)
+map("n", "<C-s>", function() fzf.files({ cwd = "~/nixos" }) end)
+map("n", "<C-q>", function() fzf.files({ cwd = "~/dotfiles" }) end)
+map("n", "<C-Space>", fzf.history)
+map("n", "<C-b>", fzf.buffers)
+map("n", "<leader><leader>a", function() _G.GitRootAg("") end)
+map("n", "<leader><leader>b", fzf.buffers)
+map("n", "<leader><leader>c", fzf.git_commits)
+map("n", "<leader><leader>f", fzf.files)
+map("n", "<leader><leader>g", fzf.git_files)
+map("n", "<leader><leader>h", fzf.history)
+map("n", "<leader><leader>l", fzf.blines)
+map("n", "<leader><leader>L", fzf.lines)
+map("n", "<leader><leader>m", fzf.marks)
+map("n", "<leader><leader>s", function() _G.GitRootAg(vim.fn.expand("<cword>")) end)
+map("n", "<leader><leader>u", ":UndoTree<CR>")
+map("n", "<leader><leader>U", ":GitUnstaged<CR>")
 map("n", "<leader><leader>A", ":GitRootAg<Space>")
-map("n", "<leader><leader>s", [[:GitRootAg<Space><C-R>=expand("<cword>")<CR><CR>]])

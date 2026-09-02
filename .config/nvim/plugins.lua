@@ -31,9 +31,7 @@ local plugins = {
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
   -- search
-  "junegunn/fzf",
-  "junegunn/fzf.vim",
-  "benwainwright/fzf-project",
+  { "ibhagwan/fzf-lua", opts = {} },
   -- movement
   "justinmk/vim-sneak",
   -- completion
