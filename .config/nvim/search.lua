@@ -17,6 +17,11 @@ fzf.setup({
     ["--layout"] = "reverse",
     ["--bind"] = "ctrl-k:up,ctrl-j:down",
   },
+  keymap = {
+    fzf = {
+      ["tab"] = "toggle-preview",
+    },
+  },
   files = {
     cmd = 'ag --hidden -g ""',
   },
