@@ -39,6 +39,8 @@ local plugins = {
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
   "hrsh7th/cmp-cmdline",
+  "hrsh7th/cmp-nvim-lsp",
+  "neovim/nvim-lspconfig",
   { "robitx/gp.nvim", config = function() dofile(vim.fn.stdpath("config") .. "/gp.lua") end, },
   -- style
   "nanotech/jellybeans.vim",

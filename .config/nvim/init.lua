@@ -16,6 +16,7 @@ for _, file in ipairs({
   "terminal.lua",
   "search.lua",
   "completion.lua",
+  "lsp.lua",
   "cmdwin.lua",
   "git.lua",
 }) do
