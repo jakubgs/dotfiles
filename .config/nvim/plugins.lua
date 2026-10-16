@@ -23,10 +23,11 @@ local plugins = {
   "akinsho/toggleterm.nvim",
   { "tyjak/vim-redact-pass", commit = "403a44dc" },
   -- text manipulation
-  "tpope/vim-surround",
-  "tpope/vim-repeat",
   "jkramer/vim-checkbox",
   "ntpeters/vim-better-whitespace",
+  "nvim-mini/mini.align",
+  "tpope/vim-repeat",
+  "tpope/vim-surround",
   -- git
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",

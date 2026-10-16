@@ -14,6 +14,7 @@ for _, file in ipairs({
   "plugins.lua",
   "theme.lua",
   "terminal.lua",
+  "minialign.lua",
   "search.lua",
   "completion.lua",
   "lsp.lua",
