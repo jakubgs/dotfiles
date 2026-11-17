@@ -11,10 +11,6 @@
   },
   "filesystem": {
     "allow": [
-      "/home/jakubgs/go",
-      "/home/jakubgs/work",
-      "/home/jakubgs/soft",
-      "/home/jakubgs/temp",
       "/tmp/opencode"
     ],
     "read": [],
