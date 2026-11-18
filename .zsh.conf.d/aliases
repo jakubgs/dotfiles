@@ -24,6 +24,8 @@ alias ll='ls -lh --color'
 alias mm="make -j6"
 alias n='sudo ss -lpsntu'
 alias pr='enscript --no-job-header --pretty-print --color --landscape --borders --columns=2 --word-wrap --mark-wrapped=arrow '
+alias ppass='PASSWORD_STORE_DIR=~/.password-store pass'
+alias pfpass='PASSWORD_STORE_DIR=~/.password-store fpass'
 alias qapt='sudo apt --quiet'
 alias qupdate='sudo apt update && sudo apt upgrade'
 alias restart='sudo rc-config restart '
@@ -35,7 +37,7 @@ alias uctl='systemctl --user'
 alias wq='du -sh'
 alias ytdl-audio='yt-dlp --add-metadata --extract-audio --format m4a --audio-format vorbis -o "%(autonumber)02d %(uploader)s - %(title)s (%(id)s).%(ext)s"'
 alias chat='mkdir -p /tmp/opencode && nono run --workdir /tmp/opencode --profile opencode-local -- opencode'
-alias opencode='nono run --allow-cwd --workdir $PWD --profile opencode-local -- opencode'
+alias opencode='nono run --allow-cwd --workdir "$PWD" --profile opencode-local -- opencode --standalone'
 alias oc='opencode'
 
 # Copying
